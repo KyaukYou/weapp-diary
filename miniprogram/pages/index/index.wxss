@@ -1,0 +1,109 @@
+/**index.wxss**/
+page {
+  padding-top: 22rpx;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  /* flex-flow: column wrap; */
+  justify-content: center;
+}
+
+.index {
+  width: 94%;
+  height: 380rpx;
+  display: flex;
+  flex-flow: column wrap;
+  border: 2rpx solid gray;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.index .index-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-flow: column wrap;
+  position: relative;
+}
+
+.index .index-wrap image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.index .index-title {
+  width: 100%;
+  color: white;
+  font-size: 36rpx;
+  font-weight: bold;
+  height: auto;
+  box-sizing: border-box;
+  padding: 24rpx;
+  padding-right: 30rpx;
+  padding-bottom: 6rpx;
+}
+
+.index .index-smtitle {
+  width: 70%;
+  height: auto;
+  font-size: 20rpx;
+  color: white;
+  box-sizing: border-box;
+  padding: 24rpx;
+  padding-left: 40rpx;
+  display: flex;
+  flex-flow: column wrap;
+  padding-top: 2rpx;
+  padding-bottom: 0;
+  position: relative;
+}
+
+.index .index-smtitle::after {
+  content: '';
+  position: absolute;
+  width: 7rpx;
+  /* height: 80%; */
+  top: 10%;
+  bottom: 10%;
+  left: 28rpx;
+  background-color: rgb(249, 189, 16);
+}
+
+.index .index-smtitle text {
+  width: 100%;
+  height: 32rpx;
+  font-weight: bold;
+}
+
+
+
+.index .index-footer {
+  width: 100%;
+  height: 70rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-grow: row nowrap;
+}
+
+.index .index-footer-left {
+  height: 100%;
+  width: 40%;
+  color: white;
+} 
+
+.index .index-footer-right {
+  width: 60%;
+  height: 100%;
+}

@@ -1,0 +1,24 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='index'>
+    <view class='index-wrap'>
+      <image src='../../images/222.jpg'></image>
+      <view class='index-title'>心中有束光，眼里有片海。带娃慢游，冲绳之蓝</view>
+      <view class='index-smtitle'>
+        <text>2018.10.01 99天 99999次浏览</text>
+        <text>宇宙</text>
+      </view>
+
+      <view class='index-footer'>
+        <view class='index-footer-left'>
+          <image ></image>
+          <text>by 啦啦啦啦啦</text>
+        </view>
+        <view class='index-footer-right'></view>
+      </view>
+    </view>
+
+  </view>
+
+
+</view>
