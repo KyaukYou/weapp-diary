@@ -1,14 +1,15 @@
 /**index.wxss**/
 page {
-  padding-top: 22rpx;
+  padding-top: 12rpx;
 }
 
 .container {
-  width: 100%;
+  width: auto;
   height: 100%;
-  display: flex;
+  /* display: flex; */
   /* flex-flow: column wrap; */
-  justify-content: center;
+  /* flex-flow:column wrap; */
+  /* align-items:center; */
 }
 
 .index {
@@ -16,9 +17,10 @@ page {
   height: 380rpx;
   display: flex;
   flex-flow: column wrap;
-  border: 2rpx solid gray;
+  /* border: 2rpx solid gray; */
   border-radius: 8rpx;
   overflow: hidden;
+  margin: 20rpx auto;
 }
 
 .index .index-wrap {
@@ -30,7 +32,7 @@ page {
   position: relative;
 }
 
-.index .index-wrap image {
+.index .index-wrap>image {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -101,9 +103,62 @@ page {
   height: 100%;
   width: 40%;
   color: white;
+  font-size: 24rpx;
+  display: flex;
+  flex-flow: row nowrap;
+  /* justify-content: center; */
+  align-items: center;
+  /* box-sizing: border-box; */
+  /* padding-left: 2%; */
 } 
+
+.index .index-footer-left image {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  margin-left: 3%;
+  margin-top: -2rpx;
+}
+
+.index .index-footer-left view { 
+  height: 100%;
+  line-height: 72rpx;
+  font-size: 20rpx;
+  margin-left: 10rpx;
+}
 
 .index .index-footer-right {
   width: 60%;
   height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  padding-right: 10rpx;
+}
+
+.index .index-footer-one {
+  width: auto;
+  height: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: right;
+  align-items: center;
+  margin: 0 10rpx;
+  margin-top: 4rpx;
+}
+
+.index .index-footer-one view {
+  width: auto;
+  height: 100%;
+  line-height: 70rpx;
+  color: white;
+  font-size: 18rpx;
+  text-align: center;
+  font-weight: bold;
+}
+
+.index .index-footer-one image {
+  width: 42rpx;
+  height: 42rpx;
 }

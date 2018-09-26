@@ -2,14 +2,15 @@
 	"miniprogramRoot": "miniprogram/",
 	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"nodeModules": true
 	},
 	"appid": "wx7e8eb46444d8dd39",
-	"projectname": "%E6%9F%B4%E7%AA%9D",
+	"projectname": "%E6%9F%B4%E8%A1%8C",
 	"libVersion": "2.2.5",
 	"condition": {
 		"search": {
