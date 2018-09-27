@@ -7,31 +7,71 @@ Page({
    * 页面的初始数据
    */
   data: {
-    travelList: {}
+    travelList: {},
+    shouquan: false
+  },
+  bindGetUserInfo(e) {
+    console.log(e);
+    this.getInit();
+
+  },
+  getInit() {
+    var that = this;
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+          // console.log('1');
+          that.setData({
+            shouquan: true
+          });
+          //加载
+          app.getOpenId();
+        } else {
+          // console.log('2');
+          that.setData({
+            shouquan: false
+          })
+        }
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // wx.cloud.callFunction({
-    //   name: 'login',
+    var that = this;
+
+    //查看授权
+    // wx.getSetting({
     //   success(res) {
-    //     console.log(res)
-    //   },
-    //   fail(res) {
-    //     console.log(res)
+    //     if (res.authSetting['scope.userInfo']) {
+    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+    //       console.log('1');
+    //       that.setData({
+    //         shouquan: true
+    //       });
+    //       //加载
+    //       app.getOpenId();
+    //     }else {
+    //       console.log('2');
+    //       that.setData({
+    //         shouquan: false
+    //       })
+    //     }
     //   }
     // })
-    var that = this;
+    that.getInit();
+
     wx.cloud.callFunction({
       name: 'getTravel',
       success(res) {
-        console.log(res)
+        // console.log(res)
         that.setData({
           travelList: res.result.data
         })
-        console.log(that.data.travelList[0])
+        // console.log(that.data.travelList[0])
       },
       fail(res) {
         console.log(res)
@@ -39,31 +79,31 @@ Page({
     })
 
     
-    const db = wx.cloud.database();
-    db.collection('travel').add({
-      data: {
-        list: {
-          date: "2018.10.01",
-          dayNum: 9,
-          headerImg: "xx",
-          seeNum: 999,
-          star: 888,
-          time: "10:25",
-          title: "啦啦啦啦",
-          where: "宇宙"
-        },
-        user: {
-          name: "哈哈",
-          avatar: "xxx"
-        }
-      },
-      success(res) {
-        console.log(res)
-      },
-      fail(res) {
-        console.log(res)
-      }
-    })
+    // const db = wx.cloud.database();
+    // db.collection('travel').add({
+    //   data: {
+    //     list: {
+    //       date: "2018.10.01",
+    //       dayNum: 9,
+    //       headerImg: "xx",
+    //       seeNum: 999,
+    //       star: 888,
+    //       time: "10:25",
+    //       title: "啦啦啦啦",
+    //       where: "宇宙"
+    //     },
+    //     user: {
+    //       name: "哈哈",
+    //       avatar: "xxx"
+    //     }
+    //   },
+    //   success(res) {
+    //     console.log(res)
+    //   },
+    //   fail(res) {
+    //     console.log(res)
+    //   }
+    // })
 
 
   },

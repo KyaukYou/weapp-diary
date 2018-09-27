@@ -1,0 +1,123 @@
+/*日历  */
+.calendar-wrapper{
+ background-color: #ffffff
+}
+.calendar-header{
+  	padding: 14px 16px;
+    line-height: 24px;
+    position: relative;
+    font-size: 18px;
+}
+
+.calendar-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  pointer-events: none;
+  box-sizing: border-box;
+  border: 0 solid #f2f2f2;
+  border-bottom-width: 1px;
+}
+.calendar-header-right{
+  width:60%;
+  display: inline-block;
+  position: relative;
+}
+.calendar-header-left{
+  width:40%;
+  display: inline-block;
+  position: relative;
+}
+
+.picker{
+  font-weight: 200;
+  color: #393D40;
+  font-size: 16px;
+  line-height: 16px;
+}
+.head-box-date{
+  display: inline-block;
+	width: 14.285%;
+	color: #909399;
+	font-size: 14px;
+	text-align: center;
+}
+.calendar-head-box{
+  position: relative;
+	padding: 8px 0;
+  margin:0 16px;
+}
+
+.calendar-head-box::after {
+  content: '';
+  position:absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+  pointer-events: none;
+  box-sizing: border-box;
+  border: 0 solid #f2f2f2;
+  border-bottom-width: 1px;
+}
+
+.calendar-date-box{
+	font-size: 0;
+	padding-top: 10px;
+  margin:0 16px;
+}
+.calendar-date-box>view{
+	position: relative;
+	display: inline-block;
+	width: 14.285%;
+	color: #393D40;
+	text-align: center;
+  height: 34px;
+  padding-top:6px;
+}
+.date-head{
+	height: 22px;
+	line-height: 22px;
+	font-size: 14px;
+}
+.selectedDate .date-head{
+	width: 22px;
+	border-radius: 100%;
+	text-align: center;
+	color: #fff!important;
+	background-color: #409EFF !important;
+	margin: 0 auto;
+}
+
+.nowDate .date-head{
+	width: 22px;
+	border-radius: 100%;
+	text-align: center;
+	color: #393D40;
+	background-color: #E3E4E6;
+	margin: 0 auto;
+}
+.date-weight{
+	height:2px;
+ 
+  width:8px;
+  margin:auto;
+  margin-top: 4px;
+  border-radius: 4px;
+}
+.date-underline-color-err{
+ background-color:#F56C6C;
+}
+.date-underline-color-normal{
+ background-color:#909399;
+}
+.not-curMonth{
+  color: #C6C9CC !important;
+}

@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "柴之声"
+  "navigationBarTitleText": "柴之声",
+  "usingComponents": {
+    "i-button": "../../module/button/index"
+  }
 }

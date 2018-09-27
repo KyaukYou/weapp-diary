@@ -1,5 +1,7 @@
 <!--index.wxml-->
 <view class="container">
+  <button class='getInfo' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" wx:if='{{!shouquan}}'>获取授权</button>
+
   <view class='index' wx:for='{{travelList}}' wx:key>
     <view class='index-wrap'>
       <image src='../../images/222.jpg'></image>
@@ -16,7 +18,7 @@
         </view>
         <view class='index-footer-right'>
           <view class='index-footer-one'>
-            <image src='../../images/star.png'></image>
+            <image src='../../images/like.png'></image>
             <view>{{item.list.star}}</view>
           </view>
           <view class='index-footer-one'>
@@ -24,7 +26,7 @@
             <view>{{item.list.star}}</view>          
           </view>
           <view class='index-footer-one'>
-            <image src='../../images/star.png'></image>
+            <image src='../../images/chat.png'></image>
             <view>1111</view>         
           </view>
         </view>
@@ -32,5 +34,7 @@
     </view>
   </view>
 
-
+  <view class='add-travel'>
+    <image src='../../images/add.png'></image>
+  </view>
 </view>

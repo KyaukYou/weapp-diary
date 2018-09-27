@@ -1,0 +1,1 @@
+<button bindtap='uploadImg'>上传图片</button>
