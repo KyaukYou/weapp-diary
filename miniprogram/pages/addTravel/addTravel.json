@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "柴之奏",
+  "usingComponents": {
+    "wux-cell-group": "../../dist/cell-group/index",
+    "wux-cell": "../../dist/cell/index",
+    "i-cell-group": "../../module/cell-group/index",
+    "i-cell": "../../module/cell/index",
+    "i-input": "../../module/input/index"
+  }
+}

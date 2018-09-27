@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "柴之声",
   "usingComponents": {
-    "i-button": "../../module/button/index"
+    "wux-floating-button": "../../dist/floating-button/index"
   }
 }

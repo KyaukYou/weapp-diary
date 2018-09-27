@@ -4,7 +4,7 @@
 
   <view class='index' wx:for='{{travelList}}' wx:key>
     <view class='index-wrap'>
-      <image src='../../images/222.jpg'></image>
+      <image src='https://6e69-nightess-0809-1257711591.tcb.qcloud.la/wx7e8eb46444d8dd39.o6zAJszuTDC74tV9p0dCVRt3FIOI.i3JWDUF5kNLFdc23fe5f522a5b4c80bfc7cec100a5c7.png'></image>
       <view class='index-title'>{{item.list.title}}</view>
       <view class='index-smtitle'>
         <text>{{item.list.date}} {{item.list.dayNum}}天 {{item.list.seeNum}}次浏览</text>
@@ -34,7 +34,8 @@
     </view>
   </view>
 
-  <view class='add-travel'>
+  <!-- <view class='add-travel'>
     <image src='../../images/add.png'></image>
-  </view>
+  </view> -->
+  <wux-floating-button actionRotate='false' position="bottomRight" theme="energized" bind:change="addTravel" bind:click="addTravel" />
 </view>

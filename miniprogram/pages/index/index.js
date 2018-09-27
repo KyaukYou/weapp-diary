@@ -10,6 +10,11 @@ Page({
     travelList: {},
     shouquan: false
   },
+  addTravel() {
+    wx.navigateTo({
+      url: '../addTravel/addTravel',
+    })
+  },
   bindGetUserInfo(e) {
     console.log(e);
     this.getInit();
@@ -26,7 +31,7 @@ Page({
             shouquan: true
           });
           //加载
-          app.getOpenId();
+          // app.getOpenId();
         } else {
           // console.log('2');
           that.setData({
@@ -43,25 +48,6 @@ Page({
   onLoad: function (options) {
     var that = this;
 
-    //查看授权
-    // wx.getSetting({
-    //   success(res) {
-    //     if (res.authSetting['scope.userInfo']) {
-    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-    //       console.log('1');
-    //       that.setData({
-    //         shouquan: true
-    //       });
-    //       //加载
-    //       app.getOpenId();
-    //     }else {
-    //       console.log('2');
-    //       that.setData({
-    //         shouquan: false
-    //       })
-    //     }
-    //   }
-    // })
     that.getInit();
 
     wx.cloud.callFunction({

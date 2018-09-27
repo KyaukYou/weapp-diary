@@ -30,6 +30,7 @@ page {
   border-radius: 8rpx;
   overflow: hidden;
   margin: 20rpx auto;
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.3);
 }
 
 .index .index-wrap {
@@ -84,7 +85,7 @@ page {
   position: absolute;
   width: 7rpx;
   /* height: 80%; */
-  top: 10%;
+  top: 1%;
   bottom: 10%;
   left: 28rpx;
   background-color: rgb(249, 189, 16);

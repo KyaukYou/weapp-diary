@@ -1,0 +1,48 @@
+<!-- <view class="page">
+  <view class="page__bd">
+    <wux-cell-group>
+      <wux-cell title="旅行标题">
+        <input slot='footer'></input>
+      </wux-cell>
+      <wux-cell title="旅行地点">
+        <input slot='footer'></input>
+      </wux-cell>
+      <wux-cell title="旅行日期">
+        <input slot='footer'></input>
+      </wux-cell>
+    </wux-cell-group>
+  </view>
+</view> -->
+
+<!-- <view class="page">
+  <view class="page__bd">
+    <wux-cell-group title="带说明的列表项">
+      <wux-cell title="标题文字">
+        <input class="weui-input" slot='footer'></input>
+      </wux-cell>
+      <wux-cell title="标题文字"></wux-cell>
+    </wux-cell-group>
+    <wux-cell-group title="带图标、说明的列表项">
+      <wux-cell thumb="http://pbqg2m54r.bkt.clouddn.com/logo.png" title="标题文字" extra="说明文字">
+        <input class="weui-input" slot='footer'></input>
+      </wux-cell>
+      <wux-cell thumb="http://pbqg2m54r.bkt.clouddn.com/logo.png" title="标题文字" extra="说明文字"></wux-cell>
+    </wux-cell-group>
+    <wux-cell-group title="带跳转的列表项" label="底部说明文字">
+      <wux-cell title="标题文字" is-link extra="说明文字"></wux-cell>
+      <wux-cell title="标题文字"  label="附加描述" >
+        <input class="weui-input" slot='footer'></input>
+      </wux-cell>
+    </wux-cell-group>
+  </view>
+</view> -->
+<i-cell-group>
+    <i-cell title="只显示箭头" >
+      <input slot='footer'/>
+    </i-cell>
+    <i-cell title="跳转到首页" is-link url="/pages/dashboard/index"></i-cell>
+    <i-cell title="只有 footer 点击有效" is-link url="/pages/dashboard/index" only-tap-footer></i-cell>
+    <i-cell title="开关啊啊啊啊">
+        <switch slot="footer" checked />
+    </i-cell>
+</i-cell-group>
