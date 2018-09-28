@@ -76,7 +76,7 @@ App({
                   // console.log('不需要添加')
                   wx.hideLoading();
                   wx.showToast({
-                    title: '加载成功',
+                    title: '欢迎回来',
                   });
                 } else {
                   // 添加openid，userInfo
@@ -90,7 +90,7 @@ App({
                       console.log(res);
                       wx.hideLoading();
                       wx.showToast({
-                        title: '加载成功',
+                        title: '注册成功',
                       });
                     },  
                     fail(res) {

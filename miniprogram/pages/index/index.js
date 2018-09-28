@@ -31,7 +31,7 @@ Page({
             shouquan: true
           });
           //加载
-          // app.getOpenId();
+          app.getOpenId();
         } else {
           // console.log('2');
           that.setData({
