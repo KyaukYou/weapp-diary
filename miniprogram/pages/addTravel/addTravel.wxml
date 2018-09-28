@@ -1,48 +1,86 @@
-<!-- <view class="page">
-  <view class="page__bd">
-    <wux-cell-group>
-      <wux-cell title="旅行标题">
-        <input slot='footer'></input>
-      </wux-cell>
-      <wux-cell title="旅行地点">
-        <input slot='footer'></input>
-      </wux-cell>
-      <wux-cell title="旅行日期">
-        <input slot='footer'></input>
-      </wux-cell>
-    </wux-cell-group>
-  </view>
-</view> -->
 
-<!-- <view class="page">
-  <view class="page__bd">
-    <wux-cell-group title="带说明的列表项">
-      <wux-cell title="标题文字">
-        <input class="weui-input" slot='footer'></input>
-      </wux-cell>
-      <wux-cell title="标题文字"></wux-cell>
-    </wux-cell-group>
-    <wux-cell-group title="带图标、说明的列表项">
-      <wux-cell thumb="http://pbqg2m54r.bkt.clouddn.com/logo.png" title="标题文字" extra="说明文字">
-        <input class="weui-input" slot='footer'></input>
-      </wux-cell>
-      <wux-cell thumb="http://pbqg2m54r.bkt.clouddn.com/logo.png" title="标题文字" extra="说明文字"></wux-cell>
-    </wux-cell-group>
-    <wux-cell-group title="带跳转的列表项" label="底部说明文字">
-      <wux-cell title="标题文字" is-link extra="说明文字"></wux-cell>
-      <wux-cell title="标题文字"  label="附加描述" >
-        <input class="weui-input" slot='footer'></input>
-      </wux-cell>
-    </wux-cell-group>
+<!-- 日历组件 -->
+<wux-calendar id="wux-calendar" />
+
+<view class='add-one'>
+  <van-cell-group>
+    <van-field 
+      maxlength='20' 
+      value="{{ title }}" 
+      type="text" 
+      clearable
+      label="旅行标题" 
+      placeholder="请输入旅行标题(20字以内)" 
+      required 
+      border="false" 
+      bind:input='addTitle' />
+
+    <van-field
+      value="{{ where }}"
+      type='text'                   
+      center
+      clearable
+      label="旅行位置"
+      placeholder="请选择"
+      border="false"
+      required
+      use-button-slot
+      bind:input='addWhere'
+    >
+      <wux-button slot="button" size="small" type="calm" bind:click='chooseWhere'>选择位置</wux-button>
+    </van-field>
+
+
+    <van-field
+      value="{{ beginDate }}"
+      type='text'
+      disabled='false'
+      center
+      clearable
+      label="旅行开始日期"
+      placeholder="请选择"
+      border="false"
+      required
+      use-button-slot
+    >
+      <wux-button slot="button" size="small" type="calm" bind:click='chooseStart'>选择日期</wux-button>
+    </van-field>
+
+    <van-field
+      value="{{ endDate }}"
+      type='text'
+      disabled='false'
+      center
+      clearable
+      label="旅行结束日期"
+      placeholder="请选择"
+      border="false"
+      required
+      use-button-slot
+    >
+      <wux-button slot="button" size="small" type="calm" bind:click='chooseEnd'>选择日期</wux-button>
+    </van-field>    
+
+  </van-cell-group>
+
+</view>
+
+<view class='add-list' wx:for='{{dayArr}}' wx:if='{{dayArr == 0 ? false : true}}' wx:key>
+  <view class='add-list-one'>
+    <button class='add-full add-list-update'>点击上传图片</button>
+    <image class='add-full' style='display: none'></image>
+    <view class='add-footer'>
+      <view>
+        <wux-icon size='24' class='add-time' type="md-time" />
+        <view>{{item}}</view>
+      </view>
+      <textarea></textarea>
+    </view>
+    <view class='add-add'><button>+</button></view>
   </view>
-</view> -->
-<i-cell-group>
-    <i-cell title="只显示箭头" >
-      <input slot='footer'/>
-    </i-cell>
-    <i-cell title="跳转到首页" is-link url="/pages/dashboard/index"></i-cell>
-    <i-cell title="只有 footer 点击有效" is-link url="/pages/dashboard/index" only-tap-footer></i-cell>
-    <i-cell title="开关啊啊啊啊">
-        <switch slot="footer" checked />
-    </i-cell>
-</i-cell-group>
+
+</view>
+
+<!-- <wux-steps direction="vertical">
+  <wux-step status="process" title="{{item}}" content="This is description" wx:for='{{dayArr}}' wx:key></wux-step>
+</wux-steps> -->

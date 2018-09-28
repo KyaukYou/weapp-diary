@@ -1,10 +1,16 @@
 {
   "navigationBarTitleText": "柴之奏",
   "usingComponents": {
-    "wux-cell-group": "../../dist/cell-group/index",
-    "wux-cell": "../../dist/cell/index",
-    "i-cell-group": "../../module/cell-group/index",
-    "i-cell": "../../module/cell/index",
-    "i-input": "../../module/input/index"
+    "van-field": "../../module/field/index",
+    "van-cell": "../../module/cell/index",
+    "van-cell-group": "../../module/cell-group/index",
+    "van-button": "../../module/button/index",
+
+    "wux-icon": "../../dist/icon/index",
+    "wux-button": "../../dist/button/index",
+    "wux-calendar": "../../dist/calendar/index",
+    "wux-upload": "../../dist/upload/index",
+    "wux-steps": "../../dist/steps/index",
+    "wux-step": "../../dist/step/index"
   }
 }

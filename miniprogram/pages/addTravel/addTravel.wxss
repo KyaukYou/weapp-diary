@@ -1,0 +1,104 @@
+.add-one {
+  width: 96%;
+  height: auto;
+  margin: 16rpx auto;
+  border-radius: 8rpx;
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.add-list {
+  transition: all .2s ease;
+  width: 96%;
+  margin: 0 auto 16rpx auto;
+  /* border: 2rpx solid blue; */
+  /* min-height: 440rpx; */
+  height: auto;
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.1);
+}
+
+.add-list-one {
+  width: 100%;
+  min-height: 440rpx;
+  height: auto;
+  padding-top: 8rpx;
+  position: relative;
+  padding-bottom: 56rpx;
+}
+
+.add-full {
+  width: 98%;
+  margin: 0rpx auto;
+  height: 300rpx;
+  line-height: 300rpx;
+}
+
+.add-list-update {
+  border: 2rpx dashed rgb(221,221,221);
+  background-color: white;
+  color: rgb(221,221,221);
+  font-size: 30rpx;
+}
+
+.add-list-update::after {
+  border: none;
+}
+
+
+.add-footer {
+  width: 98%;
+  margin: 2rpx auto;
+  min-height: 130rpx;
+  height: auto;
+}
+
+.add-footer>view {
+  width: 100%;
+  height: 60rpx;
+}
+
+.add-time {
+  float: left;
+}
+
+.add-footer>view view {
+  display: inline-block;
+  float: left;
+  height: 100%;
+  line-height: 60rpx;
+  margin-left: 12rpx;
+  font-size: 28rpx;
+  color: rgb(180,180,180);
+}
+
+.add-footer textarea {
+  width: 100%;
+  height: auto;
+  min-height: 100rpx;
+  box-sizing: border-box;
+  padding: 6rpx 10rpx;
+  font-size: 32rpx;
+  color: rgb(150,150,150);
+}
+
+.add-add {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50rpx;
+}
+
+.add-add button {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(250,250,250);
+  font-size: 24rpx;
+  line-height: 50rpx;
+  border-radius: 0;
+  color: rgb(221,221,221);
+}
+
+.add-add button::after {
+  border: none;
+}

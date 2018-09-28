@@ -1,16 +1,37 @@
-<view bindtap="handleTap" class="i-class i-cell {{ isLastCell ? 'i-cell-last' : '' }} {{ isLink ? 'i-cell-access' : '' }}">
-    <view class="i-cell-icon">
-        <slot name="icon"></slot>
-    </view>
-    <view class="i-cell-bd">
-        <view wx:if="{{ title }}" class="i-cell-text">{{ title }}</view>
-        <view wx:if="{{ label }}" class="i-cell-desc">{{ label }}</view>
-        <slot></slot>
-    </view>
-    <view catchtap="navigateTo" class="i-cell-ft">
-        <block wx:if="{{value}}">{{ value }}</block>
-        <block wx:else>
-            <slot name="footer"></slot>
-        </block>
-    </view>
+<view
+  class="{{ cellClass }}"  
+  style="{{ customStyle }}"
+  bind:tap="onClick"
+>
+  <van-icon
+    wx:if="{{ icon }}"
+    name="{{ icon }}"
+    custom-class="van-cell__left-icon"
+  />
+  <slot wx:else name="icon" />
+
+  <view
+    style="{{ titleStyle }}"
+    class="van-cell__title title-class"
+  >
+    <block wx:if="{{ title }}">
+      {{ title }}
+      <view wx:if="{{ label }}" class="van-cell__label label-class">{{ label }}</view>
+    </block>
+    <slot wx:else name="title" />
+  </view>
+
+  <view class="van-cell__value value-class">
+    <view wx:if="{{ value }}">{{ value }}</view>
+    <slot wx:else />
+  </view>
+
+  <van-icon
+    wx:if="{{ isLink }}"
+    name="arrow"
+    custom-class="van-cell__right-icon"
+  />
+  <slot wx:else name="right-icon" />
+
+  <slot name="extra" />
 </view>
