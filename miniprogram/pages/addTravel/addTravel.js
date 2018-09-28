@@ -13,10 +13,23 @@ Page({
   data: {
     title: '',
     where: '',
+    value1: true,
     beginDate: [],
     endDate: [],
     day: 1,
-    dayArr: []
+    dayArr: [],
+    textarea: ''
+  },
+  getTextarea(e) {
+    this.setData({
+      textarea: e.detail.value
+    })
+  },
+  onchange1(e) {
+    console.log(e);
+    this.setData({
+      value1: e.detail
+    })
   },
 
   //输入标题

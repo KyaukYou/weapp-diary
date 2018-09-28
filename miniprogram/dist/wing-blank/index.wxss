@@ -3,8 +3,8 @@
   margin-right: 10rpx;
 }
 .wux-wingblank--default {
-  margin-left: 20rpx;
-  margin-right: 20rpx;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 .wux-wingblank--large {
   margin-left: 30rpx;

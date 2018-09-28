@@ -5,12 +5,13 @@
     "van-cell": "../../module/cell/index",
     "van-cell-group": "../../module/cell-group/index",
     "van-button": "../../module/button/index",
+    "van-switch": "../../module/switch/index",
 
     "wux-icon": "../../dist/icon/index",
     "wux-button": "../../dist/button/index",
     "wux-calendar": "../../dist/calendar/index",
     "wux-upload": "../../dist/upload/index",
-    "wux-steps": "../../dist/steps/index",
-    "wux-step": "../../dist/step/index"
+    "wux-wing-blank": "../../dist/wing-blank/index",
+    "wux-switch": "../../dist/switch/index"
   }
 }

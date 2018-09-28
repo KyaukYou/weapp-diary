@@ -1,86 +1,108 @@
+<view class='page'>
 
-<!-- 日历组件 -->
-<wux-calendar id="wux-calendar" />
+  <!-- 日历组件 -->
+  <wux-calendar id="wux-calendar" />
 
-<view class='add-one'>
-  <van-cell-group>
-    <van-field 
-      maxlength='20' 
-      value="{{ title }}" 
-      type="text" 
-      clearable
-      label="旅行标题" 
-      placeholder="请输入旅行标题(20字以内)" 
-      required 
-      border="false" 
-      bind:input='addTitle' />
+  <view class='add-one'>
+    <van-cell-group>
+      <van-field 
+        maxlength='20' 
+        value="{{ title }}" 
+        type="text" 
+        clearable
+        label="旅行标题" 
+        placeholder="请输入旅行标题(20字以内)" 
+        required 
+        border="false" 
+        bind:input='addTitle' />
 
-    <van-field
-      value="{{ where }}"
-      type='text'                   
-      center
-      clearable
-      label="旅行位置"
-      placeholder="请选择"
-      border="false"
-      required
-      use-button-slot
-      bind:input='addWhere'
-    >
-      <wux-button slot="button" size="small" type="calm" bind:click='chooseWhere'>选择位置</wux-button>
-    </van-field>
+      <van-field
+        value="{{ where }}"
+        type='text'                   
+        center
+        clearable
+        label="旅行位置"
+        placeholder="请选择"
+        border="false"
+        required
+        use-button-slot
+        bind:input='addWhere'
+      >
+        <wux-button slot="button" size="small" type="energized" bind:click='chooseWhere'>选择位置</wux-button>
+      </van-field>
 
 
-    <van-field
-      value="{{ beginDate }}"
-      type='text'
-      disabled='false'
-      center
-      clearable
-      label="旅行开始日期"
-      placeholder="请选择"
-      border="false"
-      required
-      use-button-slot
-    >
-      <wux-button slot="button" size="small" type="calm" bind:click='chooseStart'>选择日期</wux-button>
-    </van-field>
+      <van-field
+        value="{{ beginDate }}"
+        type='text'
+        disabled='false'
+        center
+        clearable
+        label="旅行开始日期"
+        placeholder="请选择"
+        border="false"
+        required
+        use-button-slot
+      >
+        <wux-button slot="button" size="small" type="energized" bind:click='chooseStart'>选择日期</wux-button>
+      </van-field>
 
-    <van-field
-      value="{{ endDate }}"
-      type='text'
-      disabled='false'
-      center
-      clearable
-      label="旅行结束日期"
-      placeholder="请选择"
-      border="false"
-      required
-      use-button-slot
-    >
-      <wux-button slot="button" size="small" type="calm" bind:click='chooseEnd'>选择日期</wux-button>
-    </van-field>    
+      <van-field
+        value="{{ endDate }}"
+        type='text'
+        disabled='false'
+        center
+        clearable
+        label="旅行结束日期"
+        placeholder="请选择"
+        border="false"
+        required
+        use-button-slot
+      >
+        <wux-button slot="button" size="small" type="energized" bind:click='chooseEnd'>选择日期</wux-button>
+      </van-field>    
 
-  </van-cell-group>
+    </van-cell-group>
 
-</view>
-
-<view class='add-list' wx:for='{{dayArr}}' wx:if='{{dayArr == 0 ? false : true}}' wx:key>
-  <view class='add-list-one'>
-    <button class='add-full add-list-update'>点击上传图片</button>
-    <image class='add-full' style='display: none'></image>
-    <view class='add-footer'>
-      <view>
-        <wux-icon size='24' class='add-time' type="md-time" />
-        <view>{{item}}</view>
-      </view>
-      <textarea></textarea>
-    </view>
-    <view class='add-add'><button>+</button></view>
   </view>
 
-</view>
+  <view class='add-list' wx:for='{{dayArr}}' wx:if='{{dayArr == 0 ? false : true}}' wx:key>
+    <view class='add-list-one'>
+      <view class='add-footer'>
+        <view>
+          <wux-icon size='24' style='margin-top: 6rpx' class='add-time' type="md-time" />
+          <view class='add-time'>{{item}}</view>
+          <view class='add-switch'>
+            是否显示
+            <!-- <wux-switch value='{{value1}}' color='energized' bind:change='onchange1'/> -->
+            <van-switch type='warning' class='add-ss' checked="{{ value1 }}" size='28' bind:change="onchange1" />
+          </view>
+        </view>
+        <textarea maxlength='120' bindinput='getTextarea' placeholder='写下你的旅行日记吧(120字以内)'>
+          <view>{{textarea.length}}/120</view>
+        </textarea>
+      </view>
 
-<!-- <wux-steps direction="vertical">
-  <wux-step status="process" title="{{item}}" content="This is description" wx:for='{{dayArr}}' wx:key></wux-step>
-</wux-steps> -->
+      <view class='add-image'>
+        <!-- wx:for='{{}}' -->
+        <view class='add-full' >
+          <wux-icon class='add-delete' type='md-close-circle-outline' size='20' />
+          <image src='../../images/222.jpg'></image>
+        </view>
+
+        <view class='add-full add-list-update'>
+          <image src='../../images/add1.png'></image>
+        </view> 
+             
+      </view>
+      <!-- <view class='add-add'><button>+</button></view> -->
+    </view>
+
+  </view>
+
+  <wux-wing-blank size="default" style='margin-bottom: 14rpx;' wx:if='{{dayArr == 0 ? false : true}}'>
+    <!-- <wux-button class='update' block type='energized'>上传</wux-button>  -->
+    <button class='update'>上传</button>
+  </wux-wing-blank>
+   
+</view>
