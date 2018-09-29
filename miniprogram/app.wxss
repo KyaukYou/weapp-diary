@@ -23,3 +23,21 @@ page {
   background-color: #f9bd10;
   color: #f9bd10;
 }
+
+
+/* 添加图片按钮点击样式 */
+.addImg-hover {
+  background-color: rgba(235,235,235,1)!important;
+}
+
+.addImg-hover image {
+  width:36%!important;
+  height:36%!important;
+  margin-top:32%!important;
+  margin-left:32%!important;
+}
+
+/* 黄色按钮样式 */
+.chooseBtn-hover {
+  background-color: #cca100!important;
+}

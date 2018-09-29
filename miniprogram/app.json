@@ -1,8 +1,8 @@
 {
   "cloud": true,
   "pages": [
-    "pages/index/index",
     "pages/addTravel/addTravel",
+    "pages/index/index",
     
     "pages/my/my",
     

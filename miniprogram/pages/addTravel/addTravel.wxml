@@ -28,7 +28,10 @@
         use-button-slot
         bind:input='addWhere'
       >
-        <wux-button slot="button" size="small" type="energized" bind:click='chooseWhere'>选择位置</wux-button>
+        <!-- <picker slot='button' return:false> -->
+          <wux-button slot="button" size="small" type="energized" bind:click='chooseWhere'>选择位置</wux-button>
+        <!-- </picker> -->
+        
       </van-field>
 
 
@@ -44,7 +47,14 @@
         required
         use-button-slot
       >
-        <wux-button slot="button" size="small" type="energized" bind:click='chooseStart'>选择日期</wux-button>
+        <!-- <wux-button slot="button" size="small" type="energized" bind:click='chooseStart'>
+          <picker mode = date>选择日期</picker>
+        </wux-button> -->
+        <picker hover-class='chooseBtn-hover' class='picker' slot='button' mode='date' bindchange='chooseStart'>
+          <wux-button size="small" type="energized">
+            选择日期
+          </wux-button>
+        </picker>
       </van-field>
 
       <van-field
@@ -59,48 +69,52 @@
         required
         use-button-slot
       >
-        <wux-button slot="button" size="small" type="energized" bind:click='chooseEnd'>选择日期</wux-button>
+        <!-- <wux-button slot="button" size="small" type="energized" bind:click='chooseEnd'>选择日期</wux-button> -->
+        <picker hover-class='chooseBtn-hover' class='picker' slot='button' mode='date' bindchange='chooseEnd'>
+          <wux-button size="small" type="energized">
+            选择日期
+          </wux-button>
+        </picker>
       </van-field>    
 
     </van-cell-group>
 
   </view>
 
-  <view class='add-list' wx:for='{{dayArr}}' wx:if='{{dayArr == 0 ? false : true}}' wx:key>
+  <view class='add-list' wx:for='{{uploadObj.list}}' wx:for-index='main_index' wx:if='{{dayArr == 0 ? false : true}}' wx:key>
     <view class='add-list-one'>
       <view class='add-footer'>
         <view>
           <wux-icon size='24' style='margin-top: 6rpx' class='add-time' type="md-time" />
-          <view class='add-time'>{{item}}</view>
+          <view class='add-time'>{{item.date}}</view>
           <view class='add-switch'>
             是否显示
             <!-- <wux-switch value='{{value1}}' color='energized' bind:change='onchange1'/> -->
-            <van-switch type='warning' class='add-ss' checked="{{ value1 }}" size='28' bind:change="onchange1" />
+            <van-switch data-index='{{main_index}}' type='warning' class='add-ss' checked="{{ item.show }}" size='28' bind:change="onchange1" />
           </view>
         </view>
-        <textarea maxlength='120' bindinput='getTextarea' placeholder='写下你的旅行日记吧(120字以内)'>
-          <view>{{textarea.length}}/120</view>
+        <textarea value='{{item.text}}' data-index='{{main_index}}' maxlength='120' bindinput='getTextarea' placeholder='写下你的旅行日记吧(120字以内)'>
+          <view>{{item.text.length}}/120</view>
         </textarea>
       </view>
 
       <view class='add-image'>
         <!-- wx:for='{{}}' -->
-        <view class='add-full' >
-          <wux-icon class='add-delete' type='md-close-circle-outline' size='20' />
-          <image src='../../images/222.jpg'></image>
+        <view class='add-full'  data-url='{{item}}' catchtap='showbgimg' wx:for='{{uploadObj.list[main_index].trueImgs}}'  wx:for-index='img_index' wx:key data-index='{{main_index}}'>
+          <wux-icon class='add-delete' type='md-close-circle-outline' size='20' data-main='{{main_index}}' data-index='{{img_index}}' catchtap='delImg' />
+          <image src='{{item}}' ></image>
         </view>
 
-        <view class='add-full add-list-update'>
+        <view data-index='{{main_index}}' class='add-full add-list-update' hover-class='addImg-hover' bindtap='chooseImg' wx:if='{{uploadObj.list[main_index].imgNum == 0 ? false : true}}'>
           <image src='../../images/add1.png'></image>
         </view> 
              
       </view>
-      <!-- <view class='add-add'><button>+</button></view> -->
     </view>
 
   </view>
 
-  <wux-wing-blank size="default" style='margin-bottom: 14rpx;' wx:if='{{dayArr == 0 ? false : true}}'>
+  <wux-wing-blank size="default" style='margin-bottom: 14rpx;' wx:if='{{uploadObj.list.length == 0 ? false : true}}'>
     <!-- <wux-button class='update' block type='energized'>上传</wux-button>  -->
     <button class='update'>上传</button>
   </wux-wing-blank>

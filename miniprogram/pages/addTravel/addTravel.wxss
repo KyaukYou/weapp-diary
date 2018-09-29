@@ -1,7 +1,7 @@
 page {
   width: 100%;
   height: 100%;
-  background-color: rgb(221,221,221);
+  background-color: rgb(236,236,236);
 }
 
 .page {
@@ -79,6 +79,10 @@ page {
   margin-left: 4%;
 }
 
+.add-full:nth-child(3n+1) {
+  margin-left: 4%;
+}
+
 .add-full:nth-child(3n + 3) {
   margin-right: 4%;
 }
@@ -95,9 +99,11 @@ page {
 
 .add-list-update {
   background-color: rgb(245, 245, 245);
+  transition: all .2s ease;
 }
 
 .add-list-update image {
+  transition: all .2s ease;
   width: 40%;
   height: 40%;
   margin-top: 30%;
@@ -146,7 +152,7 @@ page {
   top: 0;
   bottom: 0;
   float: inherit;
-  font-size: 26rpx;
+  font-size: 28rpx;
   line-height: 60rpx;
   display: flex;
   flex-flow: row nowrap;
@@ -161,7 +167,7 @@ page {
   position: absolute;
   right: 0;
   top: 6rpx;
-  font-size: 30rpx;
+  font-size: 38rpx;
   color: #f9bd10;
 }
 
@@ -219,4 +225,24 @@ page {
 
 .update::after {
   border: none;
+}
+
+.picker {
+  /* padding:4rpx 8rpx 2rpx;
+  width:98rpx;
+  height:56rpx;
+  font-size:24rpx;
+  line-height:56rpx;
+  background-color:rgb(255, 201, 0);
+  text-align: center;
+  color:#fff;
+  border-radius: 6rpx;
+  transition: all .2s ease; */
+  margin: 0;
+  padding: 0;
+}
+
+.picker button {
+  /* font-size: 22rpx; */
+  padding-left: 4rpx;
 }

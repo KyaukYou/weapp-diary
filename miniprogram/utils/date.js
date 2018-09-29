@@ -23,6 +23,7 @@ function getDays(day1, day2) {
   retArr.push(et.getYMD());
 
   // console.log(retArr); // 或可换为return ret;
+  retArr.shift();
   return retArr;
 }
 
