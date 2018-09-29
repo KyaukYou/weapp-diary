@@ -244,5 +244,5 @@ page {
 
 .picker button {
   /* font-size: 22rpx; */
-  padding-left: 4rpx;
+  padding-left: 2rpx;
 }

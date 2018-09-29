@@ -12,6 +12,7 @@
     "wux-calendar": "../../dist/calendar/index",
     "wux-upload": "../../dist/upload/index",
     "wux-wing-blank": "../../dist/wing-blank/index",
-    "wux-switch": "../../dist/switch/index"
+    "wux-switch": "../../dist/switch/index",
+    "wux-toast": "../../dist/toast/index"
   }
 }

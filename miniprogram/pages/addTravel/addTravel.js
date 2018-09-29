@@ -1,6 +1,4 @@
-import {
-  $wuxCalendar
-} from '../../dist/index'
+import { $wuxToast } from '../../dist/index'
 
 const getDays = require('../../utils/date.js')
 
@@ -17,28 +15,28 @@ Page({
     beginDate: [],
     endDate: [],
     day: 1,
-    dayArr: ['2018.10.01'],
+    dayArr: [],
     textarea: '',
     uploadObj: {
-      title: 'xx',
-      where: 'xx',
-      sDate: '2018.9.29',
-      eDate: '2018.9.30',
-      time: '2018.10.01 12:02',
+      title: '',
+      where: '',
+      sDate: '',
+      eDate: '',
+      createTime: '',
       see: 0,
       star: 0,
       like: 0,
-      day: '5',
+      day: 0,
       list: [
-        {
-          imgs: [],
-          trueImgs: [],
-          text: '',
-          date: '2018-09-29',
-          show: true,
-          like: 0,
-          imgNum: 9
-        },
+        // {
+        //   imgs: [],
+        //   trueImgs: [],
+        //   text: '',
+        //   date: '2018-09-29',
+        //   show: true,
+        //   like: 0,
+        //   imgNum: 9
+        // },
       ]
     }
   },
@@ -55,11 +53,11 @@ Page({
         let arr = res.tempFilePaths;
         var copy = that.data.uploadObj;
 
-        for(var i=0; i<arr.length; i++) {
+        for (var i = 0; i < arr.length; i++) {
           if (copy.list[e.currentTarget.dataset.index].imgNum <= 0) {
             copy.list[e.currentTarget.dataset.index].imgNum = 0;
-          }else {
-            copy.list[e.currentTarget.dataset.index].imgNum -=1;
+          } else {
+            copy.list[e.currentTarget.dataset.index].imgNum -= 1;
             copy.list[e.currentTarget.dataset.index].trueImgs.push(arr[i]);
           }
         }
@@ -67,10 +65,10 @@ Page({
           uploadObj: copy
         })
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log(res);
       },
-      complete: function (res) {
+      complete: function(res) {
         // console.log(res);
       },
     })
@@ -81,7 +79,7 @@ Page({
     var main = e.currentTarget.dataset.main;
     var child = e.currentTarget.dataset.index;
     var copy = this.data.uploadObj;
-    copy.list[main].trueImgs.splice(child,1);
+    copy.list[main].trueImgs.splice(child, 1);
     copy.list[main].imgNum += 1;
     console.log(copy.list[main].trueImgs, copy.list[main].imgNum)
     this.setData({
@@ -199,6 +197,7 @@ Page({
     //   },
     // })
   },
+  //选择日期后日期数组
   changeDate() {
     // console.log(this.data.beginDate[0])
     // console.log(this.data.endDate[0])
@@ -215,7 +214,7 @@ Page({
         this.setData({
           day: 1
         })
-        this.addDayArr(1,0)
+        this.addDayArr(1, 0)
 
       } else {
         let arr1 = this.data.beginDate[0].split('-');
@@ -231,7 +230,7 @@ Page({
           this.setData({
             day: 0
           })
-          this.addDayArr(0,0)
+          this.addDayArr(0, 0)
         } else {
 
           //生成
@@ -239,7 +238,7 @@ Page({
           let day1 = new Date(date1).getTime();
           let day2 = new Date(date2).getTime();
           var c = day2 - day1;
-        
+
           this.setData({
             day: c / 86400000 + 1
           })
@@ -250,148 +249,202 @@ Page({
 
     }
   },
-  addDayArr(a,b) {
+  addDayArr(a, b) {
     // console.log(a,b)
-    if(a == 0) {
+    if (a == 0) {
       this.setData({
         dayArr: []
       })
       return;
     }
-    if(b == 0) {
-      var d = this.data.beginDate[0].split('-').join('.')
+    if (b == 0) {
+      var d = this.data.beginDate[0]
       console.log(d)
       let arr = [];
       arr.push(d);
-
-      // 很重要!! 初始化list数组!
-      let copy1 = this.data.uploadObj;
-      // this.perfectArrChange(copy1.list,)
-      // let listArr = [];
-      // // for (var i = 0; i < day1.length; i++) {
-      //   var listObj = {
-      //     imgs: [],
-      //     trueImgs: [],
-      //     text: '',
-      //     date: day1[i],
-      //     show: true,
-      //     like: 0,
-      //     imgNum: 9
-      //   }
-      //   listArr.push(listObj)
-      // // }
-      // copy1.list = listArr;
-
       this.setData({
         dayArr: arr
-      })
-    }else {
-      if(this.data.day == 1) {
-        var d1 = this.data.beginDate[0].split('-').join('.')
+      });
+      this.perfectArrChange(this.data.uploadObj.list, arr)
+
+    } else {
+      if (this.data.day == 1) {
+        var d1 = this.data.beginDate[0]
         let arr1 = [];
         arr1.push(d1)
         this.setData({
           dayArr: arr1
-        })
-      }else {
+        });
+        this.perfectArrChange(this.data.uploadObj.list, arr1)
+      } else {
         var day1 = getDays.getDays(this.data.beginDate[0], this.data.endDate[0])
-        // day1.shift();
-
-
-        // 很重要!! 初始化list数组!
-        let copy1 = this.data.uploadObj;
-        let listArr = this.perfectArrChange(copy1.list,day1);
-        // let listArr = [];
-        // for (var i = 0; i < day1.length; i++) {
-        //   var listObj = {
-        //     imgs: [],
-        //     trueImgs: [],
-        //     text: '',
-        //     date: day1[i],
-        //     show: true,
-        //     like: 0,
-        //     imgNum: 9
-        //   }
-        //   listArr.push(listObj)
-        // } 
-        copy1.list = listArr;
-
 
         this.setData({
           dayArr: day1,
-          uploadObj: copy1
         })
+        this.perfectArrChange(this.data.uploadObj.list, day1)
+
       }
     }
   },
-  perfectArrChange(val1,val2) {
-    //创建提取数组
-    var earr = []
+  perfectArrChange(val1, val2) {
+    var that = this;
+    // console.log(val1.list)
+    //判断默认数组长度
+    if (val1.length <= 0) {
+      let copy = this.data.uploadObj;
+      let dArr = [];
+      for (var i = 0; i < this.data.dayArr.length; i++) {
+        var listObj = {
+          imgs: [],
+          trueImgs: [],
+          text: '',
+          date: this.data.dayArr[i],
+          show: true,
+          like: 0,
+          imgNum: 9
+        }
+        dArr.push(listObj)
+        copy.list = dArr;
+      }
+      this.setData({
+        uploadObj: copy
+      })
 
-    //第一步提取法
-    function getSame(val1) {
-      for (var i = 0; i < val2.length; i++) {
-        for (var j = 0; j < val1.length; j++) {
-          if (val1[j].date == val2[i]) {
-            earr.push(val1[j]);
-            val1.splice(j, 1);
-            j -= 1;
+    } else {
+      //创建提取数组
+      var earr = []
+
+      //第一步提取法
+      function getSame(val1) {
+        for (var i = 0; i < val2.length; i++) {
+          for (var j = 0; j < val1.length; j++) {
+            if (val1[j].date == val2[i]) {
+              earr.push(val1[j]);
+              val1.splice(j, 1);
+              j -= 1;
+            }
+          }
+
+        }
+      }
+
+      //第二步数据对比添加
+      function putArr() {
+        let a = new Date(earr[0].date.split('-')).getTime();
+        let b = new Date(earr[earr.length - 1].date.split('-')).getTime();
+
+        let a1 = new Date(val2[0].split('-')).getTime();
+        let b1 = new Date(val2[val2.length - 1].split('-')).getTime();
+
+        if (a > a1) {
+          var r1 = getDays.getDays(val2[0], earr[0].date)
+          r1.pop();
+          let pArr;
+          for (var i = r1.length - 1; i >= 0; i--) {
+            pArr = {
+                imgs: [],
+                trueImgs: [],
+                text: '',
+                date: r1[i],
+                show: true,
+                like: 0,
+                imgNum: 9
+              },
+              earr.unshift(pArr)
+          }
+
+        }
+
+        if (b < b1) {
+          var r = getDays.getDays(earr[earr.length - 1].date, val2[val2.length - 1])
+          r.splice(0, 1);
+          let pArr;
+          for (var i = 0; i < r.length; i++) {
+            pArr = {
+                imgs: [],
+                trueImgs: [],
+                text: '',
+                date: r[i],
+                show: true,
+                like: 0,
+                imgNum: 9
+              },
+              earr.push(pArr)
           }
         }
-
+        let copy3 = that.data.uploadObj;
+        copy3.list = earr;
+        that.setData({
+          uploadObj: copy3
+        })
       }
+
+      getSame(val1);
+      putArr();
     }
 
-    //第二步数据对比添加
-    function putArr() {
-      let a = new Date(earr[0].date.split('-')).getTime();
-      let b = new Date(earr[earr.length - 1].date.split('-')).getTime();
+  },
+  //上传全部！！！
+  uploadAll() {
+    // $wuxToast().show({
+    //   type: 'success',
+    //   duration: 1500,
+    //   color: 'white',
+    //   icon: 'md-sunny',
+    //   text: '再点就打屎你',
+    //   success: () => console.log('已完成')
+    // })
 
-      let a1 = new Date(val2[0].split('-')).getTime();
-      let b1 = new Date(val2[val2.length - 1].split('-')).getTime();
+    var title = this.data.title;
+    var where = this.data.where;
+    var sDate = this.data.beginDate;
+    var eDate = this.data.endDate;
+    var that = this;
+    console.log(title,where,sDate,eDate)
 
-      if (a > a1) {
-        var r1 = getDays.getDays(val2[0], earr[0].date)
-        r1.pop();
-        let pArr;
-        for (var i = r1.length - 1; i >= 0; i--) {
-          pArr = {
-            imgs: [],
-            trueImgs: [],
-            text: '',
-            date: r1[i],
-            show: true,
-            like: 0,
-            imgNum: 9
-          },
-          earr.unshift(pArr)
-        }
+    if(title == '' || where == '' || sDate.length == 0 || eDate.length == 0) {
+      $wuxToast().show({
+        type: 'cancel',
+        duration: 1500,
+        color: 'white',
+        text: '填写完整啦',
+        success: () => console.log('已完成')
+      });
+    }else {
+      let date = new Date();
+      let year = date.getFullYear();
+      let month = date.getMonth() + 1;
+      let day = date.getDate();
+      let hour = date.getHours();
+      let minute = date.getMinutes();
+      let second = date.getSeconds();
 
-      }
+      month <= 9 ? month = '0'+month : month;
+      day <= 9 ? day = '0' + day : day;
+      hour <= 9 ? hour = '0' + hour : hour;
+      minute <= 9 ? minute = '0' + minute : minute;
+      second <= 9 ? second = '0' + second : second;
+      let fullTimes = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+      // console.log(year + '-' + month + '-' + day + ' ' + hour+':'+minute+':'+second)
 
-      if (b < b1) {
-        var r = getDays.getDays(earr[earr.length - 1].date, val2[val2.length - 1])
-        r.splice(0, 1);
-        let pArr;
-        for (var i = 0; i < r.length; i++) {
-          pArr = {
-            imgs: [],
-            trueImgs: [],
-            text: '',
-            date: r[i],
-            show: true,
-            like: 0,
-            imgNum: 9
-          },
-          earr.push(pArr)
-        }
-      }
-      // console.log(earr)
-      return earr;
+      var copy = that.data.uploadObj;
+      copy.title = title;
+      copy.where = where;
+      copy.sDate = sDate;
+      copy.eDate = eDate;
+      copy.createTime = fullTimes;
+      copy.day = that.data.day;
+
+      that.setData({
+        uploadObj: copy
+      })
+
+      //上传到数据库
+      // 图片上传
+      //users数据库添加id
+      //travel数据库添加uploadObj
     }
-
-    getSame(val1);
-    putArr();
 
   },
 

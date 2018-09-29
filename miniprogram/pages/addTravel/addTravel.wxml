@@ -116,7 +116,8 @@
 
   <wux-wing-blank size="default" style='margin-bottom: 14rpx;' wx:if='{{uploadObj.list.length == 0 ? false : true}}'>
     <!-- <wux-button class='update' block type='energized'>上传</wux-button>  -->
-    <button class='update'>上传</button>
+    <button hover-class='chooseBtn-hover' class='update' bindtap='uploadAll'>上传</button>
   </wux-wing-blank>
+  <wux-toast id="wux-toast" />
    
 </view>
