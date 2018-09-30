@@ -1,0 +1,110 @@
+/**my.wxss**/
+page {
+  background-color: rgb(242, 242, 242);
+  transition: all .2s ease;
+}
+
+.page {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(242, 242, 242);
+}
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+
+.my-wrap {
+  width: 100%;
+  height: 270rpx;
+  background-color: #35c1f8;
+}
+
+.my-image {
+  width: 100%;
+  height: 270rpx;
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 24rpx;
+}
+
+.my-image .my-image-no {
+  width: 132rpx;
+  height: 132rpx;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-top: 12rpx;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.my-image .my-image-no button{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 26rpx;
+  line-height: 66rpx;
+  box-sizing: border-box;
+  padding:32rpx 0;
+  /* background-color: rgb(230, 230, 230); */
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+button::after {
+  border: none;
+}
+
+.my-info-detail view:nth-of-type(1) {
+  display:inline-block;
+  width:auto;
+  height:100%;
+  position: relative;
+  padding:0 50rpx 0 16rpx;
+}
+
+.my-info-detail view:nth-of-type(1) image {
+  height: 42rpx;
+  width: 42rpx; 
+  position: absolute;
+  right: 0;
+  top: 10rpx;
+  margin-top: 0;
+}
+
+.my-image image {
+  width: 132rpx;
+  height: 132rpx;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-top: 12rpx;
+}
+
+.my-image .my-info-detail {
+  height: 58rpx;
+  width: 100%; 
+  margin: -6rpx auto 0 auto;
+  line-height: 58rpx;
+  font-size: 30rpx;
+  text-align: center;
+}

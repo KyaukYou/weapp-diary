@@ -8,7 +8,8 @@ Page({
    */
   data: {
     travelList: {},
-    shouquan: false
+    shouquan: false,
+    lazyloadBol: true
   },
   addTravel() {
     wx.navigateTo({
@@ -50,48 +51,6 @@ Page({
 
     that.getInit();
 
-    wx.cloud.callFunction({
-      name: 'getTravel',
-      success(res) {
-        // console.log(res)
-        that.setData({
-          travelList: res.result.data
-        })
-        // console.log(that.data.travelList[0])
-      },
-      fail(res) {
-        console.log(res)
-      }
-    })
-
-    
-    // const db = wx.cloud.database();
-    // db.collection('travel').add({
-    //   data: {
-    //     list: {
-    //       date: "2018.10.01",
-    //       dayNum: 9,
-    //       headerImg: "xx",
-    //       seeNum: 999,
-    //       star: 888,
-    //       time: "10:25",
-    //       title: "啦啦啦啦",
-    //       where: "宇宙"
-    //     },
-    //     user: {
-    //       name: "哈哈",
-    //       avatar: "xxx"
-    //     }
-    //   },
-    //   success(res) {
-    //     console.log(res)
-    //   },
-    //   fail(res) {
-    //     console.log(res)
-    //   }
-    // })
-
-
   },
 
   /**
@@ -105,7 +64,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    var that = this;
+    wx.cloud.callFunction({
+      name: 'getTravel',
+      success(res) {
+        that.setData({
+          travelList: res.result.data
+        })
+      },
+      fail(res) {
+        console.log(res)
+      },
+      complete(res) {
+        wx.stopPullDownRefresh();
+      }
+    })
   },
 
   /**
@@ -126,7 +99,21 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    var that = this;
+    wx.cloud.callFunction({
+      name: 'getTravel',
+      success(res) {
+        that.setData({
+          travelList: res.result.data
+        })
+      },
+      fail(res) {
+        console.log(res)
+      },
+      complete(res) {
+        wx.stopPullDownRefresh();
+      }
+    })
   },
 
   /**

@@ -2,33 +2,33 @@
 <view class="container">
   <button class='getInfo' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" wx:if='{{!shouquan}}'>获取授权</button>
 
-  <view class='index' wx:for='{{travelList}}' wx:key>
+  <view class='index' wx:for='{{travelList}}' wx:key wx:if='{{item.data.show}}'>
     <view class='index-wrap'>
-      <image src='https://6e69-nightess-0809-1257711591.tcb.qcloud.la/wx7e8eb46444d8dd39.o6zAJszuTDC74tV9p0dCVRt3FIOI.i3JWDUF5kNLFdc23fe5f522a5b4c80bfc7cec100a5c7.png'></image>
-      <view class='index-title'>{{item.list.title}}</view>
+      <image lazy-load='{{lazyloadBol}}' src='{{item.data.headerImg}}'></image>
+      <view class='index-title'>{{item.data.title}}</view>
       <view class='index-smtitle'>
-        <text>{{item.list.date}} {{item.list.dayNum}}天 {{item.list.seeNum}}次浏览</text>
-        <text>{{item.list.where}}</text>
+        <text>{{item.data.sDate}} {{item.data.day}}天 {{item.data.see}}次浏览</text>
+        <text>{{item.data.where}}</text>
       </view>
 
       <view class='index-footer'>
         <view class='index-footer-left'>
-          <image src='../../images/222.jpg'></image>
-          <view>by {{item.user.name}}</view>
+          <image src='{{item.data.userInfo.avatarUrl}}'></image>
+          <view>by {{item.data.userInfo.nickName}}</view>
         </view>
         <view class='index-footer-right'>
           <view class='index-footer-one'>
             <image src='../../images/like.png'></image>
-            <view>{{item.list.star}}</view>
+            <view>{{item.data.like}}</view>
           </view>
           <view class='index-footer-one'>
             <image src='../../images/star.png'></image>
-            <view>{{item.list.star}}</view>          
+            <view>{{item.data.star}}</view>
           </view>
-          <view class='index-footer-one'>
+          <!-- <view class='index-footer-one'>
             <image src='../../images/chat.png'></image>
             <view>1111</view>         
-          </view>
+          </view> -->
         </view>
       </view>
     </view>
@@ -37,5 +37,5 @@
   <!-- <view class='add-travel'>
     <image src='../../images/add.png'></image>
   </view> -->
-  <wux-floating-button actionRotate='false' position="bottomRight" theme="energized" bind:change="addTravel" bind:click="addTravel" />
+  <wux-floating-button actionRotate='false' position="bottomRight" theme="calm" bind:change="addTravel" bind:click="addTravel" />
 </view>

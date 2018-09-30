@@ -26,8 +26,6 @@ App({
         that.globalData.openid = res.result.openid
         wx.setStorageSync('openid', res.result.openid);
         that.getLoginInfo();
-
-
       },
       fail(res) {
         console.log(res)
@@ -42,7 +40,6 @@ App({
     wx.login({
       success(res) {
         // console.log(res);
-
         wx.getUserInfo({
           success(res) {
             // console.log(res);
@@ -84,7 +81,8 @@ App({
                   let db = wx.cloud.database();
                   db.collection('users').add({
                     data: {
-                      userInfo: that.globalData.userInfo
+                      userInfo: that.globalData.userInfo,
+                      travelArr: []
                     },
                     success(res) {
                       console.log(res);

@@ -3,35 +3,40 @@
   "pages": [
     "pages/index/index",
     "pages/addTravel/addTravel",
-    
     "pages/my/my",
-    
+    "pages/go/go",
     "pages/travelShow/travelShow"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#f9bd10",
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#35c1f8",
     "navigationBarTitleText": "柴窝",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "color": "#b0b0b0",
-    "selectedColor": "#f9bd10",
-    "borderStyle": "gray",
+    "color": "#dddddd",
+    "selectedColor": "#35c1f8",
+    "borderStyle": "black",
     "backgroundColor": "#fff",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/dog-seating.png",
-        "selectedIconPath": "images/dog-seating (1).png",
-        "text": "汪汪汪"
+        "iconPath": "images/home_light.png",
+        "selectedIconPath": "images/home_light (1).png",
+        "text": "主页"
+      },
+      {
+        "pagePath": "pages/go/go",
+        "iconPath": "images/discover.png",
+        "selectedIconPath": "images/discover (1).png",
+        "text": "发现"
       },
       {
         "pagePath": "pages/my/my",
-        "iconPath": "images/dog-seating.png",
-        "selectedIconPath": "images/dog-seating (1).png",
-        "text": "发现"
+        "iconPath": "images/my_light.png",
+        "selectedIconPath": "images/my_light (1).png",
+        "text": "我的"
       }
     ]
   }

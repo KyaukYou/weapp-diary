@@ -17,12 +17,22 @@ Page({
     day: 1,
     dayArr: [],
     textarea: '',
+    cImgNum: 0,
+    fullImgNums: 0, 
+    fullImgArr: [], 
+    fullArr: [],
+    uparr: [],
+    headerImgArr: [],
     uploadObj: {
+      userInfo: {},
       title: '',
       where: '',
       sDate: '',
       eDate: '',
+      show: true,
       createTime: '',
+      headerImgArr: [],
+      headerImg: [],
       see: 0,
       star: 0,
       like: 0,
@@ -39,6 +49,19 @@ Page({
         // },
       ]
     }
+  },
+  headerimg() {
+    var that = this;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],  
+      success: function(res) {
+        that.setData({
+          headerImgArr: res.tempFilePaths
+        })
+      },
+    })
   },
   //选择图片上传
   chooseImg(e) {
@@ -400,10 +423,11 @@ Page({
     var where = this.data.where;
     var sDate = this.data.beginDate;
     var eDate = this.data.endDate;
+    var hImg = this.data.headerImgArr;
     var that = this;
     console.log(title,where,sDate,eDate)
 
-    if(title == '' || where == '' || sDate.length == 0 || eDate.length == 0) {
+    if (title == '' || where == '' || sDate.length == 0 || eDate.length == 0 || hImg.length == 0) {
       $wuxToast().show({
         type: 'cancel',
         duration: 1500,
@@ -435,6 +459,8 @@ Page({
       copy.eDate = eDate;
       copy.createTime = fullTimes;
       copy.day = that.data.day;
+      copy.headerImgArr = that.data.headerImgArr;
+      copy.userInfo = wx.getStorageSync('userInfo');
 
       that.setData({
         uploadObj: copy
@@ -444,20 +470,251 @@ Page({
       // 图片上传
       //users数据库添加id
       //travel数据库添加uploadObj
+      let fullImgNums = 0;
+      let fullImgArr = [];
+      let fullArr = [];
+      for(var a = 0; a<this.data.uploadObj.list.length; a++) {
+
+        fullImgNums += this.data.uploadObj.list[a].trueImgs.length;
+        fullImgArr.push(this.data.uploadObj.list[a].trueImgs.length);
+        for (var c = 0; c < this.data.uploadObj.list[a].trueImgs.length; c++) {
+          fullArr.push(this.data.uploadObj.list[a].trueImgs[c])
+        }
+        this.setData({
+          fullImgNums: fullImgNums, 
+          fullImgArr: fullImgArr, 
+          fullArr: fullArr
+        })
+      }
+
+      let filePath = that.data.headerImgArr[0];
+      let pattern = /\.{1}[a-z]{1,}$/;
+      let cc = filePath.slice(0, pattern.exec(filePath).index);
+      cc = cc.slice(11);
+
+      let openid = wx.getStorageSync('openid');
+
+      let cloudPath = 'travel/' + openid + '/header/' + cc + filePath.match(/\.[^.]+?$/)[0];
+
+      wx.showLoading({
+        title: '上传标题图片',
+      })
+      wx.cloud.uploadFile({
+        cloudPath,
+        filePath,
+        success(res) {
+          console.log(res.fileID)
+          let copy3 = that.data.uploadObj;
+          copy3.headerImg = res.fileID;
+          that.setData({
+            uploadObj: copy3
+          })
+        },
+        fail(res) {
+          console.log(res)
+        },
+        complete(res) {
+          let anum = that.data.cImgNum - 0 + 1;
+          let title = '上传图片' + anum + '/' + fullImgNums;
+          console.log(anum, title)
+          wx.showLoading({
+            title: title,
+          });
+          that.uploadTravelImg()
+        }
+      })
+
     }
 
+  },
+  //上传uploadObj中的图片,并且在uploadObj中添加图片链接
+  uploadTravelImg() {
+    var num, numarr, numlist;
+    num = this.data.fullImgNums;
+    numarr = this.data.fullImgArr;
+    numlist = this.data.fullArr;
+    var uparr = this.data.uparr;
+    var that = this;
+
+    if (numlist.length <= 0) {
+      //上传图片完成
+      wx.hideLoading();
+      wx.showLoading({
+        title: '上传日记中',
+      })
+
+      //添加到数组
+      let copy = that.data.uploadObj;
+      console.log(uparr, copy.list)
+      for (var j = 0; j < copy.list.length; j++) {
+
+        let s = uparr.splice(0, numarr[j]);
+        console.log(s);
+        for (var i = 0; i < s.length; i++) {
+          copy.list[j].imgs.push(s[i])
+        }
+
+      }
+      that.setData({
+        uploadObj: copy
+      })
+      let db = wx.cloud.database();
+      db.collection('travel').add({
+        data: {
+          data: that.data.uploadObj
+        },
+        success(res) {
+          console.log(res);
+          // wx.hideLoading();
+          // wx.showToast({
+          //   title: '上传成功',
+          // });
+        },
+        fail(res) {
+          console.log(res)
+        },
+        complete(res) {
+          that.addSql(res._id)
+        }
+      })
+
+    }else {
+
+    // console.log(num,numarr,numlist)
+    if(this.data.cImgNum < num) {
+
+      let filePath = numlist[this.data.cImgNum];
+      console.log(filePath)
+      let pattern = /\.{1}[a-z]{1,}$/;
+      let aa = filePath.slice(0, pattern.exec(filePath).index);
+      aa = aa.slice(11);
+      // console.log(aa)
+
+      let openid = wx.getStorageSync('openid');
+
+      let cloudPath = 'travel/'+ openid + '/'+ aa + filePath.match(/\.[^.]+?$/)[0];
+      // console.log(cloudPath);
+
+      wx.cloud.uploadFile({
+        cloudPath,
+        filePath,
+        success(res) {
+          console.log(res.fileID)
+          uparr.push(res.fileID);
+          that.setData({
+            uparr: uparr
+          })
+          // console.log(uparr)
+        },
+        fail(res) {
+          console.log(res)
+        },
+        complete(res) {
+          console.log(res)
+          var l = that.data.cImgNum += 1;
+          that.setData({
+            cImgNum: l
+          });
+          console.log(l)
+          let anum = that.data.cImgNum - 0 + 1 ;
+          let title = '上传图片' + anum + '/' + that.data.fullImgNums;
+          console.log(anum,title)
+          wx.showLoading({
+            title: title,
+          })
+          that.uploadTravelImg();
+        }
+      })
+
+
+    }else {
+      //上传图片完成
+      wx.hideLoading();
+      wx.showLoading({
+        title: '上传日记中',
+      })
+
+      //添加到数组
+      let copy = that.data.uploadObj;
+      console.log(uparr,copy.list)
+      for(var j=0; j<copy.list.length; j++) {
+
+        let s = uparr.splice(0, numarr[j]); 
+        console.log(s);
+        for(var i=0; i<s.length; i++) {
+          copy.list[j].imgs.push(s[i])
+        }
+        // console.log(copy.list[j])
+      
+      }
+      that.setData({
+        uploadObj: copy
+      })
+
+      let db = wx.cloud.database();
+      db.collection('travel').add({
+        data: {
+          data: that.data.uploadObj
+        },
+        success(res) {
+          console.log(res);
+          // wx.hideLoading();
+          // wx.showToast({
+          //   title: '上传成功',
+          // });
+        },
+        fail(res) {
+          console.log(res)
+        },
+        complete(res) {
+          console.log(res)  
+          that.addSql(res._id)
+        }
+      })
+    }
+    }
+
+  },
+  //uploadObj上传到数据库 travel和users
+  addSql(id) {
+    let db = wx.cloud.database();
+    let _ = db.command;
+    let myuser = db.collection('users').where({
+      _openid: wx.getStorageSync('openid')
+    }).get()
+    var tarr;
+    var a = Promise.resolve(myuser).then(function (res) {
+      tarr = res.data[0]
+
+      let copyarr = tarr.travelArr;
+      copyarr.push(id)
+
+      db.collection('users').doc(tarr['_id']).update({
+        data: {
+          travelArr: copyarr
+        },
+        success(res) {
+          console.log(res)
+          wx.hideLoading();
+            wx.showToast({
+              title: '上传成功',
+          })
+          wx.switchTab({
+            url: '../index/index',
+          })
+        },
+        fail(res) {
+          console.log(res)
+        }
+      })
+    })  
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // let date = new Date();
-    // let year = date.getFullYear();
-    // let month = date.getMonth() + 1;
-    // let day = date.getDate();
-    //  this.changeDate();
-    // console.log(year + '-' + month + '-' + day)
+
   },
 
   /**
@@ -472,6 +729,7 @@ Page({
    */
   onShow: function() {
 
+    
   },
 
   /**

@@ -1,4 +1,8 @@
 <view class='page'>
+  <view class='headerimg' bindtap='headerimg'>
+    <view wx:if="{{headerImgArr.length > 0 ? false : true}}" >上传封面图</view>
+    <image wx:if="{{headerImgArr.length > 0 ? true : false}}" src='{{headerImgArr[0]}}'></image>
+  </view>
 
   <!-- 日历组件 -->
   <wux-calendar id="wux-calendar" />
@@ -29,7 +33,7 @@
         bind:input='addWhere'
       >
         <!-- <picker slot='button' return:false> -->
-          <wux-button slot="button" size="small" type="energized" bind:click='chooseWhere'>选择位置</wux-button>
+          <wux-button slot="button" size="small" type="calm" bind:click='chooseWhere'>选择位置</wux-button>
         <!-- </picker> -->
         
       </van-field>
@@ -47,11 +51,11 @@
         required
         use-button-slot
       >
-        <!-- <wux-button slot="button" size="small" type="energized" bind:click='chooseStart'>
+        <!-- <wux-button slot="button" size="small" type="calm" bind:click='chooseStart'>
           <picker mode = date>选择日期</picker>
         </wux-button> -->
         <picker hover-class='chooseBtn-hover' class='picker' slot='button' mode='date' bindchange='chooseStart'>
-          <wux-button size="small" type="energized">
+          <wux-button size="small" type="calm">
             选择日期
           </wux-button>
         </picker>
@@ -69,9 +73,9 @@
         required
         use-button-slot
       >
-        <!-- <wux-button slot="button" size="small" type="energized" bind:click='chooseEnd'>选择日期</wux-button> -->
+        <!-- <wux-button slot="button" size="small" type="calm" bind:click='chooseEnd'>选择日期</wux-button> -->
         <picker hover-class='chooseBtn-hover' class='picker' slot='button' mode='date' bindchange='chooseEnd'>
-          <wux-button size="small" type="energized">
+          <wux-button size="small" type="calm">
             选择日期
           </wux-button>
         </picker>
@@ -89,7 +93,7 @@
           <view class='add-time'>{{item.date}}</view>
           <view class='add-switch'>
             是否显示
-            <!-- <wux-switch value='{{value1}}' color='energized' bind:change='onchange1'/> -->
+            <!-- <wux-switch value='{{value1}}' color='calm' bind:change='onchange1'/> -->
             <van-switch data-index='{{main_index}}' type='warning' class='add-ss' checked="{{ item.show }}" size='28' bind:change="onchange1" />
           </view>
         </view>
@@ -115,7 +119,7 @@
   </view>
 
   <wux-wing-blank size="default" style='margin-bottom: 14rpx;' wx:if='{{uploadObj.list.length == 0 ? false : true}}'>
-    <!-- <wux-button class='update' block type='energized'>上传</wux-button>  -->
+    <!-- <wux-button class='update' block type='calm'>上传</wux-button>  -->
     <button hover-class='chooseBtn-hover' class='update' bindtap='uploadAll'>上传</button>
   </wux-wing-blank>
   <wux-toast id="wux-toast" />

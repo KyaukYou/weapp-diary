@@ -1,5 +1,6 @@
 {
-  "navigationBarTitleText": "柴之声",
+  "navigationBarTitleText": "主页",
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "wux-floating-button": "../../dist/floating-button/index"
   }

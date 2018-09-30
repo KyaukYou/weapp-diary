@@ -2,12 +2,13 @@
 
 page {
   /* padding-top: 12rpx; */
+  background-color: rgb(246,246,246);
 }
 
 .getInfo {
   width: 94%;
   height: 70rpx;
-  background: rgb(249, 189, 16);
+  background: #35c1f8;
   line-height: 70rpx;
   font-size: 30rpx;
   color: white;
@@ -18,6 +19,7 @@ page {
 .container {
   width: auto;
   height: 100%;
+  background-color: rgb(246,246,246);
   /* display: flex; *//* flex-flow: column wrap; *//* flex-flow:column wrap; *//* align-items:center; */
 }
 
@@ -50,7 +52,7 @@ page {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: -1;
+  /* z-index: -1; */
 }
 
 .index .index-title {
@@ -62,11 +64,13 @@ page {
   box-sizing: border-box;
   padding: 24rpx;
   padding-right: 30rpx;
-  padding-bottom: 6rpx;
+  padding-bottom: 12rpx;
+  line-height: 42rpx;
+  z-index: 10;
 }
 
 .index .index-smtitle {
-  width: 70%;
+  width: 77%;
   height: auto;
   font-size: 20rpx;
   color: white;
@@ -85,16 +89,18 @@ page {
   position: absolute;
   width: 7rpx;
   /* height: 80%; */
-  top: 1%;
-  bottom: 10%;
-  left: 28rpx;
-  background-color: rgb(249, 189, 16);
+  top: 14%;
+  bottom: 9%;
+  left: 26rpx;
+  background-color: #35c1f8;
 }
 
 .index .index-smtitle text {
   width: 100%;
-  height: 32rpx;
+  /* height: 32rpx; */
+  height: auto;
   font-weight: bold;
+  line-height: 30rpx;
 }
 
 .index .index-footer {
@@ -124,7 +130,7 @@ page {
   height: 50rpx;
   border-radius: 50%;
   margin-left: 3%;
-  margin-top: -8rpx;
+  margin-top: -2rpx;
 }
 
 .index .index-footer-left view {
@@ -180,7 +186,7 @@ page {
   width: 82rpx;
   height: 82rpx;
   border-radius: 50%;
-  background-color: rgb(249, 189, 16);
+  background-color: #35c1f8;
   z-index: 100;
   bottom: 16rpx;
   right: 16rpx;

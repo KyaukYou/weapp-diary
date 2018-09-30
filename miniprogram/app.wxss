@@ -6,22 +6,22 @@ page {
 }
 
 .wx-switch-input {
-  background-color: #f9bd10;
-  color: #f9bd10;
+  background-color: #35c1f8;
+  color: #35c1f8;
 }
 
 /*白色样式（false的样式）*/
 
 .wx-switch-input::before {
-  background-color: #f9bd10;
-  color: #f9bd10;
+  background-color: #35c1f8;
+  color: #35c1f8;
 }
 
 /*绿色样式（true的样式）*/
 
 .wx-switch-input::after {
-  background-color: #f9bd10;
-  color: #f9bd10;
+  background-color: #35c1f8;
+  color: #35c1f8;
 }
 
 
@@ -39,5 +39,5 @@ page {
 
 /* 黄色按钮样式 */
 .chooseBtn-hover {
-  background-color: #cca100!important;
+  background-color: #29b2e1!important;
 }

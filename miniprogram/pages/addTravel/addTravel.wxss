@@ -168,7 +168,7 @@ page {
   right: 0;
   top: 6rpx;
   font-size: 38rpx;
-  color: #f9bd10;
+  color: #35c1f8;
 }
 
 .add-footer textarea {
@@ -206,7 +206,7 @@ page {
 .add-add button {
   width: 100%;
   height: 100%;
-  background-color: #f9bd10;
+  background-color: #35c1f8;
   font-size: 34rpx;
   line-height: 50rpx;
   border-radius: 0;
@@ -218,7 +218,7 @@ page {
 }
 
 .update {
-  background-color: #f9bd10;
+  background-color: #35c1f8;
   color: white;
   box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.1);
 }
@@ -245,4 +245,37 @@ page {
 .picker button {
   /* font-size: 22rpx; */
   padding-left: 2rpx;
+}
+
+.headerimg {
+  width: 96%;
+  height: 360rpx;
+  background-color: white;
+  border-radius: 8rpx;
+  margin: 0 auto;
+  padding-top: 140rpx;
+  box-sizing: border-box;
+  position: relative;
+  margin-bottom: 20rpx;
+  margin-top: 20rpx;
+  overflow: hidden;
+}
+
+.headerimg view {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: rgb(221,221,221);
+}
+
+.headerimg image {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
 }

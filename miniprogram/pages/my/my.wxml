@@ -1,1 +1,21 @@
-<button bindtap='uploadImg'>上传图片</button>
+<!--my.wxml-->
+<view class='page' catchtouchmove="{{pageData}}">
+  <view class="my-wrap">
+    <view class='my-image' wx:if='{{hasUserInfo}}'>
+      <image src="{{userInfo.avatarUrl}}"></image>
+      <view class='my-info-detail'>
+        <view>{{userInfo.nickName}}
+          <image src='{{userGender}}'></image>
+        </view>
+      </view>
+    </view>
+    <view class='my-image' wx:if='{{!hasUserInfo}}'>
+      <view class='my-image-no'>
+        <button open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">
+          点击获取
+        </button>
+      </view>
+    </view>
+  </view>
+
+</view>

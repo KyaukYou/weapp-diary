@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "柴之奏",
+  "navigationBarTitleText": "上传旅行日记",
   "usingComponents": {
     "van-field": "../../module/field/index",
     "van-cell": "../../module/cell/index",
