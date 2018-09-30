@@ -9,7 +9,8 @@ Page({
   data: {
     travelList: {},
     shouquan: false,
-    lazyloadBol: true
+    lazyloadBol: true,
+    rotateBol: false
   },
   addTravel() {
     wx.navigateTo({
