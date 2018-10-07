@@ -5,7 +5,7 @@
     {{travelObj.data.title}}
     {{travelObj.data.where}}
 
-    <view wx:for-item='item1' wx:for='{{travelObj.data.list}}'>
+    <view wx:for-item='item1' wx:key wx:for='{{travelObj.data.list}}'>
       {{item1.date}}
       {{item.trueImgs}}
     </view>

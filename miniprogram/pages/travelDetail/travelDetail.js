@@ -25,7 +25,7 @@ Page({
 
     var a = Promise.resolve(travelData).then(function (res) {
       mydata = res.data[0]
-      console.log(mydata);
+      console.log(mydata,res.data);
       that.setData({
         travelObj: mydata
       })
