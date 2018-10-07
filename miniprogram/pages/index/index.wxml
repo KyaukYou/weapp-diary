@@ -2,7 +2,7 @@
 <view class="container">
   <button class='getInfo' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" wx:if='{{!shouquan}}'>获取授权</button>
 
-  <view class='index' wx:for='{{travelList}}' wx:key wx:if='{{item.data.show}}'>
+  <view class='index' data-id='{{item._id}}' wx:for='{{travelList}}' wx:key wx:if='{{item.data.show}}' bindtap='todetail'>
     <view class='index-wrap'>
       <image lazy-load='{{lazyloadBol}}' src='{{item.data.headerImg}}'></image>
       <view class='index-title'>{{item.data.title}}</view>

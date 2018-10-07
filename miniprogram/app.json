@@ -5,7 +5,8 @@
     "pages/addTravel/addTravel",
     "pages/my/my",
     "pages/go/go",
-    "pages/travelShow/travelShow"
+    "pages/travelShow/travelShow",
+    "pages/travelDetail/travelDetail"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

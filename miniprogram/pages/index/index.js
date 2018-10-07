@@ -12,6 +12,15 @@ Page({
     lazyloadBol: true,
     rotateBol: false
   },
+  // 查看详情
+  todetail(e) {
+    let id = e.currentTarget.dataset.id
+    console.log(e)
+
+    wx.navigateTo({
+      url: '../travelDetail/travelDetail?id='+id,
+    })
+  },
   addTravel() {
     wx.navigateTo({
       url: '../addTravel/addTravel',
