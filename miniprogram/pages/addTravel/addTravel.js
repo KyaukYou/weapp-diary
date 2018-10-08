@@ -117,6 +117,7 @@ Page({
     // arr.push(e.currentTarget.dataset.url)
     wx.previewImage({
       urls: arr,
+      current: e.currentTarget.dataset.url,
       success(res) {
         console.log(res)
       },
@@ -432,7 +433,7 @@ Page({
         type: 'cancel',
         duration: 1500,
         color: 'white',
-        text: '填写完整啦',
+        text: '请填写完整',
         success: () => console.log('已完成')
       });
     }else {

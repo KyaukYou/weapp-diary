@@ -1,5 +1,25 @@
 <!--index.wxml-->
+  <view class='index-top'>
+    <!-- 搜索框 -->
+    <view class='index-search'>
+      <wux-search-bar maxlength="30" />
+    </view>
+    <!-- 选择列表 -->
+    <view class='index-choose'>
+      <view class='index-choose-list' bindtap='changelistcolor' wx:for='{{listArr}}' data-index='{{index}}' style='color: {{item.color}}'  wx:key>{{item.name}}</view>
+      <!-- <view class='index-choose-list' style='color: {{listColor[1]}}'>时间倒序</view>
+      <view class='index-choose-list' style='color: {{listColor[2]}}'>浏览次数</view>
+      <view class='index-choose-list' style='color: {{listColor[3]}}'>点赞最高</view> -->
+    </view>
+
+    <!-- 分割线 -->
+    <view class='index-border'>
+      <wux-divider show-text="{{ false }}" />
+    </view>
+  </view>  
+
 <view class="container">
+
   <button class='getInfo' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" wx:if='{{!shouquan}}'>获取授权</button>
 
   <view class='index' data-id='{{item._id}}' wx:for='{{travelList}}' wx:key wx:if='{{item.data.show}}' bindtap='todetail'>

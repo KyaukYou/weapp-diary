@@ -5,6 +5,60 @@ page {
   background-color: rgb(246,246,246);
 }
 
+.index-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 160rpx;
+  background-color: rgb(246,246,246);
+  z-index: 999;
+  /* margin-bottom: 320rpx; */
+}
+
+.index-search {
+  width: 100%;
+  height: auto;
+}
+
+.index-border {
+  width: 100%;
+}
+
+.index-choose {
+  width: 92%;
+  height: 50rpx;
+  line-height: 50rpx;
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 26rpx;
+  font-weight: bold;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.index-choose-list {
+  width: 30%;
+  height: 100%;
+  text-align: center;
+}
+
+.index-choose-list:nth-of-type(1) {
+  width: 20%;
+  text-align: left;
+  color: rgb(239,37,15);
+}
+
+
+.index-choose-list:nth-of-type(4) {
+  width: 20%;
+  text-align: right;
+}
+
+.index-choose-listed {
+  color: #35c1f8;
+}
+
 .getInfo {
   width: 94%;
   height: 70rpx;
@@ -18,8 +72,14 @@ page {
 
 .container {
   width: auto;
-  height: 100%;
+  /* height: 100%; */
+  height: auto;
   background-color: rgb(246,246,246);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin-top: 154rpx;
+  padding-bottom: 12rpx;
   /* display: flex; *//* flex-flow: column wrap; *//* flex-flow:column wrap; *//* align-items:center; */
 }
 
@@ -31,7 +91,8 @@ page {
   /* border: 2rpx solid gray; */
   border-radius: 8rpx;
   overflow: hidden;
-  margin: 20rpx auto;
+  margin: 10rpx 0;
+  /* margin: 20rpx auto; */
   box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.3);
 }
 

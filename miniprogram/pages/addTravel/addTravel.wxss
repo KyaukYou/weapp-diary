@@ -140,7 +140,7 @@ page {
   float: left;
   height: 100%;
   line-height: 60rpx;
-  margin-left: 12rpx;
+  margin-left: 6rpx;
   font-size: 28rpx;
   color: rgb(180,180,180);
 }
@@ -173,24 +173,26 @@ page {
 
 .add-footer textarea {
   width: 94%;
-  height: 230rpx;
+  height: auto;
+  min-height: 230rpx;
   /* min-height: 100rpx; */
   box-sizing: border-box;
-  padding: 6rpx;
+  padding: 10rpx;
   margin: 6rpx 3%;
   font-size: 30rpx;
   color: rgb(50,50,50);
   letter-spacing: 2rpx;
   word-spacing: 2rpx;
   position: relative;
-  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1); */
+  border: 4rpx solid rgba(0,0,0,0.1);
   /* background-color: rgb(245, 245, 245); */
 }
 
 .add-footer textarea view {
   position: absolute;
-  bottom: 0rpx;
-  right: 4rpx;
+  bottom: 4rpx;
+  right: 6rpx;
   font-size: 22rpx;
   color: rgb(221,221,221);
 }

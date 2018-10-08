@@ -1,12 +1,15 @@
 {
   "cloud": true,
   "pages": [
+    
     "pages/index/index",
+    "pages/travelDetail/travelDetail",
+    
     "pages/addTravel/addTravel",
     "pages/my/my",
     "pages/go/go",
-    "pages/travelShow/travelShow",
-    "pages/travelDetail/travelDetail"
+    "pages/travelShow/travelShow"
+    
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

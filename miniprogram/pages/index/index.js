@@ -10,7 +10,45 @@ Page({
     travelList: {},
     shouquan: false,
     lazyloadBol: true,
-    rotateBol: false
+    rotateBol: false,
+    listArr: [
+      {
+        name: '最近更新',
+        color: 'rgb(239,37,15)'
+      },
+      {
+        name: '时间正序',
+        color: 'black'
+      },
+      {
+        name: '浏览次数',
+        color: 'black'
+      },
+      {
+        name: '点赞最高',
+        color: 'black'
+      }
+    ],
+    listColor: ['rgb(239,37,15)','black','black','black']
+  },
+  // 修改list颜色
+  changelistcolor(e) {
+    let index = e.currentTarget.dataset.index;
+    var copy = this.data.listArr;
+    for(var i=0; i<copy.length; i++) {
+      copy[i].color = 'black';
+    }
+
+    copy[index].color = 'rgb(239,37,15)';
+    this.setData({
+      listArr: copy
+    })
+    wx.showLoading({
+      title: '正在加载',
+      success: function() {
+        wx.hideLoading();
+      }
+    })
   },
   // 查看详情
   todetail(e) {

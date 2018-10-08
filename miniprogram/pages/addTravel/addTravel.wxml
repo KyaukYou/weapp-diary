@@ -91,14 +91,15 @@
         <view>
           <wux-icon size='24' style='margin-top: 6rpx' class='add-time' type="md-time" />
           <view class='add-time'>{{item.date}}</view>
+          
           <view class='add-switch'>
             是否显示
             <!-- <wux-switch value='{{value1}}' color='calm' bind:change='onchange1'/> -->
             <van-switch data-index='{{main_index}}' type='warning' class='add-ss' checked="{{ item.show }}" size='28' bind:change="onchange1" />
           </view>
         </view>
-        <textarea value='{{item.text}}' data-index='{{main_index}}' maxlength='120' bindinput='getTextarea' placeholder='写下你的旅行日记吧(120字以内)'>
-          <view>{{item.text.length}}/120</view>
+        <textarea value='{{item.text}}' data-index='{{main_index}}' maxlength='500' bindinput='getTextarea' placeholder='写下你的旅行日记吧(500字以内)'>
+          <view>{{item.text.length}}/500</view>
         </textarea>
       </view>
 

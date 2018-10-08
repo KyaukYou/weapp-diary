@@ -6,14 +6,29 @@ Page({
   data: {
     travelObj: {}
   },
+  // 查看大图
+  showImg(e) {
+    let index = e.currentTarget.dataset.index;
+    let copy = this.data.travelObj;
+
+    wx.previewImage({
+      urls: copy.data.list[index].imgs,
+      current: e.currentTarget.dataset.url,
+      success: function(res) {
+        console.log(res)
+      }
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     let that = this;
-    console.log(options.id)
+    // console.log(options.id)
+
     let myid = options.id;
+    // let myid = 'W7sQ792AWotkZqLH';
 
     let db = wx.cloud.database();
     // let _ = db.command;
@@ -28,6 +43,11 @@ Page({
       console.log(mydata,res.data);
       that.setData({
         travelObj: mydata
+      })
+
+      // console.log(that.data.travelObj)
+      wx.setNavigationBarTitle({
+        title: that.data.travelObj.data.title
       })
     })  
 

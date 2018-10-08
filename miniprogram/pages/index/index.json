@@ -2,6 +2,8 @@
   "navigationBarTitleText": "主页",
   "enablePullDownRefresh": true,
   "usingComponents": {
-    "wux-floating-button": "../../dist/floating-button/index"
+    "wux-floating-button": "../../dist/floating-button/index",
+    "wux-search-bar": "../../dist/search-bar/index",
+    "wux-divider": "../../dist/divider/index"
   }
 }

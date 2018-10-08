@@ -1,5 +1,47 @@
 <view class='page'>
-  <view>
+  <!-- <wux-notice-bar loop icon='' content="{{travelObj.data.where}}" /> -->
+
+  <view class='detail-header'>
+    <view class='detail-touxiang'>
+      <image src='{{travelObj.data.userInfo.avatarUrl}}'></image>
+    </view>
+    <view class='detail-title'>
+      <view class='detail-title-top'>{{travelObj.data.title}}</view>
+      <view class='detail-title-bottom'>
+        <text decode='true'>{{travelObj.data.createTime}}&emsp;{{travelObj.data.star}}人喜欢&emsp;{{travelObj.data.see}}浏览</text>
+      </view>
+    </view>
+  </view>
+
+  <view class='detail-container'>
+    <view class='detail-list' wx:if='{{item.show}}' wx:for='{{travelObj.data.list}}' wx:for-index='allIndex' wx:key>
+      <view class='detail-time'>
+        <wux-icon type='md-radio-button-on' size='22' />
+        <view class='detail-times'>{{item.date}} 第{{allIndex+1}}天</view>
+
+        <!-- <view class='detail-contact'></view> -->
+      </view>
+      <view class='detail-info'>
+        <view class='detail-list-img'>
+          <image data-index='{{allIndex}}' data-url='{{imgItem}}' lazy-load='true' class='{{item.imgs.length > 1 ? "detail-img-more" : "detail-img-one" }}' wx:for='{{item.imgs}}' wx:key wx:for-item='imgItem' src='{{imgItem}}' bindtap='showImg'></image>
+        </view>
+        <view class='detail-list-text'>
+          <view class='detail-list-top'>{{item.text == '' ? '暂无描述' : item.text}}</view>
+          <view class='detail-list-bottom'>
+            <!-- <image src='../../images/like.png'></image> -->
+            <wux-icon type='md-heart-empty'  size='26'/>
+            <view class='detail-likenum'>{{item.like}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+
+
+
+  <!-- <view>
     {{travelObj.data.createTime}}
     {{travelObj.data.day}}
     {{travelObj.data.title}}
@@ -9,5 +51,5 @@
       {{item1.date}}
       {{item.trueImgs}}
     </view>
-  </view>
+  </view> -->
 </view>

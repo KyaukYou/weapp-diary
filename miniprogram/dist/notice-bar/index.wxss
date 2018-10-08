@@ -1,10 +1,12 @@
 .wux-notice-bar {
-  background-color: #fefcec;
+  /* background-color: #fefcec; */
+  background-color: #35c1f8;
   height: 72rpx;
   overflow: hidden;
   font-size: 28rpx;
   line-height: 72rpx;
-  color: #f76a24;
+  /* color: #f76a24; */
+  color: white;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
