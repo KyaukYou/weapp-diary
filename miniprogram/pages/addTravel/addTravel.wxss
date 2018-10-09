@@ -297,7 +297,7 @@ page {
 
 .add-one-add image {
   position: absolute;
-  right: 15px;
+  right: 13px;
   top: 3px;
   bottom: 6px;
   width: 82px;
