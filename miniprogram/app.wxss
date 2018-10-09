@@ -41,3 +41,8 @@ page {
 .chooseBtn-hover {
   background-color: #29b2e1!important;
 }
+
+/* 添加旅行输入框点击样式 */
+.addT-hover {
+  background-color: rgb(233, 233, 233)!important;
+}

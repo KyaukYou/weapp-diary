@@ -1,11 +1,10 @@
 {
   "cloud": true,
   "pages": [
-    
     "pages/index/index",
     "pages/travelDetail/travelDetail",
-    
     "pages/addTravel/addTravel",
+    
     "pages/my/my",
     "pages/go/go",
     "pages/travelShow/travelShow"
