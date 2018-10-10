@@ -17,5 +17,20 @@
       </view>
     </view>
   </view>
-
+  <view class='my-info'>
+    <view class='my-info-child'>
+      <view class='my-info-one'>我的旅行</view>
+      <view class='my-info-two'>{{travelNum}}</view>
+    </view>
+    <view class='my-info-border'></view>
+    <view class='my-info-child'>
+      <view class='my-info-one'>我的收藏</view>
+      <view class='my-info-two'>{{starNum}}</view>
+    </view>
+    <view class='my-info-border'></view>
+    <view class='my-info-child'>
+      <view class='my-info-one'>我的粉丝</view>
+      <view class='my-info-two'>{{fans}}</view>
+    </view>
+  </view>
 </view>

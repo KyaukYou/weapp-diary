@@ -210,6 +210,7 @@ page {
   justify-content: flex-end;
   box-sizing: border-box;
   padding-right: 10rpx;
+  color: #35c1f8;
 }
 
 .index .index-footer-one {
@@ -220,21 +221,30 @@ page {
   justify-content: right;
   align-items: center;
   margin: 0 2rpx;
-  margin-top: 4rpx;
+  /* margin-top: 4rpx; */
+  overflow: hidden;
 }
 
 .index .index-footer-one view {
   width: 52rpx;
+  /* min-width: 30rpx; */
   height: 100%;
-  line-height: 72rpx;
+  line-height: 70rpx;
   color: white;
-  font-size: 20rpx;
+  /* color: #35c1f8; */
+  font-size: 24rpx;
   text-align: left;
   font-weight: bold;
-  margin-left: 4rpx;
+  margin-left: -2rpx;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  text-align: center;
+  float: left;
+}
+
+.index .index-footer-one .ii {
+  float: left;
 }
 
 .index .index-footer-one image {

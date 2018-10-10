@@ -549,6 +549,7 @@ Page({
       wx.hideLoading();
       wx.showLoading({
         title: '上传日记中',
+        mask: true
       })
 
       //添加到数组
@@ -629,6 +630,7 @@ Page({
           console.log(anum,title)
           wx.showLoading({
             title: title,
+            mask: true
           })
           that.uploadTravelImg();
         }
@@ -708,9 +710,14 @@ Page({
             wx.showToast({
               title: '上传成功',
           })
-          wx.switchTab({
-            url: '../index/index',
-          })
+          let timer = null;
+          clearTimeout(timer);
+          timer = setTimeout(function() {
+            wx.switchTab({
+              url: '../index/index',
+            })
+            clearTimeout(timer);
+          },1500)
         },
         fail(res) {
           console.log(res)
@@ -738,7 +745,10 @@ Page({
    */
   onShow: function() {
 
-    
+    // wx.showLoading({
+    //   title: '上传日记中',
+    //   mask: true
+    // })
   },
 
   /**

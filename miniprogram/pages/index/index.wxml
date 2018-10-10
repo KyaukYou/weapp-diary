@@ -38,11 +38,13 @@
         </view>
         <view class='index-footer-right'>
           <view class='index-footer-one'>
-            <image src='../../images/like.png'></image>
+            <!-- <image src='../../images/like.png'></image> -->
+            <wux-icon class='ii' type='md-heart-empty'size='24' />
             <view>{{item.data.like}}</view>
           </view>
           <view class='index-footer-one'>
-            <image src='../../images/star.png'></image>
+            <!-- <image src='../../images/star.png'></image> -->
+            <wux-icon class='ii' type='md-star-outline'size='24' />
             <view>{{item.data.star}}</view>
           </view>
           <!-- <view class='index-footer-one'>

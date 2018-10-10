@@ -2,7 +2,7 @@
   <!-- <wux-notice-bar loop icon='' content="{{travelObj.data.where}}" /> -->
 
   <view class='detail-bigImg'>
-    <image src='{{travelObj.data.headerImg}}'></image>
+    <image lazy-load mode='widthFix' src='{{travelObj.data.headerImg}}'></image>
   </view>
 
   <view class='detail-header'>
@@ -10,6 +10,7 @@
       <image src='{{travelObj.data.userInfo.avatarUrl}}'></image>
     </view>
     <view class='detail-title'>
+      <view class='detail-heart'><wux-icon type='md-heart-empty'  size='26'/></view>
       <view class='detail-title-top'>{{travelObj.data.title}}</view>
       <view class='detail-title-bottom'>
         <text decode='true'>{{travelObj.data.createTime}}&emsp;{{travelObj.data.star}}人喜欢&emsp;{{travelObj.data.see}}浏览</text>
@@ -19,24 +20,26 @@
 
   <view class='detail-container'>
     <view class='detail-list' wx:if='{{item.show}}' wx:for='{{travelObj.data.list}}' wx:for-index='allIndex' wx:key>
-      <view class='contact-border'></view>
+      <view class='contact-border'>
+        <wux-icon size='21' type='md-funnel' class='contact-border-footer' wx:if='{{travelObj.data.list.length-1 == allIndex ? true : false}}' />
+      </view>
+      
       <view class='detail-time'>
-        <wux-icon type='md-radio-button-on' size='18' />
+        <wux-icon type='md-radio-button-on' size='20' />
         <view class='detail-times'>{{item.date}} 第{{allIndex+1}}天</view>
 
         <!-- <view class='detail-contact'></view> -->
       </view>
       <view class='detail-info'>
         <view class='detail-list-img'>
-          <image data-index='{{allIndex}}' data-url='{{imgItem}}' lazy-load='true' class='{{item.imgs.length > 1 ? "detail-img-more" : "detail-img-one" }}' wx:for='{{item.imgs}}' wx:key wx:for-item='imgItem' src='{{imgItem}}' bindtap='showImg'></image>
+          <image lazy-load mode='aspectFill' data-index='{{allIndex}}' data-url='{{imgItem}}' lazy-load='true' class='{{item.imgs.length > 1 ? "detail-img-more" : "detail-img-one" }}' wx:for='{{item.imgs}}' wx:key wx:for-item='imgItem' src='{{imgItem}}' bindtap='showImg'></image>
         </view>
         <view class='detail-list-text'>
           <view class='detail-list-top'>{{item.text == '' ? '暂无描述' : item.text}}</view>
-          <view class='detail-list-bottom'>
-            <!-- <image src='../../images/like.png'></image> -->
+          <!-- <view class='detail-list-bottom'>
             <wux-icon type='md-heart-empty'  size='26'/>
             <view class='detail-likenum'>{{item.like}}</view>
-          </view>
+          </view> -->
         </view>
       </view>
     </view>
