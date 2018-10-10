@@ -1,5 +1,5 @@
 page {
-  background-color: rgb(251, 247, 231);
+  /* background-color: rgb(251, 247, 231); */
   /* background-color: rgba(244,244,244,1); */
 }
 
@@ -10,13 +10,23 @@ page {
   /* padding-top: 26rpx; */
 }
 
+.detail-bigImg {
+  width: 100%;
+  height: 380rpx;
+}
+
+.detail-bigImg image {
+  width: 100%;
+  height: 100%;
+}
+
 .detail-notice {
   background-color: #35c1f8;
   color: white;
 }
 
 .detail-header {
-  width: 94%;
+  width: 90%;
   margin: 12rpx auto;
   /* margin-bottom: 100rpx; */
 
@@ -25,9 +35,11 @@ page {
 }
 
 .detail-touxiang {
-  height: 74rpx;
-  width: 74rpx;
-  margin-left: 14rpx;
+  height: 70rpx;
+  width: 70rpx;
+  margin-left: 16rpx;
+  float: left;
+  margin-top: 6rpx;
 }
 
 .detail-touxiang image {
@@ -38,7 +50,7 @@ page {
 
 .detail-title {
   position: absolute;
-  left: 116rpx;
+  left: 110rpx;
   right: 10rpx;
   top: 0;
   height: 100%;
@@ -48,11 +60,15 @@ page {
 
 .detail-title-top {
   color: #35c1f8;
+  /* color: rgb(71, 203, 137); */
+  font-size: 28rpx;
+  font-weight: bold;
   width: 100%;
   height: 50%;
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;
+  line-height: 50rpx;
   /* margin-top: 6rpx; */
 }
 
@@ -85,7 +101,7 @@ page {
 }
 
 .detail-container {
-  width: 94%;
+  width: 88%;
   height: auto;
   margin: 0 auto;
 }
@@ -95,6 +111,7 @@ page {
   height: auto;
   /* background-color: white; */
   margin-bottom: 60rpx;
+  position: relative;
 }
 
 .detail-time {
@@ -102,11 +119,13 @@ page {
   height: 56rpx;
   line-height: 60rpx;
   color: #35c1f8;
-  font-size: 30rpx; 
+  /* color: rgb(71, 203, 137); */
+  font-size: 28rpx; 
   font-weight: bold;
   position: relative;
   box-sizing: border-box;
   padding-left: 6rpx;
+  left: -20rpx;
 }
 
 .detail-times {
@@ -130,11 +149,13 @@ page {
 }
 
 .detail-info {
-  width: 100%;
+  width: 96%;
+  margin: 0 auto;
   height: auto;
   /* background-color: white; */
   /* border-radius: 8rpx; */
   overflow: hidden;
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.1);
 }
 
 .detail-list-img {
@@ -193,7 +214,7 @@ page {
 
 
 .detail-img-one {
-  width: 98%;
+  width: 100%;
   height: 390rpx;
   margin: 14rpx auto 0 auto;
 }
@@ -217,4 +238,17 @@ page {
 
 .detail-img-more:nth-child(3n + 3) {
   margin-right: 0;
+}
+
+.contact-border {
+  position: absolute;
+  width: 5rpx;
+  background-color: #35c1f8;
+  top:46rpx;
+  bottom:-38px;
+  left:-4rpx;
+}
+
+.detail-container .detail-list:last-child .contact-border {
+  bottom:-2px;
 }

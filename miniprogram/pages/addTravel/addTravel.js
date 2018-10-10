@@ -429,13 +429,18 @@ Page({
     console.log(title,where,sDate,eDate)
 
     if (title == '' || where == '' || sDate.length == 0 || eDate.length == 0 || hImg.length == 0) {
-      $wuxToast().show({
-        type: 'cancel',
-        duration: 1500,
-        color: 'white',
-        text: '请填写完整',
-        success: () => console.log('已完成')
-      });
+      // $wuxToast().show({
+      //   type: 'cancel',
+      //   duration: 1500,
+      //   color: 'white',
+      //   text: '请填写完整',
+      //   success: () => console.log('已完成')
+      // });
+      wx.showToast({
+        image: '../../images/error.png',
+        title: '请填写完整',
+      })
+
     }else {
       let date = new Date();
       let year = date.getFullYear();
@@ -499,6 +504,7 @@ Page({
 
       wx.showLoading({
         title: '上传标题图片',
+        mask: true
       })
       wx.cloud.uploadFile({
         cloudPath,
@@ -520,6 +526,7 @@ Page({
           console.log(anum, title)
           wx.showLoading({
             title: title,
+            mask: true
           });
           that.uploadTravelImg()
         }
@@ -633,6 +640,7 @@ Page({
       wx.hideLoading();
       wx.showLoading({
         title: '上传日记中',
+        mask: true
       })
 
       //添加到数组

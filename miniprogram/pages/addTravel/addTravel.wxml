@@ -11,8 +11,8 @@
     <van-cell-group>
       <van-field  maxlength='20' value="{{ title }}" type="text" clearable label="旅行标题" placeholder="请输入旅行标题(20字以内)"  border="false" bind:input='addTitle' />
       <view hover-class='addT-hover' class='add-one-add' bindtap='headerimg'>旅行封面
-        <image wx:if="{{headerImgArr.length > 0 ? false : true}}" src='../../images/moren.jpg'>
-        </image>
+        <!-- <image wx:if="{{headerImgArr.length > 0 ? false : true}}" src='../../images/moren.jpg'>
+        </image> -->
         <image wx:if="{{headerImgArr.length > 0 ? true : false}}" src='{{headerImgArr[0]}}'></image>
       </view>
       <!-- <van-field maxlength='20' value="{{ title }}" type="text" clearable label="旅行封面" placeholder="请输入旅行标题(20字以内)"  border="false" bind:input='addTitle' >

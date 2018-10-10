@@ -60,9 +60,19 @@ Page({
     })
   },
   addTravel() {
-    wx.navigateTo({
-      url: '../addTravel/addTravel',
-    })
+    // 判断是否登录
+    if(wx.getStorageSync('openid')) {
+      // console.log('yes');
+      wx.navigateTo({
+        url: '../addTravel/addTravel',
+      })
+    }else {
+      // console.log('no');
+      wx.showToast({
+        image: '../../images/error.png',
+        title: '请先授权登录',
+      })
+    }
   },
   bindGetUserInfo(e) {
     console.log(e);

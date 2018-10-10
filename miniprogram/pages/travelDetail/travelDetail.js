@@ -28,7 +28,7 @@ Page({
     // console.log(options.id)
 
     let myid = options.id;
-    // let myid = 'W7sQ792AWotkZqLH';
+    // let myid = 'W725rd2AWotkbRXB';
 
     let db = wx.cloud.database();
     // let _ = db.command;
