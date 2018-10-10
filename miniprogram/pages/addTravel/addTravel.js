@@ -500,7 +500,7 @@ Page({
 
       let openid = wx.getStorageSync('openid');
 
-      let cloudPath = 'travel/' + openid + '/header/' + cc + filePath.match(/\.[^.]+?$/)[0];
+      let cloudPath = 'travel/' + openid + '/' + that.data.uploadObj.title +  '/header/' + cc + filePath.match(/\.[^.]+?$/)[0];
 
       wx.showLoading({
         title: '上传标题图片',
@@ -601,7 +601,7 @@ Page({
 
       let openid = wx.getStorageSync('openid');
 
-      let cloudPath = 'travel/'+ openid + '/'+ aa + filePath.match(/\.[^.]+?$/)[0];
+      let cloudPath = 'travel/'+ openid + '/'+ that.data.uploadObj.title + '/' + aa + filePath.match(/\.[^.]+?$/)[0];
       // console.log(cloudPath);
 
       wx.cloud.uploadFile({

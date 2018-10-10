@@ -79,7 +79,7 @@
         <!-- wx:for='{{}}' -->
         <view class='add-full' data-url='{{item}}' catchtap='showbgimg' wx:for='{{uploadObj.list[main_index].trueImgs}}' wx:for-index='img_index' wx:key data-index='{{main_index}}'>
           <wux-icon class='add-delete' type='md-close-circle-outline' size='20' data-main='{{main_index}}' data-index='{{img_index}}' catchtap='delImg' />
-          <image src='{{item}}'></image>
+          <image mode='aspectFill' src='{{item}}'></image>
         </view>
 
         <view data-index='{{main_index}}' class='add-full add-list-update' hover-class='addImg-hover' bindtap='chooseImg' wx:if='{{uploadObj.list[main_index].imgNum == 0 ? false : true}}'>
