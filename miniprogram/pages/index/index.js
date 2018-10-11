@@ -29,7 +29,9 @@ Page({
         color: 'black'
       }
     ],
-    listColor: ['rgb(239,37,15)','black','black','black']
+    listColor: ['rgb(239,37,15)','black','black','black'],
+    starArr: [],
+    likeArr: []
   },
   // 修改list颜色
   changelistcolor(e) {
@@ -99,6 +101,53 @@ Page({
         }
       }
     })
+  },
+  addLike(e) {
+    // console.log(e);
+    let id = e.currentTarget.dataset.id;
+    let index = e.currentTarget.dataset.index;
+    let copy = this.data.travelList[index].data.like;
+    let openid = wx.getStorageSync('openid');
+    let haveIndex = 0;
+    // for(var i=0; i<copy.length; i++) {
+    //   if(copy[i] == openid) {
+    //     copy.splice(i,1);
+    //   }
+    // }
+
+    var res = copy.some(function(item,index) {
+      if(item == openid) {
+        console.log(index)
+        haveIndex = index;
+        return true;
+      }else {
+        return false;
+      }
+    })
+
+    if(!res) {
+      copy.push(openid);
+    }
+    else {
+      copy.splice(haveIndex,1)
+    }
+    console.log(res)
+
+  },
+  addStar(e) {
+    // console.log(e);
+    let id = e.currentTarget.dataset.id;
+    let index = e.currentTarget.dataset.index;
+    let copy = this.data.travelList[index].data.like;
+  },
+
+  // 初始化点赞图标
+  initLikeArr() {
+
+  },
+  // 初始化收藏图标
+  initStarArr() {
+
   },
 
   /**
