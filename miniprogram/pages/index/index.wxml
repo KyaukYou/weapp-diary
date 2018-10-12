@@ -39,12 +39,12 @@
         <view class='index-footer-right'>
           <view class='index-footer-one' data-id='{{item._id}}' data-index='{{index}}' catchtap='addLike'>
             <!-- <image src='../../images/like.png'></image> -->
-            <wux-icon class='ii' type='md-heart-empty'size='24'/>
+            <wux-icon class='ii' type='{{likeArr[index] == 0 ? "md-heart-empty" : "md-heart" }}'size='24'/>
             <view>{{item.data.like.length}}</view>
           </view>
           <view class='index-footer-one' data-id='{{item._id}}' data-index='{{index}}' catchtap='addStar'>
             <!-- <image src='../../images/star.png'></image> -->
-            <wux-icon class='ii' type='md-star-outline'size='24'/>
+            <wux-icon class='ii' type='{{starArr[index] == 0 ? "md-star-outline" : "md-star" }}'size='24'/>
             <view>{{item.data.star.length}}</view>
           </view>
           <!-- <view class='index-footer-one'>

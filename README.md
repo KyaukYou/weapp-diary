@@ -17,37 +17,6 @@
 
 + 2018.9.29
   - 数据格式 
-      {
-        title: 'xx',
-        where: 'xx',
-        sDate: '2018.9.29',
-        eDate: '2018.9.30',
-        time: '2018.10.01 12:02',
-        see: 0,
-        star: 0,
-        like: 0,
-        day: '5',
-        list: [
-          {
-            imgs: [],
-            trueImgs: [],
-            text: 'xxx',
-            date: '2018.9.29'
-            show: true,
-            like: 0,
-            imgNum: 2
-          },
-          {
-            imgs: [],
-            trueImgs: [],
-            text: 'xxx',
-            date: '2018.9.29'
-            show: true,
-            like: 0,
-            imgNum: 2
-          }
-        ]
-      }
    - 页面优化
    - 日期列表优化
    - 日期选择优化
@@ -79,3 +48,7 @@
   - 优化添加旅行逻辑和样式
   - 优化主页显示  
   - 修复上传完成直接跳转的bug
+
++ 2018.10.12
+  - 添加点赞收藏功能(会有bug)
+  - 编辑功能近期上线  

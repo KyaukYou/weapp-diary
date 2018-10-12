@@ -33,4 +33,10 @@
       <view class='my-info-two'>{{fans}}</view>
     </view>
   </view>
+
+  <view>
+    版本号：beta0.0.012
+  </view>
+
+
 </view>
