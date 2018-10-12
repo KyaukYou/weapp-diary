@@ -75,6 +75,7 @@ App({
                   wx.showToast({
                     title: '欢迎回来',
                   });
+                  that.globalData.login = true
                 } else {
                   // 添加openid，userInfo
                   console.log('添加完成')
@@ -82,7 +83,9 @@ App({
                   db.collection('users').add({
                     data: {
                       userInfo: that.globalData.userInfo,
-                      travelArr: []
+                      travelArr: [],
+                      likeArr: [],
+                      starArr: []
                     },
                     success(res) {
                       console.log(res);
@@ -90,6 +93,7 @@ App({
                       wx.showToast({
                         title: '注册成功',
                       });
+                      that.globalData.login = true
                     },  
                     fail(res) {
                       console.log(res)
@@ -108,6 +112,7 @@ App({
             wx.showToast({
               title: '加载失败',
             })
+            that.globalData.login = false
           },
           complete(res) {
 
@@ -124,6 +129,7 @@ App({
   },
   globalData: {
     openid: '',
-    userInfo: {}
+    userInfo: {},
+    login: false
   }
 })

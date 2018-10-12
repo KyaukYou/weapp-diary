@@ -9,7 +9,7 @@ Page({
     userGender: '',
     travelNum: 0,
     starNum: 0,
-    fans: 0
+    fans: 0,
   },
   // 获得旅行数量
   getTravelNum() {
@@ -35,6 +35,31 @@ Page({
       })
     }) 
   },
+  // 获得收藏数量
+  getStarNum() {
+    let that = this;
+    // console.log(options.id)
+
+    let openid = wx.getStorageSync('openid');
+    // let openid = 'W725rd2AWotkbRXB';
+
+    let db = wx.cloud.database();
+    // let _ = db.command;
+    let travelData = db.collection('users').where({
+      _openid: openid
+    }).get();
+
+    var mydata;
+
+    var a = Promise.resolve(travelData).then(function (res) {
+      // mydata = res.data[0]
+      // console.log(res.data.starArr);
+      that.setData({
+        starNum: res.data[0].starArr.length
+      })
+    })
+  },
+
   onGotUserInfo(e) {
     console.log(e);
     this.getInit();  
@@ -100,6 +125,7 @@ Page({
    */
   onShow: function () {
     this.getTravelNum();
+    this.getStarNum();
   },
 
   /**

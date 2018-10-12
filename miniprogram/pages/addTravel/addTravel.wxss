@@ -283,7 +283,7 @@ page {
 }
 
 .add-one-add {
-  padding:10px 15px;
+  padding: 20rpx 30rpx;
   box-sizing:border-box;
   line-height: 33px;
   height: 56px;

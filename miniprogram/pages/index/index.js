@@ -8,6 +8,7 @@ Page({
    */
   data: {
     travelList: {},
+    userData: "",
     shouquan: false,
     lazyloadBol: true,
     rotateBol: false,
@@ -93,6 +94,7 @@ Page({
           });
           //加载
           app.getOpenId();
+          
         } else {
           // console.log('2');
           that.setData({
@@ -103,173 +105,288 @@ Page({
     })
   },
   addLike(e) {
-    // console.log(e);
+    var that = this;
     let id = e.currentTarget.dataset.id;
     let index = e.currentTarget.dataset.index;
-    let copy = this.data.travelList[index].data.like;
-    let openid = wx.getStorageSync('openid');
+    let copy = this.data.userData.likeArr;
+    let copy1 = this.data.travelList[index];
+    let pushId;
     let haveIndex = 0;
-    var res = copy.some(function(item,index) {
-      if(item == openid) {
-        console.log(index)
-        haveIndex = index;
-        return true;
-      }else {
-        return false;
-      }
-    })
+    let res;
+    if(copy.length == 0) {
+      pushId = copy1['_id']
+      res = false;
+    }else {
+      res = copy.some(function (item, index) {
+        if (item == copy1['_id']) {
+          console.log(index)
+          haveIndex = index;
+          return true;
+        } else {
+          pushId = copy1['_id']
+          return false;
+        }
+      })
+    }
 
     if(!res) {
-      copy.push(openid);
-      this.sqlChange(index,copy, 'like')
+      copy.push(pushId);
+      var copy2 = that.data.travelList;
+      var travelCopy = that.data.travelList[index].data.like;
+      travelCopy += 1;
+      copy2[index].data.like = travelCopy;
+      that.setData({
+        travelList: copy2
+      })
+
+      this.sqlChange(index,copy,'like','add')
     }
     else {
-      copy.splice(haveIndex,1)
-      this.sqlChange(index,copy, 'like')
+      copy.splice(haveIndex,1);
+
+      var copy2 = that.data.travelList;
+      var travelCopy = that.data.travelList[index].data.like;
+      travelCopy -= 1;
+      copy2[index].data.like = travelCopy;
+      that.setData({
+        travelList: copy2
+      })
+
+      this.sqlChange(index,copy,'like','min')
     };
 
-    let copyAll = this.data.travelList;
-    copyAll[index].data.like = copy;
+    console.log(copy)
+
+    let copyAll = this.data.userData;
+    copyAll.likeArr = copy;
+
 
     this.setData({
-      travelList: copyAll
+      userData: copyAll
     })
     this.initLikeArr();
-    // this.initStarArr();
-    // console.log(res)
 
   },
   addStar(e) {
-    // console.log(e);
+    var that = this;
     let id = e.currentTarget.dataset.id;
     let index = e.currentTarget.dataset.index;
-    let copy = this.data.travelList[index].data.star;
-    let openid = wx.getStorageSync('openid');
+    let copy = this.data.userData.starArr;
+    let copy1 = this.data.travelList[index];
+    let pushId;
     let haveIndex = 0;
-    var res = copy.some(function (item, index) {
-      if (item == openid) {
-        console.log(index)
-        haveIndex = index;
-        return true;
-      } else {
-        return false;
-      }
-    })
+    let res;
+    if (copy.length == 0) {
+      pushId = copy1['_id']
+    } else {
+      res = copy.some(function (item, index) {
+        if (item == copy1['_id']) {
+          console.log(index)
+          haveIndex = index;
+          return true;
+        } else {
+          pushId = copy1['_id']
+          return false;
+        }
+      })
+    }
 
     if (!res) {
-      copy.push(openid);
-      this.sqlChange(index,copy,'star')
+      // copy.push(pushId);
+
+      var copy2 = that.data.travelList;
+      var travelCopy = that.data.travelList[index].data.star;
+      travelCopy += 1;
+      copy2[index].data.star = travelCopy;
+      that.setData({
+        travelList: copy2
+      })
+
+      this.sqlChange(index,copy,'star','add')
     }
     else {
-      copy.splice(haveIndex, 1)
-      this.sqlChange(index,copy,'star')
+      copy.splice(haveIndex, 1);
+
+      var copy2 = that.data.travelList;
+      var travelCopy = that.data.travelList[index].data.star;
+      travelCopy -= 1;
+      copy2[index].data.star = travelCopy;
+      that.setData({
+        travelList: copy2
+      })
+
+      this.sqlChange(index,copy,'star','min')
     };
 
-    let copyAll = this.data.travelList;
-    copyAll[index].data.star = copy;
+    console.log(copy)
+
+    let copyAll = this.data.userData;
+    copyAll.starArr = copy;
 
     this.setData({
-      travelList: copyAll
+      userData: copyAll
     })
-    // this.initLikeArr();
     this.initStarArr();
-    // console.log(res)
   },
 
   // 初始化点赞图标
   initLikeArr() {
-    let copy = this.data.travelList;
-    let num = 0;
-    let openid = wx.getStorageSync('openid');
-    let arr = [];
-    for(var i=0; i<copy.length; i++) {
-      if (copy[i].data.like.length == 0) {
+    let copy = this.data.userData.likeArr;
+    let copy1 = this.data.travelList;
+    let arr = this.data.likeArr;
+    let bol = false;
+    // console.log(copy)
+    if(copy.length == 0) {
+      for (var i = 0; i < copy1.length; i++) {
         arr[i] = 0;
-      }else {
-        for (var j = 0; j < copy[i].data.like.length; j++) {
-          if (copy[i].data.like[j] == openid) {
+        // bol = false;
+      }
+    }else {
+
+      for(var i=0; i<copy1.length; i++) {
+
+        bol = copy.some(function(item,index) {
+          if(copy1[i]['_id'] == item) {
             arr[i] = 1;
-          } else {
+            return true;
+          }else {
             arr[i] = 0;
+            return false;
           }
-        }
-      }  
+        })        
+
+      }
+
+      // if(bol)
+
     }
+    // console.log(arr);
+
     this.setData({
       likeArr: arr
     })
-    // console.log(arr);
+
   },
   // 初始化收藏图标
   initStarArr() {
-    let copy = this.data.travelList;
-    let num = 0;
-    let openid = wx.getStorageSync('openid');
-    let arr = [];
-    for (var i = 0; i < copy.length; i++) {
-      if (copy[i].data.star.length == 0) {
+    let copy = this.data.userData.starArr;
+    let copy1 = this.data.travelList;
+    let arr = this.data.starArr;
+
+    let bol = false;
+    // console.log(copy)
+    if (copy.length == 0) {
+      for (var i = 0; i < copy1.length; i++) {
         arr[i] = 0;
-      } else {
-        for (var j = 0; j < copy[i].data.star.length; j++) {
-          if (copy[i].data.star[j] == openid) {
+        // bol = false;
+      }
+    } else {
+
+      for (var i = 0; i < copy1.length; i++) {
+
+        bol = copy.some(function (item, index) {
+          if (copy1[i]['_id'] == item) {
             arr[i] = 1;
+            return true;
           } else {
             arr[i] = 0;
+            return false;
           }
-        }
+        })
+
       }
-    }
+    }  
     // console.log(arr);
+
     this.setData({
       starArr: arr
     })
   },
-  sqlChange(val,arr,types) {
-    console.log(val,arr,types)
+  sqlChange(val,arr,types,what) {
+    console.log(val,arr,types,what)
     let id = this.data.travelList[val]['_id'];
-    console.log(id)
+    let openid = wx.getStorageSync('openid');
+    // console.log(id)
 
     let db = wx.cloud.database();
     let _ = db.command;
 
     if(types == 'like') {
-       db.collection('travel').doc(
-        id
-      ).update({
+      // db.collection('users').where({
+      //   _openid: openid
+      // })
+      //   .update({
+      //     data: {
+      //       likeArr: arr
+      //     },
+      //   })
+      wx.cloud.callFunction({
+        name: 'userArr',
         data: {
-          data: {
-            like: arr
-          }
-        },
-        success(res) {
-          console.log(res)
-        },
-        fali(res) {
-          console.log(res)
-        },
-        complete(res) {
-          console.log(res)
+          openid: openid,
+          arr: 'like',
+          arrs: arr
         }
-      });
-    }else if(types == 'star') {
-       db.collection('travel').doc(
-        id
-      ).update({
-        data: {
+      })
+      if(what == 'add') {
+        db.collection('travel').doc(id).update({
           data: {
-            star: arr
+            data: {
+              like: _.inc(1)
+            }
           },
           success(res) {
             console.log(res)
+          }
+        });
+      }
+      else {
+        db.collection('travel').doc(id).update({
+          data: {
+            data: {
+              like: _.inc(-1)
+            }
           },
-          fali(res) {
-            console.log(res)
-          },
-          complete(res) {
+          success(res) {
             console.log(res)
           }
+        });
+      }
+    }
+    else if(types == 'star') {
+      wx.cloud.callFunction({
+        name: 'userArr',
+        data: {
+          openid: openid,
+          arr: 'star',
+          arrs: arr
         }
-      });
+      })
+
+      if (what == 'add') {
+        db.collection('travel').doc(id).update({
+          data: {
+            data: {
+              star: _.inc(1)
+            }
+          },
+          success(res) {
+            console.log(res)
+          }
+        });
+      }
+      else {
+        db.collection('travel').doc(id).update({
+          data: {
+            data: {
+              star: _.inc(-1)
+            }
+          },
+          success(res) {
+            console.log(res)
+          }
+        });
+      }
     }
 
 
@@ -283,7 +400,6 @@ Page({
   onLoad: function (options) {
     var that = this;
     that.getInit();
-
   },
 
   /**
@@ -310,11 +426,49 @@ Page({
       },
       complete(res) {
         wx.stopPullDownRefresh();
-        that.initLikeArr();
-        that.initStarArr();
+        let timer1 = null;
+        clearInterval(timer1);
+        timer1 = setInterval(function () {
+          if (app.globalData.login) {
+            that.initUser();
+            clearInterval(timer1);
+          }
+          // console.log(app.globalData.login)
+        }, 200)
       }
     })
 
+    // let timer1 = null;
+    // clearInterval(timer1);
+    // timer1 = setInterval(function () {
+    //   if (app.globalData.login) {
+    //     that.initUser();
+    //     clearInterval(timer1);
+    //   }
+    //   console.log(app.globalData.login)
+    // }, 200)
+
+  },
+  initUser() {
+    let that = this;
+    let openid = wx.getStorageSync('openid')
+    let db = wx.cloud.database();
+
+    // let _ = db.command;
+    let userData1 = db.collection('users').where({
+      _openid: openid
+    }).get();
+
+    var mydata;
+    Promise.resolve(userData1).then(function (res) {
+      mydata = res.data[0]
+      // console.log(res.data[0]);
+      that.setData({
+        userData: mydata
+      });
+      that.initLikeArr();
+      that.initStarArr();
+    })
   },
 
   /**
@@ -348,6 +502,7 @@ Page({
       },
       complete(res) {
         wx.stopPullDownRefresh();
+        // that.initUser();
       }
     })
   },

@@ -6,7 +6,9 @@ Page({
   data: {
     travelObj: {},
     likeBol: false,
-    travelId: ''
+    travelId: '',
+    userData: '',
+    likeArr: []
   },
   // 查看大图
   showImg(e) {
@@ -23,87 +25,178 @@ Page({
   },
   // 初始化点赞图标
   initLikeArr() {
-    let copy = this.data.travelObj;
-    let num = 0;
-    let openid = wx.getStorageSync('openid');
+    let copy = this.data.userData.likeArr;
+    let copy1 = this.data.travelObj;
+    let arr = this.data.likeArr;
     let bol = false;
-    var res = copy.data.like.some(function (item, index) {
-      if (item == openid) {
-        console.log(index)
-        return true;
-      } else {
-        return false;
-      }
-    })
-    if(res) {
-      bol = true;
-    }else {
-      bol = false
+    // console.log(copy)
+    if (copy.length == 0) {
+      // for (var i = 0; i < copy1.length; i++) {
+        arr[0] = 0;
+      // }
+    } 
+    else {
+      // for (var i = 0; i < copy1.length; i++) {
+        bol = copy.some(function (item, index) {
+          if (copy1['_id'] == item) {
+            arr[0] = 1;
+            return true;
+          } else {
+            arr[0] = 0;
+            return false;
+          }
+        })
+      // }
     }
+    // console.log(arr);
+
     this.setData({
-      likeBol: bol
+      likeArr: arr
     })
+
   },
-  //取消或者点赞
   addLike(e) {
-    let id = this.data.travelObj['_id'];
-    // let index = e.currentTarget.dataset.index;
-    let copy = this.data.travelObj.data.like;
-    let openid = wx.getStorageSync('openid');
+    // console.log(e);
+    // let id = e.currentTarget.dataset.id;
+    let index = 0;
+    let copy = this.data.userData.likeArr;
+    let copy1 = this.data.travelObj;
+    let pushId;
     let haveIndex = 0;
-    var res = copy.some(function (item, index) {
-      if (item == openid) {
-        haveIndex = index;
-        return true;
-      } else {
-        return false;
-      }
-    })
+    let res;
+    if (copy.length == 0) {
+      pushId = copy1['_id']
+      res = false;
+    } 
+    else {
+      res = copy.some(function (item, index) {
+        if (item == copy1['_id']) {
+          console.log(index)
+          haveIndex = index;
+          return true;
+        } else {
+          pushId = copy1['_id']
+          return false;
+        }
+      })
+    }
 
     if (!res) {
-      copy.push(openid);
-      this.sqlChange(copy, 'like')
+      copy.push(pushId);
+      let travelCopy = this.data.travelObj.data.like;
+      travelCopy += 1;
+      copy1.data.like = travelCopy;
+      this.setData({
+        travelObj: copy1
+      })
+
+      this.sqlChange(index, copy, 'like', 'add')
     }
     else {
-      copy.splice(haveIndex, 1)
-      this.sqlChange(copy, 'like')
+      copy.splice(haveIndex, 1);
+
+      let travelCopy = this.data.travelObj.data.like;
+      travelCopy -= 1;
+      copy1.data.like = travelCopy;
+      this.setData({
+        travelObj: copy1
+      })
+
+      this.sqlChange(index, copy, 'like', 'min')
     };
 
-    let copyAll = this.data.travelObj;
-    copyAll.data.like = copy;
+    // console.log(copy)
+
+    let copyAll = this.data.userData;
+    copyAll.likeArr = copy;
+
 
     this.setData({
-      travelObj: copyAll
+      userData: copyAll
     })
     this.initLikeArr();
+
   },
-  sqlChange(arr, types) {
-    let that = this;
-    console.log(arr, types)
+  sqlChange(val, arr, types, what) {
+    console.log(val, arr, types, what)
     let id = this.data.travelObj['_id'];
+    let openid = wx.getStorageSync('openid');
     // console.log(id)
 
     let db = wx.cloud.database();
     let _ = db.command;
-      db.collection('travel').doc(
-        id
-      ).update({
+
+    if (types == 'like') {
+
+      wx.cloud.callFunction({
+        name: 'userArr',
         data: {
-          data: {
-            like: arr
-          }
-        },
-        success(res) {
-          console.log(res)
-        },
-        fali(res) {
-          console.log(res)
-        },
-        complete(res) {
-          console.log(res);
-          // that.initData(that.data.travelId);
+          openid: openid,
+          arr: 'like',
+          arrs: arr
         }
-      });
+      })
+      if (what == 'add') {
+        db.collection('travel').doc(id).update({
+          data: {
+            data: {
+              like: _.inc(1)
+            }
+          },
+          success(res) {
+            console.log(res)
+          }
+        });
+      }
+      else {
+        db.collection('travel').doc(id).update({
+          data: {
+            data: {
+              like: _.inc(-1)
+            }
+          },
+          success(res) {
+            console.log(res)
+          }
+        });
+      }
+    }
+    else if (types == 'star') {
+      wx.cloud.callFunction({
+        name: 'userArr',
+        data: {
+          openid: openid,
+          arr: 'star',
+          arrs: arr
+        }
+      })
+
+      if (what == 'add') {
+        db.collection('travel').doc(id).update({
+          data: {
+            data: {
+              star: _.inc(1)
+            }
+          },
+          success(res) {
+            console.log(res)
+          }
+        });
+      }
+      else {
+        db.collection('travel').doc(id).update({
+          data: {
+            data: {
+              star: _.inc(-1)
+            }
+          },
+          success(res) {
+            console.log(res)
+          }
+        });
+      }
+    }
+
   },
 
   /**
@@ -118,8 +211,21 @@ Page({
       travelId: myid
     })
     // let myid = 'W725rd2AWotkbRXB';
+    let db = wx.cloud.database();
+    let _ = db.command;
+    db.collection('travel').doc(myid).update({
+      data: {
+        data: {
+          see: _.inc(1)
+        }
+      },
+      success(res) {
+        console.log(res)
+      }
+    });
 
     that.initData(myid);
+    that.initUser();
 
   },
   initData(myid) {
@@ -138,12 +244,33 @@ Page({
       that.setData({
         travelObj: mydata
       })
-      that.initLikeArr();
-
       // console.log(that.data.travelObj)
       wx.setNavigationBarTitle({
         title: that.data.travelObj.data.title
       })
+    })
+
+
+  },
+  initUser() {
+    let that = this;
+    let openid = wx.getStorageSync('openid')
+    let db = wx.cloud.database();
+
+    // let _ = db.command;
+    let userData1 = db.collection('users').where({
+      _openid: openid
+    }).get();
+
+    var mydata;
+    Promise.resolve(userData1).then(function (res) {
+      mydata = res.data[0]
+      // console.log(res.data[0]);
+      that.setData({
+        userData: mydata
+      });
+      that.initLikeArr();
+      // that.initStarArr();
     })
   },
 
@@ -158,7 +285,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**

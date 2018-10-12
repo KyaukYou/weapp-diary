@@ -34,8 +34,8 @@ Page({
       headerImgArr: [],
       headerImg: [],
       see: 0,
-      star: [],
-      like: [],
+      star: 0,
+      like: 0,
       day: 0,
       list: [
         // {

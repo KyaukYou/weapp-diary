@@ -19,45 +19,43 @@
   </view>  
 
 <view class="container">
+  <!-- <view class='container-scroll'> -->
+    <button class='getInfo' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" wx:if='{{!shouquan}}'>获取授权</button>
 
-  <button class='getInfo' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" wx:if='{{!shouquan}}'>获取授权</button>
-
-  <view class='index' data-id='{{item._id}}' wx:for='{{travelList}}' wx:key wx:if='{{item.data.show}}' bindtap='todetail'>
-    <view class='index-wrap'>
-      <image lazy-load='{{lazyloadBol}}' src='{{item.data.headerImg}}'></image>
-      <view class='index-title'>{{item.data.title}}</view>
-      <view class='index-smtitle'>
-        <text>{{item.data.sDate}} {{item.data.day}}天 {{item.data.see}}次浏览</text>
-        <text>{{item.data.where}}</text>
-      </view>
-
-      <view class='index-footer'>
-        <view class='index-footer-left'>
-          <image src='{{item.data.userInfo.avatarUrl}}'></image>
-          <view>by {{item.data.userInfo.nickName}}</view>
+    <view class='index' data-id='{{item._id}}' wx:for='{{travelList}}' wx:key wx:if='{{item.data.show}}' bindtap='todetail'>
+      <view class='index-wrap'>
+        <image lazy-load='{{lazyloadBol}}' src='{{item.data.headerImg}}'></image>
+        <view class='index-title'>{{item.data.title}}</view>
+        <view class='index-smtitle'>
+          <text>{{item.data.sDate}} {{item.data.day}}天 {{item.data.see}}次浏览</text>
+          <text>{{item.data.where}}</text>
         </view>
-        <view class='index-footer-right'>
-          <view class='index-footer-one' data-id='{{item._id}}' data-index='{{index}}' catchtap='addLike'>
-            <!-- <image src='../../images/like.png'></image> -->
-            <wux-icon class='ii' type='{{likeArr[index] == 0 ? "md-heart-empty" : "md-heart" }}'size='24'/>
-            <view>{{item.data.like.length}}</view>
+
+        <view class='index-footer'>
+          <view class='index-footer-left'>
+            <image src='{{item.data.userInfo.avatarUrl}}'></image>
+            <view>by {{item.data.userInfo.nickName}}</view>
           </view>
-          <view class='index-footer-one' data-id='{{item._id}}' data-index='{{index}}' catchtap='addStar'>
-            <!-- <image src='../../images/star.png'></image> -->
-            <wux-icon class='ii' type='{{starArr[index] == 0 ? "md-star-outline" : "md-star" }}'size='24'/>
-            <view>{{item.data.star.length}}</view>
+          <view class='index-footer-right'>
+            <view class='index-footer-one' data-id='{{item._id}}' data-index='{{index}}' catchtap='addLike'>
+              <!-- <image src='../../images/like.png'></image> -->
+              <wux-icon class='ii' type='{{likeArr[index] == 0 ? "md-heart-empty" : "md-heart" }}'size='24'/>
+              <view>{{item.data.like}}</view>
+            </view>
+            <view class='index-footer-one' data-id='{{item._id}}' data-index='{{index}}' catchtap='addStar'>
+              <!-- <image src='../../images/star.png'></image> -->
+              <wux-icon class='ii' type='{{starArr[index] == 0 ? "md-star-outline" : "md-star" }}'size='24'/>
+              <view>{{item.data.star}}</view>
+            </view>
+            <!-- <view class='index-footer-one'>
+              <image src='../../images/chat.png'></image>
+              <view>1111</view>         
+            </view> -->
           </view>
-          <!-- <view class='index-footer-one'>
-            <image src='../../images/chat.png'></image>
-            <view>1111</view>         
-          </view> -->
         </view>
       </view>
     </view>
-  </view>
+  <!-- </view> -->
 
-  <!-- <view class='add-travel'>
-    <image src='../../images/add.png'></image>
-  </view> -->
   <wux-floating-button actionRotate='{{rotateBol}}' position="bottomRight" theme="calm" bind:change="addTravel" bind:click="addTravel" />
 </view>

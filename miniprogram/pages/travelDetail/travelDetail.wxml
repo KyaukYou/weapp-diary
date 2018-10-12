@@ -10,10 +10,10 @@
       <image src='{{travelObj.data.userInfo.avatarUrl}}'></image>
     </view>
     <view class='detail-title'>
-      <view class='detail-heart'><wux-icon type='{{likeBol == true ? "md-heart" : "md-heart-empty" }}' catchtap='addLike' size='26'/></view>
+      <view class='detail-heart'><wux-icon type='{{likeArr[0] == 1 ? "md-heart" : "md-heart-empty" }}' catchtap='addLike' size='26'/></view>
       <view class='detail-title-top'>{{travelObj.data.title}}</view>
       <view class='detail-title-bottom'>
-        <text decode='true'>{{travelObj.data.createTime}}&emsp;{{travelObj.data.like.length}}人喜欢&emsp;{{travelObj.data.see}}浏览</text>
+        <text decode='true'>{{travelObj.data.createTime}}&emsp;{{travelObj.data.like}}人喜欢&emsp;{{travelObj.data.see}}浏览</text>
       </view>
     </view>
   </view>
