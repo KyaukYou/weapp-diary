@@ -16,6 +16,8 @@ page {
   line-height: 50rpx;
   color: white;
   transition: all .2s ease;
+  box-sizing: border-box;
+  padding-top: 2rpx;
 }
 
 .index-top {

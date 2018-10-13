@@ -80,6 +80,8 @@ page {
   line-height: 50rpx;
   color: white;
   transition: all .2s ease;
+  padding-top: 2rpx;
+  box-sizing: border-box;
 }
 
 .delTravel:hover {

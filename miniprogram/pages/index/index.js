@@ -59,15 +59,21 @@ Page({
   todetail(e) {
     let id = e.currentTarget.dataset.id
     console.log(e)
-
-    if (e.currentTarget.dataset.lock) {
-      wx.showToast({
-        title: '已被锁定',
-      })
-    }else {
+    let sOpenid = wx.getStorageSync('openid')
+    if (e.currentTarget.dataset.openid == sOpenid) {
       wx.navigateTo({
         url: '../travelDetail/travelDetail?id=' + id,
       })
+    }else {
+      if (e.currentTarget.dataset.lock) {
+        wx.showToast({
+          title: '已被锁定',
+        })
+      } else {
+        wx.navigateTo({
+          url: '../travelDetail/travelDetail?id=' + id,
+        })
+      }
     }
   },
   addTravel() {
