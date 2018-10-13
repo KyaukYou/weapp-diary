@@ -502,17 +502,13 @@ Page({
         cloudPath,
         filePath,
         success(res) {
-          console.log(res.fileID)
-          let copy3 = that.data.uploadObj;
-          copy3.headerImg = res.fileID;
+          // console.log(res.fileID)
+          // let copy3 = that.data.uploadObj;
+          copy.headerImg = res.fileID;
           that.setData({
-            uploadObj: copy3
+            uploadObj: copy
           })
-        },
-        fail(res) {
-          // console.log(res)
-        },
-        complete(res) {
+
           let anum = that.data.cImgNum - 0 + 1;
           let title = '上传图片' + anum + '/' + fullImgNums;
           console.log(anum, title)
@@ -521,6 +517,12 @@ Page({
             mask: true
           });
           that.uploadTravelImg()
+        },
+        fail(res) {
+          // console.log(res)
+        },
+        complete(res) {
+
         }
       })
 
@@ -585,7 +587,7 @@ Page({
           // that.addSql(res._id)
           wx.hideLoading();
           wx.showToast({
-            title: '上传成功',
+            title: '更新成功',
           })
           let timer = null;
           clearTimeout(timer);
@@ -705,9 +707,6 @@ Page({
           let timer = null;
           clearTimeout(timer);
           timer = setTimeout(function () {
-            // wx.switchTab({
-            //   url: '../index/index',
-            // })
             wx.navigateBack({
               delta: 1
             })

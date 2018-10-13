@@ -518,29 +518,32 @@ Page({
         title: '上传标题图片',
         mask: true
       })
+      console.log(filePath)
+      console.log(cloudPath)
       wx.cloud.uploadFile({
         cloudPath,
         filePath,
         success(res) {
           console.log(res.fileID)
-          let copy3 = that.data.uploadObj;
-          copy3.headerImg = res.fileID;
+          // let copy3 = that.data.uploadObj;
+          copy.headerImg = res.fileID;
           that.setData({
-            uploadObj: copy3
+            uploadObj: copy
           })
-        },
-        fail(res) {
-          console.log(res)
-        },
-        complete(res) {
+
           let anum = that.data.cImgNum - 0 + 1;
           let title = '上传图片' + anum + '/' + fullImgNums;
-          console.log(anum, title)
+          // console.log(anum, title)
           wx.showLoading({
             title: title,
             mask: true
           });
           that.uploadTravelImg()
+        },
+        fail(res) {
+          // console.log(res)
+        },
+        complete(res) {
         }
       })
 
@@ -566,55 +569,48 @@ Page({
 
       //添加到数组
       let copy = that.data.uploadObj;
-      console.log(uparr, copy.list)
+      // console.log(uparr, copy.list)
       for (var j = 0; j < copy.list.length; j++) {
-
         let s = uparr.splice(0, numarr[j]);
-        console.log(s);
+        // console.log(s);
         for (var i = 0; i < s.length; i++) {
           copy.list[j].imgs.push(s[i])
         }
-
       }
       that.setData({
         uploadObj: copy
       })
+
       let db = wx.cloud.database();
       db.collection('travel').add({
         data: {
           data: that.data.uploadObj
         },
         success(res) {
-          console.log(res);
-          // wx.hideLoading();
-          // wx.showToast({
-          //   title: '上传成功',
-          // });
+          // console.log(res);
+          that.addSql(res._id);
         },
         fail(res) {
-          console.log(res)
+          // console.log(res)
         },
         complete(res) {
-          that.addSql(res._id)
+          // that.addSql(res._id)
         }
       })
 
-    }else {
-
+    }
+    else {
     // console.log(num,numarr,numlist)
     if(this.data.cImgNum < num) {
 
       let filePath = numlist[this.data.cImgNum];
-      console.log(filePath)
+      // console.log(filePath)
       let pattern = /\.{1}[a-z]{1,}$/;
       let aa = filePath.slice(0, pattern.exec(filePath).index);
       aa = aa.slice(11);
-      // console.log(aa)
-
       let openid = wx.getStorageSync('openid');
 
       let cloudPath = 'travel/'+ openid + '/'+ that.data.uploadObj.title + '/' + aa + filePath.match(/\.[^.]+?$/)[0];
-      // console.log(cloudPath);
 
       wx.cloud.uploadFile({
         cloudPath,
@@ -625,31 +621,32 @@ Page({
           that.setData({
             uparr: uparr
           })
-          // console.log(uparr)
+
+          var l = that.data.cImgNum += 1;
+          that.setData({
+            cImgNum: l
+          });
+          console.log(l)
+          let anum = that.data.cImgNum - 0 + 1;
+          let title = '上传图片' + anum + '/' + that.data.fullImgNums;
+          console.log(anum, title)
+          wx.showLoading({
+            title: title,
+            mask: true
+          })
+          that.uploadTravelImg();
         },
         fail(res) {
           console.log(res)
         },
         complete(res) {
           console.log(res)
-          var l = that.data.cImgNum += 1;
-          that.setData({
-            cImgNum: l
-          });
-          console.log(l)
-          let anum = that.data.cImgNum - 0 + 1 ;
-          let title = '上传图片' + anum + '/' + that.data.fullImgNums;
-          console.log(anum,title)
-          wx.showLoading({
-            title: title,
-            mask: true
-          })
-          that.uploadTravelImg();
         }
       })
 
 
-    }else {
+    }
+    else {
       //上传图片完成
       wx.hideLoading();
       wx.showLoading({
@@ -681,17 +678,14 @@ Page({
         },
         success(res) {
           console.log(res);
-          // wx.hideLoading();
-          // wx.showToast({
-          //   title: '上传成功',
-          // });
+          that.addSql(res._id)
         },
         fail(res) {
           console.log(res)
         },
         complete(res) {
           console.log(res)  
-          that.addSql(res._id)
+          // that.addSql(res._id)
         }
       })
     }
