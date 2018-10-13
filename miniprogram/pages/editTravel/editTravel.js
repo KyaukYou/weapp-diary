@@ -499,8 +499,8 @@ Page({
         mask: true
       })
       wx.cloud.uploadFile({
-        cloudPath: filePath,
-        filePath: filePath,
+        cloudPath,
+        filePath,
         success(res) {
           console.log(res.fileID)
           let copy3 = that.data.uploadObj;
