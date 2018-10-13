@@ -1,3 +1,6 @@
+const util = require('../../utils/util.js');
+import { $wuxToptips } from '../../dist/index'
+
 Page({
 
   /**
@@ -17,11 +20,18 @@ Page({
 
     wx.previewImage({
       urls: copy.data.list[index].imgs,
-      current: e.currentTarget.dataset.url,
+      current: copy.data.list[index].imgs[0],
       success: function (res) {
         console.log(res)
       }
     })
+    // wx.previewImage({
+    //   urls: copy.data.list[index].trueImgs,
+    //   current: e.currentTarget.dataset.url,
+    //   success: function (res) {
+    //     console.log(res)
+    //   }
+    // })
   },
   // 初始化点赞图标
   initLikeArr() {
@@ -52,10 +62,12 @@ Page({
 
     this.setData({
       likeArr: arr
-    })
+    });
+
+    wx.stopPullDownRefresh();
 
   },
-  addLike(e) {
+  addLike: util.throttle(function(e) {
     // console.log(e);
     // let id = e.currentTarget.dataset.id;
     let index = 0;
@@ -116,7 +128,7 @@ Page({
     })
     this.initLikeArr();
 
-  },
+  },3000),
   sqlChange(val, arr, types, what) {
     console.log(val, arr, types, what)
     let id = this.data.travelObj['_id'];
@@ -137,28 +149,42 @@ Page({
         }
       })
       if (what == 'add') {
-        db.collection('travel').doc(id).update({
+        wx.cloud.callFunction({
+          name: 'uploadTravel',
           data: {
-            data: {
-              like: _.inc(1)
-            }
+            types: 'like',
+            change: 'add',
+            id: id
           },
           success(res) {
             console.log(res)
+            $wuxToptips().success({
+              hidden: true,
+              text: '点赞成功',
+              duration: 2500,
+              success() { },
+            })
           }
-        });
+        })
       }
       else {
-        db.collection('travel').doc(id).update({
+        wx.cloud.callFunction({
+          name: 'uploadTravel',
           data: {
-            data: {
-              like: _.inc(-1)
-            }
+            types: 'like',
+            change: 'min',
+            id: id
           },
           success(res) {
             console.log(res)
+            $wuxToptips().warn({
+              hidden: true,
+              text: '取消点赞',
+              duration: 2500,
+              success() { },
+            })
           }
-        });
+        })
       }
     }
     else if (types == 'star') {
@@ -172,28 +198,30 @@ Page({
       })
 
       if (what == 'add') {
-        db.collection('travel').doc(id).update({
+        wx.cloud.callFunction({
+          name: 'uploadTravel',
           data: {
-            data: {
-              star: _.inc(1)
-            }
+            types: 'star',
+            change: 'add',
+            id: id
           },
           success(res) {
             console.log(res)
           }
-        });
+        })
       }
       else {
-        db.collection('travel').doc(id).update({
+        wx.cloud.callFunction({
+          name: 'uploadTravel',
           data: {
-            data: {
-              star: _.inc(-1)
-            }
+            types: 'star',
+            change: 'min',
+            id: id
           },
           success(res) {
             console.log(res)
           }
-        });
+        })
       }
     }
 
@@ -210,23 +238,19 @@ Page({
     this.setData({
       travelId: myid
     })
-    // let myid = 'W725rd2AWotkbRXB';
-    let db = wx.cloud.database();
-    let _ = db.command;
-    db.collection('travel').doc(myid).update({
+    wx.cloud.callFunction({
+      name: 'uploadSee',
       data: {
-        data: {
-          see: _.inc(1)
-        }
+        id: myid
       },
       success(res) {
         console.log(res)
+      },
+      complete(res) {
+        that.initData(myid);
+        that.initUser();
       }
-    });
-
-    that.initData(myid);
-    that.initUser();
-
+    })
   },
   initData(myid) {
     let that = this;
@@ -305,7 +329,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    let that = this;
+    that.initData(that.data.travelId);
+    that.initUser();
   },
 
   /**

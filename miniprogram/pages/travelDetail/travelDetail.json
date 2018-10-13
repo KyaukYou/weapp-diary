@@ -3,6 +3,7 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
     "wux-icon": "../../dist/icon/index",
-    "wux-notice-bar": "../../dist/notice-bar/index"
+    "wux-notice-bar": "../../dist/notice-bar/index",
+    "wux-toptips": "../../dist/toptips/index"
   }
 }

@@ -30,6 +30,7 @@ Page({
       sDate: '',
       eDate: '',
       show: true,
+      lock: false,
       createTime: '',
       headerImgArr: [],
       headerImg: [],
@@ -49,6 +50,17 @@ Page({
         // },
       ]
     }
+  },
+  changeLock(e) {
+    console.log(e)
+    var copy = this.data.uploadObj;
+    var copyBol = copy.lock;
+    copyBol = !copyBol;
+    copy.lock = copyBol;
+
+    this.setData({
+      uploadObj: copy
+    })
   },
   headerimg() {
     var that = this;
@@ -499,7 +511,7 @@ Page({
       cc = cc.slice(11);
 
       let openid = wx.getStorageSync('openid');
-
+  
       let cloudPath = 'travel/' + openid + '/' + that.data.uploadObj.title +  '/header/' + cc + filePath.match(/\.[^.]+?$/)[0];
 
       wx.showLoading({

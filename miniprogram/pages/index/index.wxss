@@ -5,6 +5,19 @@ page {
   background-color: rgb(246,246,246);
 }
 
+.delTravel {
+  position: absolute;
+  width: 50rpx;
+  height: 50rpx;
+  right: 0;
+  top: 0;
+  z-index: 999;
+  text-align: center;
+  line-height: 50rpx;
+  color: white;
+  transition: all .2s ease;
+}
+
 .index-top {
   position: fixed;
   top: 0;
@@ -100,6 +113,7 @@ page {
   margin: 20rpx auto 36rpx auto;
   /* margin: 20rpx auto; */
   box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
 .index .index-wrap {

@@ -5,6 +5,7 @@
     "wux-floating-button": "../../dist/floating-button/index",
     "wux-search-bar": "../../dist/search-bar/index",
     "wux-divider": "../../dist/divider/index",
-    "wux-icon": "../../dist/icon/index"
+    "wux-icon": "../../dist/icon/index",
+    "wux-toptips": "../../dist/toptips/index"
   }
 }

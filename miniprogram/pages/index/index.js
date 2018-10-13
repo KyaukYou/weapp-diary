@@ -1,5 +1,7 @@
 //index.js
 const app = getApp()
+const util = require('../../utils/util.js');
+import { $wuxToptips } from '../../dist/index'
 
 Page({
 
@@ -58,9 +60,15 @@ Page({
     let id = e.currentTarget.dataset.id
     console.log(e)
 
-    wx.navigateTo({
-      url: '../travelDetail/travelDetail?id='+id,
-    })
+    if (e.currentTarget.dataset.lock) {
+      wx.showToast({
+        title: '已被锁定',
+      })
+    }else {
+      wx.navigateTo({
+        url: '../travelDetail/travelDetail?id=' + id,
+      })
+    }
   },
   addTravel() {
     // 判断是否登录
@@ -104,7 +112,7 @@ Page({
       }
     })
   },
-  addLike(e) {
+  addLike: util.throttle(function(e){
     var that = this;
     let id = e.currentTarget.dataset.id;
     let index = e.currentTarget.dataset.index;
@@ -166,8 +174,8 @@ Page({
     })
     this.initLikeArr();
 
-  },
-  addStar(e) {
+  },3000),
+  addStar: util.throttle(function (e) {
     var that = this;
     let id = e.currentTarget.dataset.id;
     let index = e.currentTarget.dataset.index;
@@ -178,6 +186,7 @@ Page({
     let res;
     if (copy.length == 0) {
       pushId = copy1['_id']
+      res = false;
     } else {
       res = copy.some(function (item, index) {
         if (item == copy1['_id']) {
@@ -192,8 +201,7 @@ Page({
     }
 
     if (!res) {
-      // copy.push(pushId);
-
+      copy.push(pushId);
       var copy2 = that.data.travelList;
       var travelCopy = that.data.travelList[index].data.star;
       travelCopy += 1;
@@ -202,7 +210,7 @@ Page({
         travelList: copy2
       })
 
-      this.sqlChange(index,copy,'star','add')
+      this.sqlChange(index, copy, 'star', 'add')
     }
     else {
       copy.splice(haveIndex, 1);
@@ -215,7 +223,7 @@ Page({
         travelList: copy2
       })
 
-      this.sqlChange(index,copy,'star','min')
+      this.sqlChange(index, copy, 'star', 'min')
     };
 
     console.log(copy)
@@ -223,11 +231,13 @@ Page({
     let copyAll = this.data.userData;
     copyAll.starArr = copy;
 
+
     this.setData({
       userData: copyAll
     })
     this.initStarArr();
-  },
+
+  },3000),
 
   // 初始化点赞图标
   initLikeArr() {
@@ -329,28 +339,42 @@ Page({
         }
       })
       if(what == 'add') {
-        db.collection('travel').doc(id).update({
+        wx.cloud.callFunction({
+          name: 'uploadTravel',
           data: {
-            data: {
-              like: _.inc(1)
-            }
+            types: 'like',
+            change: 'add', 
+            id: id
           },
           success(res) {
-            console.log(res)
+            console.log(res);
+            $wuxToptips().success({
+              hidden: true,
+              text: '点赞成功',
+              duration: 2500,
+              success() { },
+            })
           }
-        });
+        })
       }
       else {
-        db.collection('travel').doc(id).update({
+        wx.cloud.callFunction({
+          name: 'uploadTravel',
           data: {
-            data: {
-              like: _.inc(-1)
-            }
+            types: 'like',
+            change: 'min',
+            id: id
           },
           success(res) {
-            console.log(res)
+            console.log(res);
+            $wuxToptips().warn({
+              hidden: true,
+              text: '取消点赞',
+              duration: 2500,
+              success() { },
+            })
           }
-        });
+        })
       }
     }
     else if(types == 'star') {
@@ -364,28 +388,42 @@ Page({
       })
 
       if (what == 'add') {
-        db.collection('travel').doc(id).update({
+        wx.cloud.callFunction({
+          name: 'uploadTravel',
           data: {
-            data: {
-              star: _.inc(1)
-            }
+            types: 'star',
+            change: 'add',
+            id: id
           },
           success(res) {
             console.log(res)
+            $wuxToptips().success({
+              hidden: true,
+              text: '收藏成功',
+              duration: 2500,
+              success() { },
+            })
           }
-        });
+        })
       }
       else {
-        db.collection('travel').doc(id).update({
+        wx.cloud.callFunction({
+          name: 'uploadTravel',
           data: {
-            data: {
-              star: _.inc(-1)
-            }
+            types: 'star',
+            change: 'min',
+            id: id
           },
           success(res) {
             console.log(res)
+            $wuxToptips().warn({
+              hidden: true,
+              text: '取消收藏',
+              duration: 2500,
+              success() { },
+            })
           }
-        });
+        })
       }
     }
 

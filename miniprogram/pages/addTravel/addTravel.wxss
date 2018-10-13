@@ -171,6 +171,15 @@ page {
   color: #35c1f8;
 }
 
+#lock-switch {
+  position: absolute;
+  right: 32rpx;
+  top: 10rpx;
+  font-size: 34rpx;
+  color: #35c1f8;
+  z-index: 99;
+}
+
 .add-footer textarea {
   width: 94%;
   height: auto;

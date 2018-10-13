@@ -11,6 +11,11 @@ Page({
     starNum: 0,
     fans: 0,
   },
+  toMyTravel() {
+    wx.navigateTo({
+      url: '../myTravel/myTravel',
+    })
+  },
   // 获得旅行数量
   getTravelNum() {
     let that = this;

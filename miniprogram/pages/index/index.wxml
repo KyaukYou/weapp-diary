@@ -20,9 +20,13 @@
 
 <view class="container">
   <!-- <view class='container-scroll'> -->
+    <wux-toptips id="wux-toptips" />
     <button class='getInfo' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" wx:if='{{!shouquan}}'>获取授权</button>
 
-    <view class='index' data-id='{{item._id}}' wx:for='{{travelList}}' wx:key wx:if='{{item.data.show}}' bindtap='todetail'>
+    <view class='index' data-id='{{item._id}}' wx:for='{{travelList}}' wx:key wx:if='{{item.data.show}}' bindtap='todetail' data-lock='{{item.data.lock}}'>
+      <view class='delTravel'>
+        <wux-icon type='{{item.data.lock == true ? "md-lock" : "md-unlock" }}'size='22'/>
+      </view>
       <view class='index-wrap'>
         <image lazy-load='{{lazyloadBol}}' src='{{item.data.headerImg}}'></image>
         <view class='index-title'>{{item.data.title}}</view>

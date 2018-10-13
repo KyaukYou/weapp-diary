@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "景点推荐"
+  "navigationBarTitleText": "景点推荐",
+  "usingComponents": {
+    "wux-circle": "../../dist/circle/index"
+  }
 }
