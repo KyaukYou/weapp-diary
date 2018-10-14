@@ -115,6 +115,7 @@ Page({
     var child = e.currentTarget.dataset.index;
     var copy = this.data.uploadObj;
     copy.list[main].trueImgs.splice(child, 1);
+    copy.list[main].imgs.splice(child, 1);
     copy.list[main].imgNum += 1;
     console.log(copy.list[main].trueImgs, copy.list[main].imgNum)
     this.setData({
@@ -406,7 +407,7 @@ Page({
     var eDate = this.data.endDate;
     var hImg = this.data.headerImgArr;
     var that = this;
-    console.log(title,where,sDate,eDate)
+    // console.log(title,where,sDate,eDate)
 
     if (title == '' || where == '' || sDate.length == 0 || eDate.length == 0 || hImg.length == 0) {
       // $wuxToast().show({
@@ -426,7 +427,7 @@ Page({
       let t = that.data.title;
 
       let d = 'travel/'+o+'/'+ t
-      console.log(d)
+      // console.log(d)
 
       // wx.cloud.deleteFile({
       //   fileList: fileIDs,
@@ -492,40 +493,46 @@ Page({
   
       let cloudPath = 'travel/' + openid + '/' + that.data.uploadObj.title +  '/header/' + cc + filePath.match(/\.[^.]+?$/)[0];
 
-      console.log(cloudPath,filePath)
+      // console.log(cloudPath)
+      // console.log(filePath)
+      // console.log(that.data.headerimg)
 
-      wx.showLoading({
-        title: '上传标题图片',
-        mask: true
-      })
-      wx.cloud.uploadFile({
-        cloudPath,
-        filePath,
-        success(res) {
-          // console.log(res.fileID)
-          // let copy3 = that.data.uploadObj;
-          copy.headerImg = res.fileID;
-          that.setData({
-            uploadObj: copy
-          })
+      let h = that.data.headerImgArr[0].substring(0,5);
+      if(h == 'cloud') {
+        that.uploadTravelImg()
+      }else {
+        wx.showLoading({
+          title: '上传标题图片',
+          mask: true
+        })
+        wx.cloud.uploadFile({
+          cloudPath: cloudPath,
+          filePath: filePath,
+          success(res) {
+            console.log(res)
+            let copy3 = that.data.uploadObj;
+            copy.headerImg = res.fileID;
+            that.setData({
+              uploadObj: copy
+            })
 
-          let anum = that.data.cImgNum - 0 + 1;
-          let title = '上传图片' + anum + '/' + fullImgNums;
-          console.log(anum, title)
-          wx.showLoading({
-            title: title,
-            mask: true
-          });
-          that.uploadTravelImg()
-        },
-        fail(res) {
-          // console.log(res)
-        },
-        complete(res) {
-
-        }
-      })
-
+            let anum = that.data.cImgNum - 0 + 1;
+            let title = '上传图片' + anum + '/' + fullImgNums;
+            console.log(anum, title)
+            wx.showLoading({
+              title: title,
+              mask: true
+            });
+            that.uploadTravelImg()
+          },
+          fail(res) {
+            console.log(res)
+          },
+          complete(res) {
+            console.log(res)
+          }
+        })
+      }
     }
 
   },
@@ -548,7 +555,7 @@ Page({
 
       //添加到数组
       let copy = that.data.uploadObj;
-      console.log(uparr, copy.list)
+      // console.log(uparr, copy.list)
       for (var j = 0; j < copy.list.length; j++) {
 
         let s = uparr.splice(0, numarr[j]);
@@ -578,7 +585,7 @@ Page({
           }
         },
         success(res) {
-          console.log(res);
+          // console.log(res);
         },
         fail(res) {
           console.log(res)
@@ -604,53 +611,88 @@ Page({
 
     // console.log(num,numarr,numlist)
     if(this.data.cImgNum < num) {
+      // console.log(this.data.cImgNum)
+      let length = numlist.length
+      let mLength = 0;
+      // for(var s=0; s<numlist.length; s++) {
 
-      let filePath = numlist[this.data.cImgNum];
-      console.log(filePath)
-      let pattern = /\.{1}[a-z]{1,}$/;
-      let aa = filePath.slice(0, pattern.exec(filePath).index);
-      aa = aa.slice(11);
-      // console.log(aa)
+        function upfn() {
+          if (mLength <= length - 1) {
+            let hh = numlist[mLength].substring(0, 5);
+            // console.log(hh)
+            if (hh == 'cloud') {
+              // console.log(filePath)
+              var l = that.data.cImgNum += 1;
+              that.setData({
+                cImgNum: l
+              });
+              mLength++;
+              upfn();
+            }
+            else {
+              let filePath = numlist[that.data.cImgNum];
+              console.log(filePath)
+              let pattern = /\.{1}[a-z]{1,}$/;
+              let aa = filePath.slice(0, pattern.exec(filePath).index);
+              aa = aa.slice(11);
+              // console.log(aa)
 
-      let openid = wx.getStorageSync('openid');
+              let openid = wx.getStorageSync('openid');
 
-      let cloudPath = 'travel/'+ openid + '/'+ that.data.uploadObj.title + '/' + aa + filePath.match(/\.[^.]+?$/)[0];
-      console.log(cloudPath,filePath);
+              let cloudPath = 'travel/' + openid + '/' + that.data.uploadObj.title + '/' + aa + filePath.match(/\.[^.]+?$/)[0];
+              // console.log(cloudPath)
+              // console.log(filePath)
+              wx.cloud.uploadFile({
+                cloudPath: cloudPath,
+                filePath: filePath,
+                success(res) {
+                  console.log(res.fileID)
+                  uparr.push(res.fileID);
+                  that.setData({
+                    uparr: uparr
+                  })
 
-      wx.cloud.uploadFile({
-        cloudPath: filePath,
-        filePath: filePath,
-        success(res) {
-          console.log(res.fileID)
-          uparr.push(res.fileID);
-          that.setData({
-            uparr: uparr
-          })
-          // console.log(uparr)
-        },
-        fail(res) {
-          // console.log(res)
-        },
-        complete(res) {
-          console.log(res)
-          var l = that.data.cImgNum += 1;
-          that.setData({
-            cImgNum: l
-          });
-          console.log(l)
-          let anum = that.data.cImgNum - 0 + 1 ;
-          let title = '上传图片' + anum + '/' + that.data.fullImgNums;
-          console.log(anum,title)
-          wx.showLoading({
-            title: title,
-            mask: true
-          })
-          that.uploadTravelImg();
+                  console.log(res)
+                  var l = that.data.cImgNum += 1;
+                  that.setData({
+                    cImgNum: l
+                  });
+                  console.log(l)
+                  let anum = that.data.cImgNum - 0 + 1;
+                  let title = '上传图片' + anum + '/' + that.data.fullImgNums;
+                  console.log(anum, title)
+                  wx.showLoading({
+                    title: title,
+                    mask: true
+                  })
+                  mLength++;
+                  upfn();
+                },
+                fail(res) {
+                  console.log(res)
+                },
+                complete(res) {
+                }
+              })
+            }
+          }
+          else {
+            var l = that.data.cImgNum += 1;
+            that.setData({
+              cImgNum: l
+            });
+            console.log(that.data.cImgNum,num)
+            that.uploadTravelImg();
+          }
         }
-      })
 
+        upfn();
 
-    }else {
+      // }
+      // that.uploadTravelImg();
+      // console.log(cloudPath,filePath);
+    }
+    else {
       //上传图片完成
       wx.hideLoading();
       wx.showLoading({
@@ -660,9 +702,8 @@ Page({
 
       //添加到数组
       let copy = that.data.uploadObj;
-      console.log(uparr,copy.list)
+      // console.log(uparr,copy.list)
       for(var j=0; j<copy.list.length; j++) {
-
         let s = uparr.splice(0, numarr[j]); 
         console.log(s);
         for(var i=0; i<s.length; i++) {
@@ -671,6 +712,7 @@ Page({
         // console.log(copy.list[j])
       
       }
+      console.log(uparr)
       that.setData({
         uploadObj: copy
       })
@@ -774,14 +816,24 @@ Page({
     var mydata;
     Promise.resolve(userData1).then(function (res) {
       mydata = res.data[0].data;
-      // console.log(res.data[0].data);
-
+      // console.log(res.data[0]);
       let copy = mydata.list;
-      for(var i=0; i<copy.length; i++) {
-        copy[i].trueImgs = copy[i].imgs;
+      
+      for (var c = 0; c < copy.length; c++) {
+        copy[c].trueImgs = [];
       }
-      mydata.list = copy;
 
+      for(var i=0; i<copy.length; i++) {
+        // let bbb = copy[i].imgs;
+        for(var j=0; j<copy[i].imgs.length; j++) {
+          
+          copy[i].trueImgs.push(copy[i].imgs[j]);
+        }
+        
+      }
+      // console.log(copy)
+      mydata.list = copy;
+      console.log(mydata)
       that.setData({
         travelId: id,
         title: mydata.title,
@@ -790,7 +842,7 @@ Page({
         endDate: mydata.eDate,
         day: mydata.day,
         headerImgArr: [mydata.headerImg],
-        uploadObj: res.data[0].data
+        uploadObj: mydata
       })
       that.changeDate();
 
