@@ -28,7 +28,7 @@
         <wux-icon type='{{item.data.lock == true ? "md-lock" : "md-unlock" }}'size='20'/>
       </view>
       <view class='index-wrap'>
-        <image lazy-load='{{lazyloadBol}}' src='{{item.data.headerImg}}'></image>
+        <image lazy-load='{{lazyloadBol}}' mode='aspectFill' src='{{item.data.headerImg}}'></image>
         <view class='index-title'>{{item.data.title}}</view>
         <view class='index-smtitle'>
           <text>{{item.data.sDate}} {{item.data.day}}天 {{item.data.see}}次浏览</text>

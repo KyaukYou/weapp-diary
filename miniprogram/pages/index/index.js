@@ -67,6 +67,7 @@ Page({
     }else {
       if (e.currentTarget.dataset.lock) {
         wx.showToast({
+          image: '../../images/error.png',
           title: '已被锁定',
         })
       } else {

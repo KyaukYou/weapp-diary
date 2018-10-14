@@ -81,6 +81,7 @@ page {
   color: white;
   transition: all .2s ease;
   padding-top: 2rpx;
+  padding-left: 4rpx;
   box-sizing: border-box;
 }
 
