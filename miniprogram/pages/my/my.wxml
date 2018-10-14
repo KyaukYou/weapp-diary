@@ -35,7 +35,7 @@
   </view>
 
   <wux-cell-group>
-    <wux-cell title="版本号" is-link extra="beta0.0.013"></wux-cell>
+    <wux-cell title="版本号" is-link extra="beta0.0.014"></wux-cell>
   </wux-cell-group>
 
 </view>

@@ -462,9 +462,19 @@ Page({
     wx.cloud.callFunction({
       name: 'getTravel',
       success(res) {
-        that.setData({
-          travelList: res.result.data
-        })
+        // console.log(res.result.data)
+        if (res.result.data.length == 0) {
+
+        }else {
+          let result = [];
+          for (var i = 0; i < res.result.data.length; i++) {
+            result.unshift(res.result.data[i])
+          }
+
+          that.setData({
+            travelList: result
+          })
+        }
       },
       fail(res) {
         console.log(res)
@@ -538,9 +548,18 @@ Page({
     wx.cloud.callFunction({
       name: 'getTravel',
       success(res) {
-        that.setData({
-          travelList: res.result.data
-        })
+        if (res.result.data.length == 0) {
+
+        } else {
+          let result = [];
+          for (var i = 0; i < res.result.data.length; i++) {
+            result.unshift(res.result.data[i])
+          }
+
+          that.setData({
+            travelList: result
+          })
+        }
       },
       fail(res) {
         console.log(res)

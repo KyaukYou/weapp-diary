@@ -96,8 +96,8 @@ page {
   /* flex-flow: row wrap; */
   /* justify-content: center; */
   /* align-items: center; */
-  margin-top: 160rpx;
-  padding-bottom: 12rpx;
+  margin-top: 166rpx;
+  padding-bottom: 8rpx;
   /* position: fixed; */
   /* top: 154rpx; */
   /* bottom: 0; */
