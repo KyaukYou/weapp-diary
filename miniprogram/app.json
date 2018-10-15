@@ -2,9 +2,11 @@
   "cloud": true,
   "pages": [
     "pages/index/index",
+    "pages/myTravel/myTravel",
+    
     "pages/my/my",
     
-    "pages/myTravel/myTravel",
+    
     "pages/editTravel/editTravel",  
     "pages/travelDetail/travelDetail",
     "pages/addTravel/addTravel",

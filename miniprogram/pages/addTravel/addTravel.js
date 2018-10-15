@@ -511,8 +511,9 @@ Page({
       cc = cc.slice(11);
 
       let openid = wx.getStorageSync('openid');
+      var str = that.data.uploadObj.title.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, ""); 
   
-      let cloudPath = 'travel/' + openid + '/' + that.data.uploadObj.title +  '/header/' + cc + filePath.match(/\.[^.]+?$/)[0];
+      let cloudPath = 'travel/' + openid + '/' + str +  '/header/' + cc + filePath.match(/\.[^.]+?$/)[0];
 
       wx.showLoading({
         title: '上传标题图片',
@@ -541,7 +542,7 @@ Page({
           that.uploadTravelImg()
         },
         fail(res) {
-          // console.log(res)
+          console.log(res)
         },
         complete(res) {
         }
@@ -609,8 +610,9 @@ Page({
       let aa = filePath.slice(0, pattern.exec(filePath).index);
       aa = aa.slice(11);
       let openid = wx.getStorageSync('openid');
+      var str = that.data.uploadObj.title.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, ""); 
 
-      let cloudPath = 'travel/'+ openid + '/'+ that.data.uploadObj.title + '/' + aa + filePath.match(/\.[^.]+?$/)[0];
+      let cloudPath = 'travel/'+ openid + '/'+ str + '/' + aa + filePath.match(/\.[^.]+?$/)[0];
 
       wx.cloud.uploadFile({
         cloudPath,

@@ -23,6 +23,7 @@ Page({
     fullImgArr: [], 
     fullArr: [],
     uparr: [],
+    upIndex: [],
     headerImgArr: [],
     uploadObj: {
       userInfo: {},
@@ -490,8 +491,9 @@ Page({
       cc = cc.slice(11);
 
       let openid = wx.getStorageSync('openid');
+      var str = that.data.uploadObj.title.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, ""); 
   
-      let cloudPath = 'travel/' + openid + '/' + that.data.uploadObj.title +  '/header/' + cc + filePath.match(/\.[^.]+?$/)[0];
+      let cloudPath = 'travel/' + openid + '/' + str +  '/header/' + cc + filePath.match(/\.[^.]+?$/)[0];
 
       // console.log(cloudPath)
       // console.log(filePath)
@@ -499,12 +501,17 @@ Page({
 
       let h = that.data.headerImgArr[0].substring(0,5);
       if(h == 'cloud') {
+        wx.showLoading({
+          title: '正在上传',
+          mask: true
+        })
         that.uploadTravelImg()
       }else {
         wx.showLoading({
           title: '上传标题图片',
           mask: true
         })
+        console.log(cloudPath,filePath)
         wx.cloud.uploadFile({
           cloudPath: cloudPath,
           filePath: filePath,
@@ -544,7 +551,7 @@ Page({
     numlist = this.data.fullArr;
     var uparr = this.data.uparr;
     var that = this;
-
+    console.log(this.data.uparr)
     if (numlist.length <= 0) {
       //上传图片完成
       wx.hideLoading();
@@ -599,8 +606,8 @@ Page({
           let timer = null;
           clearTimeout(timer);
           timer = setTimeout(function () {
-            wx.switchTab({
-              url: '../index/index',
+            wx.navigateBack({
+              delta: 1
             })
             clearTimeout(timer);
           }, 1500)
@@ -631,15 +638,16 @@ Page({
             }
             else {
               let filePath = numlist[that.data.cImgNum];
-              console.log(filePath)
+              // console.log(filePath)
               let pattern = /\.{1}[a-z]{1,}$/;
               let aa = filePath.slice(0, pattern.exec(filePath).index);
               aa = aa.slice(11);
               // console.log(aa)
 
               let openid = wx.getStorageSync('openid');
+              var str = that.data.uploadObj.title.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, ""); 
 
-              let cloudPath = 'travel/' + openid + '/' + that.data.uploadObj.title + '/' + aa + filePath.match(/\.[^.]+?$/)[0];
+              let cloudPath = 'travel/' + openid + '/' + str + '/' + aa + filePath.match(/\.[^.]+?$/)[0];
               // console.log(cloudPath)
               // console.log(filePath)
               wx.cloud.uploadFile({
@@ -702,17 +710,56 @@ Page({
 
       //添加到数组
       let copy = that.data.uploadObj;
-      // console.log(uparr,copy.list)
-      for(var j=0; j<copy.list.length; j++) {
-        let s = uparr.splice(0, numarr[j]); 
-        console.log(s);
-        for(var i=0; i<s.length; i++) {
-          copy.list[j].imgs.push(s[i])
-        }
-        // console.log(copy.list[j])
-      
-      }
+      let copyNum = [];
       console.log(uparr)
+      // // console.log(uparr,copy.list)
+      // for(var j=0; j<copy.list.length; j++) {
+      //   let s = uparr.splice(0, numarr[j]); 
+      //   // console.log(s);
+      //   for(var i=0; i<s.length; i++) {
+      //     copy.list[j].imgs.push(s[i])
+      //   }
+      //   // console.log(copy.list[j])
+      // }
+
+      for(var i=0; i<copy.list.length; i++) {
+        if(copy.list[i].imgs.length == copy.list[i].trueImgs.length) {
+          copyNum.push(0)
+        }else {
+
+          if (copy.list[i].imgs.length < copy.list[i].trueImgs.length) {
+            let num = copy.list[i].trueImgs.length - copy.list[i].imgs.length;
+            console.log(num)
+            copyNum.push(num);
+          }
+          else if (copy.list[i].imgs.length > copy.list[i].trueImgs.length) {
+            let num = copy.list[i].trueImgs.length - copy.list[i].imgs.length;
+            console.log(num);
+            copyNum.push(num);
+          }
+        }
+      }
+      console.log(copyNum)
+
+      for(var z=0; z<copyNum.length; z++) {
+        if(copyNum[z] == 0) {
+
+        }
+        else if(copyNum[z] > 0){
+          console.log('大于', copyNum[z]);
+          let s = uparr.splice(0,copyNum[z]);
+          console.log(s);
+          for(var ss=0; ss<s.length; ss++) {
+            copy.list[z].imgs.push(s[ss]);
+          }
+
+        }
+        else if(copyNum[z] < 0) {
+          console.log('小于')
+        }
+      }
+      console.log(copy.list)
+
       that.setData({
         uploadObj: copy
       })

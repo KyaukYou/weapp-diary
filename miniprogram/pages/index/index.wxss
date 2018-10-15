@@ -11,7 +11,7 @@ page {
   height: 50rpx;
   right: 0;
   top: 0;
-  z-index: 999;
+  z-index: 100;
   text-align: center;
   line-height: 50rpx;
   color: white;
@@ -246,6 +246,7 @@ page {
   margin: 0 2rpx;
   /* margin-top: 4rpx; */
   overflow: hidden;
+  /* box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.3); */
 }
 
 .index .index-footer-one view {

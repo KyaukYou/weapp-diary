@@ -36,6 +36,90 @@ Page({
     starArr: [],
     likeArr: []
   },
+  // 锁定&解锁
+  delTravel(e) {
+    let that = this;
+    let bol = e.currentTarget.dataset.lock;
+    let id = e.currentTarget.dataset.id
+    let sOpenid = wx.getStorageSync('openid')
+
+    if (e.currentTarget.dataset.openid == sOpenid) {
+      if (bol == false) {
+        wx.showModal({
+          title: '是否锁定',
+          content: '锁定后他人将不能查看你的旅行日记',
+          success(res) {
+            if (res.confirm) {
+              let db = wx.cloud.database();
+              db.collection('travel').doc(id).update({
+                data: {
+                  data: {
+                    lock: !bol
+                  }
+                },
+                success(res) {
+                  var copy = that.data.travelList;
+                  var copyBol = copy[e.currentTarget.dataset.index].data.lock;
+                  copyBol = !bol;
+                  copy[e.currentTarget.dataset.index].data.lock = copyBol;
+                  that.setData({
+                    travelList: copy
+                  })
+                  $wuxToptips().success({
+                    hidden: true,
+                    text: '锁定成功',
+                    duration: 2500,
+                    success() { },
+                  })
+                }
+              });
+            } else {
+              //none
+            }
+          }
+        })
+      }
+      else {
+        wx.showModal({
+          title: '是否解锁',
+          content: '解锁后他人将能查看你的旅行日记',
+          success(res) {
+            if (res.confirm) {
+              let db = wx.cloud.database();
+              db.collection('travel').doc(id).update({
+                data: {
+                  data: {
+                    lock: !bol
+                  }
+                },
+                success(res) {
+                  var copy = that.data.travelList;
+                  var copyBol = copy[e.currentTarget.dataset.index].data.lock;
+                  copyBol = !bol;
+                  copy[e.currentTarget.dataset.index].data.lock = copyBol;
+                  that.setData({
+                    travelList: copy
+                  })
+                  $wuxToptips().success({
+                    hidden: true,
+                    text: '解锁成功',
+                    duration: 2500,
+                    success() { },
+                  })
+                }
+              });
+            } else {
+              //none
+            }
+          }
+        })
+      }
+    } 
+    else {
+      
+    }
+
+  },
   // 修改list颜色
   changelistcolor(e) {
     let index = e.currentTarget.dataset.index;

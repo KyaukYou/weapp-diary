@@ -126,6 +126,12 @@ Page({
                 that.setData({
                   travelList: copy
                 })
+                $wuxToptips().success({
+                  hidden: true,
+                  text: '锁定成功',
+                  duration: 2500,
+                  success() { },
+                })
               }
             });
           } else {
@@ -154,6 +160,12 @@ Page({
                 copy[e.currentTarget.dataset.index].data.lock = copyBol;
                 that.setData({
                   travelList: copy
+                })
+                $wuxToptips().success({
+                  hidden: true,
+                  text: '解锁成功',
+                  duration: 2500,
+                  success() { },
                 })
               }
             });
