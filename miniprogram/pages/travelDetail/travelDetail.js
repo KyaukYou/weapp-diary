@@ -13,6 +13,18 @@ Page({
     userData: '',
     likeArr: []
   },
+  //查看标题大图
+  showBgImg() {
+    let copy = this.data.travelObj;
+
+    wx.previewImage({
+      urls: [copy.data.headerImg],
+      current: copy.data.headerImg,
+      success: function (res) {
+        console.log(res)
+      }
+    })
+  },
   // 查看大图
   showImg(e) {
     let index = e.currentTarget.dataset.index;
@@ -20,18 +32,12 @@ Page({
 
     wx.previewImage({
       urls: copy.data.list[index].imgs,
-      current: copy.data.list[index].imgs[0],
+      // current: copy.data.list[index].imgs[e.currentTarget.dataset.smIndex],
+      current: e.currentTarget.dataset.url,
       success: function (res) {
         console.log(res)
       }
     })
-    // wx.previewImage({
-    //   urls: copy.data.list[index].trueImgs,
-    //   current: e.currentTarget.dataset.url,
-    //   success: function (res) {
-    //     console.log(res)
-    //   }
-    // })
   },
   // 初始化点赞图标
   initLikeArr() {

@@ -36,6 +36,7 @@
 
   <wux-cell-group>
     <wux-cell title="版本号" is-link extra="beta0.0.015"></wux-cell>
+    <wux-cell title="BUG提交" is-link ></wux-cell>
   </wux-cell-group>
 
 </view>

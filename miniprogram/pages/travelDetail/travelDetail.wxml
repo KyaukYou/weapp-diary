@@ -2,7 +2,7 @@
   <!-- <wux-notice-bar loop icon='' content="{{travelObj.data.where}}" /> -->
   <wux-toptips id="wux-toptips" />
   <view class='detail-bigImg'>
-    <image lazy-load mode='widthFix' src='{{travelObj.data.headerImg}}'></image>
+    <image lazy-load mode='widthFix' src='{{travelObj.data.headerImg}}' bindtap='showBgImg'></image>
   </view>
 
   <view class='detail-header'>
@@ -32,7 +32,7 @@
       </view>
       <view class='detail-info'>
         <view class='detail-list-img'>
-          <image lazy-load mode='aspectFill' data-index='{{allIndex}}' data-url='{{imgItem}}' lazy-load='true' class='{{item.imgs.length > 1 ? "detail-img-more" : "detail-img-one" }}' wx:for='{{item.imgs}}' wx:key wx:for-item='imgItem' src='{{imgItem}}' bindtap='showImg'></image>
+          <image lazy-load mode='aspectFill' data-index='{{allIndex}}' data-url='{{imgItem}}' lazy-load='true' class='{{item.imgs.length > 1 ? "detail-img-more" : "detail-img-one" }}' wx:for='{{item.imgs}}' wx:for-index='smIndex' data-smIndex='{{smIndex}}' wx:key wx:for-item='imgItem' src='{{imgItem}}' bindtap='showImg'></image>
         </view>
         <view class='detail-list-text'>
           <view class='detail-list-top'>{{item.text == '' ? '暂无描述' : item.text}}</view>
