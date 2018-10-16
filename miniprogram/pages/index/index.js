@@ -248,6 +248,96 @@ Page({
       })
     }
   },
+  changeData1(index) {
+    if (index == 0) {
+      let that = this;
+      wx.cloud.callFunction({
+        name: 'getTravel',
+        success(res) {
+          if (res.result.data.length != 0) {
+            let result = [];
+            for (var i = 0; i < res.result.data.length; i++) {
+              result.unshift(res.result.data[i])
+            }
+            that.setData({
+              travelAll: result,
+            })
+          }
+        },
+        fail(res) {
+        },
+        complete(res) {
+          that.getPageList()
+        }
+      })
+    }
+    else if (index == 1) {
+      let that = this;
+      wx.cloud.callFunction({
+        name: 'getTravel',
+        success(res) {
+          if (res.result.data.length != 0) {
+            let result = [];
+            for (var i = 0; i < res.result.data.length; i++) {
+              result.unshift(res.result.data[i])
+            }
+            that.setData({
+              timeArr: result,
+            })
+          }
+        },
+        fail(res) {
+        },
+        complete(res) {
+          that.timeSort()
+        }
+      })
+    }
+    else if (index == 2) {
+      let that = this;
+      wx.cloud.callFunction({
+        name: 'getTravel',
+        success(res) {
+          if (res.result.data.length != 0) {
+            let result = [];
+            for (var i = 0; i < res.result.data.length; i++) {
+              result.unshift(res.result.data[i])
+            }
+            that.setData({
+              seeArr: result,
+            })
+          }
+        },
+        fail(res) {
+        },
+        complete(res) {
+          that.seeSort()
+        }
+      })
+    }
+    else if (index == 3) {
+      let that = this;
+      wx.cloud.callFunction({
+        name: 'getTravel',
+        success(res) {
+          if (res.result.data.length != 0) {
+            let result = [];
+            for (var i = 0; i < res.result.data.length; i++) {
+              result.unshift(res.result.data[i])
+            }
+            that.setData({
+              dianzanArr: result,
+            })
+          }
+        },
+        fail(res) {
+        },
+        complete(res) {
+          that.likeSort()
+        }
+      })
+    }
+  },
   // 查看详情
   todetail(e) {
     let id = e.currentTarget.dataset.id
@@ -628,8 +718,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    // that.getInit();
-    that.changeData(this.data.listIndex);
+    that.getInit();
   },
 
   /**
@@ -643,7 +732,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getInit();
+    let that = this;
+    that.changeData1(this.data.listIndex);
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting['scope.userInfo']) {
+          that.setData({
+            shouquan: true
+          });
+        }
+        else {
+          that.setData({
+            shouquan: false
+          })
+        }
+      }
+    })
   },
   getTravelData() {
     let that = this;
@@ -889,7 +993,8 @@ Page({
    */
   onPullDownRefresh: function () {
     var that = this;
-    that.getTravelData();
+    // that.getTravelData();
+    that.changeData(this.data.listIndex)
   },
 
   /**
