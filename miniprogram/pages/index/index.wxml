@@ -7,9 +7,6 @@
     <!-- 选择列表 -->
     <view class='index-choose'>
       <view class='index-choose-list' bindtap='changelistcolor' wx:for='{{listArr}}' data-index='{{index}}' style='color: {{item.color}}'  wx:key>{{item.name}}</view>
-      <!-- <view class='index-choose-list' style='color: {{listColor[1]}}'>时间倒序</view>
-      <view class='index-choose-list' style='color: {{listColor[2]}}'>浏览次数</view>
-      <view class='index-choose-list' style='color: {{listColor[3]}}'>点赞最高</view> -->
     </view>
 
     <!-- 分割线 -->
@@ -19,7 +16,7 @@
   </view>  
 
 <view class="container">
-  <!-- <view class='container-scroll'> -->
+  <!-- <scroll-view scroll-y='true' style='width: 100%;'> -->
     <wux-toptips id="wux-toptips" />
     <button class='getInfo' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" wx:if='{{!shouquan}}'>获取授权</button>
 
@@ -62,4 +59,5 @@
   <!-- </view> -->
 
   <wux-floating-button actionRotate='{{rotateBol}}' position="bottomRight" theme="calm" bind:change="addTravel" bind:click="addTravel" />
+  <!-- </scroll-view> -->
 </view>

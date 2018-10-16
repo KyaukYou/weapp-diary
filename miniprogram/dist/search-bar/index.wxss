@@ -89,7 +89,7 @@
 .wux-search-bar__cancel {
   margin-left: 20rpx;
   line-height: 56rpx;
-  color: rgb(239,37,15);
+  color: #35c1f8;
   white-space: nowrap;
   font-size: 30rpx;
 }

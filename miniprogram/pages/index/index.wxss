@@ -26,7 +26,7 @@ page {
   top: 0;
   left: 0;
   right: 0;
-  height: 160rpx;
+  height: 150rpx;
   background-color: rgb(246,246,246);
   z-index: 999;
   /* margin-bottom: 160rpx; */
@@ -96,13 +96,21 @@ page {
   /* flex-flow: row wrap; */
   /* justify-content: center; */
   /* align-items: center; */
-  margin-top: 166rpx;
+  margin-top: 160rpx;
   padding-bottom: 8rpx;
   /* position: fixed; */
-  /* top: 154rpx; */
+  /* top: 152rpx; */
   /* bottom: 0; */
   /* overflow-y: auto; */
   /* display: flex; *//* flex-flow: column wrap; *//* flex-flow:column wrap; *//* align-items:center; */
+}
+
+.container scroll-view {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .index {

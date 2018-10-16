@@ -1,3 +1,4 @@
+const app = getApp();
 Page({
 
   /**
@@ -81,6 +82,14 @@ Page({
           });
           //加载
           app.getOpenId();
+          let timer1 = null;
+          clearInterval(timer1);
+          timer1 = setInterval(function () {
+            if (app.globalData.login) {
+              that.getMyInfo();
+              clearInterval(timer1);
+            }
+          }, 200)
         } else {
           // console.log('2');
           that.setData({
@@ -90,32 +99,40 @@ Page({
       }
     })
   },
+  getMyInfo() {
+    if (wx.getStorageSync('userInfo')) {
+      this.setData({
+        hasUserInfo: true,
+        userInfo: wx.getStorageSync('userInfo')
+      })
+
+      if (this.data.userInfo.gender == 1) {
+        this.setData({
+          userGender: '../../images/boy.png'
+        })
+      }
+      else if (this.data.userInfo.gender == 2) {
+        this.setData({
+          userGender: '../../images/girl.png'
+        })
+      }
+
+    } else {
+      this.setData({
+        hasUserInfo: false
+      })
+    }
+  },
+  tobug() {
+    wx.navigateTo({
+      url: '../uploadBug/uploadBug',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      if(wx.getStorageSync('userInfo')) {
-        this.setData({
-          hasUserInfo: true,
-          userInfo: wx.getStorageSync('userInfo')
-        })
-
-        if (this.data.userInfo.gender == 1) {
-          this.setData({
-            userGender: '../../images/boy.png'
-          })
-        }
-        else if (this.data.userInfo.gender == 2) {
-          this.setData({
-            userGender: '../../images/girl.png'
-          })
-        }
-
-      }else {
-        this.setData({
-          hasUserInfo: false
-        })
-      }
+    this.getMyInfo();
   },
 
   /**
@@ -129,6 +146,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
+
     this.getTravelNum();
     this.getStarNum();
   },

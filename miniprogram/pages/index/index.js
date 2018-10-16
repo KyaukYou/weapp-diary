@@ -9,11 +9,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    travelList: {},
+    page: 0,
+    limit: 5,
+    travelAll: [],
+    travelsAll: [],
+    travelList: [],
     userData: "",
     shouquan: false,
     lazyloadBol: true,
     rotateBol: false,
+    listIndex: 0,
     listArr: [
       {
         name: '最近更新',
@@ -34,7 +39,15 @@ Page({
     ],
     listColor: ['rgb(239,37,15)','black','black','black'],
     starArr: [],
-    likeArr: []
+    likeArr: [],
+    timeArr: [],
+    seeArr:[],
+    dianzanArr: [],
+    searchArr: [],
+    timesArr: [],
+    seesArr: [],
+    dianzansArr: [],
+    searchsArr: []
   },
   // 锁定&解锁
   delTravel(e) {
@@ -122,6 +135,9 @@ Page({
   },
   // 修改list颜色
   changelistcolor(e) {
+    wx.showLoading({
+      title: '正在加载',
+    })
     let index = e.currentTarget.dataset.index;
     var copy = this.data.listArr;
     for(var i=0; i<copy.length; i++) {
@@ -130,14 +146,107 @@ Page({
 
     copy[index].color = 'rgb(239,37,15)';
     this.setData({
-      listArr: copy
+      listArr: copy,
+      listIndex: index
     })
-    wx.showLoading({
-      title: '正在加载',
-      success: function() {
-        wx.hideLoading();
-      }
+    this.setData({
+      travelList: []
     })
+    this.changeData(index)
+  },
+  changeData(index) {
+    if (index == 0) {
+      let that = this;
+      wx.cloud.callFunction({
+        name: 'getTravel',
+        success(res) {
+          if (res.result.data.length != 0) {
+            let result = [];
+            for (var i = 0; i < res.result.data.length; i++) {
+              result.unshift(res.result.data[i])
+            }
+            that.setData({
+              travelAll: result,
+            })
+          }
+        },
+        fail(res) {
+        },
+        complete(res) {
+          that.getPageList()
+          wx.hideLoading()
+        }
+      })
+    }
+    else if (index == 1) {
+      let that = this;
+      wx.cloud.callFunction({
+        name: 'getTravel',
+        success(res) {
+          if (res.result.data.length != 0) {
+            let result = [];
+            for (var i = 0; i < res.result.data.length; i++) {
+              result.unshift(res.result.data[i])
+            }
+            that.setData({
+              timeArr: result,
+            })
+          }
+        },
+        fail(res) {
+        },
+        complete(res) {
+          that.timeSort()
+          wx.hideLoading()
+        }
+      })
+    }
+    else if (index == 2) {
+      let that = this;
+      wx.cloud.callFunction({
+        name: 'getTravel',
+        success(res) {
+          if (res.result.data.length != 0) {
+            let result = [];
+            for (var i = 0; i < res.result.data.length; i++) {
+              result.unshift(res.result.data[i])
+            }
+            that.setData({
+              seeArr: result,
+            })
+          }
+        },
+        fail(res) {
+        },
+        complete(res) {
+          that.seeSort()
+          wx.hideLoading()
+        }
+      })
+    }
+    else if (index == 3) {
+      let that = this;
+      wx.cloud.callFunction({
+        name: 'getTravel',
+        success(res) {
+          if (res.result.data.length != 0) {
+            let result = [];
+            for (var i = 0; i < res.result.data.length; i++) {
+              result.unshift(res.result.data[i])
+            }
+            that.setData({
+              dianzanArr: result,
+            })
+          }
+        },
+        fail(res) {
+        },
+        complete(res) {
+          that.likeSort()
+          wx.hideLoading()
+        }
+      })
+    }
   },
   // 查看详情
   todetail(e) {
@@ -177,9 +286,8 @@ Page({
     }
   },
   bindGetUserInfo(e) {
-    console.log(e);
+    // console.log(e);
     this.getInit();
-
   },
   getInit() {
     var that = this;
@@ -413,14 +521,6 @@ Page({
     let _ = db.command;
 
     if(types == 'like') {
-      // db.collection('users').where({
-      //   _openid: openid
-      // })
-      //   .update({
-      //     data: {
-      //       likeArr: arr
-      //     },
-      //   })
       wx.cloud.callFunction({
         name: 'userArr',
         data: {
@@ -528,7 +628,8 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    that.getInit();
+    // that.getInit();
+    that.changeData(this.data.listIndex);
   },
 
   /**
@@ -542,21 +643,37 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
+    this.getInit();
+  },
+  getTravelData() {
+    let that = this;
     wx.cloud.callFunction({
       name: 'getTravel',
       success(res) {
-        // console.log(res.result.data)
+        console.log(res)
         if (res.result.data.length == 0) {
 
-        }else {
+        }
+        else {
           let result = [];
+          let result1 = [];
+          let result2 = [];
+          let result3 = [];
+          let result4 = [];
           for (var i = 0; i < res.result.data.length; i++) {
             result.unshift(res.result.data[i])
+            result1.unshift(res.result.data[i])
+            result2.unshift(res.result.data[i])
+            result3.unshift(res.result.data[i])
+            result4.unshift(res.result.data[i])
           }
 
           that.setData({
-            travelList: result
+            travelAll: result,
+            timeArr: result1,
+            seeArr: result2,
+            dianzanArr: result3,
+            searchArr: result4
           })
         }
       },
@@ -565,27 +682,170 @@ Page({
       },
       complete(res) {
         wx.stopPullDownRefresh();
-        let timer1 = null;
-        clearInterval(timer1);
-        timer1 = setInterval(function () {
-          if (app.globalData.login) {
-            that.initUser();
-            clearInterval(timer1);
-          }
-          // console.log(app.globalData.login)
-        }, 200)
+        that.getPageList()
+        that.timeSort()
+        that.seeSort()
+        that.likeSort()
       }
     })
+  },
+  // 分页获取
+  getPageList() {
+    let that = this;
+    if(this.data.travelAll.length <= 5) {
+      this.setData({
+        travelList: this.data.travelAll
+      })
+    }else {
+      let five = this.data.travelAll.splice(0,4);
+      console.log(five)
+      this.setData({
+        travelsAll: five
+      })
+      this.setData({
+        travelList: this.data.travelsAll
+      })
+    }
+    let timer1 = null;
+    clearInterval(timer1);
+    timer1 = setInterval(function () {
+      if (app.globalData.login) {
+        that.initUser();
+        clearInterval(timer1);
+      }
+    }, 200)
+  },
+  getPage() {
+    let that = this;
+      // console.log(this.data.travelAll);
+    if (that.data.travelAll.length <= 0) {
+      console.log('没有更多啦')
+    }else {
+      let add = that.data.travelAll.splice(0,2);
+      let copy = that.data.travelsAll;
+      for(var i=0; i<add.length; i++) {
+        copy.push(add[i]);
+      }
+      that.setData({
+        travelList: copy
+      })
+      that.initLikeArr();
+      that.initStarArr();
+    }
+  },
 
-    // let timer1 = null;
-    // clearInterval(timer1);
-    // timer1 = setInterval(function () {
-    //   if (app.globalData.login) {
-    //     that.initUser();
-    //     clearInterval(timer1);
-    //   }
-    //   console.log(app.globalData.login)
-    // }, 200)
+  //时间正序
+  timeSort() {
+    let copy = this.data.timeArr;
+    for(var i=0; i<copy.length; i++) {
+      let a = new Date(copy[i].data.createTime);
+      copy[i].data.trueTime = a.getTime();
+    }
+
+    copy.sort(function(a,b) {
+      return a.data.trueTime - b.data.trueTime;
+    })
+    let a = copy.splice(0,4);
+    this.setData({
+      timeArr: copy,
+      timesArr: a
+    })
+    this.setData({
+      travelList: this.data.timesArr
+    })
+  },
+  timesSort() {
+    let that = this;
+    if (that.data.timeArr.length <= 0) {
+      console.log('没有更多啦')
+    } else {
+      let add = that.data.timeArr.splice(0, 2);
+      let copy = that.data.timesArr;
+      for (var i = 0; i < add.length; i++) {
+        copy.push(add[i]);
+      }
+      that.setData({
+        timesArr: copy
+      })
+      this.setData({
+        travelList: this.data.timesArr
+      })
+      that.initLikeArr();
+      that.initStarArr();
+    }
+  },
+  //浏览次数
+  seeSort() {
+    let copy = this.data.seeArr;
+    copy.sort(function (a, b) {
+      return b.data.see - a.data.see;
+    })
+    let a = copy.splice(0, 4);
+    this.setData({
+      seeArr: copy,
+      seesArr: a
+    })
+    this.setData({
+      travelList: this.data.seesArr
+    })
+  },
+  seesSort() {
+    let that = this;
+    if (that.data.seeArr.length <= 0) {
+      console.log('没有更多啦')
+    } else {
+      let add = that.data.seeArr.splice(0, 2);
+      let copy = that.data.seesArr;
+      for (var i = 0; i < add.length; i++) {
+        copy.push(add[i]);
+      }
+      that.setData({
+        seesArr: copy
+      })
+      this.setData({
+        travelList: this.data.seesArr
+      })
+      that.initLikeArr();
+      that.initStarArr();
+    }
+  },
+  //点赞最高
+  likeSort() {
+    let copy = this.data.dianzanArr;
+    copy.sort(function (a, b) {
+      return b.data.like - a.data.like;
+    })
+    let a = copy.splice(0, 4);
+    this.setData({
+      dianzanArr: copy,
+      dianzansArr: a
+    })
+    this.setData({
+      travelList: this.data.dianzansArr
+    })
+  },
+  likesSort() {
+    let that = this;
+    if (that.data.dianzanArr.length <= 0) {
+      console.log('没有更多啦')
+    } else {
+      let add = that.data.dianzanArr.splice(0, 2);
+      let copy = that.data.dianzansArr;
+      for (var i = 0; i < add.length; i++) {
+        copy.push(add[i]);
+      }
+      that.setData({
+        dianzansArr: copy
+      })
+      this.setData({
+        travelList: this.data.dianzansArr
+      })
+      that.initLikeArr();
+      that.initStarArr();
+    }
+  },
+  //搜索
+  searchSort() {
 
   },
   initUser() {
@@ -629,37 +889,26 @@ Page({
    */
   onPullDownRefresh: function () {
     var that = this;
-    wx.cloud.callFunction({
-      name: 'getTravel',
-      success(res) {
-        if (res.result.data.length == 0) {
-
-        } else {
-          let result = [];
-          for (var i = 0; i < res.result.data.length; i++) {
-            result.unshift(res.result.data[i])
-          }
-
-          that.setData({
-            travelList: result
-          })
-        }
-      },
-      fail(res) {
-        console.log(res)
-      },
-      complete(res) {
-        wx.stopPullDownRefresh();
-        // that.initUser();
-      }
-    })
+    that.getTravelData();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+    // console.log('到底了');
+    if(this.data.listIndex == 0) {
+      this.getPage()
+    }
+    else if(this.data.listIndex == 1) {
+      this.timesSort();
+    }
+    else if (this.data.listIndex == 2) {
+      this.seesSort();
+    }
+    else if (this.data.listIndex == 3) {
+      this.likesSort();
+    }
   },
 
   /**

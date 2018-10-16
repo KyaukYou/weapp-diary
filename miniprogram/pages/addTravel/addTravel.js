@@ -543,6 +543,11 @@ Page({
         },
         fail(res) {
           console.log(res)
+          wx.hideLoading();
+          wx.showToast({
+            image: '../../images/error.png',
+            title: '未知错误'
+          })
         },
         complete(res) {
         }

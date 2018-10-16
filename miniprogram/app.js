@@ -53,7 +53,7 @@ App({
                  data: "users"
               },
               success(res) {
-                // console.log(res);
+                console.log(res);
                 let ifHave = false;
                 if(res.result.total == 0) {
                   ifHave = false;

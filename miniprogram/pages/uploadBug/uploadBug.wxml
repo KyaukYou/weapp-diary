@@ -1,0 +1,6 @@
+<view class='page'>
+  <textarea placeholder='请填写你要提交的bug(20字以上)' bindinput='changeValue' value='{{textarea}}' maxlength='500'>
+    <view>{{textarea.length}}/500</view>
+  </textarea>
+  <button hover-class='chooseBtn-hover' bindtap='uploadBug' >提交</button>
+</view>
