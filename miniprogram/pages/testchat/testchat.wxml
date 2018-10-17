@@ -1,0 +1,82 @@
+<view class='page'>
+  <view class='chat'>
+    <view class='chat-header'>
+      <wux-icon type='md-text' size='26' />
+      <view class='chat-header-text'>评论列表 共{{}}条评论</view>
+    </view>
+    <view class='chat-container'>
+      <view class='chat-wrap'>
+        <view class='chat-wrap-lists'>
+          <view class='chat-wrap-list'>
+            <view class='chat-wrap-avatar'>
+              <image src=''></image>
+            </view>
+            <view class='chat-wrap-top'>
+              <text>树影下的月光</text> 2018-10-17 15:00:21
+            </view>
+            <view class='chat-wrap-center'>
+              哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+            </view>
+
+            <!-- 楼中楼 -->
+            <view class='chat-wrap-child'>
+              <view class='chat-wrap-avatar chat-wrap-avatar1'>
+                <image src=''></image>
+              </view>
+              <view class='chat-wrap-top'>
+                <text>树影下的月光</text> 2018-10-17 15:00:21
+              </view>
+              <view class='chat-wrap-center'>
+                哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+              </view>
+            </view>
+          </view>
+          <view class='chat-wrap-list'>
+            <view class='chat-wrap-avatar'>
+              <image src=''></image>
+            </view>
+            <view class='chat-wrap-top'>
+              <text>树影下的月光</text> 2018-10-17 15:00:21
+            </view>
+            <view class='chat-wrap-center'>
+              哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+            </view>
+
+            <!-- 楼中楼 -->
+            <view class='chat-wrap-child'>
+              <view class='chat-wrap-avatar chat-wrap-avatar1'>
+                <image src=''></image>
+              </view>
+              <view class='chat-wrap-top'>
+                <text>树影下的月光</text> 2018-10-17 15:00:21
+              </view>
+              <view class='chat-wrap-center'>
+                哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- <view class='chat-nowrap'>
+        一条评论也没有呀~
+      </view> -->
+    </view>
+    <view class='chat-write'>
+      <view class='chat-write-header'>
+        <wux-icon type='md-paper-plane' size='26' />
+        <view class='chat-write-header-text'>发表评论</view>
+      </view>
+      <view class='chat-write-textarea'>
+        <textarea placeholder='留下你的评论呀~' bindinput='getChat'>
+
+          <view class='chat-write-footer'>
+            <view class='chat-write-num'>{{chatData.length}} / 100</view>
+            <view class='chat-write-btn'>
+              <wux-button block size='small' type="calm" bindtap='uploadChat'>回复</wux-button>
+            </view>
+          </view>
+        </textarea>
+      </view>
+    </view>
+  </view>
+</view>

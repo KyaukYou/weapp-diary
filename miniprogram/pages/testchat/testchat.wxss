@@ -1,0 +1,207 @@
+.page {
+  width: 100%;
+  height: auto;
+}
+
+.chat {
+  width: 100%;
+  height: auto;
+}
+
+.chat-header {
+  width: 96%;
+  height: 60rpx;
+  margin: 0 auto;
+  font-size: 26rpx; 
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  color: #35c1f8;
+}
+
+.chat-header-text {
+  flex: 1;
+  height: 100%;
+  line-height: 58rpx;
+  box-sizing: border-box;
+  padding-left: 10rpx;
+}
+
+.chat-container {
+  width: 100%;
+  min-height: 60rpx;
+  height: auto;
+}
+
+.chat-nowrap {
+  width: 100%;
+  height: 60rpx;
+  /* box-sizing: border-box; */
+  /* padding: 0 20rpx; */
+  color: rgb(177, 177, 177);
+  font-size: 26rpx;
+  text-align: center;
+  line-height: 60rpx;
+  /* border-bottom: 10rpx solid rgb(223, 223, 223); */
+  /* padding-bottom: 10rpx; */
+  margin: 14rpx 0;
+}
+
+.chat-write {
+  width: 100%;
+  height: auto;
+}
+
+.chat-write-header {
+  width: 96%;
+  height: 60rpx;
+  margin: 0 auto;
+  font-size: 26rpx; 
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  color: #35c1f8;
+}
+
+.chat-write-header-text {
+  flex: 1;
+  height: 100%;
+  line-height: 58rpx;
+  box-sizing: border-box;
+  padding-left: 10rpx;
+}
+
+.chat-write-textarea {
+  width: 96%;
+  height: 280rpx;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border: 2rpx solid rgb(223, 223, 223);
+  font-size: 26rpx;
+}
+
+.chat-write-textarea textarea {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 10rpx;
+  padding-bottom: 70rpx;
+  position: relative;
+  letter-spacing: 4rpx;
+  word-spacing: 4rpx;
+}
+
+.chat-write-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 70rpx;
+  border-top: 2rpx solid rgb(223, 223, 223);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-write-num {
+  width: 40%;
+  height: 100%;
+  line-height: 70rpx;
+  color: rgb(211, 211, 211);
+  box-sizing: border-box;
+  padding-left: 10rpx;
+}
+
+.chat-write-btn {
+  width: 60%;
+  height: 100%;
+  box-sizing: border-box;
+  padding-right: 10rpx;
+  /* display: flex; */
+}
+
+.chat-write-btn button {
+  width: 30%;
+  height: 60rpx;
+  margin: 0;
+  margin-top: 5rpx;
+  float: right;
+}
+
+
+/*评论主体*/
+.chat-wrap-lists {
+  width: 96%;
+  height: auto;
+  margin: 10rpx auto;
+}
+
+.chat-wrap-list {
+  width: 100%;
+  height: auto;
+  margin: 10rpx 0;
+  position: relative;
+}
+
+.chat-wrap-avatar {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background-color: gray;
+  overflow: hidden;
+  position: absolute;
+  left: 2rpx;
+
+}
+
+.chat-wrap-avatar image {
+  width: 100%;
+  height: 100%;
+}
+
+.chat-wrap-top {
+  width: 100%;
+  height: 50rpx;
+  box-sizing: border-box;
+  /* border: 1rpx solid gray; */
+  padding-left: 76rpx;
+  font-size: 24rpx;
+  line-height: 50rpx;
+  font-weight: bold;
+  color: rgb(155, 155, 155);
+}
+
+.chat-wrap-top text {
+  font-size: 28rpx;
+  color: #35c1f8;
+  margin-right: 4rpx;
+}
+
+.chat-wrap-center {
+  width: 100%;
+  min-height: 100rpx;
+  height: auto;
+  box-sizing: border-box;
+  /* border: 1rpx solid gray; */
+  padding-left: 76rpx;
+  font-size: 30rpx;
+  line-height: 40rpx;
+  color: rgb(155, 155, 155);
+}
+
+.chat-wrap-child {
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  /* border: 1rpx solid gray; */
+  padding-left: 76rpx;
+  position: relative;
+  margin-top: 4rpx;
+}
+
+.chat-wrap-avatar1 {
+  left: 78rpx;
+}

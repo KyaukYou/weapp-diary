@@ -10,7 +10,9 @@
       <image src='{{travelObj.data.userInfo.avatarUrl}}'></image>
     </view>
     <view class='detail-title'>
-      <view class='detail-heart'><wux-icon type='{{likeArr[0] == 1 ? "md-heart" : "md-heart-empty" }}' catchtap='addLike' size='26'/></view>
+      <view class='detail-heart'>
+        <wux-icon type='{{likeArr[0] == 1 ? "md-heart" : "md-heart-empty" }}' catchtap='addLike' size='26' />
+      </view>
       <view class='detail-title-top'>{{travelObj.data.title}}</view>
       <view class='detail-title-bottom'>
         <text decode='true'>{{travelObj.data.createTime}}&emsp;{{travelObj.data.like}}人喜欢&emsp;{{travelObj.data.see}}浏览</text>
@@ -23,7 +25,7 @@
       <view class='contact-border'>
         <wux-icon size='21' type='md-funnel' class='contact-border-footer' wx:if='{{travelObj.data.list.length-1 == allIndex ? true : false}}' />
       </view>
-      
+
       <view class='detail-time'>
         <wux-icon type='md-radio-button-on' size='20' />
         <view class='detail-times'>{{item.date}} 第{{allIndex+1}}天</view>
@@ -32,10 +34,11 @@
       </view>
       <view class='detail-info'>
         <view class='detail-list-img'>
-          <image lazy-load mode='aspectFill' data-index='{{allIndex}}' data-url='{{imgItem}}' lazy-load='true' class='{{item.imgs.length > 1 ? "detail-img-more" : "detail-img-one" }}' wx:for='{{item.imgs}}' wx:for-index='smIndex' data-smIndex='{{smIndex}}' wx:key wx:for-item='imgItem' src='{{imgItem}}' bindtap='showImg'></image>
+          <image lazy-load mode='aspectFill' data-index='{{allIndex}}' data-url='{{imgItem}}' lazy-load='true' class='{{item.imgs.length > 1 ? "detail-img-more" : "detail-img-one" }}' wx:for='{{item.imgs}}' wx:for-index='smIndex' data-smIndex='{{smIndex}}' wx:key
+            wx:for-item='imgItem' src='{{imgItem}}' bindtap='showImg'></image>
         </view>
         <view class='detail-list-text'>
-          <view class='detail-list-top'>{{item.text == '' ? '暂无描述' : item.text}}</view>
+          <view class='detail-list-top'>{{item.text == '' ? '木有内容啦~~~' : item.text}}</view>
           <!-- <view class='detail-list-bottom'>
             <wux-icon type='md-heart-empty'  size='26'/>
             <view class='detail-likenum'>{{item.like}}</view>
@@ -45,19 +48,61 @@
     </view>
   </view>
 
-
-
-
-
-  <!-- <view>
-    {{travelObj.data.createTime}}
-    {{travelObj.data.day}}
-    {{travelObj.data.title}}
-    {{travelObj.data.where}}
-
-    <view wx:for-item='item1' wx:key wx:for='{{travelObj.data.list}}'>
-      {{item1.date}}
-      {{item.trueImgs}}
+  <view class='chat'>
+    <view class='chat-header'>
+      <wux-icon type='md-text' size='26' />
+      <view class='chat-header-text'>评论列表 共{{travelObj.data.chat.length}}条评论</view>
     </view>
-  </view> -->
+    <view class='chat-container'>
+      <view class='chat-wrap' wx:if='{{travelObj.data.chat.length == 0 ? false : true}}'>
+        <view class='chat-wrap-lists' wx:for='{{travelObj.data.chat}}' wx:key>
+          <view class='chat-wrap-list'>
+            <view class='chat-wrap-avatar'>
+              <image src='{{item.avatar}}'></image>
+            </view>
+            <view class='chat-wrap-top'>
+              <text>{{item.name}}</text> {{item.time}}
+            </view>
+            <view class='chat-wrap-center'>
+              {{item.text}}
+            </view>
+
+            <!-- 楼中楼 -->
+            <view class='chat-wrap-child' wx:for='{{item.follow}}' wx:for-index='{{fIndex}}' wx:for-item='{{fItem}}' wx:key>
+              <view class='chat-wrap-avatar chat-wrap-avatar1'>
+                <image src='{{fItem.avatar}}'></image>
+              </view>
+              <view class='chat-wrap-top'>
+                <text>{{fItem.name}}</text> {{fItem.time}}
+              </view>
+              <view class='chat-wrap-center'>
+                {{fItem.text}}
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='chat-nowrap' wx:if='{{travelObj.data.chat.length == 0 ? true : false}}'>
+        一条评论也没有呀~
+      </view>
+    </view>
+    <view class='chat-write'>
+      <view class='chat-write-header'>
+        <wux-icon type='md-paper-plane' size='26' />
+        <view class='chat-write-header-text'>发表评论</view>
+      </view>
+      <view class='chat-write-textarea'>
+        <textarea maxlength='100' value='{{chatData}}' placeholder='留下你的评论呀~' bindinput='getChat'>
+
+          <view class='chat-write-footer'>
+            <view class='chat-write-num'>{{chatData.length}}/100</view>
+            <view class='chat-write-btn'>
+              <wux-button block size='small' type="calm" bindtap='uploadChat'>回复</wux-button>
+            </view>
+          </view>
+        </textarea>
+      </view>
+    </view>
+  </view>
+  <!-- 评论 -->
 </view>

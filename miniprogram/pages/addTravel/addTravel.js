@@ -39,16 +39,8 @@ Page({
       like: 0,
       day: 0,
       list: [
-        // {
-        //   imgs: [],
-        //   trueImgs: [],
-        //   text: '',
-        //   date: '2018-09-29',
-        //   show: true,
-        //   like: 0,
-        //   imgNum: 9
-        // },
-      ]
+      ],
+      chat: []
     }
   },
   changeLock(e) {
@@ -423,14 +415,6 @@ Page({
   },
   //上传全部！！！
   uploadAll() {
-    // $wuxToast().show({
-    //   type: 'success',
-    //   duration: 1500,
-    //   color: 'white',
-    //   icon: 'md-sunny',
-    //   text: '再点就打屎你',
-    //   success: () => console.log('已完成')
-    // })
 
     var title = this.data.title;
     var where = this.data.where;

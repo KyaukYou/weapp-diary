@@ -1,5 +1,7 @@
 const util = require('../../utils/util.js');
-import { $wuxToptips } from '../../dist/index'
+import {
+  $wuxToptips
+} from '../../dist/index'
 
 Page({
 
@@ -11,7 +13,106 @@ Page({
     likeBol: false,
     travelId: '',
     userData: '',
-    likeArr: []
+    likeArr: [],
+    chatData: ''
+  },
+  //获取当前时间
+  getThisTime() {
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+    let second = date.getSeconds();
+
+    month <= 9 ? month = '0' + month : month;
+    day <= 9 ? day = '0' + day : day;
+    hour <= 9 ? hour = '0' + hour : hour;
+    minute <= 9 ? minute = '0' + minute : minute;
+    second <= 9 ? second = '0' + second : second;
+    let fullTimes = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+    return fullTimes;
+  },
+  // 评论内容
+  getChat(e) {
+    this.setData({
+      chatData: e.detail.value
+    })
+  },
+  //回复评论
+  uploadChat() {
+    let that = this;
+
+    if (this.data.chatData == '') {
+      wx.showToast({
+        image: '../../images/error.png',
+        title: '请输入内容',
+      })
+    } else {
+      let info = wx.getStorageSync('userInfo');
+      let thisTime = this.getThisTime();
+
+      let val = {
+        name: info.nickName,
+        avatar: info.avatarUrl,
+        text: this.data.chatData,
+        time: thisTime,
+        follow: []
+      }
+      const db = wx.cloud.database();
+      const _ = db.command;
+      console.log(_)
+
+      db.collection('travel').doc(this.data.travelId).update({
+        data: {
+          data: {
+            chat: _.push(val)
+          }
+        },
+        success(res) {
+          console.log(res);
+          wx.showToast({
+            title: '评论成功'
+          })
+          that.setData({
+            chatData: ''
+          });
+          that.initData(that.data.travelId);
+          that.initUser();
+        },
+        fail(res) {
+          console.log(res)
+        }
+      })
+
+
+      // wx.cloud.callFunction({
+      //   name: 'uploadChat',
+      //   data: {
+      //     id: that.data.travelId,
+      //     val: 1
+      //   },
+      //   success(res) {
+      //     console.log(res)
+      //     wx.showToast({
+      //       title: '评论成功'
+      //     })
+      //     that.setData({
+      //       chatData: ''
+      //     })
+      //   },
+      //   fail(res) {
+      //     console.log(res)
+      //   },
+      //   complete(res) {
+      //     console.log(res);
+      //     that.initData(that.data.travelId);
+      //     that.initUser();
+      //   }
+      // })
+    }
+
   },
   //查看标题大图
   showBgImg() {
@@ -20,7 +121,7 @@ Page({
     wx.previewImage({
       urls: [copy.data.headerImg],
       current: copy.data.headerImg,
-      success: function (res) {
+      success: function(res) {
         console.log(res)
       }
     })
@@ -34,7 +135,7 @@ Page({
       urls: copy.data.list[index].imgs,
       // current: copy.data.list[index].imgs[e.currentTarget.dataset.smIndex],
       current: e.currentTarget.dataset.url,
-      success: function (res) {
+      success: function(res) {
         console.log(res)
       }
     })
@@ -48,20 +149,19 @@ Page({
     // console.log(copy)
     if (copy.length == 0) {
       // for (var i = 0; i < copy1.length; i++) {
-        arr[0] = 0;
+      arr[0] = 0;
       // }
-    } 
-    else {
+    } else {
       // for (var i = 0; i < copy1.length; i++) {
-        bol = copy.some(function (item, index) {
-          if (copy1['_id'] == item) {
-            arr[0] = 1;
-            return true;
-          } else {
-            arr[0] = 0;
-            return false;
-          }
-        })
+      bol = copy.some(function(item, index) {
+        if (copy1['_id'] == item) {
+          arr[0] = 1;
+          return true;
+        } else {
+          arr[0] = 0;
+          return false;
+        }
+      })
       // }
     }
     // console.log(arr);
@@ -85,9 +185,8 @@ Page({
     if (copy.length == 0) {
       pushId = copy1['_id']
       res = false;
-    } 
-    else {
-      res = copy.some(function (item, index) {
+    } else {
+      res = copy.some(function(item, index) {
         if (item == copy1['_id']) {
           console.log(index)
           haveIndex = index;
@@ -109,8 +208,7 @@ Page({
       })
 
       this.sqlChange(index, copy, 'like', 'add')
-    }
-    else {
+    } else {
       copy.splice(haveIndex, 1);
 
       let travelCopy = this.data.travelObj.data.like;
@@ -134,7 +232,7 @@ Page({
     })
     this.initLikeArr();
 
-  },3000),
+  }, 3000),
   sqlChange(val, arr, types, what) {
     console.log(val, arr, types, what)
     let id = this.data.travelObj['_id'];
@@ -168,12 +266,11 @@ Page({
               hidden: true,
               text: '点赞成功',
               duration: 2500,
-              success() { },
+              success() {},
             })
           }
         })
-      }
-      else {
+      } else {
         wx.cloud.callFunction({
           name: 'uploadTravel',
           data: {
@@ -187,13 +284,12 @@ Page({
               hidden: true,
               text: '取消点赞',
               duration: 2500,
-              success() { },
+              success() {},
             })
           }
         })
       }
-    }
-    else if (types == 'star') {
+    } else if (types == 'star') {
       wx.cloud.callFunction({
         name: 'userArr',
         data: {
@@ -215,8 +311,7 @@ Page({
             console.log(res)
           }
         })
-      }
-      else {
+      } else {
         wx.cloud.callFunction({
           name: 'uploadTravel',
           data: {
@@ -236,9 +331,11 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+    wx.showLoading({
+      title: '正在加载',
+    })
     let that = this;
-    // console.log(options.id)
 
     let myid = options.id;
     this.setData({
@@ -268,16 +365,16 @@ Page({
 
     var mydata;
 
-    var a = Promise.resolve(travelData).then(function (res) {
+    var a = Promise.resolve(travelData).then(function(res) {
       mydata = res.data[0]
-      console.log(mydata, res.data);
+      // console.log(mydata, res.data);
       that.setData({
         travelObj: mydata
       })
-      // console.log(that.data.travelObj)
       wx.setNavigationBarTitle({
         title: that.data.travelObj.data.title
       })
+      wx.hideLoading();
     })
 
 
@@ -293,7 +390,7 @@ Page({
     }).get();
 
     var mydata;
-    Promise.resolve(userData1).then(function (res) {
+    Promise.resolve(userData1).then(function(res) {
       mydata = res.data[0]
       // console.log(res.data[0]);
       that.setData({
@@ -307,34 +404,33 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  },
+  onShow: function() {},
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     let that = this;
     that.initData(that.data.travelId);
     that.initUser();
@@ -343,14 +439,14 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

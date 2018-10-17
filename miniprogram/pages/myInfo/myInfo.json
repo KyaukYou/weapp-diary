@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "个人信息",
+  "enablePullDownRefresh": false,
+    "usingComponents": {
+      "van-cell-group": "../../module/cell-group/index",
+      "van-field": "../../module/field/index"
+    }
+}
