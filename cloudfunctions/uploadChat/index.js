@@ -3,7 +3,7 @@ cloud.init()
 const db = cloud.database()
 const _ = db.command
 exports.main = async (event, context) => {
-  return _;
+
   try {
     return await db.collection('travel').doc(event.id).update({
       data: {
@@ -15,4 +15,5 @@ exports.main = async (event, context) => {
   } catch (e) {
     console.error(e)
   }
+
 }

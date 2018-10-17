@@ -61,10 +61,10 @@
               <image src='{{item.avatar}}'></image>
             </view>
             <view class='chat-wrap-top'>
-              <text>{{item.name}}</text> {{item.time}}
+              <text>{{item.name}}</text> <text class='chat-wrap-time'>{{item.time}}</text> 
             </view>
             <view class='chat-wrap-center'>
-              {{item.text}}
+              {{item.text}} <text class='chat-wrap-huifu'>回复</text>
             </view>
 
             <!-- 楼中楼 -->

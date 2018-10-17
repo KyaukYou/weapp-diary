@@ -492,3 +492,16 @@ page {
 .chat-wrap-avatar1 {
   left: 78rpx;
 }
+
+.chat-wrap-top .chat-wrap-time {
+  float: right;
+  font-size: 24rpx;
+  font-weight: 200;
+  color: rgb(155, 155, 155);
+}
+
+.chat-wrap-huifu {
+  font-size: 24rpx;
+  color: #35c1f8;
+  margin-left: 10rpx;
+}

@@ -64,53 +64,53 @@ Page({
       const _ = db.command;
       console.log(_)
 
-      db.collection('travel').doc(this.data.travelId).update({
-        data: {
-          data: {
-            chat: _.push(val)
-          }
-        },
-        success(res) {
-          console.log(res);
-          wx.showToast({
-            title: '评论成功'
-          })
-          that.setData({
-            chatData: ''
-          });
-          that.initData(that.data.travelId);
-          that.initUser();
-        },
-        fail(res) {
-          console.log(res)
-        }
-      })
-
-
-      // wx.cloud.callFunction({
-      //   name: 'uploadChat',
+      // db.collection('travel').doc(this.data.travelId).update({
       //   data: {
-      //     id: that.data.travelId,
-      //     val: 1
+      //     data: {
+      //       chat: _.push(val)
+      //     }
       //   },
       //   success(res) {
-      //     console.log(res)
+      //     console.log(res);
       //     wx.showToast({
       //       title: '评论成功'
       //     })
       //     that.setData({
       //       chatData: ''
-      //     })
+      //     });
+      //     that.initData(that.data.travelId);
+      //     that.initUser();
       //   },
       //   fail(res) {
       //     console.log(res)
-      //   },
-      //   complete(res) {
-      //     console.log(res);
-      //     that.initData(that.data.travelId);
-      //     that.initUser();
       //   }
       // })
+
+
+      wx.cloud.callFunction({
+        name: 'uploadChat',
+        data: {
+          id: that.data.travelId,
+          val: val
+        },
+        success(res) {
+          console.log(res)
+          wx.showToast({
+            title: '评论成功'
+          })
+          that.setData({
+            chatData: ''
+          })
+        },
+        fail(res) {
+          console.log(res)
+        },
+        complete(res) {
+          console.log(res);
+          that.initData(that.data.travelId);
+          that.initUser();
+        }
+      })
     }
 
   },

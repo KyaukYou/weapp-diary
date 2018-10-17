@@ -271,72 +271,6 @@ Page({
         }
       })
     }
-    else if (index == 1) {
-      let that = this;
-      wx.cloud.callFunction({
-        name: 'getTravel',
-        success(res) {
-          if (res.result.data.length != 0) {
-            let result = [];
-            for (var i = 0; i < res.result.data.length; i++) {
-              result.unshift(res.result.data[i])
-            }
-            that.setData({
-              timeArr: result,
-            })
-          }
-        },
-        fail(res) {
-        },
-        complete(res) {
-          that.timeSort()
-        }
-      })
-    }
-    else if (index == 2) {
-      let that = this;
-      wx.cloud.callFunction({
-        name: 'getTravel',
-        success(res) {
-          if (res.result.data.length != 0) {
-            let result = [];
-            for (var i = 0; i < res.result.data.length; i++) {
-              result.unshift(res.result.data[i])
-            }
-            that.setData({
-              seeArr: result,
-            })
-          }
-        },
-        fail(res) {
-        },
-        complete(res) {
-          that.seeSort()
-        }
-      })
-    }
-    else if (index == 3) {
-      let that = this;
-      wx.cloud.callFunction({
-        name: 'getTravel',
-        success(res) {
-          if (res.result.data.length != 0) {
-            let result = [];
-            for (var i = 0; i < res.result.data.length; i++) {
-              result.unshift(res.result.data[i])
-            }
-            that.setData({
-              dianzanArr: result,
-            })
-          }
-        },
-        fail(res) {
-        },
-        complete(res) {
-          that.likeSort()
-        }
-      })
-    }
   },
   // 查看详情
   todetail(e) {
@@ -796,11 +730,11 @@ Page({
   // 分页获取
   getPageList() {
     let that = this;
-    if(this.data.travelAll.length <= 5) {
-      this.setData({
-        travelList: this.data.travelAll
-      })
-    }else {
+    // if(this.data.travelAll.length <= 4) {
+    //   this.setData({
+    //     travelList: this.data.travelAll
+    //   })
+    // }else {
       let five = this.data.travelAll.splice(0,4);
       console.log(five)
       this.setData({
@@ -809,7 +743,7 @@ Page({
       this.setData({
         travelList: this.data.travelsAll
       })
-    }
+    // }
     let timer1 = null;
     clearInterval(timer1);
     timer1 = setInterval(function () {
@@ -817,7 +751,7 @@ Page({
         that.initUser();
         clearInterval(timer1);
       }
-    }, 200)
+    },200)      
   },
   getPage() {
     let that = this;
