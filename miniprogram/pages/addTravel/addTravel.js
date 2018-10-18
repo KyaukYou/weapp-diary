@@ -495,9 +495,11 @@ Page({
       cc = cc.slice(11);
 
       let openid = wx.getStorageSync('openid');
-      var str = that.data.uploadObj.title.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, ""); 
+      // var str1 = that.data.uploadObj.title.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, ""); 
+      // var str = encodeURIComponent(str1)
+      let timeStr = new Date(that.data.uploadObj.createTime).getTime();
   
-      let cloudPath = 'travel/' + openid + '/' + str +  '/header/' + cc + filePath.match(/\.[^.]+?$/)[0];
+      let cloudPath = 'travel/' + openid + '/' + timeStr +  '/header/' + cc + filePath.match(/\.[^.]+?$/)[0];
 
       wx.showLoading({
         title: '上传标题图片',
@@ -599,9 +601,11 @@ Page({
       let aa = filePath.slice(0, pattern.exec(filePath).index);
       aa = aa.slice(11);
       let openid = wx.getStorageSync('openid');
-      var str = that.data.uploadObj.title.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, ""); 
+      // var str1 = that.data.uploadObj.title.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, ""); 
+      // var str = encodeURIComponent(str1)
+      let timeStr = new Date(that.data.uploadObj.createTime).getTime();
 
-      let cloudPath = 'travel/'+ openid + '/'+ str + '/' + aa + filePath.match(/\.[^.]+?$/)[0];
+      let cloudPath = 'travel/'+ openid + '/'+ timeStr + '/' + aa + filePath.match(/\.[^.]+?$/)[0];
 
       wx.cloud.uploadFile({
         cloudPath,

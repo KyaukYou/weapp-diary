@@ -1,0 +1,39 @@
+<view class="container">
+  <!-- <view class='container-scroll'> -->
+    <wux-toptips id="wux-toptips" />
+    <view class='index' data-id='{{item._id}}' wx:for='{{travelList}}' wx:key wx:if='{{item.data.show}}' bindtap='todetail'>
+      <view class='delTravel' data-lock='{{item.data.lock}}' data-index='{{index}}' catchtap='delTravel' data-id='{{item._id}}'>
+        <wux-icon type='{{item.data.lock == true ? "md-lock" : "md-unlock" }}'size='20'/>
+      </view>
+      <view class='index-wrap'>
+        <image lazy-load='{{lazyloadBol}}' mode='aspectFill' src='{{item.data.headerImg}}'></image>
+        <view class='index-title'>{{item.data.title}}</view>
+        <view class='index-smtitle'>
+          <text>{{item.data.sDate}} {{item.data.day}}天 {{item.data.see}}次浏览</text>
+          <text>{{item.data.where}}</text>
+        </view>
+
+        <view class='index-footer'>
+          <view class='index-footer-left'>
+            <image src='{{item.data.userInfo.avatarUrl}}'></image>
+            <view>by {{item.data.userInfo.nickName}}</view>
+          </view>
+          <view class='index-footer-right'>
+            <view class='index-footer-one' data-id='{{item._id}}' data-index='{{index}}'>
+              <!-- <image src='../../images/like.png'></image> -->
+              <wux-icon class='ii' type='{{likeArr[index] == 0 ? "md-heart-empty" : "md-heart" }}'size='24'/>
+              <view>{{item.data.like}}</view>
+            </view>
+            <view class='index-footer-one' data-id='{{item._id}}' data-index='{{index}}'>
+              <!-- <image src='../../images/star.png'></image> -->
+              <wux-icon class='ii' type='{{starArr[index] == 0 ? "md-star-outline" : "md-star" }}'size='24'/>
+              <view>{{item.data.star}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  <!-- </view> -->
+
+  <!-- <wux-floating-button actionRotate='{{rotateBol}}' position="bottomRight" theme="calm" bind:change="addTravel" bind:click="addTravel" /> -->
+</view>

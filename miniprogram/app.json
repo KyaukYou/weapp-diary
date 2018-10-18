@@ -2,6 +2,8 @@
   "cloud": true,
   "pages": [
     "pages/index/index",
+    "pages/myStar/myStar",
+    
     "pages/testchat/testchat",
     
     "pages/myInfo/myInfo",

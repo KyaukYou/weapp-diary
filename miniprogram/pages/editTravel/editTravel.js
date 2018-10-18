@@ -50,7 +50,86 @@ Page({
         //   imgNum: 9
         // },
       ]
+    },
+    chatData: ''
+  },
+  //获取当前时间
+  getThisTime() {
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+    let second = date.getSeconds();
+
+    month <= 9 ? month = '0' + month : month;
+    day <= 9 ? day = '0' + day : day;
+    hour <= 9 ? hour = '0' + hour : hour;
+    minute <= 9 ? minute = '0' + minute : minute;
+    second <= 9 ? second = '0' + second : second;
+    let fullTimes = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+    return fullTimes;
+  },
+  // 评论内容
+  getChat(e) {
+    this.setData({
+      chatData: e.detail.value
+    })
+  },
+  //回复评论
+  uploadChat() {
+    let that = this;
+
+    if (this.data.chatData == '') {
+      wx.showToast({
+        image: '../../images/error.png',
+        title: '请输入内容',
+      })
+    } else {
+      let info = wx.getStorageSync('userInfo');
+      let thisTime = this.getThisTime();
+
+      let val = {
+        name: info.nickName,
+        avatar: info.avatarUrl,
+        text: this.data.chatData,
+        time: thisTime,
+        follow: []
+      }
+
+      wx.cloud.callFunction({
+        name: 'uploadChat',
+        data: {
+          id: that.data.travelId,
+          val: val
+        },
+        success(res) {
+          console.log(res)
+          wx.showToast({
+            title: '评论成功'
+          })
+          that.setData({
+            chatData: ''
+          })
+        },
+        fail(res) {
+          console.log(res)
+        },
+        complete(res) {
+          console.log(res);
+          that.initData(that.data.travelId);
+          that.initUser();
+        }
+      })
     }
+
+  },
+  //楼中楼
+  chattochat() {
+    wx.showToast({
+      title: '即将开放',
+    })
   },
   changeLock(e) {
     console.log(e)
@@ -491,9 +570,10 @@ Page({
       cc = cc.slice(11);
 
       let openid = wx.getStorageSync('openid');
-      var str = that.data.uploadObj.title.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, ""); 
+      // var str = that.data.uploadObj.title.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, ""); 
+      let timeStr = new Date(that.data.uploadObj.createTime).getTime();
   
-      let cloudPath = 'travel/' + openid + '/' + str +  '/header/' + cc + filePath.match(/\.[^.]+?$/)[0];
+      let cloudPath = 'travel/' + openid + '/' + timeStr +  '/header/' + cc + filePath.match(/\.[^.]+?$/)[0];
 
       // console.log(cloudPath)
       // console.log(filePath)
@@ -644,10 +724,11 @@ Page({
               aa = aa.slice(11);
               // console.log(aa)
 
-              let openid = wx.getStorageSync('openid');
-              var str = that.data.uploadObj.title.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, ""); 
+              // let openid = wx.getStorageSync('openid');
+              // var str = that.data.uploadObj.title.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, ""); 
+              let timeStr = new Date(that.data.uploadObj.createTime).getTime();
 
-              let cloudPath = 'travel/' + openid + '/' + str + '/' + aa + filePath.match(/\.[^.]+?$/)[0];
+              let cloudPath = 'travel/' + openid + '/' + timeStr + '/' + aa + filePath.match(/\.[^.]+?$/)[0];
               // console.log(cloudPath)
               // console.log(filePath)
               wx.cloud.uploadFile({
@@ -892,7 +973,9 @@ Page({
         uploadObj: mydata
       })
       that.changeDate();
-
+      wx.setNavigationBarTitle({
+        title: '编辑'+that.data.uploadObj.title
+      })
     })
   },
 

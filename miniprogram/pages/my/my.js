@@ -12,9 +12,19 @@ Page({
     starNum: 0,
     fans: 0,
   },
+  toInfo() {
+    wx.showToast({
+      title: '尽请期待!',
+    })
+  },
   toMyTravel() {
     wx.navigateTo({
       url: '../myTravel/myTravel',
+    })
+  },
+  toMyStar() {
+    wx.navigateTo({
+      url: '../myStar/myStar',
     })
   },
   // 获得旅行数量
@@ -124,9 +134,15 @@ Page({
     }
   },
   tobug() {
-    wx.navigateTo({
-      url: '../uploadBug/uploadBug',
-    })
+    if (wx.getStorageSync('openid')) {
+      wx.navigateTo({
+        url: '../uploadBug/uploadBug',
+      })
+    }else {
+      wx.showToast({
+        title: '请先授权登录',
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载

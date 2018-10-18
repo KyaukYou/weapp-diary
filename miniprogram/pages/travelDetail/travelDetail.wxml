@@ -38,7 +38,7 @@
             wx:for-item='imgItem' src='{{imgItem}}' bindtap='showImg'></image>
         </view>
         <view class='detail-list-text'>
-          <view class='detail-list-top'>{{item.text == '' ? '木有内容啦~~~' : item.text}}</view>
+          <text decode='true' class='detail-list-top'>{{item.text == '' ? '木有内容啦~~~' : item.text}}</text>
           <!-- <view class='detail-list-bottom'>
             <wux-icon type='md-heart-empty'  size='26'/>
             <view class='detail-likenum'>{{item.like}}</view>
@@ -48,6 +48,8 @@
     </view>
   </view>
 
+
+  <!-- 评论 -->
   <view class='chat'>
     <view class='chat-header'>
       <wux-icon type='md-text' size='26' />
@@ -64,7 +66,7 @@
               <text>{{item.name}}</text> <text class='chat-wrap-time'>{{item.time}}</text> 
             </view>
             <view class='chat-wrap-center'>
-              {{item.text}} <text class='chat-wrap-huifu'>回复</text>
+              {{item.text}} <view style='display: inline-block' class='chat-wrap-huifu' bindtap='chattochat' hover-class='huifuHover'>回复</view>
             </view>
 
             <!-- 楼中楼 -->
@@ -104,5 +106,5 @@
       </view>
     </view>
   </view>
-  <!-- 评论 -->
+  
 </view>

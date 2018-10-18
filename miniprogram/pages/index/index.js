@@ -22,7 +22,7 @@ Page({
     listArr: [
       {
         name: '最近更新',
-        color: 'rgb(239,37,15)'
+        color: '#35c1f8'
       },
       {
         name: '时间正序',
@@ -37,17 +37,21 @@ Page({
         color: 'black'
       }
     ],
-    listColor: ['rgb(239,37,15)','black','black','black'],
+    listColor: ['#35c1f8', 'black', 'black', 'black'],
     starArr: [],
     likeArr: [],
     timeArr: [],
-    seeArr:[],
+    seeArr: [],
     dianzanArr: [],
     searchArr: [],
     timesArr: [],
     seesArr: [],
     dianzansArr: [],
-    searchsArr: []
+    searchsArr: [],
+    mainArr: [],
+    searchVal: '',
+    searchBol: false,
+    whatBol: false
   },
   // 锁定&解锁
   delTravel(e) {
@@ -127,9 +131,9 @@ Page({
           }
         })
       }
-    } 
+    }
     else {
-      
+
     }
 
   },
@@ -140,11 +144,11 @@ Page({
     })
     let index = e.currentTarget.dataset.index;
     var copy = this.data.listArr;
-    for(var i=0; i<copy.length; i++) {
+    for (var i = 0; i < copy.length; i++) {
       copy[i].color = 'black';
     }
 
-    copy[index].color = 'rgb(239,37,15)';
+    copy[index].color = '#35c1f8';
     this.setData({
       listArr: copy,
       listIndex: index
@@ -152,9 +156,77 @@ Page({
     this.setData({
       travelList: []
     })
+    if (this.data.searchBol) {
+      this.setData({
+        whatBol: true
+      })
+    }else {
+      this.setData({
+        whatBol: false
+      })
+    }
     this.changeData(index)
   },
   changeData(index) {
+    let that = this;
+    if(this.data.whatBol) {
+      let result = [];
+      let result1 = [];
+      let result2 = [];
+      let result3 = [];
+      for (var i = 0; i < this.data.mainArr.length; i++) {
+        result.unshift(this.data.mainArr[i])
+        result1.unshift(this.data.mainArr[i])
+        result2.unshift(this.data.mainArr[i])
+        result3.unshift(this.data.mainArr[i])
+      };
+
+      let results = result.filter(function (item, index) {
+        if (item.data.title.match(that.data.searchVal)) {
+          return true;
+        }
+      })
+
+      let results1 = result1.filter(function (item, index) {
+        if (item.data.title.match(that.data.searchVal)) {
+          return true;
+        }
+      })
+
+      let results2 = result2.filter(function (item, index) {
+        if (item.data.title.match(that.data.searchVal)) {
+          return true;
+        }
+      })
+
+      let results3 = result3.filter(function (item, index) {
+        if (item.data.title.match(that.data.searchVal)) {
+          return true;
+        }
+      })
+
+      this.setData({
+        travelAll: results,
+        timeArr: results1,
+        seeArr: results2,
+        dianzanArr: results3
+      });
+
+      if(index ==0) {
+        this.getPageList();
+      }
+      else if(index == 1) {
+        this.timeSort();
+      }
+      else if(index == 2) {
+        this.seeSort();
+      }
+      else if(index == 3) {
+        this.likeSort();
+      }
+
+    }else {
+
     if (index == 0) {
       let that = this;
       wx.cloud.callFunction({
@@ -247,6 +319,7 @@ Page({
         }
       })
     }
+    }
   },
   changeData1(index) {
     if (index == 0) {
@@ -256,11 +329,14 @@ Page({
         success(res) {
           if (res.result.data.length != 0) {
             let result = [];
+            let result1 = [];
             for (var i = 0; i < res.result.data.length; i++) {
               result.unshift(res.result.data[i])
+              result1.unshift(res.result.data[i])
             }
             that.setData({
               travelAll: result,
+              mainArr: result1
             })
           }
         },
@@ -281,7 +357,7 @@ Page({
       wx.navigateTo({
         url: '../travelDetail/travelDetail?id=' + id,
       })
-    }else {
+    } else {
       if (e.currentTarget.dataset.lock) {
         wx.showToast({
           image: '../../images/error.png',
@@ -296,16 +372,18 @@ Page({
   },
   addTravel() {
     // 判断是否登录
-    if(wx.getStorageSync('openid')) {
+    if (wx.getStorageSync('openid')) {
       // console.log('yes');
       wx.navigateTo({
         url: '../addTravel/addTravel',
       })
-    }else {
+    } else {
       // console.log('no');
-      wx.showToast({
-        image: '../../images/error.png',
-        title: '请先授权登录',
+      $wuxToptips().error({
+        hidden: true,
+        text: '请先授权',
+        duration: 2500,
+        success() { },
       })
     }
   },
@@ -325,7 +403,7 @@ Page({
           });
           //加载
           app.getOpenId();
-          
+
         } else {
           // console.log('2');
           that.setData({
@@ -335,7 +413,16 @@ Page({
       }
     })
   },
-  addLike: util.throttle(function(e){
+  addLike: util.throttle(function (e) {
+    if (!wx.getStorageSync('openid')) {
+      $wuxToptips().error({
+        hidden: true,
+        text: '请先授权',
+        duration: 2500,
+        success() { },
+      })
+      return;
+    }
     var that = this;
     let id = e.currentTarget.dataset.id;
     let index = e.currentTarget.dataset.index;
@@ -344,10 +431,10 @@ Page({
     let pushId;
     let haveIndex = 0;
     let res;
-    if(copy.length == 0) {
+    if (copy.length == 0) {
       pushId = copy1['_id']
       res = false;
-    }else {
+    } else {
       res = copy.some(function (item, index) {
         if (item == copy1['_id']) {
           console.log(index)
@@ -360,7 +447,7 @@ Page({
       })
     }
 
-    if(!res) {
+    if (!res) {
       copy.push(pushId);
       var copy2 = that.data.travelList;
       var travelCopy = that.data.travelList[index].data.like;
@@ -370,10 +457,10 @@ Page({
         travelList: copy2
       })
 
-      this.sqlChange(index,copy,'like','add')
+      this.sqlChange(index, copy, 'like', 'add')
     }
     else {
-      copy.splice(haveIndex,1);
+      copy.splice(haveIndex, 1);
 
       var copy2 = that.data.travelList;
       var travelCopy = that.data.travelList[index].data.like;
@@ -383,7 +470,7 @@ Page({
         travelList: copy2
       })
 
-      this.sqlChange(index,copy,'like','min')
+      this.sqlChange(index, copy, 'like', 'min')
     };
 
     console.log(copy)
@@ -397,8 +484,17 @@ Page({
     })
     this.initLikeArr();
 
-  },3000),
+  }, 3000),
   addStar: util.throttle(function (e) {
+    if (!wx.getStorageSync('openid')) {
+      $wuxToptips().error({
+        hidden: true,
+        text: '请先授权',
+        duration: 2500,
+        success() { },
+      })
+      return;
+    }
     var that = this;
     let id = e.currentTarget.dataset.id;
     let index = e.currentTarget.dataset.index;
@@ -460,7 +556,7 @@ Page({
     })
     this.initStarArr();
 
-  },3000),
+  }, 3000),
 
   // 初始化点赞图标
   initLikeArr() {
@@ -469,24 +565,24 @@ Page({
     let arr = this.data.likeArr;
     let bol = false;
     // console.log(copy)
-    if(copy.length == 0) {
+    if (copy.length == 0) {
       for (var i = 0; i < copy1.length; i++) {
         arr[i] = 0;
         // bol = false;
       }
-    }else {
+    } else {
 
-      for(var i=0; i<copy1.length; i++) {
+      for (var i = 0; i < copy1.length; i++) {
 
-        bol = copy.some(function(item,index) {
-          if(copy1[i]['_id'] == item) {
+        bol = copy.some(function (item, index) {
+          if (copy1[i]['_id'] == item) {
             arr[i] = 1;
             return true;
-          }else {
+          } else {
             arr[i] = 0;
             return false;
           }
-        })        
+        })
 
       }
 
@@ -520,23 +616,26 @@ Page({
         bol = copy.some(function (item, index) {
           if (copy1[i]['_id'] == item) {
             arr[i] = 1;
+            // console.log(arr[i],item)
             return true;
           } else {
             arr[i] = 0;
+            // console.log(arr[i], item)
             return false;
           }
         })
 
       }
-    }  
+    }
     // console.log(arr);
 
     this.setData({
       starArr: arr
     })
+    wx.hideLoading()
   },
-  sqlChange(val,arr,types,what) {
-    console.log(val,arr,types,what)
+  sqlChange(val, arr, types, what) {
+    console.log(val, arr, types, what)
     let id = this.data.travelList[val]['_id'];
     let openid = wx.getStorageSync('openid');
     // console.log(id)
@@ -544,7 +643,7 @@ Page({
     let db = wx.cloud.database();
     let _ = db.command;
 
-    if(types == 'like') {
+    if (types == 'like') {
       wx.cloud.callFunction({
         name: 'userArr',
         data: {
@@ -553,12 +652,12 @@ Page({
           arrs: arr
         }
       })
-      if(what == 'add') {
+      if (what == 'add') {
         wx.cloud.callFunction({
           name: 'uploadTravel',
           data: {
             types: 'like',
-            change: 'add', 
+            change: 'add',
             id: id
           },
           success(res) {
@@ -592,7 +691,7 @@ Page({
         })
       }
     }
-    else if(types == 'star') {
+    else if (types == 'star') {
       wx.cloud.callFunction({
         name: 'userArr',
         data: {
@@ -659,7 +758,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**
@@ -698,12 +797,14 @@ Page({
           let result2 = [];
           let result3 = [];
           let result4 = [];
+          let result5 = [];
           for (var i = 0; i < res.result.data.length; i++) {
             result.unshift(res.result.data[i])
             result1.unshift(res.result.data[i])
             result2.unshift(res.result.data[i])
             result3.unshift(res.result.data[i])
             result4.unshift(res.result.data[i])
+            result5.unshift(res.result.data[i])
           }
 
           that.setData({
@@ -711,7 +812,8 @@ Page({
             timeArr: result1,
             seeArr: result2,
             dianzanArr: result3,
-            searchArr: result4
+            searchArr: result4,
+            mainArr: result5
           })
         }
       },
@@ -735,14 +837,14 @@ Page({
     //     travelList: this.data.travelAll
     //   })
     // }else {
-      let five = this.data.travelAll.splice(0,4);
-      console.log(five)
-      this.setData({
-        travelsAll: five
-      })
-      this.setData({
-        travelList: this.data.travelsAll
-      })
+    let five = this.data.travelAll.splice(0, 4);
+    console.log(five)
+    this.setData({
+      travelsAll: five
+    })
+    this.setData({
+      travelList: this.data.travelsAll
+    })
     // }
     let timer1 = null;
     clearInterval(timer1);
@@ -751,17 +853,18 @@ Page({
         that.initUser();
         clearInterval(timer1);
       }
-    },200)      
+    }, 200)
+    wx.stopPullDownRefresh();
   },
   getPage() {
     let that = this;
-      // console.log(this.data.travelAll);
+    // console.log(this.data.travelAll);
     if (that.data.travelAll.length <= 0) {
       console.log('没有更多啦')
-    }else {
-      let add = that.data.travelAll.splice(0,2);
+    } else {
+      let add = that.data.travelAll.splice(0, 2);
       let copy = that.data.travelsAll;
-      for(var i=0; i<add.length; i++) {
+      for (var i = 0; i < add.length; i++) {
         copy.push(add[i]);
       }
       that.setData({
@@ -775,15 +878,15 @@ Page({
   //时间正序
   timeSort() {
     let copy = this.data.timeArr;
-    for(var i=0; i<copy.length; i++) {
+    for (var i = 0; i < copy.length; i++) {
       let a = new Date(copy[i].data.createTime);
       copy[i].data.trueTime = a.getTime();
     }
 
-    copy.sort(function(a,b) {
+    copy.sort(function (a, b) {
       return a.data.trueTime - b.data.trueTime;
     })
-    let a = copy.splice(0,4);
+    let a = copy.splice(0, 4);
     this.setData({
       timeArr: copy,
       timesArr: a
@@ -791,6 +894,9 @@ Page({
     this.setData({
       travelList: this.data.timesArr
     })
+    this.initLikeArr();
+    this.initStarArr();
+    wx.stopPullDownRefresh();
   },
   timesSort() {
     let that = this;
@@ -826,6 +932,9 @@ Page({
     this.setData({
       travelList: this.data.seesArr
     })
+    this.initLikeArr();
+    this.initStarArr();
+    wx.stopPullDownRefresh();
   },
   seesSort() {
     let that = this;
@@ -861,6 +970,9 @@ Page({
     this.setData({
       travelList: this.data.dianzansArr
     })
+    this.initLikeArr();
+    this.initStarArr();
+    wx.stopPullDownRefresh();
   },
   likesSort() {
     let that = this;
@@ -882,9 +994,77 @@ Page({
       that.initStarArr();
     }
   },
+  changeSearch(e) {
+    if (e.detail == '') {
+      this.setData({
+        searchBol: false
+      })
+    } 
+    else {
+      this.setData({
+        searchBol: true,
+        searchVal: e.detail
+      })
+    }
+  },
   //搜索
-  searchSort() {
+  getSearch(e) {
+    wx.showLoading({
+      mask: true,
+      title: '正在加载',
+    })
+    if (this.data.searchVal == '') {
+      this.setData({
+        searchBol: false
+      })
+    } else {
+      this.setData({
+        searchBol: true
+      })
+      this.searchSort(this.data.searchVal)
+    }
 
+  },
+  searchSort(val) {
+    let copy = this.data.mainArr;
+    //筛选
+    let result = copy.filter(function (item, index) {
+      if (item.data.title.match(val)) {
+        return true;
+      }
+    })
+
+    let a = result.splice(0, 4);
+    this.setData({
+      searchArr: result,
+      searchsArr: a
+    })
+    this.setData({
+      travelList: this.data.searchsArr
+    })
+    wx.hideLoading()
+    this.initLikeArr();
+    this.initStarArr();
+  },
+  searchsSort() {
+    let that = this;
+    if (that.data.searchArr.length <= 0) {
+      console.log('没有更多啦')
+    } else {
+      let add = that.data.searchArr.splice(0, 2);
+      let copy = that.data.searchsArr;
+      for (var i = 0; i < add.length; i++) {
+        copy.push(add[i]);
+      }
+      that.setData({
+        searchsArr: copy
+      })
+      this.setData({
+        travelList: this.data.searchsArr
+      })
+      that.initLikeArr();
+      that.initStarArr();
+    }
   },
   initUser() {
     let that = this;
@@ -912,14 +1092,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    
+
   },
 
   /**
@@ -927,7 +1107,11 @@ Page({
    */
   onPullDownRefresh: function () {
     var that = this;
-    // that.getTravelData();
+    this.setData({
+      searchBol: false,
+      searchVal: '',
+      whatBol: false
+    })
     that.changeData(this.data.listIndex)
   },
 
@@ -935,25 +1119,29 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    // console.log('到底了');
-    if(this.data.listIndex == 0) {
-      this.getPage()
+    if (this.data.searchBol) {
+      this.searchsSort()
     }
-    else if(this.data.listIndex == 1) {
-      this.timesSort();
-    }
-    else if (this.data.listIndex == 2) {
-      this.seesSort();
-    }
-    else if (this.data.listIndex == 3) {
-      this.likesSort();
-    }
+    else {
+      if (this.data.listIndex == 0) {
+        this.getPage()
+      }
+      else if (this.data.listIndex == 1) {
+        this.timesSort();
+      }
+      else if (this.data.listIndex == 2) {
+        this.seesSort();
+      }
+      else if (this.data.listIndex == 3) {
+        this.likesSort();
+      }
+    }   
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+
   }
 })

@@ -43,6 +43,15 @@ Page({
   //回复评论
   uploadChat() {
     let that = this;
+    if (!wx.getStorageSync('openid')) {
+      $wuxToptips().error({
+        hidden: true,
+        text: '请先授权',
+        duration: 2500,
+        success() { },
+      })
+      return;
+    }
 
     if (this.data.chatData == '') {
       wx.showToast({
@@ -60,32 +69,6 @@ Page({
         time: thisTime,
         follow: []
       }
-      const db = wx.cloud.database();
-      const _ = db.command;
-      console.log(_)
-
-      // db.collection('travel').doc(this.data.travelId).update({
-      //   data: {
-      //     data: {
-      //       chat: _.push(val)
-      //     }
-      //   },
-      //   success(res) {
-      //     console.log(res);
-      //     wx.showToast({
-      //       title: '评论成功'
-      //     })
-      //     that.setData({
-      //       chatData: ''
-      //     });
-      //     that.initData(that.data.travelId);
-      //     that.initUser();
-      //   },
-      //   fail(res) {
-      //     console.log(res)
-      //   }
-      // })
-
 
       wx.cloud.callFunction({
         name: 'uploadChat',
@@ -113,6 +96,12 @@ Page({
       })
     }
 
+  },
+  //楼中楼
+  chattochat() {
+    wx.showToast({
+      title: '即将开放',
+    })
   },
   //查看标题大图
   showBgImg() {
@@ -174,8 +163,15 @@ Page({
 
   },
   addLike: util.throttle(function(e) {
-    // console.log(e);
-    // let id = e.currentTarget.dataset.id;
+    if (!wx.getStorageSync('openid')) {
+      $wuxToptips().error({
+        hidden: true,
+        text: '请先授权',
+        duration: 2500,
+        success() { },
+      })
+      return;
+    }
     let index = 0;
     let copy = this.data.userData.likeArr;
     let copy1 = this.data.travelObj;
@@ -411,7 +407,13 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {},
+  onShow: function() {
+    // let db = wx.cloud.database();
+    // let _ = db.command;
+    // db.collection('travel').doc(this.data.travelId).where({
+
+    // })
+  },
 
   /**
    * 生命周期函数--监听页面隐藏

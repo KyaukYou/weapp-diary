@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "上传旅行日记",
+  "navigationBarTitleText": "",
   "usingComponents": {
     "van-field": "../../module/field/index",
     "van-cell": "../../module/cell/index",
@@ -13,6 +13,8 @@
     "wux-upload": "../../dist/upload/index",
     "wux-wing-blank": "../../dist/wing-blank/index",
     "wux-switch": "../../dist/switch/index",
-    "wux-toast": "../../dist/toast/index"
+    "wux-toast": "../../dist/toast/index",
+    "wux-notice-bar": "../../dist/notice-bar/index",
+    "wux-toptips": "../../dist/toptips/index"
   }
 }

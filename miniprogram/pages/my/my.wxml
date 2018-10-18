@@ -18,12 +18,12 @@
     </view>
   </view>
   <view class='my-info'>
-    <view class='my-info-child' catchtap='toMyTravel'>
+    <view class='my-info-child' bindtap='toMyTravel'>
       <view class='my-info-one'>我的旅行</view>
       <view class='my-info-two'>{{travelNum}}</view>
     </view>
     <view class='my-info-border'></view>
-    <view class='my-info-child'>
+    <view class='my-info-child' bindtap='toMyStar'>
       <view class='my-info-one'>我的收藏</view>
       <view class='my-info-two'>{{starNum}}</view>
     </view>
@@ -40,9 +40,9 @@
   </view>
 
   <wux-cell-group>
-    <wux-cell title="个人中心" is-link></wux-cell>
+    <wux-cell title="个人中心" bindtap='toInfo' is-link></wux-cell>
     <wux-cell title="BUG提交" is-link bindtap='tobug'></wux-cell>
-    <wux-cell title="版本号" is-link extra="beta0.0.017"></wux-cell>
+    <wux-cell title="版本号" is-link extra="0.0.018"></wux-cell>
   </wux-cell-group>
 
 </view>

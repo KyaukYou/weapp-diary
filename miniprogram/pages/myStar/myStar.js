@@ -23,7 +23,7 @@ Page({
     console.log(e)
 
     wx.navigateTo({
-      url: '../editTravel/editTravel?id=' + id,
+      url: '../travelDetail/travelDetail?id=' + id,
     })
   },
 
@@ -140,7 +140,7 @@ Page({
           }
         }
       })
-    } 
+    }
     else {
       wx.showModal({
         title: '是否解锁',
@@ -202,38 +202,9 @@ Page({
     var that = this;
     wx.showLoading({
       mask: true,
-      title: '正在加载',
+      title: '正在加载'
     })
-    let db = wx.cloud.database();
-    let openid = wx.getStorageSync('openid');
-
-    let userData1 = db.collection('travel').where({
-      _openid: openid
-    }).get();
-
-    var mydata;
-    Promise.resolve(userData1).then(function (res) {
-      mydata = res.data
-      console.log(res.data[0]);
-
-      var aa = [];
-      for(var i=0 ;i<mydata.length; i++) {
-        aa.unshift(mydata[i])
-      }
-
-      that.setData({
-        travelList: aa
-      })
-      wx.stopPullDownRefresh();
-      let timer1 = null;
-      clearInterval(timer1);
-      timer1 = setInterval(function () {
-        if (app.globalData.login) {
-          that.initUser();
-          clearInterval(timer1);
-        }
-      }, 200)
-    })
+    that.getStarData();
   },
   initUser() {
     let that = this;
@@ -276,33 +247,49 @@ Page({
    */
   onPullDownRefresh: function () {
     var that = this;
+    that.getStarData();
+  },
+  getStarData(){
+    let that  = this;
     let db = wx.cloud.database();
     let openid = wx.getStorageSync('openid');
 
-    let userData1 = db.collection('travel').where({
+    let userData1 = db.collection('users').where({
       _openid: openid
     }).get();
 
     var mydata;
     Promise.resolve(userData1).then(function (res) {
-      mydata = res.data
-      var aa = [];
-      for (var i = 0; i < mydata.length; i++) {
-        aa.unshift(mydata[i])
-      }
+      mydata = res.data[0].starArr
+      console.log(mydata);
 
-      that.setData({
-        travelList: aa
-      })
-      wx.stopPullDownRefresh();
-      let timer1 = null;
-      clearInterval(timer1);
-      timer1 = setInterval(function () {
-        if (app.globalData.login) {
-          that.initUser();
+      wx.cloud.callFunction({
+        name: 'getTravel',
+        success(res) {
+          console.log(res.result.data);
+          let a = [];
+          for (var i = 0; i < mydata.length; i++) {
+            res.result.data.filter(function (item, index) {
+              if (mydata[i] == item['_id']) {
+                a.push(item)
+              }
+            })
+          }
+          console.log(a);
+          that.setData({
+            travelList: a
+          })
+          wx.stopPullDownRefresh();
+          let timer1 = null;
           clearInterval(timer1);
+          timer1 = setInterval(function () {
+            if (app.globalData.login) {
+              that.initUser();
+              clearInterval(timer1);
+            }
+          }, 200)
         }
-      }, 200)
+      })
     })
   },
 
