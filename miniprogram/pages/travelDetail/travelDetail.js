@@ -14,7 +14,8 @@ Page({
     travelId: '',
     userData: '',
     likeArr: [],
-    chatData: ''
+    chatData: '',
+    chatBol: true
   },
   //获取当前时间
   getThisTime() {
@@ -59,6 +60,10 @@ Page({
         title: '请输入内容',
       })
     } else {
+      wx.showLoading({
+        mask: true,
+        title: '正在评论',
+      })
       let info = wx.getStorageSync('userInfo');
       let thisTime = this.getThisTime();
 
@@ -78,6 +83,7 @@ Page({
         },
         success(res) {
           console.log(res)
+          wx.hideLoading();
           wx.showToast({
             title: '评论成功'
           })
@@ -344,6 +350,9 @@ Page({
       },
       success(res) {
         console.log(res)
+        that.setData({
+          chatBol: false
+        })
       },
       complete(res) {
         that.initData(myid);
@@ -363,7 +372,7 @@ Page({
 
     var a = Promise.resolve(travelData).then(function(res) {
       mydata = res.data[0]
-      // console.log(mydata, res.data);
+      console.log(mydata);
       that.setData({
         travelObj: mydata
       })
@@ -372,8 +381,6 @@ Page({
       })
       wx.hideLoading();
     })
-
-
   },
   initUser() {
     let that = this;

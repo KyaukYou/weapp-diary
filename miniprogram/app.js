@@ -130,6 +130,7 @@ App({
   globalData: {
     openid: '',
     userInfo: {},
-    login: false
+    login: false,
+    version: '0.1019.02'
   }
 })

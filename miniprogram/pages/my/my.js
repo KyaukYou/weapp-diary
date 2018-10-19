@@ -11,6 +11,7 @@ Page({
     travelNum: 0,
     starNum: 0,
     fans: 0,
+    version: ''
   },
   toInfo() {
     wx.showToast({
@@ -162,10 +163,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
-
     this.getTravelNum();
     this.getStarNum();
+    this.setData({
+      version: app.globalData.version
+    })
   },
 
   /**

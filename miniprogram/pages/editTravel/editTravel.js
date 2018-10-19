@@ -87,6 +87,10 @@ Page({
         title: '请输入内容',
       })
     } else {
+      wx.showLoading({
+        mask: true,
+        title: '正在评论',
+      })
       let info = wx.getStorageSync('userInfo');
       let thisTime = this.getThisTime();
 
@@ -106,6 +110,7 @@ Page({
         },
         success(res) {
           console.log(res)
+          wx.hideLoading();
           wx.showToast({
             title: '评论成功'
           })
@@ -724,7 +729,7 @@ Page({
               aa = aa.slice(11);
               // console.log(aa)
 
-              // let openid = wx.getStorageSync('openid');
+              let openid = wx.getStorageSync('openid');
               // var str = that.data.uploadObj.title.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, ""); 
               let timeStr = new Date(that.data.uploadObj.createTime).getTime();
 
@@ -927,7 +932,28 @@ Page({
       })
     })  
   },
+  initData(id) {
+    let that = this;
+    let db = wx.cloud.database();
+    // let _ = db.command;
+    let travelData = db.collection('travel').where({
+      _id: id
+    }).get();
 
+    var mydata;
+
+    var a = Promise.resolve(travelData).then(function (res) {
+      mydata = res.data[0]
+      console.log(mydata);
+      that.setData({
+        travelObj: mydata
+      })
+      wx.setNavigationBarTitle({
+        title: that.data.travelObj.data.title
+      })
+      wx.hideLoading();
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -936,41 +962,44 @@ Page({
     let id = options.id;
     let db = wx.cloud.database();
     let openid = wx.getStorageSync('openid');
-
+    // this.initData(id);  
     let userData1 = db.collection('travel').where({
       _id: id
     }).get();
 
     var mydata;
     Promise.resolve(userData1).then(function (res) {
-      mydata = res.data[0].data;
-      // console.log(res.data[0]);
-      let copy = mydata.list;
+      // console.log(res)
+      mydata = res.data[0];
+      // console.log(mydata);
+      var copy = [];
+      for(var ii=0; ii<mydata.data.list.length; ii++) {
+        copy.push(mydata.data.list[ii])
+      }
+      console.log(mydata)
+      console.log(copy)
       
       for (var c = 0; c < copy.length; c++) {
         copy[c].trueImgs = [];
       }
 
       for(var i=0; i<copy.length; i++) {
-        // let bbb = copy[i].imgs;
         for(var j=0; j<copy[i].imgs.length; j++) {
-          
           copy[i].trueImgs.push(copy[i].imgs[j]);
         }
-        
       }
-      // console.log(copy)
-      mydata.list = copy;
-      console.log(mydata)
+      console.log(copy)
+      mydata['data'].list = copy;
+      console.log(mydata['data'])
       that.setData({
         travelId: id,
-        title: mydata.title,
-        where: mydata.where,
-        beginDate: mydata.sDate,
-        endDate: mydata.eDate,
-        day: mydata.day,
-        headerImgArr: [mydata.headerImg],
-        uploadObj: mydata
+        title: mydata.data.title,
+        where: mydata.data.where,
+        beginDate: mydata.data.sDate,
+        endDate: mydata.data.eDate,
+        day: mydata.data.day,
+        headerImgArr: [mydata.data.headerImg],
+        uploadObj: mydata['data']
       })
       that.changeDate();
       wx.setNavigationBarTitle({

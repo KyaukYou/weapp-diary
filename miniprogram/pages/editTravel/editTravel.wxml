@@ -113,11 +113,11 @@
   <view class='chat'>
     <view class='chat-header'>
       <wux-icon type='md-text' size='26' />
-      <view class='chat-header-text'>评论列表 共{{travelObj.data.chat.length}}条评论</view>
+      <view class='chat-header-text'>评论列表 共{{uploadObj.chat.length}}条评论</view>
     </view>
     <view class='chat-container'>
-      <view class='chat-wrap' wx:if='{{travelObj.data.chat.length == 0 ? false : true}}'>
-        <view class='chat-wrap-lists' wx:for='{{travelObj.data.chat}}' wx:key>
+      <view class='chat-wrap' wx:if='{{uploadObj.chat.length == 0 ? false : true}}'>
+        <view class='chat-wrap-lists' wx:for='{{uploadObj.chat}}' wx:key>
           <view class='chat-wrap-list'>
             <view class='chat-wrap-avatar'>
               <image src='{{item.avatar}}'></image>
@@ -144,7 +144,7 @@
           </view>
         </view>
       </view>
-      <view class='chat-nowrap' wx:if='{{travelObj.data.chat.length == 0 ? true : false}}'>
+      <view class='chat-nowrap' wx:if='{{uploadObj.chat.length == 0 ? true : false}}'>
         一条评论也没有呀~
       </view>
     </view>
