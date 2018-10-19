@@ -492,6 +492,7 @@ Page({
     var eDate = this.data.endDate;
     var hImg = this.data.headerImgArr;
     var that = this;
+    // console.log(sDate)
     // console.log(title,where,sDate,eDate)
 
     if (title == '' || where == '' || sDate.length == 0 || eDate.length == 0 || hImg.length == 0) {
@@ -508,15 +509,6 @@ Page({
       })
 
     }else {
-      let o = wx.getStorageSync('openid');
-      let t = that.data.title;
-
-      let d = 'travel/'+o+'/'+ t
-      // console.log(d)
-
-      // wx.cloud.deleteFile({
-      //   fileList: fileIDs,
-      // })
 
       let date = new Date();
       let year = date.getFullYear();
@@ -543,11 +535,11 @@ Page({
       copy.day = that.data.day;
       copy.headerImgArr = that.data.headerImgArr;
       copy.userInfo = wx.getStorageSync('userInfo');
-
+      // console.log(sDate)
       that.setData({
         uploadObj: copy
       })
-
+      // console.log(that.data.uploadObj)
       //上传到数据库
       // 图片上传
       //users数据库添加id
@@ -666,7 +658,7 @@ Page({
           data: {
             title: that.data.uploadObj.title,
             where: that.data.uploadObj.where,
-            sDate: that.data.uploadObj.Sdate,
+            sDate: that.data.uploadObj.sDate,
             eDate: that.data.uploadObj.eDate,
             createTime: that.data.uploadObj.createTime,
             headerImgArr: that.data.uploadObj.headerImgArr,
@@ -856,7 +848,7 @@ Page({
           data: {
             title: that.data.uploadObj.title,
             where: that.data.uploadObj.where,
-            sDate: that.data.uploadObj.Sdate,
+            sDate: that.data.uploadObj.sDate,
             eDate: that.data.uploadObj.eDate,
             createTime: that.data.uploadObj.createTime,
             headerImgArr: that.data.uploadObj.headerImgArr,
@@ -932,28 +924,6 @@ Page({
       })
     })  
   },
-  initData(id) {
-    let that = this;
-    let db = wx.cloud.database();
-    // let _ = db.command;
-    let travelData = db.collection('travel').where({
-      _id: id
-    }).get();
-
-    var mydata;
-
-    var a = Promise.resolve(travelData).then(function (res) {
-      mydata = res.data[0]
-      console.log(mydata);
-      that.setData({
-        travelObj: mydata
-      })
-      wx.setNavigationBarTitle({
-        title: that.data.travelObj.data.title
-      })
-      wx.hideLoading();
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -962,22 +932,19 @@ Page({
     let id = options.id;
     let db = wx.cloud.database();
     let openid = wx.getStorageSync('openid');
-    // this.initData(id);  
-    let userData1 = db.collection('travel').where({
-      _id: id
-    }).get();
+    let userData1 = db.collection('travel').doc(id).get();
 
     var mydata;
     Promise.resolve(userData1).then(function (res) {
-      // console.log(res)
-      mydata = res.data[0];
-      // console.log(mydata);
+      console.log(res)
+      mydata = res.data;
+      console.log(mydata);
       var copy = [];
       for(var ii=0; ii<mydata.data.list.length; ii++) {
         copy.push(mydata.data.list[ii])
       }
-      console.log(mydata)
-      console.log(copy)
+      // console.log(mydata)
+      // console.log(copy)
       
       for (var c = 0; c < copy.length; c++) {
         copy[c].trueImgs = [];
@@ -988,9 +955,9 @@ Page({
           copy[i].trueImgs.push(copy[i].imgs[j]);
         }
       }
-      console.log(copy)
+      // console.log(copy)
       mydata['data'].list = copy;
-      console.log(mydata['data'])
+      // console.log(mydata['data'])
       that.setData({
         travelId: id,
         title: mydata.data.title,
