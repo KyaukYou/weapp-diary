@@ -40,7 +40,7 @@
   </view>
 
   <wux-cell-group>
-    <wux-cell title="个人中心" bindtap='toInfo' is-link></wux-cell>
+    <!-- <wux-cell title="个人中心" bindtap='toInfo' is-link></wux-cell> -->
     <wux-cell title="BUG提交" is-link bindtap='tobug'></wux-cell>
     <wux-cell title="版本号" is-link extra="{{version}}"></wux-cell>
   </wux-cell-group>

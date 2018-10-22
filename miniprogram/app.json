@@ -42,12 +42,6 @@
         "text": "主页"
       },
       {
-        "pagePath": "pages/go/go",
-        "iconPath": "images/discover.png",
-        "selectedIconPath": "images/discover (1).png",
-        "text": "发现"
-      },
-      {
         "pagePath": "pages/my/my",
         "iconPath": "images/my_light.png",
         "selectedIconPath": "images/my_light (1).png",

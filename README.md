@@ -107,3 +107,12 @@
 + 2018.10.20
   - 例行更新  
   - 维护中
+
++ 2018.10.22
+  - 暂时删除发现页面
+      {
+        "pagePath": "pages/go/go",
+        "iconPath": "images/discover.png",
+        "selectedIconPath": "images/discover (1).png",
+        "text": "发现"
+      },
