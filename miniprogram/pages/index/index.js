@@ -752,6 +752,12 @@ Page({
   onLoad: function (options) {
     var that = this;
     that.getInit();
+
+    let db = wx.cloud.database();
+    db.collection('control').doc('W87jRg6qgQy38jbV').get().then(res => {
+      console.log(res.data)
+    })
+
   },
 
   /**
