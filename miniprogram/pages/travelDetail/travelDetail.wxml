@@ -66,19 +66,21 @@
               <text>{{item.name}}</text> <text class='chat-wrap-time'>{{item.time}}</text> 
             </view>
             <view class='chat-wrap-center'>
-              {{item.text}} <view style='display: inline-block' class='chat-wrap-huifu' bindtap='chattochat' hover-class='huifuHover'>回复</view>
+              {{item.text}} <view style='display: inline-block' class='chat-wrap-huifu' bindtap='chattochat' hover-class='huifuHover' data-name='{{item.name}}' data-index='{{index}}'>回复</view>
             </view>
 
             <!-- 楼中楼 -->
-            <view class='chat-wrap-child' wx:for='{{item.follow}}' wx:for-index='{{fIndex}}' wx:for-item='{{fItem}}' wx:key>
+            <view class='chat-wrap-child' wx:if='{{sItem.index == index ? true : false}}' wx:for='{{travelObj.data.chats}}' wx:for-index='sIndex' wx:for-item='sItem' wx:key>
               <view class='chat-wrap-avatar chat-wrap-avatar1'>
-                <image src='{{fItem.avatar}}'></image>
+                <image src='{{sItem.avatar}}'></image>
               </view>
               <view class='chat-wrap-top'>
-                <text>{{fItem.name}}</text> {{fItem.time}}
+                <text>{{sItem.name}}</text>  <text class='chat-wrap-time'>{{sItem.time}}</text>
               </view>
               <view class='chat-wrap-center'>
-                {{fItem.text}}
+                回复:{{sItem.chatName}}: 
+                {{sItem.text}}
+                <view style='display: inline-block' class='chat-wrap-huifu' bindtap='chattochat' hover-class='huifuHover' data-name='{{item.name}}' data-index='{{index}}'>回复</view>
               </view>
             </view>
           </view>
@@ -94,12 +96,13 @@
         <view class='chat-write-header-text'>发表评论</view>
       </view>
       <view class='chat-write-textarea'>
-        <textarea maxlength='100' value='{{chatData}}' placeholder='留下你的评论呀~' bindinput='getChat'>
+        <textarea cursor-spacing='120' maxlength='100' value='{{chatData}}' placeholder='{{pText}}' bindinput='getChat'>
 
           <view class='chat-write-footer'>
             <view class='chat-write-num'>{{chatData.length}}/100</view>
+            <wux-button block size='small' class='chat-write-header-btn' type="light" bindtap='cancelChats'>取消</wux-button>
             <view class='chat-write-btn'>
-              <wux-button block size='small' type="calm" bindtap='uploadChat'>回复</wux-button>
+              <wux-button block size='small'  type="calm" bindtap='uploadChat'>提交</wux-button>
             </view>
           </view>
         </textarea>

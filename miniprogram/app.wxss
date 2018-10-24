@@ -118,6 +118,7 @@ page {
   justify-content: center;
   align-items: center;
   color: #35c1f8;
+  position: relative;
 }
 
 .chat-write-header-text {
@@ -175,6 +176,7 @@ page {
   height: 100%;
   box-sizing: border-box;
   padding-right: 10rpx;
+  position: relative;
   /* display: flex; */
 }
 
@@ -192,6 +194,7 @@ page {
   width: 96%;
   height: auto;
   margin: 10rpx auto;
+  margin-bottom: 18rpx;
 }
 
 .chat-wrap-list {
@@ -237,7 +240,7 @@ page {
 
 .chat-wrap-center {
   width: 100%;
-  min-height: 100rpx;
+  /* min-height: 100rpx; */
   height: auto;
   box-sizing: border-box;
   /* border: 1rpx solid gray; */
@@ -245,6 +248,7 @@ page {
   font-size: 26rpx;
   line-height: 40rpx;
   color: rgb(155, 155, 155);
+  margin-bottom: 10rpx;
 }
 
 .chat-wrap-child {
@@ -273,4 +277,10 @@ page {
   font-size: 24rpx;
   color: #35c1f8;
   margin-left: 10rpx;
+}
+
+.chat-write-header-btn {
+  /* display: inline-block; */
+  position: absolute;
+  left: 20%;
 }

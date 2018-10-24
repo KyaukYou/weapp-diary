@@ -15,7 +15,11 @@ Page({
     userData: '',
     likeArr: [],
     chatData: '',
-    chatBol: true
+    chatBol: true,
+    pText: '留下你的评论呀~',
+    chatsBol: false,
+    chatsIndex: 0,
+    chatsName: ''
   },
   //获取当前时间
   getThisTime() {
@@ -59,7 +63,8 @@ Page({
         image: '../../images/error.png',
         title: '请输入内容',
       })
-    } else {
+    } 
+    else {
       wx.showLoading({
         mask: true,
         title: '正在评论',
@@ -67,46 +72,103 @@ Page({
       let info = wx.getStorageSync('userInfo');
       let thisTime = this.getThisTime();
 
-      let val = {
-        name: info.nickName,
-        avatar: info.avatarUrl,
-        text: this.data.chatData,
-        time: thisTime,
-        follow: []
-      }
-
-      wx.cloud.callFunction({
-        name: 'uploadChat',
-        data: {
-          id: that.data.travelId,
-          val: val
-        },
-        success(res) {
-          console.log(res)
-          wx.hideLoading();
-          wx.showToast({
-            title: '评论成功'
-          })
-          that.setData({
-            chatData: ''
-          })
-        },
-        fail(res) {
-          console.log(res)
-        },
-        complete(res) {
-          console.log(res);
-          that.initData(that.data.travelId);
-          that.initUser();
+      //楼中楼
+      if(this.data.chatsBol) {
+        let val = {
+          index: this.data.chatsIndex,
+          name: info.nickName,
+          avatar: info.avatarUrl,
+          text: this.data.chatData,
+          time: thisTime,
+          chatName: this.data.chatsName
         }
-      })
+        wx.cloud.callFunction({
+          name: 'uploadChats',
+          data: {
+            id: that.data.travelId,
+            val: val
+          },
+          success(res) {
+            console.log(res)
+            wx.hideLoading();
+            wx.showToast({
+              title: '评论成功'
+            })
+            that.setData({
+              chatData: ''
+            })
+          },
+          fail(res) {
+            console.log(res)
+          },
+          complete(res) {
+            console.log(res);
+            that.initData(that.data.travelId);
+            that.initUser();
+          }
+        })    
+      }
+      //正常评论
+      else {
+        let val = {
+          name: info.nickName,
+          avatar: info.avatarUrl,
+          text: this.data.chatData,
+          time: thisTime,
+          follow: []
+        }
+
+        wx.cloud.callFunction({
+          name: 'uploadChat',
+          data: {
+            id: that.data.travelId,
+            val: val
+          },
+          success(res) {
+            console.log(res)
+            wx.hideLoading();
+            wx.showToast({
+              title: '评论成功'
+            })
+            that.setData({
+              chatData: ''
+            })
+          },
+          fail(res) {
+            console.log(res)
+          },
+          complete(res) {
+            console.log(res);
+            that.initData(that.data.travelId);
+            that.initUser();
+          }
+        })        
+      }
     }
 
   },
   //楼中楼
-  chattochat() {
-    wx.showToast({
-      title: '即将开放',
+  chattochat(e) {
+    // wx.showToast({
+    //   title: '即将开放',
+    // })
+    let index = e.currentTarget.dataset.index;
+    let name = e.currentTarget.dataset.name;
+    this.setData({
+      chatsIndex: index,
+      chatsName: name,
+      chatData: '',
+      pText: '回复：'+ name,
+      chatsBol: true
+    })
+
+  },
+  //取消楼中楼
+  cancelChats() {
+    this.setData({
+      chatData: '',
+      pText: '留下你的评论呀~',
+      chatsBol: false
     })
   },
   //查看标题大图
@@ -339,14 +401,16 @@ Page({
     })
     let that = this;
 
-    let myid = options.id;
+    // let myid = options.id;
     this.setData({
-      travelId: myid
+      // travelId: myid
+      travelId: 'W8nS5Z25dhqgTLLt'
     })
     wx.cloud.callFunction({
       name: 'uploadSee',
       data: {
-        id: myid
+        // id: myid
+        id: 'W8nS5Z25dhqgTLLt'
       },
       success(res) {
         console.log(res)
@@ -355,7 +419,8 @@ Page({
         })
       },
       complete(res) {
-        that.initData(myid);
+        // that.initData(myid);
+        that.initData('W8nS5Z25dhqgTLLt')
         that.initUser();
       }
     })

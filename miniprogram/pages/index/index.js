@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showAdd: 'none',
     page: 0,
     limit: 5,
     travelAll: [],
@@ -755,7 +756,10 @@ Page({
 
     let db = wx.cloud.database();
     db.collection('control').doc('W87jRg6qgQy38jbV').get().then(res => {
-      console.log(res.data)
+      console.log(res.data.showAdd.showAdd)
+      this.setData({
+        showAdd: res.data.showAdd.showAdd
+      })
     })
 
   },

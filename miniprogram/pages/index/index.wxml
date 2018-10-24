@@ -60,6 +60,6 @@
   </view>
   <!-- </view> -->
 
-  <wux-floating-button actionRotate='{{rotateBol}}' position="bottomRight" theme="calm" bind:change="addTravel" bind:click="addTravel" />
+  <wux-floating-button actionRotate='{{rotateBol}}' position="bottomRight" theme="calm" bind:change="addTravel" bind:click="addTravel" style='display: {{showAdd}}' />
   <!-- </scroll-view> -->
 </view>
