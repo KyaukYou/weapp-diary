@@ -51,7 +51,12 @@ Page({
         // },
       ]
     },
-    chatData: ''
+    chatData: '',
+    chatBol: false,
+    pText: '留下你的评论呀~',
+    chatsBol: false,
+    chatsIndex: 0,
+    chatsName: ''    
   },
   //获取当前时间
   getThisTime() {
@@ -80,13 +85,23 @@ Page({
   //回复评论
   uploadChat() {
     let that = this;
+    if (!wx.getStorageSync('openid')) {
+      $wuxToptips().error({
+        hidden: true,
+        text: '请先授权',
+        duration: 2500,
+        success() { },
+      })
+      return;
+    }
 
     if (this.data.chatData == '') {
       wx.showToast({
         image: '../../images/error.png',
         title: '请输入内容',
       })
-    } else {
+    }
+    else {
       wx.showLoading({
         mask: true,
         title: '正在评论',
@@ -94,46 +109,105 @@ Page({
       let info = wx.getStorageSync('userInfo');
       let thisTime = this.getThisTime();
 
-      let val = {
-        name: info.nickName,
-        avatar: info.avatarUrl,
-        text: this.data.chatData,
-        time: thisTime,
-        follow: []
-      }
-
-      wx.cloud.callFunction({
-        name: 'uploadChat',
-        data: {
-          id: that.data.travelId,
-          val: val
-        },
-        success(res) {
-          console.log(res)
-          wx.hideLoading();
-          wx.showToast({
-            title: '评论成功'
-          })
-          that.setData({
-            chatData: ''
-          })
-        },
-        fail(res) {
-          console.log(res)
-        },
-        complete(res) {
-          console.log(res);
-          that.initData(that.data.travelId);
-          that.initUser();
+      //楼中楼
+      if (this.data.chatsBol) {
+        let val = {
+          index: this.data.chatsIndex,
+          name: info.nickName,
+          avatar: info.avatarUrl,
+          text: this.data.chatData,
+          time: thisTime,
+          chatName: this.data.chatsName
         }
-      })
+        wx.cloud.callFunction({
+          name: 'uploadChats',
+          data: {
+            id: that.data.travelId,
+            val: val
+          },
+          success(res) {
+            console.log(res)
+            wx.hideLoading();
+            wx.showToast({
+              title: '评论成功'
+            })
+            that.setData({
+              chatData: ''
+            })
+          },
+          fail(res) {
+            console.log(res)
+          },
+          complete(res) {
+            // console.log(res);
+            // that.initData(that.data.travelId);
+            // that.initUser();
+            that.getAllData(that.data.travelId)
+          }
+        })
+      }
+      //正常评论
+      else {
+        let val = {
+          name: info.nickName,
+          avatar: info.avatarUrl,
+          text: this.data.chatData,
+          time: thisTime,
+          follow: []
+        }
+
+        wx.cloud.callFunction({
+          name: 'uploadChat',
+          data: {
+            id: that.data.travelId,
+            val: val
+          },
+          success(res) {
+            console.log(res)
+            wx.hideLoading();
+            wx.showToast({
+              title: '评论成功'
+            })
+            that.setData({
+              chatData: ''
+            })
+          },
+          fail(res) {
+            console.log(res)
+          },
+          complete(res) {
+            // console.log(res);
+            // that.initData(that.data.travelId);
+            // that.initUser();
+            that.getAllData(that.data.travelId)
+          }
+        })
+      }
     }
 
   },
   //楼中楼
-  chattochat() {
-    wx.showToast({
-      title: '即将开放',
+  chattochat(e) {
+    // wx.showToast({
+    //   title: '即将开放',
+    // })
+    let index = e.currentTarget.dataset.index;
+    let name = e.currentTarget.dataset.name;
+    this.setData({
+      chatsIndex: index,
+      chatsName: name,
+      chatData: '',
+      pText: '回复：' + name,
+      chatsBol: true
+    })
+
+  },
+  //取消楼中楼
+  cancelChats() {
+    this.setData({
+      chatData: '',
+      pText: '留下你的评论呀~',
+      chatsBol: false
     })
   },
   changeLock(e) {
@@ -930,6 +1004,10 @@ Page({
   onLoad: function(options) {
     var that = this;
     let id = options.id;
+    this.getAllData(id)
+  },
+  getAllData(id) {
+    let that = this;
     let db = wx.cloud.database();
     let openid = wx.getStorageSync('openid');
     let userData1 = db.collection('travel').doc(id).get();
@@ -940,18 +1018,18 @@ Page({
       mydata = res.data;
       console.log(mydata);
       var copy = [];
-      for(var ii=0; ii<mydata.data.list.length; ii++) {
+      for (var ii = 0; ii < mydata.data.list.length; ii++) {
         copy.push(mydata.data.list[ii])
       }
       // console.log(mydata)
       // console.log(copy)
-      
+
       for (var c = 0; c < copy.length; c++) {
         copy[c].trueImgs = [];
       }
 
-      for(var i=0; i<copy.length; i++) {
-        for(var j=0; j<copy[i].imgs.length; j++) {
+      for (var i = 0; i < copy.length; i++) {
+        for (var j = 0; j < copy[i].imgs.length; j++) {
           copy[i].trueImgs.push(copy[i].imgs[j]);
         }
       }
@@ -970,7 +1048,7 @@ Page({
       })
       that.changeDate();
       wx.setNavigationBarTitle({
-        title: '编辑'+that.data.uploadObj.title
+        title: '编辑' + that.data.uploadObj.title
       })
     })
   },

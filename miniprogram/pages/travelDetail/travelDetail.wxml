@@ -53,7 +53,7 @@
   <view class='chat' hidden='{{chatBol}}'>
     <view class='chat-header'>
       <wux-icon type='md-text' size='26' />
-      <view class='chat-header-text'>评论列表 共{{travelObj.data.chat.length}}条评论</view>
+      <view class='chat-header-text'>评论列表 共{{travelObj.data.chat.length-0 + travelObj.data.chats.length-0}}条评论</view>
     </view>
     <view class='chat-container'>
       <view class='chat-wrap' wx:if='{{travelObj.data.chat.length == 0 ? false : true}}'>
@@ -74,13 +74,13 @@
               <view class='chat-wrap-avatar chat-wrap-avatar1'>
                 <image src='{{sItem.avatar}}'></image>
               </view>
-              <view class='chat-wrap-top'>
+              <view class='chat-wrap-top chat-wrap-top1'>
                 <text>{{sItem.name}}</text>  <text class='chat-wrap-time'>{{sItem.time}}</text>
               </view>
-              <view class='chat-wrap-center'>
-                回复:{{sItem.chatName}}: 
+              <view class='chat-wrap-center chat-wrap-center1'>
+                回复 <text class='chat-wrap-center-ctoc'>{{sItem.chatName}}：</text>
                 {{sItem.text}}
-                <view style='display: inline-block' class='chat-wrap-huifu' bindtap='chattochat' hover-class='huifuHover' data-name='{{item.name}}' data-index='{{index}}'>回复</view>
+                <view style='display: inline-block' class='chat-wrap-huifu' bindtap='chattochat' hover-class='huifuHover' data-name='{{sItem.name}}' data-index='{{index}}'>回复</view>
               </view>
             </view>
           </view>

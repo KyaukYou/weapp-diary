@@ -9,7 +9,7 @@
 
   <view class='add-one'>
     <van-cell-group>
-      <van-field  maxlength='20' value="{{ title }}" type="text" clearable label="旅行标题" placeholder="请输入旅行标题(20字以内)"  border="false" bind:input='addTitle' />
+      <van-field maxlength='20' value="{{ title }}" type="text" clearable label="旅行标题" placeholder="请输入旅行标题(20字以内)" border="false" bind:input='addTitle' />
       <view hover-class='addT-hover' class='add-one-add' bindtap='headerimg'>旅行封面
         <!-- <image wx:if="{{headerImgArr.length > 0 ? false : true}}" src='../../images/moren.jpg'>
         </image> -->
@@ -19,7 +19,7 @@
         <image slot="button" size="small" type="calm" bind:click='chooseWhere'>选择位置</image>
       </van-field> -->
 
-      <van-field value="{{ where }}" type='text' center clearable label="旅行位置" placeholder="请选择" border="false"  use-button-slot bind:input='addWhere'>
+      <van-field value="{{ where }}" type='text' center clearable label="旅行位置" placeholder="请选择" border="false" use-button-slot bind:input='addWhere'>
         <!-- <picker slot='button' return:false> -->
         <wux-button slot="button" size="small" type="calm" bind:click='chooseWhere'>选择位置</wux-button>
         <!-- </picker> -->
@@ -27,7 +27,7 @@
       </van-field>
 
 
-      <van-field value="{{ beginDate }}" type='text' disabled='false' center clearable label="旅行开始日期" placeholder="请选择" border="false"  use-button-slot>
+      <van-field value="{{ beginDate }}" type='text' disabled='false' center clearable label="旅行开始日期" placeholder="请选择" border="false" use-button-slot>
         <!-- <wux-button slot="button" size="small" type="calm" bind:click='chooseStart'>
           <picker mode = date>选择日期</picker>
         </wux-button> -->
@@ -38,7 +38,7 @@
         </picker>
       </van-field>
 
-      <van-field value="{{ endDate }}" type='text' disabled='false' center clearable label="旅行结束日期" placeholder="请选择" border="false"  use-button-slot>
+      <van-field value="{{ endDate }}" type='text' disabled='false' center clearable label="旅行结束日期" placeholder="请选择" border="false" use-button-slot>
         <!-- <wux-button slot="button" size="small" type="calm" bind:click='chooseEnd'>选择日期</wux-button> -->
         <picker hover-class='chooseBtn-hover' class='picker' slot='button' mode='date' bindchange='chooseEnd'>
           <wux-button size="small" type="calm">
@@ -47,7 +47,7 @@
         </picker>
       </van-field>
 
-      <van-field type='text' center disabled label="是否锁定" border="false"  use-button-slot >
+      <van-field type='text' center disabled label="是否锁定" border="false" use-button-slot>
         <!-- <picker slot='button' return:false> -->
         <van-switch slot='button' type='warning' id='lock-switch' class='lock-switch' checked="{{uploadObj.lock}}" size='28px' bind:change="changeLock" />
         <!-- </picker> -->
@@ -110,10 +110,10 @@
 
 
   <!-- 评论 -->
-  <view class='chat'>
+  <view class='chat' hidden='{{chatBol}}'>
     <view class='chat-header'>
       <wux-icon type='md-text' size='26' />
-      <view class='chat-header-text'>评论列表 共{{uploadObj.chat.length}}条评论</view>
+      <view class='chat-header-text'>评论列表 共{{uploadObj.chat.length + uploadObj.chats.length}}条评论</view>
     </view>
     <view class='chat-container'>
       <view class='chat-wrap' wx:if='{{uploadObj.chat.length == 0 ? false : true}}'>
@@ -123,22 +123,27 @@
               <image src='{{item.avatar}}'></image>
             </view>
             <view class='chat-wrap-top'>
-              <text>{{item.name}}</text> <text class='chat-wrap-time'>{{item.time}}</text> 
+              <text>{{item.name}}</text>
+              <text class='chat-wrap-time'>{{item.time}}</text>
             </view>
             <view class='chat-wrap-center'>
-              {{item.text}} <view style='display: inline-block' class='chat-wrap-huifu' bindtap='chattochat' hover-class='huifuHover'>回复</view>
+              {{item.text}}
+              <view style='display: inline-block' class='chat-wrap-huifu' bindtap='chattochat' hover-class='huifuHover' data-name='{{item.name}}' data-index='{{index}}'>回复</view>
             </view>
 
             <!-- 楼中楼 -->
-            <view class='chat-wrap-child' wx:for='{{item.follow}}' wx:for-index='{{fIndex}}' wx:for-item='{{fItem}}' wx:key>
+            <view class='chat-wrap-child' wx:if='{{sItem.index == index ? true : false}}' wx:for='{{uploadObj.chats}}' wx:for-index='sIndex' wx:for-item='sItem' wx:key>
               <view class='chat-wrap-avatar chat-wrap-avatar1'>
-                <image src='{{fItem.avatar}}'></image>
+                <image src='{{sItem.avatar}}'></image>
               </view>
-              <view class='chat-wrap-top'>
-                <text>{{fItem.name}}</text> {{fItem.time}}
+              <view class='chat-wrap-top chat-wrap-top1'>
+                <text>{{sItem.name}}</text>
+                <text class='chat-wrap-time'>{{sItem.time}}</text>
               </view>
-              <view class='chat-wrap-center'>
-                {{fItem.text}}
+              <view class='chat-wrap-center chat-wrap-center1'>
+                回复
+                <text class='chat-wrap-center-ctoc'>{{sItem.chatName}}：</text> {{sItem.text}}
+                <view style='display: inline-block' class='chat-wrap-huifu' bindtap='chattochat' hover-class='huifuHover' data-name='{{sItem.name}}' data-index='{{index}}'>回复</view>
               </view>
             </view>
           </view>
@@ -154,12 +159,13 @@
         <view class='chat-write-header-text'>发表评论</view>
       </view>
       <view class='chat-write-textarea'>
-        <textarea maxlength='100' value='{{chatData}}' placeholder='留下你的评论呀~' bindinput='getChat'>
+        <textarea cursor-spacing='120' maxlength='100' value='{{chatData}}' placeholder='{{pText}}' bindinput='getChat'>
 
           <view class='chat-write-footer'>
             <view class='chat-write-num'>{{chatData.length}}/100</view>
+            <wux-button block size='small' class='chat-write-header-btn' style='background-color: rgb(236,236,236)' type="stable" bindtap='cancelChats'>取消</wux-button>
             <view class='chat-write-btn'>
-              <wux-button block size='small' type="calm" bindtap='uploadChat'>回复</wux-button>
+              <wux-button block size='small' type="calm" bindtap='uploadChat'>提交</wux-button>
             </view>
           </view>
         </textarea>

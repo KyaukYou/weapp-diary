@@ -52,8 +52,8 @@
 .wux-button--block,
 .wux-button--full {
   width: 100%;
-  margin-top: 20rpx;
-  margin-bottom: 20rpx;
+  /* margin-top: 20rpx; */
+  /* margin-bottom: 20rpx; */
 }
 .wux-button--block {
   display: block;
@@ -97,7 +97,8 @@
 }
 .wux-button--stable {
   border-color: transparent;
-  background-color: #f8f8f8;
+  /* background-color: #f8f8f8; */
+  background-color: rgb(236, 236, 236);
   color: #fff;
 }
 .wux-button--stable.wux-button--outline {

@@ -184,7 +184,7 @@ page {
   width: 30%;
   height: 60rpx;
   margin: 0;
-  margin-top: 5rpx;
+  margin-top: 6rpx;
   float: right;
 }
 
@@ -212,7 +212,7 @@ page {
   overflow: hidden;
   position: absolute;
   left: 2rpx;
-
+  top: 4rpx;
 }
 
 .chat-wrap-avatar image {
@@ -230,6 +230,14 @@ page {
   line-height: 50rpx;
   font-weight: bold;
   color: rgb(155, 155, 155);
+}
+
+.chat-wrap-top1 {
+  padding-left:68rpx;
+}
+
+.chat-wrap-top1 text {
+  font-size: 24rpx;
 }
 
 .chat-wrap-top text {
@@ -251,6 +259,11 @@ page {
   margin-bottom: 10rpx;
 }
 
+.chat-wrap-center1 {
+  padding-left: 68rpx;
+  font-size: 24rpx;
+}
+
 .chat-wrap-child {
   width: 100%;
   height: auto;
@@ -258,16 +271,18 @@ page {
   /* border: 1rpx solid gray; */
   padding-left: 76rpx;
   position: relative;
-  margin-top: 4rpx;
+  margin-top: 14rpx;
 }
 
 .chat-wrap-avatar1 {
   left: 78rpx;
+  width: 56rpx;
+  height: 56rpx;
 }
 
 .chat-wrap-top .chat-wrap-time {
   float: right;
-  font-size: 22rpx;
+  font-size: 20rpx;
   font-weight: bold;
   color: rgb(155, 155, 155);
   transition: all .2s ease;
@@ -283,4 +298,8 @@ page {
   /* display: inline-block; */
   position: absolute;
   left: 20%;
+}
+
+.chat-wrap-center-ctoc {
+  color: orange;
 }

@@ -40,7 +40,8 @@ Page({
       day: 0,
       list: [
       ],
-      chat: []
+      chat: [],
+      chats: []
     }
   },
   changeLock(e) {

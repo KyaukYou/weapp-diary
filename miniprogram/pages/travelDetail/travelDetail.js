@@ -401,16 +401,16 @@ Page({
     })
     let that = this;
 
-    // let myid = options.id;
+    let myid = options.id;
     this.setData({
-      // travelId: myid
-      travelId: 'W8nS5Z25dhqgTLLt'
+      travelId: myid
+      // travelId: 'W8nS5Z25dhqgTLLt'
     })
     wx.cloud.callFunction({
       name: 'uploadSee',
       data: {
-        // id: myid
-        id: 'W8nS5Z25dhqgTLLt'
+        id: myid
+        // id: 'W8nS5Z25dhqgTLLt'
       },
       success(res) {
         console.log(res)
@@ -419,8 +419,8 @@ Page({
         })
       },
       complete(res) {
-        // that.initData(myid);
-        that.initData('W8nS5Z25dhqgTLLt')
+        that.initData(myid);
+        // that.initData('W8nS5Z25dhqgTLLt')
         that.initUser();
       }
     })
