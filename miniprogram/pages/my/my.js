@@ -11,7 +11,9 @@ Page({
     travelNum: 0,
     starNum: 0,
     fans: 0,
-    version: ''
+    version: '',
+    showAdd: 'none',
+    showStar: 'block'
   },
   toInfo() {
     wx.showToast({
@@ -150,6 +152,24 @@ Page({
    */
   onLoad: function (options) {
     this.getMyInfo();
+
+    let db = wx.cloud.database();
+    db.collection('control').doc('W87jRg6qgQy38jbV').get().then(res => {
+      console.log(res.data.showAdd.showAdd)
+      if (res.data.showAdd.showAdd == 'none') {
+        this.setData({
+          showAdd: res.data.showAdd.showAdd,
+          showStar: 'block'
+        })
+      }else {
+        this.setData({
+          showAdd: 'flex',
+          showStar: 'none'
+        })
+      }
+
+
+    })
   },
 
   /**

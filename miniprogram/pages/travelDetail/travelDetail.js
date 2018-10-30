@@ -19,7 +19,8 @@ Page({
     pText: '留下你的评论呀~',
     chatsBol: false,
     chatsIndex: 0,
-    chatsName: ''
+    chatsName: '',
+    showAdd: 'none'
   },
   //获取当前时间
   getThisTime() {
@@ -423,6 +424,14 @@ Page({
         // that.initData('W8nS5Z25dhqgTLLt')
         that.initUser();
       }
+    })
+
+    let db = wx.cloud.database();
+    db.collection('control').doc('W87jRg6qgQy38jbV').get().then(res => {
+      console.log(res.data.showAdd.showAdd)
+        this.setData({
+          showAdd: res.data.showAdd.showAdd,
+        })
     })
   },
   initData(myid) {

@@ -50,7 +50,7 @@
 
 
   <!-- 评论 -->
-  <view class='chat' hidden='{{chatBol}}'>
+  <view class='chat' style='display: {{showAdd}}'>
     <view class='chat-header'>
       <wux-icon type='md-text' size='26' />
       <view class='chat-header-text'>评论列表 共{{travelObj.data.chat.length-0 + travelObj.data.chats.length-0}}条评论</view>
