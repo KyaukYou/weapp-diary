@@ -30,6 +30,17 @@ Page({
       url: '../myStar/myStar',
     })
   },
+  toMyDetail() {
+    if (wx.getStorageSync('openid')) {
+      wx.navigateTo({
+        url: '../myInfo/myInfo',
+      })
+    } else {
+      wx.showToast({
+        title: '请先授权登录',
+      })
+    }
+  },
   // 获得旅行数量
   getTravelNum() {
     let that = this;

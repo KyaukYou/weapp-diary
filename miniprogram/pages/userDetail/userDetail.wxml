@@ -1,0 +1,18 @@
+<view class='page'>
+  <view class='detail-top'>
+    <view class='detail-img'>
+      <image src='{{userInfo.avatarUrl}}'></image>
+    </view>
+    <view class='detail-name'>
+      {{userInfo.nickName}}
+    </view>
+    <view class='detail-info'>
+      {{watch.length}}关注 {{fans.length}}粉丝
+    </view>
+    <view class='detail-addFans'>
+      关注
+    </view>
+  </view>
+
+
+</view>

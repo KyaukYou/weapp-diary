@@ -83,9 +83,13 @@ App({
                   db.collection('users').add({
                     data: {
                       userInfo: that.globalData.userInfo,
+                      userDetail: {},
                       travelArr: [],
                       likeArr: [],
-                      starArr: []
+                      starArr: [],
+                      fans: [],
+                      watch: [],
+
                     },
                     success(res) {
                       console.log(res);
@@ -131,6 +135,6 @@ App({
     openid: '',
     userInfo: {},
     login: false,
-    version: '0.1030.10'
+    version: '0.12.1109'
   }
 })

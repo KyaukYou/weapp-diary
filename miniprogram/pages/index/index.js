@@ -1019,15 +1019,16 @@ Page({
   },
   //搜索
   getSearch(e) {
-    wx.showLoading({
-      mask: true,
-      title: '正在加载',
-    })
     if (this.data.searchVal == '') {
       this.setData({
         searchBol: false
       })
+
     } else {
+      wx.showLoading({
+        mask: true,
+        title: '正在加载',
+      })
       this.setData({
         searchBol: true
       })

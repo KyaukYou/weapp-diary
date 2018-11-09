@@ -44,7 +44,7 @@ page {
 
 .index-choose {
   width: 92%;
-  height: 50rpx;
+  height: 32rpx;
   line-height: 50rpx;
   display: flex;
   flex-flow: row wrap;

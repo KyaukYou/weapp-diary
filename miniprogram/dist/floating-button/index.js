@@ -35,25 +35,22 @@ Component({
             type: Boolean,
             value: false,
             observer(newVal) {
-                if (!this.data.auto) {
+                if (this.data.controlled) {
                     this.setData({
                         buttonVisible: newVal,
                     })
                 }
             },
         },
-        auto: {
+        controlled: {
             type: Boolean,
-            value: true,
+            value: false,
         },
     },
     methods: {
-        /**
-         * change 事件的回调
-         */
-        fireEvents(buttonVisible) {
+        onChange(buttonVisible) {
             if (this.data.buttonVisible !== buttonVisible) {
-                if (this.data.auto) {
+                if (!this.data.controlled) {
                     this.setData({
                         buttonVisible,
                     })
@@ -62,10 +59,10 @@ Component({
 
             this.triggerEvent('change', { value: buttonVisible })
         },
-        /**
-         * 按钮点击事件
-         */
-        buttonClicked(e) {
+        onToggle() {
+            this.onChange(!this.data.buttonVisible)
+        },
+        onTap(e) {
             const { index, value } = e.currentTarget.dataset
             const params = {
                 index,
@@ -73,22 +70,33 @@ Component({
                 buttons: this.data.buttons,
             }
 
-            this.triggerEvent('click', params)
-            this.fireEvents(false)
+            if (!value.disabled) {
+                this.triggerEvent('click', params)
+                this.onChange(false)
+            }
         },
-        /**
-         * 切换状态
-         */
-        onToggle(e) {
-            this.fireEvents(!this.data.buttonVisible)
+        bindgetuserinfo(e) {
+            this.triggerEvent('getuserinfo', { ...e.detail, ...e.currentTarget.dataset })
+        },
+        bindcontact(e) {
+            this.triggerEvent('contact', { ...e.detail, ...e.currentTarget.dataset })
+        },
+        bindgetphonenumber(e) {
+            this.triggerEvent('getphonenumber', { ...e.detail, ...e.currentTarget.dataset })
+        },
+        bindopensetting(e) {
+            this.triggerEvent('opensetting', { ...e.detail, ...e.currentTarget.dataset })
+        },
+        onError(e) {
+            this.triggerEvent('error', { ...e.detail, ...e.currentTarget.dataset })
         },
     },
     data: {
         buttonVisible: false,
     },
     attached() {
-        const { defaultVisible, visible, auto } = this.data
-        const buttonVisible = !auto ? visible : defaultVisible
+        const { defaultVisible, visible, controlled } = this.data
+        const buttonVisible = controlled ? visible : defaultVisible
 
         this.setData({
             buttonVisible,

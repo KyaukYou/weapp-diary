@@ -9,7 +9,7 @@ Component({
             type: String,
             value: '',
             observer(newVal) {
-                if (!this.data.auto) {
+                if (this.data.controlled) {
                     this.updated(newVal)
                 }
             },
@@ -18,9 +18,25 @@ Component({
             type: String,
             value: '搜索',
         },
+        placeholderStyle: {
+            type: String,
+            value: '',
+        },
+        placeholderClass: {
+            type: String,
+            value: 'input-placeholder',
+        },
+        disabled: {
+            type: Boolean,
+            value: false,
+        },
         maxlength: {
             type: Number,
             value: 140,
+        },
+        cursorSpacing: {
+            type: Number,
+            value: 11,
         },
         focus: {
             type: Boolean,
@@ -31,7 +47,31 @@ Component({
                 })
             },
         },
-        disabled: {
+        confirmType: {
+            type: String,
+            value: 'search',
+        },
+        confirmHold: {
+            type: Boolean,
+            value: false,
+        },
+        cursor: {
+            type: Number,
+            value: -1,
+        },
+        selectionStart: {
+            type: Number,
+            value: -1,
+        },
+        selectionEnd: {
+            type: Number,
+            value: -1,
+        },
+        adjustPosition: {
+            type: Boolean,
+            value: true,
+        },
+        clear: {
             type: Boolean,
             value: false,
         },
@@ -43,9 +83,9 @@ Component({
             type: Boolean,
             value: false,
         },
-        auto: {
+        controlled: {
             type: Boolean,
-            value: true,
+            value: false,
         },
     },
     data: {
@@ -61,7 +101,7 @@ Component({
             }
         },
         onChange(e) {
-            if (this.data.auto) {
+            if (!this.data.controlled) {
                 this.updated(e.detail.value)
             }
 
@@ -91,10 +131,10 @@ Component({
             this.triggerEvent('confirm', e.detail)
         },
         onClear() {
-            const { auto, inputValue } = this.data
+            const { controlled, inputValue } = this.data
 
             this.setData({
-                inputValue: !auto ? inputValue : '',
+                inputValue: controlled ? inputValue : '',
                 inputFocus: true,
             })
 
@@ -104,14 +144,16 @@ Component({
             this.triggerEvent('cancel', { value: this.data.inputValue })
         },
         onClick() {
+            if (this.data.disabled) return
+
             this.setData({
                 inputFocus: true,
             })
         },
     },
     attached() {
-        const { defaultValue, value, auto } = this.data
-        const inputValue = !auto ? value : defaultValue
+        const { defaultValue, value, controlled } = this.data
+        const inputValue = controlled ? value : defaultValue
 
         this.updated(inputValue)
     },

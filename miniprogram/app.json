@@ -2,13 +2,16 @@
   "cloud": true,
   "pages": [
     "pages/index/index",
-    "pages/myStar/myStar",
-    
-    "pages/testchat/testchat",
+    "pages/userDetail/userDetail",
     
     "pages/myInfo/myInfo",
     "pages/my/my",
     
+    "pages/myStar/myStar",
+    
+    "pages/testchat/testchat",
+    
+     
     "pages/uploadBug/uploadBug",
     "pages/addTravel/addTravel",
     

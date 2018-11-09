@@ -1,22 +1,53 @@
 <view class='page'>
+  <view class='myInfo-wrap'>
+    <view class='myInfo-detail'>
+      <view class='myInfo-detail-list'>
+        <view class='myInfo-left'>
+          *
+          <text>生日</text>
+        </view>
+        <view class='myInfo-input'>
+          <picker mode="date" bindchange="bindBirthChange" value="{{birth}}"  custom-item="{{customItem}}">
+            <view class="picker" placeholder='请选择'>
+              {{birth}}
+            </view>
+          </picker>
+        </view>
+      </view>
 
-  <van-cell-group>
-  <van-field
-    v-model="username"
-    required
-    clearable
-    label="用户名"
-    icon="question"
-    placeholder="请输入用户名"
-  />
+      <view class='myInfo-detail-list'>
+        <view class='myInfo-left'>
+          *
+          <text>年龄</text>
+        </view>
+        <view class='myInfo-input'>
+          <input placeholder='{{age}}' value='{{agePer}}' placeholder-class='myInfo-color' disabled='true'>
+          </input>
+        </view>
+      </view>
 
-  <van-field
-    v-model="password"
-    type="password"
-    label="密码"
-    placeholder="请输入密码"
-    required
-  />
-</van-cell-group>
+      <view class='myInfo-detail-list'>
+        <view class='myInfo-left'>
+          *
+          <text>所在区域</text>
+        </view>
+        <view class='myInfo-input'>
+          <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+            <view class="picker" placeholder='请选择'>
+              {{region[0]}}-{{region[1]}}-{{region[2]}}
+            </view>
+          </picker>
+        </view> 
+      </view>
 
+
+    </view>
+    <view class='myInfo-center'>
+      <textarea placeholder='个人简介' maxlength='100' placeholder-class='textarea-sm' value='{{goodat}}' bindinput='bindTextareaChange'>
+        <view class='edit-textarea-length'>{{goodat.length <= 9 ? '0' + goodat.length: goodat.length}} / 100</view>
+      </textarea>
+    </view>
+
+    <button class='update' hover-class='chooseBtn-hover' bindtap='saveInfo' >保存</button>
+  </view>
 </view>

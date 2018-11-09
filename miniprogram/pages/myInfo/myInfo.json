@@ -2,7 +2,9 @@
   "navigationBarTitleText": "个人信息",
   "enablePullDownRefresh": false,
     "usingComponents": {
-      "van-cell-group": "../../module/cell-group/index",
-      "van-field": "../../module/field/index"
+        "wux-cell-group": "../../dist/cell-group/index",
+        "wux-cell": "../../dist/cell/index",
+        "wux-input": "../../dist/input/index",
+        "wux-textarea": "../../dist/textarea/index"
     }
 }
