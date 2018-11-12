@@ -13,7 +13,8 @@ exports.main = async (event, context) => {
             birth: event.birth,
             age: event.age,
             where: event.region,
-            info: event.goodat
+            info: event.goodat,
+            email: event.email
           }
         },
       })

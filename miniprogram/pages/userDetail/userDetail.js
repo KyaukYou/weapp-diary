@@ -9,9 +9,9 @@ Page({
     fans: [],
     watch: []
   },
-  getData: function () {
+  getData(id) {
     var that = this;
-    let openid = wx.getStorageSync('openid')
+    let openid = id
     wx.showLoading({
       title: '正在加载...',
     })
@@ -42,6 +42,10 @@ Page({
           userDetail: res.result.data[0].userDetail
         })
 
+        wx.setNavigationBarTitle({
+          title: res.result.data[0].userInfo+'的信息'
+        })
+
       },
       fail(res) {
         wx.hideLoading();
@@ -56,7 +60,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    console.log(options.id)
+    this.getData(options.id)
   },
 
   /**
@@ -70,7 +75,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getData();
+    // this.getData();
   },
 
   /**

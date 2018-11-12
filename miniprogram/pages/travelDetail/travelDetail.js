@@ -22,6 +22,12 @@ Page({
     chatsName: '',
     showAdd: 'none'
   },
+  touserDetail() {
+    console.log(this.data.userData._id)
+    wx.navigateTo({
+      url: '../userDetail/userDetail?id='+this.data.userData._id,
+    })
+  },
   //获取当前时间
   getThisTime() {
     let date = new Date();

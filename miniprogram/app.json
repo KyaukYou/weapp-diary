@@ -3,8 +3,11 @@
   "pages": [
     "pages/index/index",
     "pages/userDetail/userDetail",
-    
     "pages/myInfo/myInfo",
+    
+    
+    
+    
     "pages/my/my",
     
     "pages/myStar/myStar",

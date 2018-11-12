@@ -135,3 +135,7 @@
   left: 2%;
   right: 2%;
 }
+
+.update::after {
+  border: none;
+}

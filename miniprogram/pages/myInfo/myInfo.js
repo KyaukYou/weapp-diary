@@ -12,10 +12,18 @@ Page({
     genderData: ['男', '女', '其他'],
     age: '请选择出生日期',
     agePer: '',
+    email: '',
     goodat: '',
     startDate: '',
     endDate: '',
     shenxiao: ['鼠', '牛', '虎', '兔', '龙', '蛇', '马', '羊', '猴', '鸡', '狗', '猪'],
+  },
+  // 我的邮箱
+  emailChange(e) {
+    // console.log(e.detail.value);
+    this.setData({
+      email: e.detail.value
+    })
   },
   // 省市区三级联动
   bindRegionChange: function (e) {
@@ -84,38 +92,49 @@ Page({
   },
   saveInfo: util.throttle(function () {
     let that = this;
-    if (this.data.birth != '请选择' && this.data.region[0] != '请选择' && this.data.goodat != '') {
-      wx.showLoading({
-        title: '正在保存...',
-      })
-      let openid = wx.getStorageSync('openid');
-      wx.cloud.callFunction({
-        name: 'uploadDetail',
-        data: {
+    if (this.data.birth != '请选择' && this.data.region[0] != '请选择' && this.data.goodat != '' && this.data.email != '') {
+      // if(this.data.email)
+      var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); 
+      if (!reg.test(this.data.email)) {
+        wx.showToast({
+          image: '../../images/error.png',
+          title: '邮箱格式错误',
+        })
+      }else {
+        wx.showLoading({
+          title: '正在保存...',
+        })
+        let openid = wx.getStorageSync('openid');
+        wx.cloud.callFunction({
+          name: 'uploadDetail',
+          data: {
             openid: openid,
             birth: that.data.birth,
             age: that.data.age,
             region: that.data.region,
-            goodat: that.data.goodat
-        },
-        success(res) {
-          wx.hideLoading();
-          wx.showToast({
-            title: '保存成功',
-          })
-          // console.log(res)
-        },
-        fail(res) {
-          // console.log(res)
-          wx.hideLoading();
-          wx.showToast({
-            title: '未知错误',
-          })
-        }
-      })
+            goodat: that.data.goodat,
+            email: that.data.email
+          },
+          success(res) {
+            wx.hideLoading();
+            wx.showToast({
+              title: '保存成功',
+            })
+            // console.log(res)
+          },
+          fail(res) {
+            // console.log(res)
+            wx.hideLoading();
+            wx.showToast({
+              title: '未知错误',
+            })
+          }
+        })
+      }
     }
     else {
       wx.showToast({
+        image: '../../images/error.png',
         title: '请填写完整',
       })
     }
@@ -229,11 +248,13 @@ Page({
         for (var s in result.where) {
           newRegion.push(result.where[s])
         }
+        console.log(newAge)
         that.setData({
           birth: result.birth,
-          age: newAge[0]+'岁,属'+newAge[1],
+          agePer: newAge[0]+'岁,属'+newAge[1],
           region: newRegion,
           goodat: result.info,
+          email: result.email
         })
 
       },

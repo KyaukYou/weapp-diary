@@ -6,7 +6,7 @@
   </view>
 
   <view class='detail-header'>
-    <view class='detail-touxiang'>
+    <view class='detail-touxiang' bindtap='touserDetail'>
       <image src='{{travelObj.data.userInfo.avatarUrl}}'></image>
     </view>
     <view class='detail-title'>

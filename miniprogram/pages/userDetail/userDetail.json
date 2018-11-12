@@ -1,4 +1,11 @@
 {
   "navigationBarTitleText": "用户信息",
-  "enablePullDownRefresh": false
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "wux-cell-group": "../../dist/cell-group/index",
+    "wux-cell": "../../dist/cell/index",
+    "wux-input": "../../dist/input/index",
+    "wux-icon": "../../dist/icon/index",
+    "wux-textarea": "../../dist/textarea/index"
+  }
 }

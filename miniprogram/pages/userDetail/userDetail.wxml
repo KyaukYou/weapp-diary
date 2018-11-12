@@ -1,5 +1,37 @@
 <view class='page'>
-  <view class='detail-top'>
+  <view class='detail-bgImg'>
+    <image mode='aspectFill' src='../../images/bg.jpg'></image>
+  </view>
+
+  <view class='detail-wrap'>
+    <view class='detail-img'>
+      <image src='{{userInfo.avatarUrl}}'></image>
+      <view class='detail-text'>
+        <text>{{userDetail.watch.length}}关注</text>
+        |
+        <text>{{userDetail.fans.length}}粉丝</text>
+      </view>
+    </view>
+
+    <wux-cell-group >
+    <!-- <wux-cell title="标题文字" extra='{{userDetail.email}}'></wux-cell> -->
+      <wux-cell hover-class="none">
+        <wux-textarea label='用户昵称' disabled controlled value='{{userInfo.nickName}}' />
+      </wux-cell>
+      <wux-cell hover-class="none">
+        <wux-textarea label='出生日期' disabled controlled value='{{userDetail.birth}}' />
+      </wux-cell>
+      <wux-cell hover-class="none">
+        <wux-textarea label='邮箱地址' disabled controlled value='{{userDetail.email}}' />
+      </wux-cell>
+      <wux-cell hover-class="none">
+        <wux-textarea controlled disabled autoHeight label='个人简介' value='{{userDetail.info}}' />
+      </wux-cell>
+    </wux-cell-group>
+  </view>
+
+  <button class='detail-button' hover-class='chooseBtn-hover'>关注</button>
+  <!-- <view class='detail-top'>
     <view class='detail-img'>
       <image src='{{userInfo.avatarUrl}}'></image>
     </view>
@@ -12,7 +44,7 @@
     <view class='detail-addFans'>
       关注
     </view>
-  </view>
+  </view> -->
 
 
 </view>

@@ -29,6 +29,17 @@
       <view class='myInfo-detail-list'>
         <view class='myInfo-left'>
           *
+          <text>邮箱</text>
+        </view>
+        <view class='myInfo-input'>
+          <input bindinput="emailChange" placeholder='请输入你的邮箱' value='{{email}}' placeholder-class='myInfo-color'>
+          </input>
+        </view>
+      </view>
+
+      <view class='myInfo-detail-list'>
+        <view class='myInfo-left'>
+          *
           <text>所在区域</text>
         </view>
         <view class='myInfo-input'>
