@@ -1,18 +1,7 @@
 <!--my.wxml-->
 <view class='page' catchtouchmove="{{pageData}}">
   <view class="my-wrap">
-    <image src='{{bgImg}}' class='show-img' mode='aspectFill'></image>
-    <view class='my-image'>
-      <image src="{{userInfo.avatarUrl}}"></image>
-      <view class='my-info-detail'>
-        <view>{{userInfo.nickName}}
-          <image src='{{userGender}}'></image>
-        </view>
-      </view>
-    </view>
-    <view class='add-fans' bindtap='addFans' wx:if='{{thisOpenid == myOpenid ? fasle : true}}'>{{addText}}</view>
-  </view>
-  <view class='my-info'>
+    <view class='my-info'>
     <view class='my-info-border'></view>
     <view class='my-info-child'>
       <view class='my-info-one'>{{whatHe}}的关注</view>
@@ -23,8 +12,19 @@
       <view class='my-info-two'>{{fans.length}}</view>
     </view>
   </view>
+    <image src='{{bgImg}}' class='show-img' mode='aspectFill'></image>
+    <view class='my-image'>
+      <image src="{{userInfo.avatarUrl}}"></image>
+      <view class='my-info-detail'>
+        <view>{{userInfo.nickName}}
+          <image src='{{userGender}}' ></image>
+        </view>
+      </view>
+    </view>
+    <view class='add-fans' bindtap='addFans' wx:if='{{thisOpenid == myOpenid ? fasle : true}}'>{{addText}}</view>
+  </view>
 
-  <wux-cell-group style='position: relative; top: -130rpx;'>
+  <wux-cell-group >
     <wux-cell hover-class="none">
       <wux-textarea label="出生日期" disabled autoHeight controlled value='{{userDetail.birth}}'/>
     </wux-cell>

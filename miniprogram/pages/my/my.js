@@ -1,4 +1,5 @@
 const app = getApp();
+import { $wuxDialog } from '../../dist/index'
 Page({
 
   /**
@@ -16,6 +17,22 @@ Page({
     showAdd: 'none',
     showStar: 'block',
     bgImg: ''
+  },
+  showVersion() {
+    if(this.data.showAdd == 'block') {
+      $wuxDialog().alert({
+        resetOnClose: true,
+        title: '更新日志(V0.13.1113)',
+        content: `添加关注功能(测试版)
+              添加个人信息编辑
+              添加查看对方信息`,
+        onConfirm(e) {
+          // console.log('感谢上帝，你没吃鞋帮！')
+        },
+      })
+    }else {
+
+    }
   },
   // 修改背景图
   changeImg() {
@@ -70,7 +87,7 @@ Page({
                 wx.hideLoading();
                 wx.showToast({
                   image: '../../images/error.png',
-                  title: '上传失败1',
+                  title: '上传失败',
                 })
               }
             })
@@ -79,7 +96,7 @@ Page({
             wx.hideLoading();
             wx.showToast({
               image: '../../images/error.png',
-              title: '上传失败2',
+              title: '上传失败',
             })
           }
 
