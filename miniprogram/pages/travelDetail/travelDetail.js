@@ -25,8 +25,12 @@ Page({
   touserDetail() {
     console.log(this.data.userData._id)
     wx.navigateTo({
-      url: '../userDetail/userDetail?id='+this.data.userData._id,
+      url: '../userDetail/userDetail?id='+this.data.travelObj._openid,
     })
+  },
+  // 评论头像点击
+  toUsers() {
+
   },
   //获取当前时间
   getThisTime() {

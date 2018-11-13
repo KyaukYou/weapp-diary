@@ -11,9 +11,85 @@ Page({
     travelNum: 0,
     starNum: 0,
     fans: 0,
+    watch: 0,
     version: '',
     showAdd: 'none',
-    showStar: 'block'
+    showStar: 'block',
+    bgImg: ''
+  },
+  // 修改背景图
+  changeImg() {
+    let that = this;
+    wx.chooseImage({
+      count: 1,
+      success(res) {
+        console.log(res.tempFilePaths[0]);
+
+        let filePath = res.tempFilePaths[0];
+        let pattern = /\.{1}[a-z]{1,}$/;
+        let cc = filePath.slice(0, pattern.exec(filePath).index);
+        cc = cc.slice(11);
+        let openid = wx.getStorageSync('openid');
+        let cloudPath = 'user/' + openid + '/backgroundImg/' + cc + filePath.match(/\.[^.]+?$/)[0];
+        console.log(filePath,cloudPath)
+        wx.showLoading({
+          title: '正在上传...',
+          mask: true
+        })
+        wx.cloud.uploadFile({
+          cloudPath,
+          filePath,
+          success(res) {
+            console.log(res.fileID);
+            wx.cloud.callFunction({
+              name: 'uploadBgImg',
+              data: {
+                openid: openid,
+                url: res.fileID
+              },
+              success(res) {
+                wx.hideLoading();
+                wx.showToast({
+                  title: '上传成功',
+                });
+
+                wx.cloud.callFunction({
+                  name: 'getDetail',
+                  data: {
+                    openid: openid
+                  },
+                  success(res) {
+                    let result = res.result.data[0].backgroundImg;
+                    that.setData({
+                      bgImg: result.url
+                    })
+                  }
+                })
+              },
+              fail(res) {
+                wx.hideLoading();
+                wx.showToast({
+                  image: '../../images/error.png',
+                  title: '上传失败1',
+                })
+              }
+            })
+          },
+          fail(res) {
+            wx.hideLoading();
+            wx.showToast({
+              image: '../../images/error.png',
+              title: '上传失败2',
+            })
+          }
+
+        })
+
+      },
+      fail(res) {
+        console.log(res)
+      }
+    })
   },
   toInfo() {
     wx.showToast({
@@ -85,7 +161,10 @@ Page({
       // mydata = res.data[0]
       // console.log(res.data.starArr);
       that.setData({
-        starNum: res.data[0].starArr.length
+        starNum: res.data[0].starArr.length,
+        bgImg: res.data[0].backgroundImg.url,
+        fans: res.data[0].fans,
+        watch: res.data[0].watch
       })
     })
   },

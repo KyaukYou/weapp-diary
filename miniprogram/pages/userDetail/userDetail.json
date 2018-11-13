@@ -6,6 +6,7 @@
     "wux-cell": "../../dist/cell/index",
     "wux-input": "../../dist/input/index",
     "wux-icon": "../../dist/icon/index",
-    "wux-textarea": "../../dist/textarea/index"
+    "wux-textarea": "../../dist/textarea/index",
+    "wux-toptips": "../../dist/toptips/index"
   }
 }

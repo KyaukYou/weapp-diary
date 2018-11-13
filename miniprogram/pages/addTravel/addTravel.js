@@ -496,8 +496,6 @@ Page({
       cc = cc.slice(11);
 
       let openid = wx.getStorageSync('openid');
-      // var str1 = that.data.uploadObj.title.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, ""); 
-      // var str = encodeURIComponent(str1)
       let timeStr = new Date(that.data.uploadObj.createTime).getTime();
   
       let cloudPath = 'travel/' + openid + '/' + timeStr +  '/header/' + cc + filePath.match(/\.[^.]+?$/)[0];

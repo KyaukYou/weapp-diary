@@ -26,7 +26,7 @@ page {
   top: 0;
   left: 0;
   right: 0;
-  height: 150rpx;
+  height: 140rpx;
   background-color: rgb(246,246,246);
   z-index: 999;
   /* margin-bottom: 160rpx; */
@@ -40,11 +40,12 @@ page {
 
 .index-border {
   width: 100%;
+  margin-top: -20rpx;
 }
 
 .index-choose {
   width: 92%;
-  height: 32rpx;
+  height: 50rpx;
   line-height: 50rpx;
   display: flex;
   flex-flow: row wrap;
@@ -55,21 +56,21 @@ page {
 }
 
 .index-choose-list {
-  width: 30%;
+  width: 25%;
   height: 100%;
   text-align: center;
 }
 
 .index-choose-list:nth-of-type(1) {
-  width: 20%;
-  text-align: left;
-  color: rgb(239,37,15);
+  width: 25%;
+  /* text-align: left; */
+  /* color: rgb(239,37,15); */
 }
 
 
 .index-choose-list:nth-of-type(4) {
-  width: 20%;
-  text-align: right;
+  width: 25%;
+  /* text-align: right; */
 }
 
 .index-choose-listed {

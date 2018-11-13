@@ -8,7 +8,7 @@
   </view>
   <!-- 选择列表 -->
   <view class='index-choose'>
-    <view class='index-choose-list' bindtap='changelistcolor' wx:for='{{listArr}}' data-index='{{index}}' style='color: {{item.color}}' wx:key>{{item.name}}</view>
+    <view class='index-choose-list' bindtap='changelistcolor' wx:for='{{listArr}}' data-index='{{index}}' style='color: {{item.color}}; background-color: {{item.bgcolor}}' wx:key>{{item.name}}</view>
   </view>
 
   <!-- 分割线 -->
