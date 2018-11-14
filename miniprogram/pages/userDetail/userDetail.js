@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    id: '',
     userInfo: {},
     userDetail: {},
     userGender: '',
@@ -195,23 +196,9 @@ Page({
   onLoad: function (options) {
     this.getTravelNum(options.id);
     this.getStarNum(options.id);
-    // let db = wx.cloud.database();
-    // db.collection('control').doc('W87jRg6qgQy38jbV').get().then(res => {
-    //   console.log(res.data.showAdd.showAdd)
-    //   if (res.data.showAdd.showAdd == 'none') {
-    //     this.setData({
-    //       showAdd: res.data.showAdd.showAdd,
-    //       showStar: 'block'
-    //     })
-    //   } else {
-    //     this.setData({
-    //       showAdd: 'flex',
-    //       showStar: 'none'
-    //     })
-    //   }
-
-
-    // })
+    this.setData({
+      id: options.id
+    })
   },
 
   /**
@@ -245,7 +232,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.getTravelNum(this.data.id);
+    this.getStarNum(this.data.id);
   },
 
   /**
