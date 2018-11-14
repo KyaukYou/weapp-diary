@@ -191,6 +191,7 @@ Page({
         fans: res.data[0].fans,
         watch: res.data[0].watch
       })
+      wx.stopPullDownRefresh()
     })
   },
 
@@ -323,7 +324,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    this.getTravelNum();
+    this.getStarNum();
   },
 
   /**
