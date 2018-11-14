@@ -138,7 +138,7 @@ Page({
         watch: res.data[0].watch,
       })
       that.getMyInfo();
-
+      wx.stopPullDownRefresh()
       if (res.data[0].fans) {
         for (var i = 0; i < res.data[0].fans.length; i++) {
           if (res.data[0].fans[i].openid == that.data.myOpenid) {
