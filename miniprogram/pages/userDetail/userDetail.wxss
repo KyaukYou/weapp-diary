@@ -85,7 +85,8 @@ button::after {
   width: auto;
   height: 100%;
   position: relative;
-  padding: 0 50rpx 0 16rpx;
+  padding: 0 6rpx 0 18rpx;
+  line-height: 60rpx;
 }
 
 .my-info-detail view:nth-of-type(1) image {
@@ -97,7 +98,7 @@ button::after {
   margin-top: 0;
 }
 
-.my-image image {
+.my-image>image {
   width: 132rpx;
   height: 132rpx;
   border-radius: 50%;
@@ -107,12 +108,21 @@ button::after {
 
 .my-image .my-info-detail {
   height: 58rpx;
-  width: 100%;
+  width: auto;
   margin: -6rpx auto 0 auto;
-  line-height: 58rpx;
+  /* line-height: 58rpx; */
   font-size: 30rpx;
   text-align: center;
-  /* color: white; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row nowrap;
+}
+
+
+.my-image .my-info-detail .xingbie {
+  width: 34rpx;
+  height: 34rpx;
 }
 
 .my-info {
@@ -203,8 +213,36 @@ button::after {
   background-color: rgba(255, 255, 255, 0.3);
   font-size: 22rpx;
   text-align: center;
-  border: 2rpx solid rgba(255, 255, 255, 0.3);
+  /* border: 2rpx solid rgba(255, 255, 255, 0.3); */
   right: 20rpx;
   top: 20rpx;
   color: white;
+}
+
+.fans-watch {
+  width:100%;
+  z-index:9999;
+  position:relative;
+  height:68rpx;
+  line-height:68rpx;
+  top: -38rpx;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+}
+
+.watch {
+  width: 50%;
+  text-align: right;
+  padding-right: 10rpx;
+  box-sizing: border-box;
+}
+
+.fans {
+  width: 50%;
+  text-align: left;
+  padding-left: 10rpx;
+  box-sizing: border-box;
 }

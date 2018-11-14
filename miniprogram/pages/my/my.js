@@ -19,15 +19,23 @@ Page({
     bgImg: ''
   },
   showVersion() {
-    if(this.data.showAdd == 'block') {
+    if (this.data.showAdd == 'block' || this.data.showAdd == 'flex') {
       $wuxDialog().alert({
         resetOnClose: true,
-        title: '更新日志(V0.13.1113)',
-        content: `添加关注功能(测试版)
-              添加个人信息编辑
-              添加查看对方信息`,
+        title: '更新日志',
+        content: `V1.0.1114(2018-11-14)
+                  1.【新增】我的页面背景图添加(测试版)
+                  2.【优化】首页显示效果
+                  3.【优化】我的页面显示效果
+                  4.【优化】个人信息页面显示效果
+                  5.【优化】BUG页面代码优化
+                  6.【优化】评论功能数据添加
+                  \n
+                  V0.13.1113(2018-11-13)
+                  1.【新增】关注功能(测试版)
+                  2.【新增】我的信息编辑
+                  3.【新增】查看对方信息`,
         onConfirm(e) {
-          // console.log('感谢上帝，你没吃鞋帮！')
         },
       })
     }else {

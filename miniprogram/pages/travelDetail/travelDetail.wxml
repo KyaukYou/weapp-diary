@@ -59,7 +59,7 @@
       <view class='chat-wrap' wx:if='{{travelObj.data.chat.length == 0 ? false : true}}'>
         <view class='chat-wrap-lists' wx:for='{{travelObj.data.chat}}' wx:key>
           <view class='chat-wrap-list'>
-            <view class='chat-wrap-avatar' bindtap='toUsers'>
+            <view class='chat-wrap-avatar' data-openid='{{item.openid}}' bindtap='toUsers'>
               <image src='{{item.avatar}}'></image>
             </view>
             <view class='chat-wrap-top'>
@@ -71,7 +71,7 @@
 
             <!-- 楼中楼 -->
             <view class='chat-wrap-child' wx:if='{{sItem.index == index ? true : false}}' wx:for='{{travelObj.data.chats}}' wx:for-index='sIndex' wx:for-item='sItem' wx:key>
-              <view class='chat-wrap-avatar chat-wrap-avatar1' bindtap='toUsers'>
+              <view class='chat-wrap-avatar chat-wrap-avatar1' data-openid='{{sItem.openid}}' bindtap='toUsers'>
                 <image src='{{sItem.avatar}}'></image>
               </view>
               <view class='chat-wrap-top chat-wrap-top1'>

@@ -29,8 +29,10 @@ Page({
     })
   },
   // 评论头像点击
-  toUsers() {
-
+  toUsers(e) {
+    wx.navigateTo({
+      url: '../userDetail/userDetail?id=' + e.currentTarget.dataset.openid,
+    })
   },
   //获取当前时间
   getThisTime() {
@@ -91,7 +93,8 @@ Page({
           avatar: info.avatarUrl,
           text: this.data.chatData,
           time: thisTime,
-          chatName: this.data.chatsName
+          chatName: this.data.chatsName,
+          openid: wx.getStorageSync('openid')
         }
         wx.cloud.callFunction({
           name: 'uploadChats',
@@ -126,7 +129,7 @@ Page({
           avatar: info.avatarUrl,
           text: this.data.chatData,
           time: thisTime,
-          follow: []
+          openid: wx.getStorageSync('openid'),
         }
 
         wx.cloud.callFunction({

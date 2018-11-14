@@ -61,6 +61,14 @@ Page({
           that.setData({
             textarea: ''
           })
+          let timer = null;
+          clearTimeout(timer);
+          timer = setTimeout(function() {
+            wx.navigateBack({
+              delta: 1
+            })
+            clearTimeout(timer);
+          },1000)
         },
         fail(res) {
           console.log(res);

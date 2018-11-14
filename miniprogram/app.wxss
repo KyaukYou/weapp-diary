@@ -303,3 +303,11 @@ page {
 .chat-wrap-center-ctoc {
   color: orange;
 }
+
+/* 性别图标 */
+/* .xingbie {
+  position: absolute;
+  top: 8rpx;
+  width: 30rpx;
+  height: 30rpx;
+} */

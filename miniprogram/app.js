@@ -83,13 +83,16 @@ App({
                   db.collection('users').add({
                     data: {
                       userInfo: that.globalData.userInfo,
-                      userDetail: {},
+                      userDetail: {
+                        birth: '2000-01-01',
+                        where: { "0": "北京市", "1": "北京市", "2": "东城区" }
+                      },
                       travelArr: [],
                       likeArr: [],
                       starArr: [],
                       fans: [],
                       watch: [],
-
+                      backgroundImg: {}
                     },
                     success(res) {
                       console.log(res);
@@ -135,6 +138,6 @@ App({
     openid: '',
     userInfo: {},
     login: false,
-    version: 'V0.13.1113'
+    version: 'V1.0.1114'
   }
 })

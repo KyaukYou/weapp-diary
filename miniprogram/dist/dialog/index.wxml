@@ -1,7 +1,7 @@
 <wux-popup visible="{{ in }}" z-index="{{ zIndex }}" closable="{{ closable }}" mask="{{ mask }}" mask-closable="{{ maskClosable }}" bind:close="onClose" bind:closed="onClosed">
     <view slot="header">{{ title }}</view>
-    <view>
-        <text>{{ content }}</text>
+    <view class='alert-view' style='width:90%; margin:0 auto; text-align:left; padding:0; font-size: 26rpx; max-height: 430rpx; overflow-y: auto;'>
+        <text decode='true'>{{ content }}</text>
         <view class="wux-popup__input-container" wx:if="{{ prompt }}">
             <label>
                 <input type="{{ prompt.fieldtype }}" class="wux-popup__input" value="{{ prompt.response }}" password="{{ prompt.password }}" placeholder="{{ prompt.placeholder }}" maxlength="{{ maxlength }}" bindinput="bindinput" />

@@ -251,12 +251,23 @@ Page({
         console.log(newAge)
         that.setData({
           birth: result.birth,
-          agePer: newAge[0]+'岁,属'+newAge[1],
+          // agePer: newAge[0]+'岁,属'+newAge[1],
           region: newRegion,
           goodat: result.info,
           email: result.email
         })
+        var date = new Date();
+        var year = date.getFullYear();
+        var cha = year - Number(that.data.birth.slice(0, 4));
 
+
+        var sx = that.getPet(that.data.birth.slice(0, 4));
+
+
+        that.setData({
+          age: [cha, sx],
+          agePer: cha + '岁' + ',属' + sx
+        })
       },
       fail(res) {
         wx.hideLoading();

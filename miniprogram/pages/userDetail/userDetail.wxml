@@ -1,42 +1,47 @@
 <!--my.wxml-->
 <view class='page' catchtouchmove="{{pageData}}">
   <view class="my-wrap">
-    <view class='my-info'>
-    <view class='my-info-border'></view>
-    <view class='my-info-child'>
-      <view class='my-info-one'>{{whatHe}}的关注</view>
-      <view class='my-info-two'>{{watch.length}}</view>
-    </view>
-    <view class='my-info-child'>
-      <view class='my-info-one'>{{whatHe}}的粉丝</view>
-      <view class='my-info-two'>{{fans.length}}</view>
-    </view>
-  </view>
+    <!-- <view class='my-info'>
+      <view class='my-info-border'></view>
+      <view class='my-info-child'>
+        <view class='my-info-one'>{{whatHe}}的关注</view>
+        <view class='my-info-two'>{{watch.length}}</view>
+      </view>
+      <view class='my-info-child'>
+        <view class='my-info-one'>{{whatHe}}的粉丝</view>
+        <view class='my-info-two'>{{fans.length}}</view>
+      </view>
+    </view> -->
     <image src='{{bgImg}}' class='show-img' mode='aspectFill'></image>
     <view class='my-image'>
       <image src="{{userInfo.avatarUrl}}"></image>
       <view class='my-info-detail'>
         <view>{{userInfo.nickName}}
-          <image src='{{userGender}}' ></image>
         </view>
+        <image src='{{userGender}}' class='xingbie'></image>
       </view>
+    </view>
+    <view class='fans-watch'>
+      <view class='watch'>{{watch.length}} 关注</view>
+      
+      <view class='fans'>粉丝 {{fans.length}}</view>
     </view>
     <view class='add-fans' bindtap='addFans' wx:if='{{thisOpenid == myOpenid ? fasle : true}}'>{{addText}}</view>
   </view>
 
-  <wux-cell-group >
+  <wux-cell-group>
     <wux-cell hover-class="none">
-      <wux-textarea label="出生日期" disabled autoHeight controlled value='{{userDetail.birth}}'/>
+      <wux-textarea label="出生日期" disabled autoHeight controlled value='{{userDetail.birth}}' />
     </wux-cell>
     <wux-cell hover-class="none">
-      <wux-textarea label="邮箱地址" disabled autoHeight controlled value='{{userDetail.email}}'/>
+      <wux-textarea label="邮箱地址" disabled autoHeight controlled value='{{userDetail.email}}' />
     </wux-cell>
     <wux-cell hover-class="none">
-      <wux-textarea label="所在地区" disabled autoHeight controlled value='{{where}}'/>
+      <wux-textarea label="所在地区" disabled autoHeight controlled value='{{where}}' />
     </wux-cell>
     <wux-cell hover-class="none">
-      <wux-textarea label="个人介绍" disabled autoHeight controlled value='{{userDetail.info}}'/>
-    </wux-cell>        
+      <wux-textarea label="个人介绍" disabled autoHeight controlled value='{{userDetail.info}}' />
+    </wux-cell>
   </wux-cell-group>
 
   <wux-toptips id="wux-toptips" />

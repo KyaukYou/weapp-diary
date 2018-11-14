@@ -129,19 +129,26 @@ Page({
         thisOpenid: res.data[0]._openid,
         myOpenid: wx.getStorageSync('openid'),
         starNum: res.data[0].starArr.length,
+        userInfo: res.data[0].userInfo,
+      })
+
+      that.setData({
         fans: res.data[0].fans,
         watch: res.data[0].watch,
-        userInfo: res.data[0].userInfo,
       })
       that.getMyInfo();
 
-      for (var i = 0; i < res.data[0].fans.length; i++) {
-        if (res.data[0].fans[i].openid == that.data.myOpenid) {
-          that.setData({
-            addText: '已关注'
-          })
-          return true;
+      if (res.data[0].fans) {
+        for (var i = 0; i < res.data[0].fans.length; i++) {
+          if (res.data[0].fans[i].openid == that.data.myOpenid) {
+            that.setData({
+              addText: '已关注'
+            })
+            return true;
+          }
         }
+      }else {
+
       }
 
 

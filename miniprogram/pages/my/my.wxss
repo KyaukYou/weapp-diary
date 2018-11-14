@@ -85,19 +85,20 @@ button::after {
   width: auto;
   height: 100%;
   position: relative;
-  padding: 0 50rpx 0 16rpx;
+  padding: 0 6rpx 0 0rpx;
+  line-height: 60rpx;
 }
 
 .my-info-detail view:nth-of-type(1) image {
-  height: 42rpx;
-  width: 42rpx;
-  position: absolute;
-  right: 0;
-  top: 10rpx;
+  height: 38rpx;
+  width: 38rpx;
+  /* position: absolute; */
+  /* right: 0; */
+  /* top: 14rpx; */
   margin-top: 0;
 }
 
-.my-image image {
+.my-image>image {
   width: 132rpx;
   height: 132rpx;
   border-radius: 50%;
@@ -107,13 +108,23 @@ button::after {
 
 .my-image .my-info-detail {
   height: 58rpx;
-  width: 100%;
+  width: auto;
   margin: -6rpx auto 0 auto;
-  line-height: 58rpx;
+  /* line-height: 58rpx; */
   font-size: 30rpx;
   text-align: center;
-  /* color: white; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row nowrap;
 }
+
+
+.my-image .my-info-detail .xingbie {
+  width: 34rpx;
+  height: 34rpx;
+}
+
 
 .my-info {
   width: 100%;
@@ -125,7 +136,7 @@ button::after {
   display: flex;
   flex-flow: row nowrap;
   position: absolute;
-  z-index: 9999;
+  z-index: 100;
   box-shadow:0 2px 5px 1px rgba(0, 0, 0, 0.1);
   /* font-weight: bold; */
 }
@@ -194,3 +205,10 @@ button::after {
   left: 0;
   right: 0;
 }
+
+
+/* 弹出框 */
+/* .alert-view {
+  width: 80%;
+  text-align: center;
+} */

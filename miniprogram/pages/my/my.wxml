@@ -24,13 +24,14 @@
     </view>
 
     <image src='{{bgImg}}' class='show-img' mode='aspectFill'></image>
-    <wux-icon size='22' type='md-planet' class='edit-img' bindtap='changeImg' />
+    <!-- <wux-icon size='22' type='md-planet' class='edit-img' bindtap='changeImg' /> -->
+    <image class='edit-img' src='../../images/skin.png' bindtap='changeImg'></image>
     <view class='my-image' wx:if='{{hasUserInfo}}'>
       <image src="{{userInfo.avatarUrl}}"></image>
       <view class='my-info-detail'>
         <view>{{userInfo.nickName}}
-          <image src='{{userGender}}' ></image>
         </view>
+        <image src='{{userGender}}' class='xingbie' ></image>
       </view>
     </view>
     <view class='my-image' wx:if='{{!hasUserInfo}}'>
