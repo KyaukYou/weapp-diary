@@ -52,6 +52,11 @@ page {
   color: #0e9dd6!important;
 }
 
+/* 粉丝关注背景颜色 */
+.fansWatch {
+  background-color: rgb(236,236,236)!important;
+}
+
 
 
 /* 评论 */

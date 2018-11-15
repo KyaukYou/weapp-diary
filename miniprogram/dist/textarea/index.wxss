@@ -51,7 +51,7 @@
 }
 
 .wux-textarea--disabled {
-  opacity: 0.3;
+  opacity: 1;
 }
 
 .wux-textarea--error .wux-textarea__control {

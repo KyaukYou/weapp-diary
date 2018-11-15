@@ -2,7 +2,7 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  background-color: rgba(252, 252, 252, 1);
+  background-color: rgba(242, 242, 242, 1);
 }
 
 .myInfo-wrap {
@@ -13,13 +13,23 @@
   /* bottom: 30rpx; */
   /* left: 3%; */
   margin: 0rpx auto 30rpx auto;
-  box-shadow:0 0 8rpx rgb(210,210,210);
+  border: 4rpx solid white;
+  box-shadow:0 0 8rpx rgb(233,233,233);
   /* box-shadow:0 2px 5px 1px rgba(0, 0, 0, 0.1); */
+}
+
+.myInfo-left>image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 26rpx;
+  float: left;
+  margin-right: 14rpx;
 }
 
 .myInfo-detail {
   width: 100%;
   height: auto;
+  background-color: rgba(242, 242, 242, 1);
   /* border-radius: 8rpx; */
   /* box-shadow:0 0 8rpx rgb(210,210,210); */
 }
@@ -30,12 +40,12 @@
   line-height: 96rpx;
   box-sizing: border-box;
   padding-left: 20rpx;
-  /* background-color: rgb(242, 242, 242); */
-  margin-bottom: 2rpx;
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 8rpx;
   font-size: 32rpx;
   color: #535353;
   position: relative;
-  border-bottom: 2rpx solid rgba(233, 233, 233, 1);
+  /* border-bottom: 2rpx solid rgba(233, 233, 233, 1); */
   /* box-shadow:0 2px 5px 1px rgba(0, 0, 0, 0.1); */
 }
 
@@ -93,7 +103,8 @@
   margin-top: 2rpx;
   padding: 20rpx 26rpx;
   box-sizing: border-box;
-  border-radius: 8rpx;
+  /* border-radius: 8rpx; */
+  background-color: white;
   /* box-shadow:0 0 8rpx rgb(210,210,210); */
 }
 

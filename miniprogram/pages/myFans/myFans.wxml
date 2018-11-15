@@ -1,0 +1,17 @@
+<view class='page'>
+  <view class='list' hover-class='fansWatch' wx:for='{{myData}}' wx:key data-openid='{{item.openid}}' bindtap='toUsers'>
+    <view class='list-img'>
+      <image src='{{item.avatarUrl}}'></image>
+    </view>
+    <view class='list-name'>
+      <view class='list-text'>{{item.nickName}}
+        <view class='list-gender'>
+          <image src='{{item.gender == 1 ? "../../images/boy.png" : "../../images/girl.png" }}'></image>
+        </view>
+      </view>
+    </view>
+    <view class='guanzhu' catchtap='addWatch' data-index='{{index}}' data-openid='{{item.openid}}'>{{textArr[index]}}</view>
+  </view>
+
+  <wux-toptips id="wux-toptips" />
+</view>

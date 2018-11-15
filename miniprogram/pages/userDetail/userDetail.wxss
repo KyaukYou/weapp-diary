@@ -1,7 +1,7 @@
 /* 分隔 */
 
 page {
-  /* background-color: rgb(242, 242, 242); */
+  background-color: rgb(242, 242, 242);
   transition: all 0.2s ease;
 }
 

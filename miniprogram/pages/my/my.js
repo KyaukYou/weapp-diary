@@ -16,14 +16,34 @@ Page({
     version: '',
     showAdd: 'none',
     showStar: 'block',
-    bgImg: ''
+    bgImg: '',
+    animationSlow: '',
+    timer: null
+  },
+  // 我的关注
+  toWatch(e) {
+    wx.navigateTo({
+      url: '../myWatch/myWatch?id=' + wx.getStorageSync('openid'),
+    })
+  },
+  // 我的粉丝
+  toFans(e) {
+    wx.navigateTo({
+      url: '../myFans/myFans?id=' + wx.getStorageSync('openid'),
+    })
   },
   showVersion() {
     if (this.data.showAdd == 'block' || this.data.showAdd == 'flex') {
       $wuxDialog().alert({
         resetOnClose: true,
         title: '更新日志',
-        content: `V1.0.1114(2018-11-14)
+        content: `V1.1.1115(2018-11-15)
+                  1.【优化】整体颜色优化
+                  2.【优化】我的页面图标添加
+                  3.【优化】完善背景图片添加
+                  4.【新增】我的关注，我的粉丝页面
+                  \n
+                  V1.0.1114(2018-11-14)
                   1.【新增】我的页面背景图添加(测试版)
                   2.【优化】首页显示效果
                   3.【优化】我的页面显示效果
@@ -189,9 +209,15 @@ Page({
         starNum: res.data[0].starArr.length,
         bgImg: res.data[0].backgroundImg.url,
         fans: res.data[0].fans,
-        watch: res.data[0].watch
+        watch: res.data[0].watch, 
       })
-      wx.stopPullDownRefresh()
+      that.data.timer = setTimeout(function() {
+        that.setData({
+          animationSlow: ''
+        })
+        clearTimeout(that.data.timer);
+      },2000);
+      // wx.stopPullDownRefresh()
     })
   },
 
@@ -219,8 +245,8 @@ Page({
               clearInterval(timer1);
             }
           }, 200)
+
         } else {
-          // console.log('2');
           that.setData({
             shouquan: false
           })
@@ -286,6 +312,13 @@ Page({
 
 
     })
+  },
+  shuaxin() {
+    this.setData({
+      animationSlow: 'animationSlow'
+    })
+    this.getTravelNum();
+    this.getStarNum();
   },
 
   /**

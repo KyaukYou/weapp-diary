@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "我的关注",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "wux-toptips": "../../dist/toptips/index"
+  }
+}

@@ -12,26 +12,26 @@
         <view class='my-info-two'>{{starNum}}</view>
       </view>
       <view class='my-info-border'></view>
-      <view class='my-info-child'>
+      <view class='my-info-child' bindtap='toWatch'>
         <view class='my-info-one'>我的关注</view>
         <view class='my-info-two'>{{watch.length}}</view>
       </view>
       <view class='my-info-border' style='left: 75%'></view>
-      <view class='my-info-child'>
+      <view class='my-info-child' bindtap='toFans'>
         <view class='my-info-one'>我的粉丝</view>
         <view class='my-info-two'>{{fans.length}}</view>
       </view>
     </view>
-
     <image src='{{bgImg}}' class='show-img' mode='aspectFill'></image>
     <!-- <wux-icon size='22' type='md-planet' class='edit-img' bindtap='changeImg' /> -->
+    <image bindtap='shuaxin' class='shuaxin-img {{animationSlow}}' src='../../images/shuaxin.png'></image>
     <image class='edit-img' src='../../images/skin.png' bindtap='changeImg'></image>
     <view class='my-image' wx:if='{{hasUserInfo}}'>
       <image src="{{userInfo.avatarUrl}}"></image>
       <view class='my-info-detail'>
         <view>{{userInfo.nickName}}
         </view>
-        <image src='{{userGender}}' class='xingbie' ></image>
+        <image src='{{userGender}}' class='xingbie'></image>
       </view>
     </view>
     <view class='my-image' wx:if='{{!hasUserInfo}}'>
@@ -44,13 +44,13 @@
   </view>
 
 
-  <wux-cell-group style=''>
-    <wux-cell title="我的收藏" is-link bindtap='toMyStar' style='display: {{showStar}}'></wux-cell>
-    <wux-cell title="我的信息" is-link bindtap='toMyDetail'></wux-cell>
-    <wux-cell title="BUG提交" is-link bindtap='tobug'></wux-cell>
-    <!-- <wux-cell title="版本号" is-link extra="{{version}}"></wux-cell> -->
-    <wux-cell title="版本号" bindtap='showVersion' is-link extra="{{version}}"></wux-cell>
-  </wux-cell-group>
+  <!-- <wux-cell-group style=''> -->
+  <wux-cell thumb='../../images/star_list.png' title="我的收藏" is-link bindtap='toMyStar' style='display: {{showStar}}'></wux-cell>
+  <!-- </wux-cell-group> -->
+  <wux-cell thumb='../../images/info_list.png' title="我的信息" is-link bindtap='toMyDetail'></wux-cell>
+  <wux-cell thumb='../../images/bug_list.png' title="BUG提交" is-link bindtap='tobug'></wux-cell>
+  <!-- <wux-cell title="版本号" is-link extra="{{version}}"></wux-cell> -->
+  <wux-cell thumb='../../images/ver_list.png' title="版本号" bindtap='showVersion' is-link extra="{{version}}"></wux-cell>
 
   <wux-dialog id="wux-dialog" />
   <wux-dialog id="wux-dialog--alert" />

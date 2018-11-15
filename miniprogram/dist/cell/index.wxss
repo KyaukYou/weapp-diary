@@ -9,13 +9,14 @@
   font-size: 28rpx;
   line-height: inherit;
   text-align: inherit;
-  padding: 20rpx 22rpx;
+  padding: 24rpx 22rpx;
   position: relative;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
   align-items: center;
   background: #fff;
+  margin-bottom: 12rpx;
 }
 
 .wux-cell:after {
@@ -37,7 +38,7 @@
   bottom: 0;
   right: 0;
   height: 2rpx;
-  border-bottom: 2rpx solid #d9d9d9;
+  /* border-bottom: 2rpx solid #d9d9d9; */
   color: #d9d9d9;
   transform-origin: 0 100%;
   transform: scaleY(0.5);
@@ -60,12 +61,13 @@
   display: block;
   width: 40rpx;
   height: 40rpx;
-  margin-right: 10rpx;
+  margin-right: 16rpx;
 }
 
 .wux-cell__bd {
   -ms-flex: 1;
   flex: 1;
+  padding-left: 50rpx;
 }
 
 .wux-cell__text {

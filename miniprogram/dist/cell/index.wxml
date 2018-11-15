@@ -20,7 +20,7 @@
     bindopensetting="bindopensetting"
     bindtap="onTap"
 >
-    <view class="wux-cell__hd">
+    <view class="wux-cell__hd" style='position: absolute;top: 24rpx;'>
         <block wx:if="{{ thumb }}">
             <image class="wux-cell__thumb" src="{{ thumb }}" />
         </block>
