@@ -6,10 +6,10 @@
   color: black;
   background: 0 0;
   /* font-size: inherit; */
-  font-size: 28rpx;
+  font-size: 30rpx;
   line-height: inherit;
   text-align: inherit;
-  padding: 24rpx 22rpx;
+  padding: 22rpx 22rpx 24rpx 22rpx;
   position: relative;
   display: -ms-flexbox;
   display: flex;
@@ -104,6 +104,6 @@
   top: -4rpx;
   position: absolute;
   top: 50%;
-  margin-top: -8rpx;
+  margin-top: -4rpx;
   right: 4rpx;
 }
