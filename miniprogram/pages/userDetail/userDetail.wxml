@@ -26,7 +26,7 @@
       
       <view class='fans'>粉丝 {{fans.length}}</view>
     </view>
-    <view class='add-fans' bindtap='addFans' wx:if='{{thisOpenid == myOpenid ? fasle : true}}'>{{addText}}</view>
+    <view class='add-fans' hover-class='fansWatch1' bindtap='addFans' wx:if='{{thisOpenid == myOpenid ? fasle : true}}'>{{addText}}</view>
   </view>
 
   <!-- <wux-cell-group> -->

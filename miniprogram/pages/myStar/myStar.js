@@ -262,11 +262,12 @@ Page({
     Promise.resolve(userData1).then(function (res) {
       mydata = res.data[0].starArr
       console.log(mydata);
-
+      
       wx.cloud.callFunction({
         name: 'getTravel',
         success(res) {
           console.log(res.result.data);
+          wx.hideLoading();
           let a = [];
           for (var i = 0; i < mydata.length; i++) {
             res.result.data.filter(function (item, index) {
@@ -279,6 +280,7 @@ Page({
           that.setData({
             travelList: a
           })
+          
           wx.stopPullDownRefresh();
           let timer1 = null;
           clearInterval(timer1);
@@ -288,6 +290,9 @@ Page({
               clearInterval(timer1);
             }
           }, 200)
+        },
+        fail(res) {
+          wx.hideLoading();
         }
       })
     })

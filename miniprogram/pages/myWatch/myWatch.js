@@ -133,12 +133,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading();
-    this.setData({
-      // id: options.id
-      id: 'oRp3y0MvsGx3TW5zPRYg4iUcTTpI'
+    wx.showLoading({
+      mask: true,
+      title: '正在加载',
     })
-    this.getData(options.id)
+    this.setData({
+      id: options.id
+    })
   },
 
   /**
@@ -152,7 +153,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.getData(this.data.id)
   },
 
   /**

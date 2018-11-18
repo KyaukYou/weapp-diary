@@ -72,9 +72,9 @@ App({
                   // 已经有了不添加
                   // console.log('不需要添加')
                   wx.hideLoading();
-                  wx.showToast({
-                    title: '欢迎回来',
-                  });
+                  // wx.showToast({
+                  //   title: '欢迎回来',
+                  // });
                   that.globalData.login = true
                 } else {
                   // 添加openid，userInfo
@@ -92,7 +92,9 @@ App({
                       starArr: [],
                       fans: [],
                       watch: [],
-                      backgroundImg: {}
+                      backgroundImg: {
+                        url: ''
+                      }
                     },
                     success(res) {
                       console.log(res);
@@ -138,6 +140,6 @@ App({
     openid: '',
     userInfo: {},
     login: false,
-    version: 'V1.1.1115'
+    version: 'V1.2.1118'
   }
 })

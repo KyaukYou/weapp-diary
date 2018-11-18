@@ -126,17 +126,32 @@ Page({
     var mydata;
 
     var a = Promise.resolve(travelData).then(function (res) {
+      let newWhere = [];
+      for (var s in res.data[0].userDetail.where) {
+        newWhere.push(res.data[0].userDetail.where[s])
+      }
+      newWhere = newWhere.join('-');
       that.setData({
         thisOpenid: res.data[0]._openid,
         myOpenid: wx.getStorageSync('openid'),
         starNum: res.data[0].starArr.length,
         userInfo: res.data[0].userInfo,
+        userDetail: res.data[0].userDetail,
+        where: newWhere
       })
 
       that.setData({
         fans: res.data[0].fans,
         watch: res.data[0].watch,
       })
+      if (res.data[0].backgroundImg) {
+        console.log('有')
+        that.setData({
+          bgImg: res.data[0].backgroundImg.url
+        })
+      }else {
+        console.log('没有')
+      }
       that.getMyInfo();
       wx.stopPullDownRefresh()
       if (res.data[0].fans) {
@@ -149,25 +164,10 @@ Page({
           }
         }
       }else {
-
+        that.setData({
+          addText: '关注'
+        })
       }
-
-
-
-      let newWhere = [];
-      for (var s in res.data[0].userDetail.where) {
-        newWhere.push(res.data[0].userDetail.where[s])
-      }
-      newWhere = newWhere.join('-')
-      // newWhere = newWhere.split(',')
-      console.log(res.data[0])
-
-      that.setData({
-        bgImg: res.data[0].backgroundImg.url,
-        userDetail: res.data[0].userDetail,
-        where: newWhere,
-      })
-      
     })
   },
 
@@ -194,8 +194,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getTravelNum(options.id);
-    this.getStarNum(options.id);
     this.setData({
       id: options.id
     })
@@ -212,6 +210,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getTravelNum(this.data.id);
+    this.getStarNum(this.data.id);
   },
 
   /**

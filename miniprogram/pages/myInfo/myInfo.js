@@ -236,9 +236,9 @@ Page({
       },
       success(res) {
         wx.hideLoading();
-        wx.showToast({
-          title: '加载成功',
-        })
+        // wx.showToast({
+        //   title: '加载成功',
+        // })
         let result = res.result.data[0].userDetail
         let newAge = [];
         let newRegion = [];

@@ -76,4 +76,5 @@
   text-align: center;
   font-size: 24rpx;
   width: 82rpx;
+  transition: all .3s ease;
 }

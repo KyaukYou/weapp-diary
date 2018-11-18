@@ -2,6 +2,8 @@
   "cloud": true,
   "pages": [
     "pages/index/index",
+    "pages/showVer/showVer",
+    
     "pages/my/my",
     "pages/myFans/myFans",
     "pages/myWatch/myWatch",

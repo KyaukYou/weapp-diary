@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "更新日志",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+      "van-cell": "../../module/cell/index",
+      "van-cell-group": "../../module/cell-group/index"
+  }
+}

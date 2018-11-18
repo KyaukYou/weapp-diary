@@ -1,5 +1,6 @@
 <view class='page'>
-  <view class='list' hover-class='fansWatch' wx:for='{{myData}}' wx:key data-openid='{{item.openid}}' bindtap='toUsers'>
+ <!-- hover-class='fansWatch' -->
+  <view class='list' wx:for='{{myData}}' wx:key data-openid='{{item.openid}}' bindtap='toUsers'>
     <view class='list-img'>
       <image src='{{item.avatarUrl}}'></image>
     </view>
@@ -10,7 +11,7 @@
         </view>
       </view>
     </view>
-    <view class='guanzhu' catchtap='addWatch' data-index='{{index}}' data-openid='{{item.openid}}'>{{textArr[index]}}</view>
+    <view class='guanzhu' hover-class='fansWatch' catchtap='addWatch' data-index='{{index}}' data-openid='{{item.openid}}'>{{textArr[index]}}</view>
   </view>
 
   <wux-toptips id="wux-toptips" />
