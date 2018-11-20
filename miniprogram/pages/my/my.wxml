@@ -22,6 +22,24 @@
         <view class='my-info-two'>{{fans.length}}</view>
       </view>
     </view>
+
+    <view class='my-info' style='display: {{showAdd == "flex" ? "none" : "flex" }}'>
+      <view class='my-info-child' bindtap='toMyStar' style='width: 33.333%'>
+        <view class='my-info-one'>我的收藏</view>
+        <view class='my-info-two'>{{starNum}}</view>
+      </view>
+      <view class='my-info-border' style='left: 33.333%'></view>
+      <view class='my-info-child' bindtap='toWatch' style='width: 33.333%'>
+        <view class='my-info-one'>我的关注</view>
+        <view class='my-info-two'>{{watch.length}}</view>
+      </view>
+      <view class='my-info-border' style='left: 66.666%'></view>
+      <view class='my-info-child' bindtap='toFans' style='width: 33.333%'>
+        <view class='my-info-one'>我的粉丝</view>
+        <view class='my-info-two'>{{fans.length}}</view>
+      </view>
+    </view>
+
     <image src='{{bgImg}}' class='show-img' mode='aspectFill'></image>
     <!-- <wux-icon size='22' type='md-planet' class='edit-img' bindtap='changeImg' /> -->
     <image bindtap='shuaxin' class='shuaxin-img {{animationSlow}}' src='../../images/shuaxin.png'></image>
@@ -45,7 +63,7 @@
 
 
   <!-- <wux-cell-group style=''> -->
-  <wux-cell thumb='../../images/star_list.png' title="我的收藏" is-link bindtap='toMyStar' style='display: {{showStar}}'></wux-cell>
+  <!-- <wux-cell thumb='../../images/star_list.png' title="我的收藏" is-link bindtap='toMyStar' style='display: {{showStar}}'></wux-cell> -->
   <!-- </wux-cell-group> -->
   <wux-cell thumb='../../images/info_list.png' title="我的信息" is-link bindtap='toMyDetail'></wux-cell>
   <wux-cell thumb='../../images/bug_list.png' title="BUG提交" is-link bindtap='tobug'></wux-cell>
