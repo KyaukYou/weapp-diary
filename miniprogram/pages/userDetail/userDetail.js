@@ -22,6 +22,16 @@ Page({
     whatHe: '他'
   },
   addFans() {
+    if (!wx.getStorageSync('openid')) {
+      $wuxToptips().error({
+        hidden: true,
+        text: '请先授权',
+        duration: 2500,
+        success() { },
+      })
+      return;
+    }
+
     if(this.data.addText == '关注') {
       let that = this;
       let userAll = wx.getStorageSync('userInfo');

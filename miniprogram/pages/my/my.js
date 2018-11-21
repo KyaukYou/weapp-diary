@@ -1,5 +1,6 @@
 const app = getApp();
 import { $wuxDialog } from '../../dist/index'
+import { $wuxToptips } from '../../dist/index'
 Page({
 
   /**
@@ -67,6 +68,16 @@ Page({
   },
   // 修改背景图
   changeImg() {
+    if (!wx.getStorageSync('openid')) {
+      $wuxToptips().error({
+        hidden: true,
+        text: '请先授权',
+        duration: 2500,
+        success() { },
+      })
+      return;
+    }
+
     let that = this;
     wx.chooseImage({
       count: 1,
@@ -160,9 +171,15 @@ Page({
         url: '../myInfo/myInfo',
       })
     } else {
-      wx.showToast({
-        title: '请先授权登录',
-      })
+      if (!wx.getStorageSync('openid')) {
+        $wuxToptips().error({
+          hidden: true,
+          text: '请先授权',
+          duration: 2500,
+          success() { },
+        })
+        return;
+      }
     }
   },
   // 获得旅行数量
@@ -287,9 +304,15 @@ Page({
         url: '../uploadBug/uploadBug',
       })
     }else {
-      wx.showToast({
-        title: '请先授权登录',
-      })
+      if (!wx.getStorageSync('openid')) {
+        $wuxToptips().error({
+          hidden: true,
+          text: '请先授权',
+          duration: 2500,
+          success() { },
+        })
+        return;
+      }
     }
   },
   /**

@@ -68,6 +68,16 @@ Page({
   },
   // 添加关注
   addWatch(e) {
+    if (!wx.getStorageSync('openid')) {
+      $wuxToptips().error({
+        hidden: true,
+        text: '请先授权',
+        duration: 2500,
+        success() { },
+      })
+      return;
+    }
+
     if (this.data.textArr[e.currentTarget.dataset.index] == '关注') {
       let that = this;
       let userAll = wx.getStorageSync('userInfo');

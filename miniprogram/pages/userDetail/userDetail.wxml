@@ -34,13 +34,13 @@
       <wux-textarea label="出生日期" disabled autoHeight controlled value='{{userDetail.birth}}' />
     </wux-cell>
     <wux-cell is-link thumb='../../images/email.png' hover-class="none">
-      <wux-textarea label="邮箱地址" disabled autoHeight controlled value='{{userDetail.email}}' />
+      <wux-textarea label="邮箱地址" disabled autoHeight controlled value='{{userDetail.email || "暂时没有邮箱呀~" }}' />
     </wux-cell>
     <wux-cell is-link thumb='../../images/where.png' hover-class="none">
       <wux-textarea label="所在地区" disabled autoHeight controlled value='{{where}}' />
     </wux-cell>
     <wux-cell is-link thumb='../../images/show.png' hover-class="none">
-      <wux-textarea label="个人介绍" disabled autoHeight controlled value='{{userDetail.info}}' />
+      <wux-textarea label="个人介绍" disabled autoHeight controlled value='{{userDetail.info || "暂时没有介绍呀~" }}' />
     </wux-cell>
   <!-- </wux-cell-group> -->
 

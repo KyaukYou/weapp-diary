@@ -55,12 +55,12 @@
     <view class='my-image' wx:if='{{!hasUserInfo}}'>
       <view class='my-image-no'>
         <button open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">
-          点击获取
+          获取授权
         </button>
       </view>
     </view>
   </view>
-
+<wux-toptips id="wux-toptips" />
 
   <!-- <wux-cell-group style=''> -->
   <!-- <wux-cell thumb='../../images/star_list.png' title="我的收藏" is-link bindtap='toMyStar' style='display: {{showStar}}'></wux-cell> -->

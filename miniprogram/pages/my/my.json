@@ -5,6 +5,7 @@
         "wux-cell-group": "../../dist/cell-group/index",
         "wux-cell": "../../dist/cell/index",
         "wux-icon": "../../dist/icon/index",
-        "wux-dialog": "../../dist/dialog/index"
+        "wux-dialog": "../../dist/dialog/index",
+        "wux-toptips": "../../dist/toptips/index"
     }
 }
