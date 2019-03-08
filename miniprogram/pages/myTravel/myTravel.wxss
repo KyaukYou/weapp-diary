@@ -1,6 +1,6 @@
 page {
   /* padding-top: 12rpx; */
-  background-color: rgb(246,246,246);
+  background-color: rgb(255,255,255);
 }
 
 .index-top {
@@ -9,7 +9,7 @@ page {
   left: 0;
   right: 0;
   height: 160rpx;
-  background-color: rgb(246,246,246);
+  background-color: rgb(53, 193, 248);
   z-index: 999;
   /* margin-bottom: 160rpx; */
   /* margin-bottom: 320rpx; */
@@ -73,7 +73,7 @@ page {
   position: absolute;
   width: 50rpx;
   height: 50rpx;
-  right: 0;
+  /* right: 0; */
   top: 0;
   z-index: 100;
   text-align: center;
@@ -86,14 +86,14 @@ page {
 }
 
 .delTravel:hover {
-  background-color: rgba(0, 0, 0, 0.2);
+  /* background-color: rgba(0, 0, 0, 0.2); */
 }
 
 .container {
   width: 100%;
   /* height: 100%; */
   height: auto;
-  background-color: rgb(246,246,246);
+  background-color: rgb(255,255,255);
   /* display: flex; */
   /* flex-flow: row wrap; */
   /* justify-content: center; */
@@ -109,15 +109,15 @@ page {
 
 .index {
   width: 94%;
-  height: 380rpx;
+  height: 300rpx;
   display: flex;
   flex-flow: column wrap;
   /* border: 2rpx solid gray; */
-  border-radius: 8rpx;
+  /* border-radius: 8rpx; */
   overflow: hidden;
-  margin: 20rpx auto 36rpx auto;
+  margin: 60rpx auto 60rpx auto;
   /* margin: 20rpx auto; */
-  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.3); */
   position: relative;
 }
 
@@ -126,43 +126,55 @@ page {
   height: 100%;
   position: relative;
   display: flex;
-  flex-flow: column wrap;
-  position: relative;
+  flex-flow: row nowrap;
+  align-items: center;
 }
 
 .index .index-wrap>image {
-  width: 100%;
+  width: 58%;
   height: 100%;
-  position: absolute;
+  /* position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 0; */
   /* z-index: -1; */
+}
+
+.index-wrap-text {
+  width: 42%;
+  height: 94%;
+  background-color: white;
+  border: 1px solid rgb(240, 240, 240);
+  color: black;
 }
 
 .index .index-title {
   width: 100%;
-  color: white;
+  color: #333;
   font-size: 36rpx;
   font-weight: bold;
   height: auto;
   box-sizing: border-box;
-  padding: 24rpx;
-  padding-right: 30rpx;
+  padding: 16rpx;
+  padding-right: 4rpx;
   padding-bottom: 12rpx;
   line-height: 42rpx;
   z-index: 10;
+  height: 66rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
 
 .index .index-smtitle {
-  width: 77%;
+  width: 100%;
   height: auto;
   font-size: 20rpx;
-  color: white;
+  color: #999;
   box-sizing: border-box;
-  padding: 24rpx;
-  padding-left: 40rpx;
+  padding: 16rpx;
+  /* padding-left: 40rpx; */
   display: flex;
   flex-flow: column wrap;
   padding-top: 2rpx;
@@ -173,7 +185,7 @@ page {
 .index .index-smtitle::after {
   content: '';
   position: absolute;
-  width: 7rpx;
+  width: 0rpx;
   /* height: 80%; */
   top: 14%;
   bottom: 9%;
@@ -212,8 +224,8 @@ page {
 }
 
 .index .index-footer-left image {
-  width: 50rpx;
-  height: 50rpx;
+  width: 42rpx;
+  height: 42rpx;
   border-radius: 50%;
   margin-left: 3%;
   margin-top: -2rpx;
@@ -222,9 +234,11 @@ page {
 .index .index-footer-left view {
   height: 100%;
   line-height: 66rpx;
-  font-size: 22rpx;
+  font-size: 21rpx;
   font-weight: bold;
   margin-left: 14rpx;
+  position: relative;
+  top: 4rpx;
 }
 
 .index .index-footer-right {
@@ -235,7 +249,7 @@ page {
   justify-content: flex-end;
   box-sizing: border-box;
   padding-right: 10rpx;
-  color: #35c1f8;
+  color: rgb(53, 193, 248);
 }
 
 .index .index-footer-one {
@@ -256,7 +270,7 @@ page {
   height: 100%;
   line-height: 70rpx;
   color: white;
-  /* color: #35c1f8; */
+  color: rgb(53, 193, 248);
   font-size: 24rpx;
   text-align: left;
   font-weight: bold;

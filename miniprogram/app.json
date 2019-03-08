@@ -2,9 +2,9 @@
   "cloud": true,
   "pages": [
     "pages/index/index",
-    "pages/showVer/showVer",
-    
     "pages/my/my",
+    "pages/myTravel/myTravel",
+    "pages/showVer/showVer",
     "pages/myFans/myFans",
     "pages/myWatch/myWatch",
     "pages/myInfo/myInfo",
@@ -13,7 +13,6 @@
     "pages/testchat/testchat",     
     "pages/uploadBug/uploadBug",
     "pages/addTravel/addTravel",    
-    "pages/myTravel/myTravel",
     "pages/editTravel/editTravel",  
     "pages/travelDetail/travelDetail",  
     "pages/go/go",

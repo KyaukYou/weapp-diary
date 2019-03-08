@@ -140,6 +140,6 @@ App({
     openid: '',
     userInfo: {},
     login: false,
-    version: 'V1.3.1121'
+    version: 'V1.5.0308'
   }
 })

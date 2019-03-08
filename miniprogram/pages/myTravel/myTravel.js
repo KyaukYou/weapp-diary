@@ -223,9 +223,10 @@ Page({
 
       that.setData({
         travelList: aa
-      })
+      });
+      wx.hideLoading();
       wx.stopPullDownRefresh();
-      let timer1 = null;
+      var timer1 = null;
       clearInterval(timer1);
       timer1 = setInterval(function () {
         if (app.globalData.login) {
@@ -248,7 +249,7 @@ Page({
     var mydata;
     Promise.resolve(userData1).then(function (res) {
       mydata = res.data[0]
-      // console.log(res.data[0]);
+      console.log(res);
       that.setData({
         userData: mydata
       });

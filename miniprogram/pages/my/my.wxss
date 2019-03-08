@@ -126,6 +126,8 @@ button::after {
 .my-image .my-info-detail .xingbie {
   width: 34rpx;
   height: 34rpx;
+  position: relative;
+  top: 2rpx;
 }
 
 

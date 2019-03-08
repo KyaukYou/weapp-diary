@@ -105,6 +105,10 @@ Page({
   delTravel(e) {
     let that = this;
     let bol = e.currentTarget.dataset.lock;
+    let sOpenid = wx.getStorageSync('openid');
+    if (e.currentTarget.dataset.openid != sOpenid) {
+      return false;
+    }
 
     if (bol == false) {
       wx.showModal({

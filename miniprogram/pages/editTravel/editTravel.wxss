@@ -48,6 +48,7 @@ page {
   margin: 14rpx 2%;
   box-sizing: border-box;
   position: relative;
+  overflow: hidden;
 }
 
 .add-full image {
@@ -293,6 +294,7 @@ page {
   font-size: 14px;
   border: 1rpx solid rgb(248, 248, 248);
   transition: all .2s ease;
+  overflow: hidden;
 }
 
 .add-one-add image {
