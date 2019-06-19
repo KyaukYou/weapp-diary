@@ -8,21 +8,21 @@
     "pages/myFans/myFans",
     "pages/myWatch/myWatch",
     "pages/myInfo/myInfo",
-    "pages/userDetail/userDetail",  
-    "pages/myStar/myStar",    
-    "pages/testchat/testchat",     
+    "pages/userDetail/userDetail",
+    "pages/myStar/myStar",
+    "pages/testchat/testchat",
     "pages/uploadBug/uploadBug",
-    "pages/addTravel/addTravel",    
-    "pages/editTravel/editTravel",  
-    "pages/travelDetail/travelDetail",  
+    "pages/addTravel/addTravel",
+    "pages/editTravel/editTravel",
+    "pages/travelDetail/travelDetail",
     "pages/go/go",
-    "pages/travelShow/travelShow"  
+    "pages/travelShow/travelShow"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#35c1f8",
-    "navigationBarTitleText": "柴行",
+    "navigationBarTitleText": "旅行小柴",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
@@ -44,5 +44,6 @@
         "text": "我的"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
