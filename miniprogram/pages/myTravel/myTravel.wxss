@@ -119,6 +119,7 @@ page {
   /* margin: 20rpx auto; */
   /* box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.3); */
   position: relative;
+  box-shadow: 0 0px 8px 0px rgba(199, 199, 199, 0.3);
 }
 
 .index .index-wrap {
@@ -143,7 +144,7 @@ page {
 
 .index-wrap-text {
   width: 42%;
-  height: 94%;
+  height: 100%;
   background-color: white;
   border: 1px solid rgb(240, 240, 240);
   color: black;

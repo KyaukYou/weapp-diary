@@ -7,12 +7,23 @@
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
+		"coverView": true,
 		"nodeModules": true,
-		"uglifyFileName": true
+		"autoAudits": false,
+		"uglifyFileName": true,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		},
+		"enhance": true
 	},
 	"appid": "wx7e8eb46444d8dd39",
 	"projectname": "%E6%9F%B4%E8%A1%8C",
-	"libVersion": "2.6.2",
+	"libVersion": "2.7.7",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
