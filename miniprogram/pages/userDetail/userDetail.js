@@ -33,6 +33,8 @@ Page({
     }
 
     if(this.data.addText == '关注') {
+      let db = wx.cloud.database();
+      
       let that = this;
       let userAll = wx.getStorageSync('userInfo');
       let user1 = {
@@ -82,11 +84,124 @@ Page({
       })
     }
     else {
-      $wuxToptips().warn({
-        hidden: true,
-        text: '无法取消关注',
-        duration: 2500,
-        success() { },
+      // $wuxToptips().warn({
+      //   hidden: true,
+      //   text: '无法取消关注',
+      //   duration: 2500,
+      //   success() { },
+      // })
+      let db = wx.cloud.database();
+      let that = this;
+
+      let userAll = wx.getStorageSync('userInfo');
+      let user1 = {
+        avatarUrl: userAll.avatarUrl,
+        gender: userAll.gender,
+        nickName: userAll.nickName,
+        openid: this.data.myOpenid
+      }
+      let user2 = {
+        avatarUrl: that.data.userInfo.avatarUrl,
+        gender: that.data.userInfo.gender,
+        nickName: that.data.userInfo.nickName,
+        openid: this.data.thisOpenid
+      }
+
+      wx.showModal({
+        title: '是否取消',
+        content: '是否取消关注',
+        success(res) {
+          if (res.confirm) {
+
+            // 取消关注  
+            let myData = db.collection('users').where({
+              _openid: that.data.myOpenid
+            }).get()
+
+            Promise.resolve(myData).then(function (res) {
+              console.log(res);
+              let data1 = res.data[0];
+              for(var i=0; i<data1.watch.length; i++) {
+                if (data1.watch[i].openid == that.data.thisOpenid) {
+                  data1.watch.splice(i,1);
+                }
+              }
+              console.log(data1)
+              db.collection('users').doc(data1._id).update({
+                data: {
+                  watch: data1.watch
+                },
+                success(res) {
+                  console.log(res);
+
+                  //取消粉丝
+                  wx.cloud.callFunction({
+                    name: 'cancelFans',
+                    data: {
+                      thisOpenid: that.data.thisOpenid,
+                      myOpenid: that.data.myOpenid
+                    },
+                    success(res) {
+                      console.log(res)
+
+                      let data2 = res.result.data[0];
+                      console.log(data2)
+                      for (var b = 0; b < data2.fans.length; b++) {
+                        if (data2.fans[b].openid == that.data.myOpenid) {
+                          data2.fans.splice(b, 1);
+                        }
+                      }
+
+                      wx.cloud.callFunction({
+                        name: 'cancelFans1',
+                        data: {
+                          thisOpenid: that.data.thisOpenid,
+                          myOpenid: that.data.myOpenid,
+                          dataId: data2._id,
+                          dataFans: data2.fans
+                        },
+                        success(res) {
+                          console.log(res)
+                          if(res.result.stats.updated == 1) {
+                            $wuxToptips().warn({
+                              hidden: true,
+                              text: '取消关注',
+                              duration: 2500,
+                              success() { },
+                            })
+                            that.setData({
+                              addText: '关注'
+                            })
+                            that.getTravelNum(that.data.id);
+                            that.getStarNum(that.data.id);
+                          }
+
+
+                        },
+                        fail(res) {
+                          console.log(res);
+                        }
+                      })
+
+                    },
+                    fail(res) {
+                      console.log(res);
+                    }
+                  })
+
+                },
+                fail(res) {
+                  console.log(res);
+                }
+              })
+
+            })
+
+          }
+          else {
+
+          }
+        }  
       })
     }
   },
@@ -164,6 +279,7 @@ Page({
       }
       that.getMyInfo();
       wx.stopPullDownRefresh()
+      console.log(res.data[0].fans)
       if (res.data[0].fans) {
         for (var i = 0; i < res.data[0].fans.length; i++) {
           if (res.data[0].fans[i].openid == that.data.myOpenid) {

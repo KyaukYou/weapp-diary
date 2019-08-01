@@ -18,7 +18,7 @@ Page({
     showAdd: 'none',
     showStar: 'block',
     bgImg: '',
-    animationSlow: '',
+    animationSlow: 'animationSlow-pause',
     timer: null
   },
   // 我的关注
@@ -233,7 +233,7 @@ Page({
       })
       that.data.timer = setTimeout(function() {
         that.setData({
-          animationSlow: ''
+          animationSlow: 'animationSlow-pause'
         })
         clearTimeout(that.data.timer);
       },2000);
@@ -341,7 +341,7 @@ Page({
   },
   shuaxin() {
     this.setData({
-      animationSlow: 'animationSlow'
+      animationSlow: ''
     })
     this.getTravelNum();
     this.getStarNum();

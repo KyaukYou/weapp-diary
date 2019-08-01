@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "上传旅行日记",
+  "navigationBarTitleText": "新增日记",
   "usingComponents": {
     "van-field": "../../module/field/index",
     "van-cell": "../../module/cell/index",

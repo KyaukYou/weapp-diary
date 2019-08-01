@@ -9,17 +9,17 @@
 
   <view class='add-one'>
     <van-cell-group>
-      <van-field  maxlength='20' value="{{ title }}" type="text" clearable label="旅行标题" placeholder="请输入旅行标题(20字以内)"  border="false" bind:input='addTitle' />
-      <view hover-class='addT-hover' class='add-one-add' bindtap='headerimg'>旅行封面
+      <van-field  maxlength='20' value="{{ title }}" type="text" clearable label="日记标题" placeholder="请输入日记标题(20字以内)"  border="false" bind:input='addTitle' />
+      <view hover-class='addT-hover' class='add-one-add' bindtap='headerimg'>日记封面
         <!-- <image wx:if="{{headerImgArr.length > 0 ? false : true}}" src='../../images/moren.jpg'>
         </image> -->
         <image mode='aspectFill' wx:if="{{headerImgArr.length > 0 ? true : false}}" src='{{headerImgArr[0]}}'></image>
       </view>
-      <!-- <van-field maxlength='20' value="{{ title }}" type="text" clearable label="旅行封面" placeholder="请输入旅行标题(20字以内)"  border="false" bind:input='addTitle' >
+      <!-- <van-field maxlength='20' value="{{ title }}" type="text" clearable label="日记封面" placeholder="请输入日记标题(20字以内)"  border="false" bind:input='addTitle' >
         <image slot="button" size="small" type="calm" bind:click='chooseWhere'>选择位置</image>
       </van-field> -->
 
-      <van-field value="{{ where }}" type='text' center clearable label="旅行位置" placeholder="请选择" border="false"  use-button-slot bind:input='addWhere'>
+      <van-field value="{{ where }}" type='text' center clearable label="日记位置" placeholder="请选择" border="false"  use-button-slot bind:input='addWhere'>
         <!-- <picker slot='button' return:false> -->
         <wux-button slot="button" size="small" type="calm" bind:click='chooseWhere'>选择位置</wux-button>
         <!-- </picker> -->
@@ -27,7 +27,7 @@
       </van-field>
 
 
-      <van-field value="{{ beginDate }}" type='text' disabled='false' center clearable label="旅行开始日期" placeholder="请选择" border="false"  use-button-slot>
+      <van-field value="{{ beginDate }}" type='text' disabled='false' center clearable label="日记开始日期" placeholder="请选择" border="false"  use-button-slot>
         <!-- <wux-button slot="button" size="small" type="calm" bind:click='chooseStart'>
           <picker mode = date>选择日期</picker>
         </wux-button> -->
@@ -38,7 +38,7 @@
         </picker>
       </van-field>
 
-      <van-field value="{{ endDate }}" type='text' disabled='false' center clearable label="旅行结束日期" placeholder="请选择" border="false"  use-button-slot>
+      <van-field value="{{ endDate }}" type='text' disabled='false' center clearable label="日记结束日期" placeholder="请选择" border="false"  use-button-slot>
         <!-- <wux-button slot="button" size="small" type="calm" bind:click='chooseEnd'>选择日期</wux-button> -->
         <picker hover-class='chooseBtn-hover' class='picker' slot='button' mode='date' bindchange='chooseEnd'>
           <wux-button size="small" type="calm">
@@ -77,7 +77,7 @@
             <van-switch data-index='{{main_index}}' type='warning' class='add-ss' checked="{{ item.show }}" size='28' bind:change="onchange1" />
           </view>
         </view>
-        <textarea value='{{item.text}}' data-index='{{main_index}}' maxlength='500' bindinput='getTextarea' placeholder='写下你的旅行日记吧(500字以内)'>
+        <textarea value='{{item.text}}' data-index='{{main_index}}' maxlength='500' bindinput='getTextarea' placeholder='写下你的日记吧(500字以内)'>
           <view>{{item.text.length}}/500</view>
         </textarea>
       </view>

@@ -27,6 +27,91 @@ Page({
     })
   },
 
+
+  // 同步删除收藏，喜欢
+  syncData(id) {
+    let db = wx.cloud.database();
+    let allUser = db.collection('users').get();
+
+    Promise.resolve(allUser).then(function(res) {
+      console.log(res);
+      let likeArr1 = [];
+      let starArr1 = [];
+      let travelArr1 = [];
+      let result = res.data;
+      for(var i=0; i<result.length; i++) {
+        // if(result[i])
+
+        // 喜欢数组
+        for(let j=0; j<result[i].likeArr.length; j++) {
+          if (result[i].likeArr[j] == id) {
+            result[i].likeArr.splice(j,1);
+            likeArr1.push(i)
+          }
+        }
+
+        // 收藏数组
+        for (let k = 0; k < result[i].starArr.length; k++) {
+          if (result[i].starArr[k] == id) {
+            result[i].starArr.splice(k, 1);
+            starArr1.push(i)
+          }
+        }
+
+        // 我的旅行数组
+        for (let x = 0; x < result[i].travelArr.length; x++) {
+          if (result[i].travelArr[x] == id) {
+            result[i].travelArr.splice(x, 1);
+            travelArr1.push(i)
+          }
+        }
+      }
+
+      // console.log(result);
+      // console.log(likeArr1,starArr1,travelArr1)
+      // 或得需要更新的用户
+      let conArr = (likeArr1.concat(starArr1)).concat(travelArr1)
+      let conArr1 = [...new Set(conArr)]
+
+
+      // 循环更新
+      for(var a=0; a<conArr1.length; a++) {
+
+        wx.cloud.callFunction({
+          name: 'syncTravel',
+          data: {
+            id: result[conArr1[a]],
+            likeArr: result[conArr1[a]].likeArr,
+            starArr: result[conArr1[a]].starArr,
+            travelArr: result[conArr1[a]].travelArr
+          },
+          success(res) {
+            console.log(res)
+          }
+        })  
+
+        // db.collection('users').doc(result[conArr1[a]]._id).update({
+        //   data: {
+        //     likeArr: result[conArr1[a]].likeArr,
+        //     starArr: result[conArr1[a]].starArr,
+        //     travelArr: result[conArr1[a]].travelArr
+        //   },
+        //   success(res) {
+        //     console.log(res)
+        //   },
+        //   fail(res) {
+        //     console.log(res)
+        //   }
+        // })        
+      }
+
+    }) 
+
+
+    
+    // console.log(allUser)
+  },
+
   // 删除旅行
   delTravelId(e) {
     let db = wx.cloud.database();
@@ -60,6 +145,7 @@ Page({
                 duration: 1500,
                 success() { 
 
+                  that.syncData(id);
                   
                   wx.showLoading({
                     mask: true,
@@ -275,6 +361,7 @@ Page({
   onLoad: function (options) {
     // var that = this;
     // that.getInit();
+    this.syncData()
   },
 
   /**
