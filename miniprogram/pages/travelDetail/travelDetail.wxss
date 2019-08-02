@@ -291,7 +291,7 @@ page {
 .detail-container .contact-border-footer {
   position: absolute;
   bottom: -40rpx;
-  left: -14rpx;
+  left: -16rpx;
   color: #35c1f8;
   font-size: 24rpx;
 }
@@ -300,8 +300,8 @@ page {
   position: absolute;
   width: 60rpx;
   height: 60rpx;
-  right: 20rpx;
-  top: 18rpx;
+  right: -10rpx;
+  top: 20rpx;
   text-align: center;
   color: #35c1f8;
 }

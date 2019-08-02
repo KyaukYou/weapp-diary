@@ -71,7 +71,7 @@ Page({
     if (!wx.getStorageSync('openid')) {
       $wuxToptips().error({
         hidden: true,
-        text: '请先授权',
+        text: '请先登录',
         duration: 2500,
         success() { },
       })
@@ -165,16 +165,123 @@ Page({
       url: '../myStar/myStar',
     })
   },
+
+  createTime() {
+    let timer1 = new Date();
+    let y = timer1.getFullYear();
+    let m = timer1.getMonth() + 1;
+    let d = timer1.getDate();
+    let h = timer1.getHours();
+    let m1 = timer1.getMinutes();
+    let s = timer1.getSeconds();
+    y = this.addZero(y);
+    m = this.addZero(m);
+    d = this.addZero(d);
+    h = this.addZero(h);
+    m1 = this.addZero(m1);
+    s = this.addZero(s);
+    return `${y}-${m}-${d} ${h}:${m1}:${s}`;
+  },
+
+  addZero(num) {
+    let addNum;
+    if (num <= 9) {
+      addNum = "0" + num;
+    } else {
+      addNum = num;
+    }
+    return addNum;
+  },
+
   toMyDetail() {
+    let that = this;
     if (wx.getStorageSync('openid')) {
-      wx.navigateTo({
-        url: '../myInfo/myInfo',
+      
+
+      wx.getLocation({
+        type: 'wgs84',
+        altitude: true,
+        success(res) {
+          console.log(res)
+          const latitude = res.latitude;
+          const longitude = res.longitude;
+          wx.request({
+            url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=RAHBZ-KLP3O-HCJWQ-SVU4O-EHKB3-SLFZA&get_poi=1`,
+            data: {},
+            header: {
+              'Content-Type': 'json'
+            },
+            method: 'GET',
+            success(res) {
+              console.log(res);
+              let getAddress = res.data.result;
+              let db = wx.cloud.database();
+              let myDetails = db.collection('users').where({
+                _openid: wx.getStorageSync('openid')
+              }).get();  
+
+              Promise.resolve(myDetails).then(function(res){
+                console.log(res);
+                let detail = res.data[0].userDetail;
+
+                detail.finalLogin.unshift({
+                  time: that.createTime(),
+                  address: getAddress.address_component,
+                  trueAddress: `${latitude},${longitude}`
+                })
+                if(detail.ifFirst == true) {
+                  detail.where = [getAddress.address_component.province, getAddress.address_component.city, getAddress.address_component.district]
+                }
+
+                wx.cloud.callFunction({
+                  name: 'uploadDetails',
+                  data: {
+                    openid: res.data[0]._openid,
+                    detail: detail
+                  },
+                  success(res) {
+                    console.log(res)
+                    wx.navigateTo({
+                      url: '../myInfo/myInfo',
+                    })
+                  },
+                  fail(res) {
+                    console.log(res)
+                    wx.navigateTo({
+                      url: '../myInfo/myInfo',
+                    })
+                  }
+                })
+                // db.collection('users').where({
+                //   _id: res.data[0]._id
+                // }).update({
+                //   data: {
+                //     userDetail: detail
+                //   },
+                //   success(res) {
+                //     console.log(res)
+                //     wx.navigateTo({
+                //       url: '../myInfo/myInfo',
+                //     })
+                //   }
+                // })
+              })
+
+            },
+            fail(res) {
+              console.log(res);
+            }
+          })
+
+
+        },
       })
+
     } else {
       if (!wx.getStorageSync('openid')) {
         $wuxToptips().error({
           hidden: true,
-          text: '请先授权',
+          text: '请先登录',
           duration: 2500,
           success() { },
         })
@@ -232,9 +339,17 @@ Page({
         watch: res.data[0].watch, 
       })
       that.data.timer = setTimeout(function() {
-        that.setData({
-          animationSlow: 'animationSlow-pause'
-        })
+        if (that.data.animationSlow == '') {
+          that.setData({
+            animationSlow: 'animationSlow-pause'
+          })
+          $wuxToptips().success({
+            hidden: true,
+            text: '刷新成功',
+            duration: 1500,
+            success() { },
+          })
+        }
         clearTimeout(that.data.timer);
       },2000);
       // wx.stopPullDownRefresh()
@@ -307,7 +422,7 @@ Page({
       if (!wx.getStorageSync('openid')) {
         $wuxToptips().error({
           hidden: true,
-          text: '请先授权',
+          text: '请先登录',
           duration: 2500,
           success() { },
         })

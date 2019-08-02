@@ -42,7 +42,9 @@
 
     <image src='{{bgImg}}' class='show-img' mode='aspectFill'></image>
     <!-- <wux-icon size='22' type='md-planet' class='edit-img' bindtap='changeImg' /> -->
-    <image bindtap='shuaxin' class='shuaxin-img animationSlow {{animationSlow}}' src='../../images/shuaxin.png'></image>
+    <view bindtap='shuaxin' class='shuaxin-img animationSlow {{animationSlow}}'>
+      <image style="width: 62%; height: 62%;"  src='../../images/shuaxin.png'></image>
+    </view>
     <image class='edit-img' src='../../images/skin.png' bindtap='changeImg'></image>
     <view class='my-image' wx:if='{{hasUserInfo}}'>
       <image src="{{userInfo.avatarUrl}}"></image>
@@ -55,7 +57,7 @@
     <view class='my-image' wx:if='{{!hasUserInfo}}'>
       <view class='my-image-no'>
         <button open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">
-          获取授权
+          点击登录
         </button>
       </view>
     </view>
@@ -65,8 +67,8 @@
   <!-- <wux-cell-group style=''> -->
   <!-- <wux-cell thumb='../../images/star_list.png' title="我的收藏" is-link bindtap='toMyStar' style='display: {{showStar}}'></wux-cell> -->
   <!-- </wux-cell-group> -->
-  <wux-cell thumb='../../images/info_list.png' title="我的信息" is-link bindtap='toMyDetail'></wux-cell>
-  <wux-cell thumb='../../images/bug_list.png' title="BUG提交" is-link bindtap='tobug'></wux-cell>
+  <wux-cell thumb='../../images/info_list.png' title="我的信息" is-link bindtap='toMyDetail' extra=" "></wux-cell>
+  <wux-cell thumb='../../images/bug_list.png' title="BUG提交" is-link bindtap='tobug' extra=" "></wux-cell>
   <!-- <wux-cell title="版本号" is-link extra="{{version}}"></wux-cell> -->
   <wux-cell thumb='../../images/ver_list.png' title="版本号" bindtap='showVersion' is-link extra="{{version}}"></wux-cell>
 

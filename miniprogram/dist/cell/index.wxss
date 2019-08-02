@@ -62,6 +62,8 @@
   width: 40rpx;
   height: 40rpx;
   margin-right: 16rpx;
+  position: relative;
+  top: -2px;
 }
 
 .wux-cell__bd {
@@ -102,8 +104,8 @@
   transform: matrix(0.71, 0.71, -.71, 0.71, 0, 0);
   position: relative;
   top: -4rpx;
-  position: absolute;
-  top: 50%;
-  margin-top: -4rpx;
-  right: 4rpx;
+  /* position: absolute;
+  top: 20rpx;
+  margin-top: -4rpx; */
+  right: -20rpx;
 }

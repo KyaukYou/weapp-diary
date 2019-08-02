@@ -27,7 +27,7 @@
     </view>
     <view wx:if='{{index % 2 == 0}}' class='index-wrap'>
       <image lazy-load='{{lazyloadBol}}' mode='aspectFill' src='{{item.data.headerImg}}'></image>
-      <view class='index-wrap-text' style='border-left: 0;'>
+      <view class='index-wrap-text index-wrap-text-right' style='border-left: 0;'>
         <view class='index-title'>{{item.data.title}}</view>
         <view class='index-smtitle'>
           <text>{{item.data.sDate}} {{item.data.day}}天 {{item.data.see}}次浏览</text>
@@ -63,7 +63,7 @@
       <wux-icon type='{{item.data.lock == true ? "md-lock" : "md-unlock" }}' size='18' style='position: relative; right: -4rpx; top: -4rpx;' />
     </view>
     <view wx:if='{{index % 2 != 0}}' class='index-wrap'>
-      <view class='index-wrap-text' style='border-right: 0;'>
+      <view class='index-wrap-text index-wrap-text-left' style='border-right: 0;'>
         <view class='index-title'>{{item.data.title}}</view>
         <view class='index-smtitle'>
           <text>{{item.data.sDate}} {{item.data.day}}天 {{item.data.see}}次浏览</text>

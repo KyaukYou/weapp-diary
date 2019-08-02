@@ -25,7 +25,7 @@ Page({
     if (!wx.getStorageSync('openid')) {
       $wuxToptips().error({
         hidden: true,
-        text: '请先授权',
+        text: '请先登录',
         duration: 2500,
         success() { },
       })
@@ -165,7 +165,7 @@ Page({
                           if(res.result.stats.updated == 1) {
                             $wuxToptips().warn({
                               hidden: true,
-                              text: '取消关注',
+                              text: '取消成功',
                               duration: 2500,
                               success() { },
                             })

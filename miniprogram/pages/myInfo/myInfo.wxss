@@ -24,6 +24,8 @@
   margin-top: 26rpx;
   float: left;
   margin-right: 14rpx;
+  position: relative;
+  top: 4rpx;
 }
 
 .myInfo-detail {
@@ -137,10 +139,11 @@
   width: auto;
   height: 60rpx;
   right: -10rpx;
-  bottom: -20rpx;
+  bottom: -30rpx;
   text-align: center;
   line-height: 60rpx;
-  color: rgb(170, 170, 170);
+  color: rgb(182, 182, 182);
+  font-size: 22rpx;
 }
 
 .update {

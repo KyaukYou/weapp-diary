@@ -360,9 +360,15 @@ Page({
       })
     } else {
       if (e.currentTarget.dataset.lock) {
-        wx.showToast({
-          image: '../../images/error.png',
-          title: '已被锁定',
+        // wx.showToast({
+        //   image: '../../images/error.png',
+        //   title: '已被锁定',
+        // })
+        $wuxToptips().info({
+          hidden: true,
+          text: '已被锁定',
+          duration: 2000,
+          success() { },
         })
       } else {
         wx.navigateTo({
@@ -382,7 +388,7 @@ Page({
       // console.log('no');
       $wuxToptips().error({
         hidden: true,
-        text: '请先授权',
+        text: '请先登录',
         duration: 2500,
         success() { },
       })
@@ -418,7 +424,7 @@ Page({
     if (!wx.getStorageSync('openid')) {
       $wuxToptips().error({
         hidden: true,
-        text: '请先授权',
+        text: '请先登录',
         duration: 2500,
         success() { },
       })
@@ -490,7 +496,7 @@ Page({
     if (!wx.getStorageSync('openid')) {
       $wuxToptips().error({
         hidden: true,
-        text: '请先授权',
+        text: '请先登录',
         duration: 2500,
         success() { },
       })

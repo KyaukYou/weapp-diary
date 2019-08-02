@@ -67,8 +67,8 @@ page {
   bottom: 0;
   left: 0;
   right: 0;
-  font-size: 26rpx;
-  line-height: 66rpx;
+  font-size: 22rpx;
+  line-height: 68rpx;
   box-sizing: border-box;
   padding: 32rpx 0;
   /* background-color: rgb(230, 230, 230); */
@@ -204,13 +204,17 @@ button::after {
 
 .shuaxin-img {
   position: absolute;
-  width: 42rpx;
-  height: 42rpx;
-  top: 12rpx;
-  left: 16rpx;
+  width: 66rpx;
+  height: 66rpx;
+  top: 0rpx;
+  left: 0rpx;
   /* color: white; */
   text-align: center;
   z-index: 999;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .show-img {

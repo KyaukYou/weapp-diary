@@ -19,12 +19,39 @@ Page({
   },
   // 查看详情
   todetail(e) {
+    // let id = e.currentTarget.dataset.id
+    // console.log(e)
+
+    // wx.navigateTo({
+    //   url: '../travelDetail/travelDetail?id=' + id,
+    // })
+
     let id = e.currentTarget.dataset.id
     console.log(e)
+    let sOpenid = wx.getStorageSync('openid')
+    if (e.currentTarget.dataset.openid == sOpenid) {
+      wx.navigateTo({
+        url: '../travelDetail/travelDetail?id=' + id,
+      })
+    } else {
+      if (e.currentTarget.dataset.lock) {
+        // wx.showToast({
+        //   image: '../../images/error.png',
+        //   title: '已被锁定',
+        // })
+        $wuxToptips().info({
+          hidden: true,
+          text: '已被锁定',
+          duration: 2000,
+          success() { },
+        })
+      } else {
+        wx.navigateTo({
+          url: '../travelDetail/travelDetail?id=' + id,
+        })
+      }
+    }
 
-    wx.navigateTo({
-      url: '../travelDetail/travelDetail?id=' + id,
-    })
   },
 
   // 初始化点赞图标
@@ -276,7 +303,7 @@ Page({
           for (var i = 0; i < mydata.length; i++) {
             res.result.data.filter(function (item, index) {
               if (mydata[i] == item['_id']) {
-                a.push(item)
+                a.unshift(item)
               }
             })
           }

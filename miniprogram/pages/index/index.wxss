@@ -34,6 +34,7 @@ page {
   z-index: 999;
   /* margin-bottom: 160rpx; */
   /* margin-bottom: 320rpx; */
+  box-shadow: 0 2rpx 6rpx rgba(199, 199, 199, 0.3);
 }
 
 .index-search {
@@ -118,9 +119,10 @@ page {
   overflow: hidden;
   margin: 60rpx auto 60rpx auto;
   /* margin: 20rpx auto; */
-  box-shadow: 0 0px 8px 0px rgba(199, 199, 199, 0.3);
+  box-shadow: 0rpx 2rpx 10rpx 4rpx rgba(190, 190, 190, 0.4);
   position: relative;
 }
+
 
 .index .index-wrap {
   width: 100%;
@@ -134,8 +136,8 @@ page {
 }
 
 .index .index-wrap>image {
-  width: 58%;
-  height: 100%;
+  width: 57%;
+  height: 99%;
   /* position: absolute;
   top: 0;
   left: 0;
@@ -149,8 +151,18 @@ page {
   background-color: white;
   border: 1px solid rgb(240, 240, 240);
   color: black;
+  position: relative;
   /* box-sizing: border-box; */
 }
+
+.index-wrap-text-left {
+  left: -1%;
+}
+
+.index-wrap-text-right {
+  right: -1%;
+}
+
 
 .index .index-title {
   width: 100%;

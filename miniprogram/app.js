@@ -85,7 +85,9 @@ App({
                       userInfo: that.globalData.userInfo,
                       userDetail: {
                         birth: '1990-01-01',
-                        where: { "0": "江苏省", "1": "无锡市", "2": "锡山区" }
+                        where: { "0": "江苏省", "1": "无锡市", "2": "锡山区" },
+                        ifFirst: true,
+                        finalLogin: []
                       },
                       travelArr: [],
                       likeArr: [],
@@ -140,6 +142,6 @@ App({
     openid: '',
     userInfo: {},
     login: false,
-    version: 'V1.7.0801'
+    version: 'V1.7.0802'
   }
 })

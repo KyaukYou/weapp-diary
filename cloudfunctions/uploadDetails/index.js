@@ -9,14 +9,7 @@ exports.main = async (event, context) => {
     })
       .update({
         data: {
-          userDetail: {
-            birth: event.birth,
-            age: event.age,
-            where: event.region,
-            info: event.goodat,
-            email: event.email,
-            ifFirst: false
-          }
+          userDetail: event.detail
         },
       })
   } catch (e) {
