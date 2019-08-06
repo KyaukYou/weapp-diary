@@ -768,6 +768,8 @@ Page({
       })
     })
 
+    that.changeData1(this.data.listIndex);
+
   },
 
   /**
@@ -782,7 +784,7 @@ Page({
    */
   onShow: function () {
     let that = this;
-    that.changeData1(this.data.listIndex);
+    // that.changeData1(this.data.listIndex);
     wx.getSetting({
       success(res) {
         if (res.authSetting['scope.userInfo']) {

@@ -252,6 +252,7 @@ Page({
     this.setData({
       id: options.id
     })
+    this.getData(this.data.id)
   },
 
   /**
@@ -265,7 +266,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getData(this.data.id)
+    // this.getData(this.data.id)
   },
 
   /**

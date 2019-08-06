@@ -217,6 +217,12 @@ Page({
   onLoad: function (options) {
     // var that = this;
     // that.getInit();
+    var that = this;
+    wx.showLoading({
+      mask: true,
+      title: '正在加载'
+    })
+    that.getStarData();
   },
 
   /**
@@ -230,12 +236,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    wx.showLoading({
-      mask: true,
-      title: '正在加载'
-    })
-    that.getStarData();
+    // var that = this;
+    // wx.showLoading({
+    //   mask: true,
+    //   title: '正在加载'
+    // })
+    // that.getStarData();
   },
   initUser() {
     let that = this;
