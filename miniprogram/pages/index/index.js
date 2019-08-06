@@ -1010,8 +1010,15 @@ Page({
       that.initStarArr();
     }
   },
+  delAllVal() {
+    this.setData({
+      searchBol: false,
+      searchVal: ''
+    })
+  },
   changeSearch(e) {
-    if (e.detail == '') {
+    console.log(e)
+    if (e.detail.value == '') {
       this.setData({
         searchBol: false
       })
@@ -1019,7 +1026,7 @@ Page({
     else {
       this.setData({
         searchBol: true,
-        searchVal: e.detail
+        searchVal: e.detail.value
       })
     }
   },
@@ -1029,7 +1036,11 @@ Page({
       this.setData({
         searchBol: false
       })
-
+      wx.showLoading({
+        mask: true,
+        title: '正在加载',
+      })
+      this.searchSort(this.data.searchVal)
     } else {
       wx.showLoading({
         mask: true,

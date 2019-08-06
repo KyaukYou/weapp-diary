@@ -6,7 +6,6 @@
     "wux-divider": "../../dist/divider/index",
     "wux-icon": "../../dist/icon/index",
     "wux-toptips": "../../dist/toptips/index",
-
-    "van-search": "../../module/search/index"
+    "wux-input": "../../dist/input/index"
   }
 }

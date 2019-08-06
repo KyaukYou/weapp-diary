@@ -105,6 +105,7 @@
   <wux-wing-blank size="default" style='margin-bottom: 14rpx;' wx:if='{{uploadObj.list.length == 0 ? false : true}}'>
     <!-- <wux-button class='update' block type='calm'>上传</wux-button>  -->
     <button hover-class='chooseBtn-hover' class='update' bindtap='uploadAll'>上传</button>
+    <view class="tishi">请尽量选择2M以内大小的图片进行上传,图片过大可能会造成小程序闪屏。</view>
   </wux-wing-blank>
   <wux-toast id="wux-toast" />
 

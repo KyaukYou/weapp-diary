@@ -35,6 +35,33 @@ App({
       }
     })
   },
+
+  createTime() {
+    let timer1 = new Date();
+    let y = timer1.getFullYear();
+    let m = timer1.getMonth() + 1;
+    let d = timer1.getDate();
+    let h = timer1.getHours();
+    let m1 = timer1.getMinutes();
+    let s = timer1.getSeconds();
+    y = this.addZero(y);
+    m = this.addZero(m);
+    d = this.addZero(d);
+    h = this.addZero(h);
+    m1 = this.addZero(m1);
+    s = this.addZero(s);
+    return `${y}-${m}-${d} ${h}:${m1}:${s}`;
+  },
+
+  addZero(num) {
+    let addNum;
+    if (num <= 9) {
+      addNum = "0" + num;
+    } else {
+      addNum = num;
+    }
+    return addNum;
+  },
   getLoginInfo(res) {
     var that = this;
     wx.login({
@@ -96,7 +123,8 @@ App({
                       watch: [],
                       backgroundImg: {
                         url: ''
-                      }
+                      },
+                      createdTime: that.createTime()
                     },
                     success(res) {
                       console.log(res);
@@ -142,6 +170,6 @@ App({
     openid: '',
     userInfo: {},
     login: false,
-    version: 'V1.7.0802'
+    version: 'V1.8.0805'
   }
 })

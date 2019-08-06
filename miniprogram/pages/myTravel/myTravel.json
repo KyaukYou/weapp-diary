@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "我的旅行",
+  "navigationBarTitleText": "我的日记",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "wux-floating-button": "../../dist/floating-button/index",

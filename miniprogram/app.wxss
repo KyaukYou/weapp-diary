@@ -319,3 +319,10 @@ page {
   width: 30rpx;
   height: 30rpx;
 } */
+
+.tishi {
+  font-size: 20rpx;
+  text-align: center;
+  color: rgb(177, 177, 177);
+  margin-top: 2rpx;
+}

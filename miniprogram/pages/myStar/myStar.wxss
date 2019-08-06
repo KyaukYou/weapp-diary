@@ -115,7 +115,7 @@ page {
   /* border: 2rpx solid gray; */
   /* border-radius: 8rpx; */
   overflow: hidden;
-  margin: 60rpx auto 60rpx auto;
+  margin: 54rpx auto 54rpx auto;
   /* margin: 20rpx auto; */
   /* box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.3); */
   position: relative;
