@@ -766,6 +766,7 @@ Page({
       this.setData({
         showAdd: res.data.showAdd.showAdd
       })
+      wx.setStorageSync('show', res.data.showAdd.showAdd)
     })
 
     that.changeData1(this.data.listIndex);

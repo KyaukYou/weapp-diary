@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    show: 'none',
     title: '',
     where: '',
     value1: true,
@@ -730,7 +731,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    if(wx.getStorageSync('show')) {
+      let shows = wx.getStorageSync('show');
+      if(shows == 'none') {
+          this.setData({
+            show: false
+          })
 
+        wx.setNavigationBarTitle({
+          title: '测试页面'
+        })
+      }
+      else {
+        this.setData({
+          show: true
+        })
+
+        wx.setNavigationBarTitle({
+          title: '新增日记'
+        })
+      }
+    }
+    else {
+      this.setData({
+        show: false
+      })
+    }
   },
 
   /**

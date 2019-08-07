@@ -1,4 +1,4 @@
-<view class='page'>
+<view class='page' wx:if='{{show}}'>
   <!-- <view class='headerimg' bindtap='headerimg'>
     <view wx:if="{{headerImgArr.length > 0 ? false : true}}">上传封面图</view>
     <image wx:if="{{headerImgArr.length > 0 ? true : false}}" src='{{headerImgArr[0]}}'></image>

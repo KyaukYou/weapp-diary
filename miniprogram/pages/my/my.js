@@ -66,6 +66,107 @@ Page({
 
     }
   },
+  // 修改头像
+  uploadTX() {
+    if (!wx.getStorageSync('openid')) {
+      $wuxToptips().error({
+        hidden: true,
+        text: '请先登录',
+        duration: 2500,
+        success() { },
+      })
+      return;
+    }
+
+    let that = this;
+    wx.chooseImage({
+      count: 1,
+      success(res) {
+        console.log(res.tempFilePaths[0]);
+
+        let filePath = res.tempFilePaths[0];
+        let pattern = /\.{1}[a-z]{1,}$/;
+        let cc = filePath.slice(0, pattern.exec(filePath).index);
+        cc = cc.slice(11);
+        let openid = wx.getStorageSync('openid');
+        let cloudPath = 'user/' + openid + '/avatar/' + cc + filePath.match(/\.[^.]+?$/)[0];
+        console.log(filePath, cloudPath)
+        wx.showLoading({
+          title: '正在上传...',
+          mask: true
+        })
+        
+        wx.cloud.uploadFile({
+          cloudPath,
+          filePath,
+          success(res) {
+            console.log(res.fileID);
+            let imageUrl = res.fileID;
+            let db = wx.cloud.database();
+            let allUser = db.collection('users').where({
+              _openid: openid
+            }).get();
+
+            Promise.resolve(allUser).then(function (res) {
+              let db = wx.cloud.database();
+              console.log(res);
+              let infoResult = res.data[0].userInfo;
+              let myId = res.data[0]._id;
+              infoResult.avatarUrl = imageUrl;
+
+              db.collection('users').doc(myId).update({
+                data: {
+                  userInfo: infoResult
+                },
+                success(res) {
+                  console.log(res);
+                },
+                fail(res) {
+                  console.log(res)
+                }
+              })
+
+              // wx.cloud.callFunction({
+              //   name: 'uploadTX',
+              //   data: {
+              //     id: myId,
+              //     userInfo: infoResult
+              //   },
+              //   success(res) {
+              //     wx.hideLoading();
+              //     wx.showToast({
+              //       title: '上传成功',
+              //     });
+              //     that.shuaxin();
+              //   },
+              //   fail(res) {
+              //     wx.hideLoading();
+              //     wx.showToast({
+              //       image: '../../images/error.png',
+              //       title: '上传失败',
+              //     });
+              //   }
+              // })
+            })
+
+          },
+          fail(res) {
+            wx.hideLoading();
+            wx.showToast({
+              image: '../../images/error.png',
+              title: '上传失败',
+            })
+          }
+
+        })
+
+      },
+      fail(res) {
+        console.log(res)
+      }
+    })
+  },
+
   // 修改背景图
   changeImg() {
     if (!wx.getStorageSync('openid')) {
@@ -196,86 +297,170 @@ Page({
   toMyDetail() {
     let that = this;
     if (wx.getStorageSync('openid')) {
-      
 
-      wx.getLocation({
-        type: 'wgs84',
-        altitude: true,
-        success(res) {
-          console.log(res)
-          const latitude = res.latitude;
-          const longitude = res.longitude;
-          wx.request({
-            url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=RAHBZ-KLP3O-HCJWQ-SVU4O-EHKB3-SLFZA&get_poi=1`,
-            data: {},
-            header: {
-              'Content-Type': 'json'
-            },
-            method: 'GET',
-            success(res) {
-              console.log(res);
-              let getAddress = res.data.result;
-              let db = wx.cloud.database();
-              let myDetails = db.collection('users').where({
-                _openid: wx.getStorageSync('openid')
-              }).get();  
-
-              Promise.resolve(myDetails).then(function(res){
+      let sDetail = wx.getStorageSync('userDetail');
+      if(sDetail.ifFirst == false) {
+        wx.getLocation({
+          type: 'wgs84',
+          altitude: true,
+          success(res) {
+            console.log(res)
+            const latitude = res.latitude;
+            const longitude = res.longitude;
+            wx.request({
+              url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=RAHBZ-KLP3O-HCJWQ-SVU4O-EHKB3-SLFZA&get_poi=1`,
+              data: {},
+              header: {
+                'Content-Type': 'json'
+              },
+              method: 'GET',
+              success(res) {
                 console.log(res);
-                let detail = res.data[0].userDetail;
+                let getAddress = res.data.result;
+                let db = wx.cloud.database();
+                let myDetails = db.collection('users').where({
+                  _openid: wx.getStorageSync('openid')
+                }).get();
 
-                detail.finalLogin.unshift({
-                  time: that.createTime(),
-                  address: getAddress.address_component,
-                  trueAddress: `${latitude},${longitude}`
-                })
-                if(detail.ifFirst == true) {
-                  detail.where = [getAddress.address_component.province, getAddress.address_component.city, getAddress.address_component.district]
-                }
+                Promise.resolve(myDetails).then(function (res) {
+                  console.log(res);
+                  let detail = res.data[0].userDetail;
 
-                wx.cloud.callFunction({
-                  name: 'uploadDetails',
-                  data: {
-                    openid: res.data[0]._openid,
-                    detail: detail
-                  },
-                  success(res) {
-                    console.log(res)
-                    wx.navigateTo({
-                      url: '../myInfo/myInfo',
-                    })
-                  },
-                  fail(res) {
-                    console.log(res)
-                    wx.navigateTo({
-                      url: '../myInfo/myInfo',
-                    })
+                  detail.finalLogin.unshift({
+                    time: that.createTime(),
+                    address: getAddress.address_component,
+                    trueAddress: `${latitude},${longitude}`
+                  })
+                  if (detail.ifFirst == true) {
+                    detail.where = [getAddress.address_component.province, getAddress.address_component.city, getAddress.address_component.district]
                   }
+
+                  wx.cloud.callFunction({
+                    name: 'uploadDetails',
+                    data: {
+                      openid: res.data[0]._openid,
+                      detail: detail
+                    },
+                    success(res) {
+                    },
+                    fail(res) {
+                    }
+                  })
                 })
-                // db.collection('users').where({
-                //   _id: res.data[0]._id
-                // }).update({
-                //   data: {
-                //     userDetail: detail
-                //   },
-                //   success(res) {
-                //     console.log(res)
-                //     wx.navigateTo({
-                //       url: '../myInfo/myInfo',
-                //     })
-                //   }
-                // })
-              })
 
-            },
-            fail(res) {
-              console.log(res);
-            }
-          })
+              },
+              fail(res) {
+                console.log(res);
+              }
+            })
 
 
-        },
-      })
+          },
+        })
+        wx.navigateTo({
+          url: '../myInfo/myInfo',
+        })
+       
+      }
+      else {
+        wx.getLocation({
+          type: 'wgs84',
+          altitude: true,
+          success(res) {
+            console.log(res)
+            const latitude = res.latitude;
+            const longitude = res.longitude;
+            wx.request({
+              url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=RAHBZ-KLP3O-HCJWQ-SVU4O-EHKB3-SLFZA&get_poi=1`,
+              data: {},
+              header: {
+                'Content-Type': 'json'
+              },
+              method: 'GET',
+              success(res) {
+                console.log(res);
+                let getAddress = res.data.result;
+                let db = wx.cloud.database();
+                let myDetails = db.collection('users').where({
+                  _openid: wx.getStorageSync('openid')
+                }).get();
+
+                Promise.resolve(myDetails).then(function (res) {
+                  console.log(res);
+                  let detail = res.data[0].userDetail;
+
+                  detail.finalLogin.unshift({
+                    time: that.createTime(),
+                    address: getAddress.address_component,
+                    trueAddress: `${latitude},${longitude}`,
+                  })
+                  let sDetail = wx.getStorageSync('userDetail');
+                  if (sDetail.ifFirst == true) {
+                    detail.ifFirst = false
+                    detail.where = [getAddress.address_component.province, getAddress.address_component.city, getAddress.address_component.district]
+                  }
+
+                  wx.cloud.callFunction({
+                    name: 'uploadDetails',
+                    data: {
+                      openid: res.data[0]._openid,
+                      detail: detail
+                    },
+                    success(res) {
+                      console.log(res)
+                      wx.navigateTo({
+                        url: '../myInfo/myInfo',
+                      })
+                    },
+                    fail(res) {
+                      console.log(res)
+                      wx.navigateTo({
+                        url: '../myInfo/myInfo',
+                      })
+                    }
+                  })
+                })
+
+              },
+              fail(res) {
+                console.log(res);
+              }
+            })
+
+
+          },
+          fail(res) {
+            wx.getSetting({
+              success(res) {
+                console.log(res.authSetting['scope.userLocation']);
+                if (res.authSetting['scope.userLocation']) {
+                }
+                else {
+                  wx.showModal({
+                    title: '是否授权当前位置',
+                    content: '你的位置信息将用于我的信息的位置展示',
+                    success(res) {
+                      wx.openSetting({
+                        success(res) {
+                          console.log(res);
+                          that.setData({
+                            userBol: true
+                          })
+                        }
+                      })
+                    },
+                    fail(res) {
+                      console.log('取消')
+                    }
+                  })
+                }
+              }
+            })
+          }
+        })
+      }  
+
+
 
     } else {
       if (!wx.getStorageSync('openid')) {
@@ -306,6 +491,7 @@ Page({
     var mydata;
 
     var a = Promise.resolve(travelData).then(function (res) {
+      // console.log(res)
       // mydata = res.data[0]
       // console.log(res.data.length);
       that.setData({
@@ -330,6 +516,8 @@ Page({
     var mydata;
 
     var a = Promise.resolve(travelData).then(function (res) {
+      console.log(res)
+      wx.setStorageSync('userDetail', res.data[0].userDetail)
       // mydata = res.data[0]
       // console.log(res.data.starArr);
       that.setData({
@@ -412,6 +600,10 @@ Page({
         hasUserInfo: false
       })
     }
+
+    this.getTravelNum();
+    this.getStarNum();
+
   },
   tobug() {
     if (wx.getStorageSync('openid')) {

@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    show: false,
     travelId: '',
     title: '',
     where: '',
@@ -1011,7 +1012,27 @@ Page({
   onLoad: function(options) {
     var that = this;
     let id = options.id;
-    this.getAllData(id)
+  
+    if (wx.getStorageSync('show')) {
+      let shows = wx.getStorageSync('show');
+      if (shows == 'none') {
+        that.setData({
+          show: false
+        })
+      }
+      else {
+        that.setData({
+          show: true
+        })
+
+        that.getAllData(id)
+      }
+    }
+    else {
+      that.setData({
+        show: false
+      })
+    }
   },
   getAllData(id) {
     let that = this;

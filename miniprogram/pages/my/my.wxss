@@ -107,6 +107,17 @@ button::after {
   border-radius: 50%;
   margin: 0 auto;
   margin-top: 12rpx;
+  position: relative;
+}
+
+.my-image .editImage {
+  position: absolute;
+  width: 40rpx;
+  height: 44rpx;
+  overflow: auto;
+  bottom: 82rpx;
+  left: 50%;
+  margin-left: 44rpx;
 }
 
 .my-image .my-info-detail {
