@@ -54,7 +54,7 @@ Page({
 
     this.setData({
       age: [cha, sx],
-      agePer: cha + '岁' + ',属' + sx
+      agePer: cha + '岁'+', 属' + sx
     })
     // this.data.year
   },
@@ -74,7 +74,7 @@ Page({
 
     this.setData({
       age: [cha, sx],
-      agePer: cha + '岁' + ',属' + sx
+      agePer: cha + '岁'+', 属' + sx
     })
   },
   // 性别
@@ -273,7 +273,7 @@ Page({
 
         that.setData({
           age: [cha, sx],
-          agePer: cha + '岁' + ',属' + sx
+          agePer: cha + '岁'+', 属' + sx
         })
       },
       fail(res) {

@@ -108,16 +108,19 @@ button::after {
   margin: 0 auto;
   margin-top: 12rpx;
   position: relative;
+  box-shadow: 0 0 10rpx 0 rgba(50,50,50,0.7);
 }
 
 .my-image .editImage {
   position: absolute;
-  width: 40rpx;
-  height: 44rpx;
+  width: 36rpx;
+  height: 40rpx;
   overflow: auto;
-  bottom: 82rpx;
+  bottom: 78rpx;
   left: 50%;
   margin-left: 44rpx;
+  box-shadow: none;
+  opacity: 0.9;
 }
 
 .my-image .my-info-detail {

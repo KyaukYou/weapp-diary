@@ -62,6 +62,17 @@ App({
     }
     return addNum;
   },
+  sxTX(openid) {
+    let db = wx.cloud.database();
+    let that = this;
+    let d = db.collection('users').where({
+      _openid: openid
+    }).get();
+    Promise.resolve(d).then(function (res) {
+      console.log(res)
+      wx.setStorageSync('userInfo', res.data[0].userInfo);
+    })
+  },
   getLoginInfo(res) {
     var that = this;
     wx.login({
@@ -72,6 +83,8 @@ App({
             // console.log(res);
             that.globalData.userInfo = res.userInfo
             wx.setStorageSync('userInfo', res.userInfo);
+
+            that.sxTX(that.globalData.openid)
 
             //判断openid是否在其中
             wx.cloud.callFunction({
@@ -170,6 +183,6 @@ App({
     openid: '',
     userInfo: {},
     login: false,
-    version: 'V1.8.0807'
+    version: 'V1.9.0807'
   }
 })

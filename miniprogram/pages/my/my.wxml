@@ -48,8 +48,7 @@
     <image class='edit-img' src='../../images/skin.png' bindtap='changeImg'></image>
     <view class='my-image' wx:if='{{hasUserInfo}}'>
     
-      <image src="{{userInfo.avatarUrl}}">
-        
+      <image src="{{userInfo.avatarUrl}}" bindtap="showBGTX">
       </image>
       <image src='../../images/photo3.png' class="editImage" bindtap="uploadTX"></image>
       <view class='my-info-detail'>

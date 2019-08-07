@@ -66,6 +66,21 @@ Page({
 
     }
   },
+
+  sxTX(openid) {
+    let db = wx.cloud.database();
+    let that = this;
+    let d = db.collection('users').where({
+      _openid: openid
+    }).get();
+    Promise.resolve(d).then(function (res) {
+      console.log(res)
+      wx.setStorageSync('userInfo', res.data[0].userInfo);
+      that.setData({
+        userInfo: res.data[0].userInfo
+      })
+    })
+  },
   // 修改头像
   uploadTX() {
     if (!wx.getStorageSync('openid')) {
@@ -112,6 +127,7 @@ Page({
               console.log(res);
               let infoResult = res.data[0].userInfo;
               let myId = res.data[0]._id;
+              let ooo = res.data[0]._openid
               infoResult.avatarUrl = imageUrl;
 
               db.collection('users').doc(myId).update({
@@ -120,41 +136,48 @@ Page({
                 },
                 success(res) {
                   console.log(res);
+                  wx.hideLoading();
+                  // wx.showToast({
+                  //   title: '上传成功',
+                  // });
+                  $wuxToptips().success({
+                    hidden: true,
+                    text: '更新成功',
+                    duration: 1500,
+                    success() { },
+                  })
+                  that.sxTX(ooo);
                 },
                 fail(res) {
                   console.log(res)
+                  wx.hideLoading();
+                  // wx.showToast({
+                  //   image: '../../images/error.png',
+                  //   title: '上传失败',
+                  // });
+                  $wuxToptips().warn({
+                    hidden: true,
+                    text: '更新失败',
+                    duration: 1500,
+                    success() { },
+                  })
                 }
               })
 
-              // wx.cloud.callFunction({
-              //   name: 'uploadTX',
-              //   data: {
-              //     id: myId,
-              //     userInfo: infoResult
-              //   },
-              //   success(res) {
-              //     wx.hideLoading();
-              //     wx.showToast({
-              //       title: '上传成功',
-              //     });
-              //     that.shuaxin();
-              //   },
-              //   fail(res) {
-              //     wx.hideLoading();
-              //     wx.showToast({
-              //       image: '../../images/error.png',
-              //       title: '上传失败',
-              //     });
-              //   }
-              // })
             })
 
           },
           fail(res) {
             wx.hideLoading();
-            wx.showToast({
-              image: '../../images/error.png',
-              title: '上传失败',
+            // wx.showToast({
+            //   image: '../../images/error.png',
+            //   title: '上传失败',
+            // })
+            $wuxToptips().warn({
+              hidden: true,
+              text: '更新失败',
+              duration: 1500,
+              success() { },
             })
           }
 
@@ -544,6 +567,13 @@ Page({
     })
   },
 
+  showBGTX() {
+    wx.previewImage({
+      current: this.data.userInfo.avatarUrl, // 当前显示图片的http链接
+      urls: [this.data.userInfo.avatarUrl] // 需要预览的图片http链接列表
+    })
+  },
+
   onGotUserInfo(e) {
     console.log(e);
     this.getInit();  
@@ -583,6 +613,8 @@ Page({
         hasUserInfo: true,
         userInfo: wx.getStorageSync('userInfo')
       })
+
+      // this.sxTX(wx.getStorageSync('openid'));
 
       if (this.data.userInfo.gender == 1) {
         this.setData({
