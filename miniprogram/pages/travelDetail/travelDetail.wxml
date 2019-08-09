@@ -2,7 +2,8 @@
   <!-- <wux-notice-bar loop icon='' content="{{travelObj.data.where}}" /> -->
   <wux-toptips id="wux-toptips" />
   <view class='detail-bigImg'>
-    <image lazy-load mode='widthFix' src='{{travelObj.data.headerImg}}' bindtap='showBgImg'></image>
+  <!-- mode='widthFix' -->
+    <image lazy-load  src='{{travelObj.data.headerImg}}' bindtap='showBgImg'></image>
   </view>
 
   <view class='detail-header'>

@@ -63,7 +63,7 @@
   height: 40rpx;
   margin-right: 16rpx;
   position: relative;
-  top: -2px;
+  /* top: -2px; */
 }
 
 .wux-cell__bd {

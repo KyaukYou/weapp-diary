@@ -8,13 +8,86 @@ Page({
   data: {
     myData: [],
     textArr: [],
-    id: ''
+    id: '',
+    bol: false,
+    upArr: []
   },
   toUsers(e) {
     wx.navigateTo({
       url: '../userDetail/userDetail?id=' + e.currentTarget.dataset.openid,
     })
   },
+
+  waitUser(index) {
+    let that = this;
+    return new Promise((resolve, reject) => {
+      wx.cloud.callFunction({
+        name: 'getSomeOne',
+        data: {
+          openid: that.data.myData[index].openid
+        },
+        success(res) {
+          console.log(res);
+          let copy = that.data.upArr;
+          let userObj = {
+            avatarUrl: res.result.data[0].userInfo.avatarUrl,
+            gender: res.result.data[0].userInfo.gender,
+            nickName: res.result.data[0].userInfo.nickName,
+            openid: res.result.data[0]._openid
+          }
+          copy.push(userObj)
+          that.setData({
+            upArr: copy
+          })
+          resolve(res);
+        }
+      })
+    })
+  },
+
+  // 同步信息
+  syncUser() {
+    //先更新页面信息，再同步
+    let that = this;
+    let allLength = this.data.myData.length;
+    let index = 0;
+    async function getInfos() {
+      if (index == allLength) {
+        index = 0;
+        that.setData({
+          myData: that.data.upArr,
+          bol: true
+        })
+
+        //同步服务器
+        that.tongbu();
+      }
+      else {
+        await that.waitUser(index);
+        index++;
+        getInfos();
+      }
+
+    }
+    getInfos();
+
+  },
+
+  //同步
+  tongbu() {
+    let that = this;
+    wx.cloud.callFunction({
+      name: 'syncFans',
+      data: {
+        openid: that.data.id,
+        fans: that.data.upArr
+      },
+      success(res) {
+        console.log(res);
+      }
+    })
+  },
+
   // 获得数据
   getData(id) {
     let that = this;
@@ -54,6 +127,9 @@ Page({
           textArr: arr
         })
 
+        if (that.data.bol == false) {
+          that.syncUser();
+        }
 
       },
       fail(res) {

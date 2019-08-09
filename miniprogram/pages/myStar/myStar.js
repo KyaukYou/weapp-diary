@@ -15,8 +15,11 @@ Page({
     lazyloadBol: true,
     rotateBol: false,
     starArr: [],
-    likeArr: []
+    likeArr: [],
+    // bol: false,
+    // upArr: []
   },
+
   // 查看详情
   todetail(e) {
     // let id = e.currentTarget.dataset.id

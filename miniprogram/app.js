@@ -62,7 +62,7 @@ App({
     }
     return addNum;
   },
-  sxTX(openid) {
+  sxTX(openid,val) {
     let db = wx.cloud.database();
     let that = this;
     let d = db.collection('users').where({
@@ -70,8 +70,40 @@ App({
     }).get();
     Promise.resolve(d).then(function (res) {
       console.log(res)
-      wx.setStorageSync('userInfo', res.data[0].userInfo);
+
+      let getInfo = res.data[0].userInfo;
+      getInfo.city = val.city;
+      getInfo.country = val.country;
+      getInfo.gender = val.gender;
+      getInfo.nickName = val.nickName;
+      getInfo.language = val.language;
+      getInfo.province = val.province;
+      // 判断是否自定义头像
+      if(getInfo.avatarUrl.substr(0,5) == 'cloud') {
+        // 是
+      }
+      else {
+        // 否
+        // 更新
+        getInfo.avatarUrl = val.avatarUrl;
+      }
+
+      that.updateWX(res.data[0]._id,getInfo)
+
+      wx.setStorageSync('userInfo', getInfo);
     })
+  },
+  updateWX(id,val) {
+    let db = wx.cloud.database();
+    db.collection('users').doc(id).update({
+      data: {
+        userInfo: val
+      },
+      success(res) {
+        console.log(res)
+      }
+    })
+      
   },
   getLoginInfo(res) {
     var that = this;
@@ -84,7 +116,10 @@ App({
             that.globalData.userInfo = res.userInfo
             wx.setStorageSync('userInfo', res.userInfo);
 
-            that.sxTX(that.globalData.openid)
+            // 更新信息
+            // that.updateWX(that.globalData.openid);
+
+            that.sxTX(that.globalData.openid, res.userInfo)
 
             //判断openid是否在其中
             wx.cloud.callFunction({
@@ -183,6 +218,6 @@ App({
     openid: '',
     userInfo: {},
     login: false,
-    version: 'V1.9.0807'
+    version: 'V1.9.0809'
   }
 })
