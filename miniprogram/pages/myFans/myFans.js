@@ -9,7 +9,7 @@ Page({
     myData: [],
     textArr: [],
     id: '',
-    bol: false,
+    bol: true,
     upArr: []
   },
   toUsers(e) {
@@ -362,6 +362,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    this.setData({
+      bol: false
+    })
     this.getData(this.data.id)
   },
 
