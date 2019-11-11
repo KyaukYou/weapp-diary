@@ -761,7 +761,7 @@ Page({
     that.getInit();
 
     let db = wx.cloud.database();
-    db.collection('control').doc('W87jRg6qgQy38jbV').get().then(res => {
+    db.collection('control').doc('8c9503d5-5f09-4e63-94a3-7d94bc2ba94b').get().then(res => {
       console.log(res.data.showAdd.showAdd)
       this.setData({
         showAdd: res.data.showAdd.showAdd
@@ -770,7 +770,6 @@ Page({
     })
 
     that.changeData1(this.data.listIndex);
-
   },
 
   /**
