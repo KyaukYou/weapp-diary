@@ -53,4 +53,4 @@
    + 编译小程序，即可新建日记   
 
 ### 8.扫码体验
-![旅行小柴](./images/chai.png)   
+![旅行小柴](http://data.littlechai.cn/chai.png)   
