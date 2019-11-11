@@ -42,10 +42,10 @@
 ---   
 
 ### 6.修改项目代码
-   + 复制云开发**control**集合记录的**_id**值
-   + miniprogram > pages > index > index.js 中搜索 W87jRg6qgQy38jbV **替换** 刚才复制的_id
-   + miniprogram > pages > my > my.js 中搜索 W87jRg6qgQy38jbV **替换** 刚才复制的_id
-   + miniprogram > pages > travelDetail > travelDetail.js 中搜索 W87jRg6qgQy38jbV **替换** 刚才复制的_id
+   + 复制云开发**control**集合记录的 **_id** 值
+   + miniprogram > pages > index > index.js 中搜索 W87jRg6qgQy38jbV **替换** 刚才复制的 **_id**
+   + miniprogram > pages > my > my.js 中搜索 W87jRg6qgQy38jbV **替换** 刚才复制的 **_id**
+   + miniprogram > pages > travelDetail > travelDetail.js 中搜索 W87jRg6qgQy38jbV **替换** 刚才复制的 **_id**
 
 ---
 
