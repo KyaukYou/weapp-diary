@@ -352,7 +352,7 @@ Page({
   // 查看详情
   todetail(e) {
     let id = e.currentTarget.dataset.id
-    console.log(e)
+    // console.log(e)
     let sOpenid = wx.getStorageSync('openid')
     if (e.currentTarget.dataset.openid == sOpenid) {
       wx.navigateTo({
@@ -380,12 +380,12 @@ Page({
   addTravel() {
     // 判断是否登录
     if (wx.getStorageSync('openid')) {
-      // console.log('yes');
+      // // console.log('yes');
       wx.navigateTo({
         url: '../addTravel/addTravel',
       })
     } else {
-      // console.log('no');
+      // // console.log('no');
       $wuxToptips().error({
         hidden: true,
         text: '请先登录',
@@ -395,7 +395,7 @@ Page({
     }
   },
   bindGetUserInfo(e) {
-    // console.log(e);
+    // // console.log(e);
     this.getInit();
   },
   getInit() {
@@ -404,7 +404,7 @@ Page({
       success(res) {
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-          // console.log('1');
+          // // console.log('1');
           that.setData({
             shouquan: true
           });
@@ -412,7 +412,7 @@ Page({
           app.getOpenId();
 
         } else {
-          // console.log('2');
+          // // console.log('2');
           that.setData({
             shouquan: false
           })
@@ -444,7 +444,7 @@ Page({
     } else {
       res = copy.some(function (item, index) {
         if (item == copy1['_id']) {
-          console.log(index)
+          // console.log(index)
           haveIndex = index;
           return true;
         } else {
@@ -480,7 +480,7 @@ Page({
       this.sqlChange(index, copy, 'like', 'min')
     };
 
-    console.log(copy)
+    // console.log(copy)
 
     let copyAll = this.data.userData;
     copyAll.likeArr = copy;
@@ -516,7 +516,7 @@ Page({
     } else {
       res = copy.some(function (item, index) {
         if (item == copy1['_id']) {
-          console.log(index)
+          // console.log(index)
           haveIndex = index;
           return true;
         } else {
@@ -552,7 +552,7 @@ Page({
       this.sqlChange(index, copy, 'star', 'min')
     };
 
-    console.log(copy)
+    // console.log(copy)
 
     let copyAll = this.data.userData;
     copyAll.starArr = copy;
@@ -571,7 +571,7 @@ Page({
     let copy1 = this.data.travelList;
     let arr = this.data.likeArr;
     let bol = false;
-    // console.log(copy)
+    // // console.log(copy)
     if (copy.length == 0) {
       for (var i = 0; i < copy1.length; i++) {
         arr[i] = 0;
@@ -596,7 +596,7 @@ Page({
       // if(bol)
 
     }
-    // console.log(arr);
+    // // console.log(arr);
 
     this.setData({
       likeArr: arr
@@ -610,7 +610,7 @@ Page({
     let arr = this.data.starArr;
 
     let bol = false;
-    // console.log(copy)
+    // // console.log(copy)
     if (copy.length == 0) {
       for (var i = 0; i < copy1.length; i++) {
         arr[i] = 0;
@@ -623,18 +623,18 @@ Page({
         bol = copy.some(function (item, index) {
           if (copy1[i]['_id'] == item) {
             arr[i] = 1;
-            // console.log(arr[i],item)
+            // // console.log(arr[i],item)
             return true;
           } else {
             arr[i] = 0;
-            // console.log(arr[i], item)
+            // // console.log(arr[i], item)
             return false;
           }
         })
 
       }
     }
-    // console.log(arr);
+    // // console.log(arr);
 
     this.setData({
       starArr: arr
@@ -642,10 +642,10 @@ Page({
     wx.hideLoading()
   },
   sqlChange(val, arr, types, what) {
-    console.log(val, arr, types, what)
+    // console.log(val, arr, types, what)
     let id = this.data.travelList[val]['_id'];
     let openid = wx.getStorageSync('openid');
-    // console.log(id)
+    // // console.log(id)
 
     let db = wx.cloud.database();
     let _ = db.command;
@@ -668,7 +668,7 @@ Page({
             id: id
           },
           success(res) {
-            console.log(res);
+            // console.log(res);
             $wuxToptips().success({
               hidden: true,
               text: '点赞成功',
@@ -687,7 +687,7 @@ Page({
             id: id
           },
           success(res) {
-            console.log(res);
+            // console.log(res);
             $wuxToptips().warn({
               hidden: true,
               text: '取消点赞',
@@ -717,7 +717,7 @@ Page({
             id: id
           },
           success(res) {
-            console.log(res)
+            // console.log(res)
             $wuxToptips().success({
               hidden: true,
               text: '收藏成功',
@@ -736,7 +736,7 @@ Page({
             id: id
           },
           success(res) {
-            console.log(res)
+            // console.log(res)
             $wuxToptips().warn({
               hidden: true,
               text: '取消收藏',
@@ -761,8 +761,8 @@ Page({
     that.getInit();
 
     let db = wx.cloud.database();
-    db.collection('control').doc('W87jRg6qgQy38jbV').get().then(res => {
-      console.log(res.data.showAdd.showAdd)
+    db.collection('control').doc(app.globalData.controlId).get().then(res => {
+      // console.log(res.data.showAdd.showAdd)
       this.setData({
         showAdd: res.data.showAdd.showAdd
       })
@@ -805,7 +805,7 @@ Page({
     wx.cloud.callFunction({
       name: 'getTravel',
       success(res) {
-        console.log(res)
+        // console.log(res)
         if (res.result.data.length == 0) {
 
         }
@@ -836,7 +836,7 @@ Page({
         }
       },
       fail(res) {
-        console.log(res)
+        // console.log(res)
       },
       complete(res) {
         wx.stopPullDownRefresh();
@@ -856,7 +856,7 @@ Page({
     //   })
     // }else {
     let five = this.data.travelAll.splice(0, 4);
-    console.log(five)
+    // console.log(five)
     this.setData({
       travelsAll: five
     })
@@ -876,9 +876,9 @@ Page({
   },
   getPage() {
     let that = this;
-    // console.log(this.data.travelAll);
+    // // console.log(this.data.travelAll);
     if (that.data.travelAll.length <= 0) {
-      console.log('没有更多啦')
+      // console.log('没有更多啦')
     } else {
       let add = that.data.travelAll.splice(0, 2);
       let copy = that.data.travelsAll;
@@ -919,7 +919,7 @@ Page({
   timesSort() {
     let that = this;
     if (that.data.timeArr.length <= 0) {
-      console.log('没有更多啦')
+      // console.log('没有更多啦')
     } else {
       let add = that.data.timeArr.splice(0, 2);
       let copy = that.data.timesArr;
@@ -957,7 +957,7 @@ Page({
   seesSort() {
     let that = this;
     if (that.data.seeArr.length <= 0) {
-      console.log('没有更多啦')
+      // console.log('没有更多啦')
     } else {
       let add = that.data.seeArr.splice(0, 2);
       let copy = that.data.seesArr;
@@ -995,7 +995,7 @@ Page({
   likesSort() {
     let that = this;
     if (that.data.dianzanArr.length <= 0) {
-      console.log('没有更多啦')
+      // console.log('没有更多啦')
     } else {
       let add = that.data.dianzanArr.splice(0, 2);
       let copy = that.data.dianzansArr;
@@ -1019,7 +1019,7 @@ Page({
     })
   },
   changeSearch(e) {
-    console.log(e)
+    // console.log(e)
     if (e.detail.value == '') {
       this.setData({
         searchBol: false
@@ -1079,7 +1079,7 @@ Page({
   searchsSort() {
     let that = this;
     if (that.data.searchArr.length <= 0) {
-      console.log('没有更多啦')
+      // console.log('没有更多啦')
     } else {
       let add = that.data.searchArr.splice(0, 2);
       let copy = that.data.searchsArr;
@@ -1109,7 +1109,7 @@ Page({
     var mydata;
     Promise.resolve(userData1).then(function (res) {
       mydata = res.data[0]
-      // console.log(res.data[0]);
+      // // console.log(res.data[0]);
       that.setData({
         userData: mydata
       });

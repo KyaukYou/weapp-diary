@@ -27,7 +27,7 @@ Page({
           openid: that.data.myData[index].openid
         },
         success(res) {
-          console.log(res);
+          // console.log(res);
           let copy = that.data.upArr;
           let userObj = {
             avatarUrl: res.result.data[0].userInfo.avatarUrl,
@@ -83,7 +83,7 @@ Page({
         fans: that.data.upArr
       },
       success(res) {
-        console.log(res);
+        // console.log(res);
       }
     })
   },
@@ -122,7 +122,7 @@ Page({
           }
 
         }
-        console.log(arr)
+        // console.log(arr)
         that.setData({
           textArr: arr
         })
@@ -171,7 +171,7 @@ Page({
         openid: heOpenid
       }
 
-      // console.log(user1, user2)
+      // // console.log(user1, user2)
       wx.cloud.callFunction({
         name: 'uploadFans',
         data: {
@@ -179,7 +179,7 @@ Page({
           val: user1
         },
         success(res) {
-          console.log(res)
+          // console.log(res)
           wx.cloud.callFunction({
             name: 'uploadWatch',
             data: {
@@ -187,7 +187,7 @@ Page({
               val: user2
             },
             success(res) {
-              console.log(res)
+              // console.log(res)
               $wuxToptips().success({
                 hidden: true,
                 text: '关注成功',
@@ -229,20 +229,20 @@ Page({
             }).get()
 
             Promise.resolve(myData).then(function (res) {
-              console.log(res);
+              // console.log(res);
               let data1 = res.data[0];
               for (var i = 0; i < data1.watch.length; i++) {
                 if (data1.watch[i].openid == thisOpenid) {
                   data1.watch.splice(i, 1);
                 }
               }
-              console.log(data1)
+              // console.log(data1)
               db.collection('users').doc(data1._id).update({
                 data: {
                   watch: data1.watch
                 },
                 success(res) {
-                  console.log(res);
+                  // console.log(res);
 
                   //取消粉丝
                   wx.cloud.callFunction({
@@ -252,10 +252,10 @@ Page({
                       myOpenid: that.data.myOpenid
                     },
                     success(res) {
-                      console.log(res)
+                      // console.log(res)
 
                       let data2 = res.result.data[0];
-                      console.log(data2)
+                      // console.log(data2)
                       for (var b = 0; b < data2.fans.length; b++) {
                         if (data2.fans[b].openid == myOpenid) {
                           data2.fans.splice(b, 1);
@@ -271,7 +271,7 @@ Page({
                           dataFans: data2.fans
                         },
                         success(res) {
-                          console.log(res)
+                          // console.log(res)
                           if (res.result.stats.updated == 1) {
                             $wuxToptips().warn({
                               hidden: true,
@@ -288,19 +288,19 @@ Page({
 
                         },
                         fail(res) {
-                          console.log(res);
+                          // console.log(res);
                         }
                       })
 
                     },
                     fail(res) {
-                      console.log(res);
+                      // console.log(res);
                     }
                   })
 
                 },
                 fail(res) {
-                  console.log(res);
+                  // console.log(res);
                 }
               })
 

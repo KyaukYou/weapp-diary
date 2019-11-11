@@ -20,7 +20,7 @@ Page({
   // 查看详情
   todetail(e) {
     let id = e.currentTarget.dataset.id
-    console.log(e)
+    // console.log(e)
 
     wx.navigateTo({
       url: '../editTravel/editTravel?id=' + id,
@@ -34,7 +34,7 @@ Page({
     let allUser = db.collection('users').get();
 
     Promise.resolve(allUser).then(function(res) {
-      console.log(res);
+      // console.log(res);
       let likeArr1 = [];
       let starArr1 = [];
       let travelArr1 = [];
@@ -67,8 +67,8 @@ Page({
         }
       }
 
-      // console.log(result);
-      // console.log(likeArr1,starArr1,travelArr1)
+      // // console.log(result);
+      // // console.log(likeArr1,starArr1,travelArr1)
       // 或得需要更新的用户
       let conArr = (likeArr1.concat(starArr1)).concat(travelArr1)
       let conArr1 = [...new Set(conArr)]
@@ -86,7 +86,7 @@ Page({
             travelArr: result[conArr1[a]].travelArr
           },
           success(res) {
-            console.log(res)
+            // console.log(res)
           }
         })  
 
@@ -97,10 +97,10 @@ Page({
         //     travelArr: result[conArr1[a]].travelArr
         //   },
         //   success(res) {
-        //     console.log(res)
+        //     // console.log(res)
         //   },
         //   fail(res) {
-        //     console.log(res)
+        //     // console.log(res)
         //   }
         // })        
       }
@@ -109,14 +109,14 @@ Page({
 
 
     
-    // console.log(allUser)
+    // // console.log(allUser)
   },
 
   // 删除旅行
   delTravelId(e) {
     let db = wx.cloud.database();
     let that = this;
-    // console.log(e.currentTarget.dataset.id)
+    // // console.log(e.currentTarget.dataset.id)
     let id = e.currentTarget.dataset.id
     wx.showModal({
       title: '是否删除',
@@ -129,16 +129,16 @@ Page({
           //     id: id
           //   },
           //   success(res) {
-          //     console.log(res)
+          //     // console.log(res)
           //   },
           //   fail(res) {
-          //     console.log(res)
+          //     // console.log(res)
           //   }
           // })
           db.collection('travel').doc(id)
             .remove()
             .then(res => {
-              console.log(res);
+              // console.log(res);
               $wuxToptips().success({
                 hidden: true,
                 text: '删除成功',
@@ -161,7 +161,7 @@ Page({
                   var mydata;
                   Promise.resolve(userData1).then(function (res) {
                     mydata = res.data
-                    console.log(res.data[0]);
+                    // console.log(res.data[0]);
 
                     var aa = [];
                     for (var i = 0; i < mydata.length; i++) {
@@ -186,7 +186,7 @@ Page({
                 },
               })
             }).catch(res => {
-              console.log(res);
+              // console.log(res);
               $wuxToptips().error({
                 hidden: true,
                 text: '删除失败',
@@ -208,7 +208,7 @@ Page({
     let copy1 = this.data.travelList;
     let arr = this.data.likeArr;
     let bol = false;
-    // console.log(copy)
+    // // console.log(copy)
     if (copy.length == 0) {
       for (var i = 0; i < copy1.length; i++) {
         arr[i] = 0;
@@ -233,7 +233,7 @@ Page({
       // if(bol)
 
     }
-    // console.log(arr);
+    // // console.log(arr);
 
     this.setData({
       likeArr: arr
@@ -247,7 +247,7 @@ Page({
     let arr = this.data.starArr;
 
     let bol = false;
-    // console.log(copy)
+    // // console.log(copy)
     if (copy.length == 0) {
       for (var i = 0; i < copy1.length; i++) {
         arr[i] = 0;
@@ -269,7 +269,7 @@ Page({
 
       }
     }
-    // console.log(arr);
+    // // console.log(arr);
 
     this.setData({
       starArr: arr
@@ -378,7 +378,7 @@ Page({
     var mydata;
     Promise.resolve(userData1).then(function (res) {
       mydata = res.data
-      console.log(res.data[0]);
+      // console.log(res.data[0]);
 
       var aa = [];
       for (var i = 0; i < mydata.length; i++) {
@@ -427,7 +427,7 @@ Page({
     // var mydata;
     // Promise.resolve(userData1).then(function (res) {
     //   mydata = res.data
-    //   console.log(res.data[0]);
+    //   // console.log(res.data[0]);
 
     //   var aa = [];
     //   for(var i=0 ;i<mydata.length; i++) {
@@ -462,7 +462,7 @@ Page({
     var mydata;
     Promise.resolve(userData1).then(function (res) {
       mydata = res.data[0]
-      console.log(res);
+      // console.log(res);
       that.setData({
         userData: mydata
       });

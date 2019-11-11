@@ -38,30 +38,6 @@ Page({
       wx.navigateTo({
         url: '../showVer/showVer',
       })
-      // $wuxDialog().alert({
-      //   resetOnClose: true,
-      //   title: '更新日志',
-      //   content: `V1.1.1115(2018-11-15)
-      //             1.【优化】整体颜色优化
-      //             2.【优化】我的页面图标添加
-      //             3.【优化】完善背景图片添加
-      //             4.【新增】我的关注，我的粉丝页面
-      //             \n
-      //             V1.0.1114(2018-11-14)
-      //             1.【新增】我的页面背景图添加(测试版)
-      //             2.【优化】首页显示效果
-      //             3.【优化】我的页面显示效果
-      //             4.【优化】个人信息页面显示效果
-      //             5.【优化】BUG页面代码优化
-      //             6.【优化】评论功能数据添加
-      //             \n
-      //             V0.13.1113(2018-11-13)
-      //             1.【新增】关注功能(测试版)
-      //             2.【新增】我的信息编辑
-      //             3.【新增】查看对方信息`,
-      //   onConfirm(e) {
-      //   },
-      // })
     }else {
 
     }
@@ -74,7 +50,7 @@ Page({
       _openid: openid
     }).get();
     Promise.resolve(d).then(function (res) {
-      console.log(res)
+      // console.log(res)
       wx.setStorageSync('userInfo', res.data[0].userInfo);
       that.setData({
         userInfo: res.data[0].userInfo
@@ -97,7 +73,7 @@ Page({
     wx.chooseImage({
       count: 1,
       success(res) {
-        console.log(res.tempFilePaths[0]);
+        // console.log(res.tempFilePaths[0]);
 
         let filePath = res.tempFilePaths[0];
         let pattern = /\.{1}[a-z]{1,}$/;
@@ -105,7 +81,7 @@ Page({
         cc = cc.slice(11);
         let openid = wx.getStorageSync('openid');
         let cloudPath = 'user/' + openid + '/avatar/' + cc + filePath.match(/\.[^.]+?$/)[0];
-        console.log(filePath, cloudPath)
+        // console.log(filePath, cloudPath)
         wx.showLoading({
           title: '正在上传...',
           mask: true
@@ -115,7 +91,7 @@ Page({
           cloudPath,
           filePath,
           success(res) {
-            console.log(res.fileID);
+            // console.log(res.fileID);
             let imageUrl = res.fileID;
             let db = wx.cloud.database();
             let allUser = db.collection('users').where({
@@ -124,7 +100,7 @@ Page({
 
             Promise.resolve(allUser).then(function (res) {
               let db = wx.cloud.database();
-              console.log(res);
+              // console.log(res);
               let infoResult = res.data[0].userInfo;
               let myId = res.data[0]._id;
               let ooo = res.data[0]._openid
@@ -135,7 +111,7 @@ Page({
                   userInfo: infoResult
                 },
                 success(res) {
-                  console.log(res);
+                  // console.log(res);
                   wx.hideLoading();
                   // wx.showToast({
                   //   title: '上传成功',
@@ -149,7 +125,7 @@ Page({
                   that.sxTX(ooo);
                 },
                 fail(res) {
-                  console.log(res)
+                  // console.log(res)
                   wx.hideLoading();
                   // wx.showToast({
                   //   image: '../../images/error.png',
@@ -185,7 +161,7 @@ Page({
 
       },
       fail(res) {
-        console.log(res)
+        // console.log(res)
       }
     })
   },
@@ -206,7 +182,7 @@ Page({
     wx.chooseImage({
       count: 1,
       success(res) {
-        console.log(res.tempFilePaths[0]);
+        // console.log(res.tempFilePaths[0]);
 
         let filePath = res.tempFilePaths[0];
         let pattern = /\.{1}[a-z]{1,}$/;
@@ -214,7 +190,7 @@ Page({
         cc = cc.slice(11);
         let openid = wx.getStorageSync('openid');
         let cloudPath = 'user/' + openid + '/backgroundImg/' + cc + filePath.match(/\.[^.]+?$/)[0];
-        console.log(filePath,cloudPath)
+        // console.log(filePath,cloudPath)
         wx.showLoading({
           title: '正在上传...',
           mask: true
@@ -223,7 +199,7 @@ Page({
           cloudPath,
           filePath,
           success(res) {
-            console.log(res.fileID);
+            // console.log(res.fileID);
             wx.cloud.callFunction({
               name: 'uploadBgImg',
               data: {
@@ -270,7 +246,7 @@ Page({
 
       },
       fail(res) {
-        console.log(res)
+        // console.log(res)
       }
     })
   },
@@ -327,7 +303,7 @@ Page({
           type: 'wgs84',
           altitude: true,
           success(res) {
-            console.log(res)
+            // console.log(res)
             const latitude = res.latitude;
             const longitude = res.longitude;
             wx.request({
@@ -338,7 +314,7 @@ Page({
               },
               method: 'GET',
               success(res) {
-                console.log(res);
+                // console.log(res);
                 let getAddress = res.data.result;
                 let db = wx.cloud.database();
                 let myDetails = db.collection('users').where({
@@ -346,7 +322,7 @@ Page({
                 }).get();
 
                 Promise.resolve(myDetails).then(function (res) {
-                  console.log(res);
+                  // console.log(res);
                   let detail = res.data[0].userDetail;
 
                   detail.finalLogin.unshift({
@@ -373,7 +349,7 @@ Page({
 
               },
               fail(res) {
-                console.log(res);
+                // console.log(res);
               }
             })
 
@@ -390,7 +366,7 @@ Page({
           type: 'wgs84',
           altitude: true,
           success(res) {
-            console.log(res)
+            // console.log(res)
             const latitude = res.latitude;
             const longitude = res.longitude;
             wx.request({
@@ -401,7 +377,7 @@ Page({
               },
               method: 'GET',
               success(res) {
-                console.log(res);
+                // console.log(res);
                 let getAddress = res.data.result;
                 let db = wx.cloud.database();
                 let myDetails = db.collection('users').where({
@@ -409,7 +385,7 @@ Page({
                 }).get();
 
                 Promise.resolve(myDetails).then(function (res) {
-                  console.log(res);
+                  // console.log(res);
                   let detail = res.data[0].userDetail;
 
                   detail.finalLogin.unshift({
@@ -430,13 +406,13 @@ Page({
                       detail: detail
                     },
                     success(res) {
-                      console.log(res)
+                      // console.log(res)
                       wx.navigateTo({
                         url: '../myInfo/myInfo',
                       })
                     },
                     fail(res) {
-                      console.log(res)
+                      // console.log(res)
                       wx.navigateTo({
                         url: '../myInfo/myInfo',
                       })
@@ -446,7 +422,7 @@ Page({
 
               },
               fail(res) {
-                console.log(res);
+                // console.log(res);
               }
             })
 
@@ -455,7 +431,7 @@ Page({
           fail(res) {
             wx.getSetting({
               success(res) {
-                console.log(res.authSetting['scope.userLocation']);
+                // console.log(res.authSetting['scope.userLocation']);
                 if (res.authSetting['scope.userLocation']) {
                 }
                 else {
@@ -465,7 +441,7 @@ Page({
                     success(res) {
                       wx.openSetting({
                         success(res) {
-                          console.log(res);
+                          // console.log(res);
                           that.setData({
                             userBol: true
                           })
@@ -473,7 +449,7 @@ Page({
                       })
                     },
                     fail(res) {
-                      console.log('取消')
+                      // console.log('取消')
                     }
                   })
                 }
@@ -500,7 +476,7 @@ Page({
   // 获得旅行数量
   getTravelNum() {
     let that = this;
-    // console.log(options.id)
+    // // console.log(options.id)
 
     let openid = wx.getStorageSync('openid');
     // let openid = 'W725rd2AWotkbRXB';
@@ -514,9 +490,9 @@ Page({
     var mydata;
 
     var a = Promise.resolve(travelData).then(function (res) {
-      // console.log(res)
+      // // console.log(res)
       // mydata = res.data[0]
-      // console.log(res.data.length);
+      // // console.log(res.data.length);
       that.setData({
         travelNum: res.data.length
       })
@@ -525,7 +501,7 @@ Page({
   // 获得收藏数量
   getStarNum() {
     let that = this;
-    // console.log(options.id)
+    // // console.log(options.id)
 
     let openid = wx.getStorageSync('openid');
     // let openid = 'W725rd2AWotkbRXB';
@@ -539,10 +515,10 @@ Page({
     var mydata;
 
     var a = Promise.resolve(travelData).then(function (res) {
-      console.log(res)
+      // console.log(res)
       wx.setStorageSync('userDetail', res.data[0].userDetail)
       // mydata = res.data[0]
-      // console.log(res.data.starArr);
+      // // console.log(res.data.starArr);
       that.setData({
         starNum: res.data[0].starArr.length,
         bgImg: res.data[0].backgroundImg.url,
@@ -575,7 +551,7 @@ Page({
   },
 
   onGotUserInfo(e) {
-    console.log(e);
+    // console.log(e);
     this.getInit();  
   },
   getInit() {
@@ -584,7 +560,7 @@ Page({
       success(res) {
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-          // console.log('1');
+          // // console.log('1');
           that.setData({
             shouquan: true
           });
@@ -660,23 +636,43 @@ Page({
   onLoad: function (options) {
     this.getMyInfo();
 
-    let db = wx.cloud.database();
-    db.collection('control').doc('W87jRg6qgQy38jbV').get().then(res => {
-      console.log(res.data.showAdd.showAdd)
-      if (res.data.showAdd.showAdd == 'none') {
+    // let db = wx.cloud.database();
+    // db.collection('control').doc('W87jRg6qgQy38jbV').get().then(res => {
+    //   // console.log(res.data.showAdd.showAdd)
+    //   if (res.data.showAdd.showAdd == 'none') {
+    //     this.setData({
+    //       showAdd: res.data.showAdd.showAdd,
+    //       showStar: 'block'
+    //     })
+    //   }else {
+    //     this.setData({
+    //       showAdd: 'flex',
+    //       showStar: 'none'
+    //     })
+    //   }
+    // })
+
+    if(wx.getStorageSync('show')) {
+      if (wx.getStorageSync('show') == 'none') {
         this.setData({
-          showAdd: res.data.showAdd.showAdd,
+          showAdd: 'none',
           showStar: 'block'
         })
-      }else {
+      }
+      else {
         this.setData({
           showAdd: 'flex',
           showStar: 'none'
         })
       }
+    }
+    else {
+      this.setData({
+        showAdd: 'none',
+        showStar: 'block'
+      })
+    }
 
-
-    })
   },
   shuaxin() {
     this.setData({

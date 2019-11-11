@@ -23,14 +23,14 @@ Page({
   // 查看详情
   todetail(e) {
     // let id = e.currentTarget.dataset.id
-    // console.log(e)
+    // // console.log(e)
 
     // wx.navigateTo({
     //   url: '../travelDetail/travelDetail?id=' + id,
     // })
 
     let id = e.currentTarget.dataset.id
-    console.log(e)
+    // console.log(e)
     let sOpenid = wx.getStorageSync('openid')
     if (e.currentTarget.dataset.openid == sOpenid) {
       wx.navigateTo({
@@ -63,7 +63,7 @@ Page({
     let copy1 = this.data.travelList;
     let arr = this.data.likeArr;
     let bol = false;
-    // console.log(copy)
+    // // console.log(copy)
     if (copy.length == 0) {
       for (var i = 0; i < copy1.length; i++) {
         arr[i] = 0;
@@ -88,7 +88,7 @@ Page({
       // if(bol)
 
     }
-    // console.log(arr);
+    // // console.log(arr);
 
     this.setData({
       likeArr: arr
@@ -102,7 +102,7 @@ Page({
     let arr = this.data.starArr;
 
     let bol = false;
-    // console.log(copy)
+    // // console.log(copy)
     if (copy.length == 0) {
       for (var i = 0; i < copy1.length; i++) {
         arr[i] = 0;
@@ -124,7 +124,7 @@ Page({
 
       }
     }
-    // console.log(arr);
+    // // console.log(arr);
 
     this.setData({
       starArr: arr
@@ -259,7 +259,7 @@ Page({
     var mydata;
     Promise.resolve(userData1).then(function (res) {
       mydata = res.data[0]
-      // console.log(res.data[0]);
+      // // console.log(res.data[0]);
       that.setData({
         userData: mydata
       });
@@ -301,12 +301,12 @@ Page({
     var mydata;
     Promise.resolve(userData1).then(function (res) {
       mydata = res.data[0].starArr
-      console.log(mydata);
+      // console.log(mydata);
       
       wx.cloud.callFunction({
         name: 'getTravel',
         success(res) {
-          console.log(res.result.data);
+          // console.log(res.result.data);
           wx.hideLoading();
           let a = [];
           for (var i = 0; i < mydata.length; i++) {
@@ -316,7 +316,7 @@ Page({
               }
             })
           }
-          console.log(a);
+          // console.log(a);
           that.setData({
             travelList: a
           })

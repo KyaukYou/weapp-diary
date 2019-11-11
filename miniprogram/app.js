@@ -28,10 +28,10 @@ App({
         that.getLoginInfo();
       },
       fail(res) {
-        console.log(res)
+        // console.log(res)
       },
       complete(res) {
-        // console.log(res)
+        // // console.log(res)
       }
     })
   },
@@ -69,7 +69,7 @@ App({
       _openid: openid
     }).get();
     Promise.resolve(d).then(function (res) {
-      console.log(res)
+      // console.log(res)
 
       let getInfo = res.data[0].userInfo;
       getInfo.city = val.city;
@@ -100,7 +100,7 @@ App({
         userInfo: val
       },
       success(res) {
-        console.log(res)
+        // console.log(res)
       }
     })
       
@@ -109,10 +109,10 @@ App({
     var that = this;
     wx.login({
       success(res) {
-        // console.log(res);
+        // // console.log(res);
         wx.getUserInfo({
           success(res) {
-            // console.log(res);
+            // // console.log(res);
             that.globalData.userInfo = res.userInfo
             wx.setStorageSync('userInfo', res.userInfo);
 
@@ -128,7 +128,7 @@ App({
                  data: "users"
               },
               success(res) {
-                console.log(res);
+                // console.log(res);
                 let ifHave = false;
                 if(res.result.total == 0) {
                   ifHave = false;
@@ -136,7 +136,7 @@ App({
                   let data = res.result.data;
                   for (var i = 0; i < data.length; i++) {
                     if (data[i]['_openid'] == that.globalData.openid) {
-                      console.log('有');
+                      // console.log('有');
                       ifHave = true;
                       break;
                     }
@@ -145,7 +145,7 @@ App({
 
                 if (ifHave) {
                   // 已经有了不添加
-                  // console.log('不需要添加')
+                  // // console.log('不需要添加')
                   wx.hideLoading();
                   // wx.showToast({
                   //   title: '欢迎回来',
@@ -153,7 +153,7 @@ App({
                   that.globalData.login = true
                 } else {
                   // 添加openid，userInfo
-                  console.log('添加完成')
+                  // console.log('添加完成')
                   let db = wx.cloud.database();
                   db.collection('users').add({
                     data: {
@@ -175,7 +175,7 @@ App({
                       createdTime: that.createTime()
                     },
                     success(res) {
-                      console.log(res);
+                      // console.log(res);
                       wx.hideLoading();
                       wx.showToast({
                         title: '注册成功',
@@ -183,13 +183,13 @@ App({
                       that.globalData.login = true
                     },  
                     fail(res) {
-                      console.log(res)
+                      // console.log(res)
                     }
                   })
                 }
               },
               fail(res) {
-                console.log(res)
+                // console.log(res)
               }
             })
 
@@ -218,6 +218,7 @@ App({
     openid: '',
     userInfo: {},
     login: false,
+    controlId: 'W87jRg6qgQy38jbV',
     version: 'V1.9.0809'
   }
 })

@@ -46,7 +46,7 @@ Page({
     }
   },
   changeLock(e) {
-    console.log(e)
+    // console.log(e)
     var copy = this.data.uploadObj;
     var copyBol = copy.lock;
     copyBol = !copyBol;
@@ -71,14 +71,14 @@ Page({
   },
   //选择图片上传
   chooseImg(e) {
-    console.log(e.currentTarget.dataset.index)
+    // console.log(e.currentTarget.dataset.index)
     var that = this;
     wx.chooseImage({
       count: that.data.uploadObj.list[e.currentTarget.dataset.index].imgNum,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: function(res) {
-        console.log(res);
+        // console.log(res);
         let arr = res.tempFilePaths;
         var copy = that.data.uploadObj;
 
@@ -95,29 +95,29 @@ Page({
         })
       },
       fail: function(res) {
-        console.log(res);
+        // console.log(res);
       },
       complete: function(res) {
-        // console.log(res);
+        // // console.log(res);
       },
     })
   },
   //删除图片
   delImg(e) {
-    // console.log(e.currentTarget.dataset.index);
+    // // console.log(e.currentTarget.dataset.index);
     var main = e.currentTarget.dataset.main;
     var child = e.currentTarget.dataset.index;
     var copy = this.data.uploadObj;
     copy.list[main].trueImgs.splice(child, 1);
     copy.list[main].imgNum += 1;
-    console.log(copy.list[main].trueImgs, copy.list[main].imgNum)
+    // console.log(copy.list[main].trueImgs, copy.list[main].imgNum)
     this.setData({
       uploadObj: copy
     })
   },
   //查看大图
   showbgimg(e) {
-    console.log(e.currentTarget.dataset.url)
+    // console.log(e.currentTarget.dataset.url)
     var copy = this.data.uploadObj;
     var arr = copy.list[e.currentTarget.dataset.index].trueImgs;
     // arr.push(e.currentTarget.dataset.url)
@@ -125,7 +125,7 @@ Page({
       urls: arr,
       current: e.currentTarget.dataset.url,
       success(res) {
-        console.log(res)
+        // console.log(res)
       },
       fail(res) {
 
@@ -137,7 +137,7 @@ Page({
   },
   //编辑文字
   getTextarea(e) {
-    console.log(e.currentTarget.dataset)
+    // console.log(e.currentTarget.dataset)
     let copy = this.data.uploadObj;
     copy.list[e.currentTarget.dataset.index].text = e.detail.value
     this.setData({
@@ -155,14 +155,14 @@ Page({
 
   //输入标题
   addTitle(e) {
-    // console.log(e)
+    // // console.log(e)
     this.setData({
       title: e.detail
     })
   },
   //输入位置
   addWhere(e) {
-    // console.log(e)
+    // // console.log(e)
     this.setData({
       where: e.detail
     })
@@ -172,19 +172,19 @@ Page({
     let that = this;
     wx.chooseLocation({
       success: function(res) {
-        console.log(res)
+        // console.log(res)
         that.setData({
           where: res.name + '(' + res.address + ')'
         })
       },
       fail(res) {
-        console.log('取消' + res)
+        // console.log('取消' + res)
       }
     })
   },
   // 选择开始时间
   chooseStart(e) {
-    // console.log(e)
+    // // console.log(e)
     let that = this;
     let arr = [];
     arr.push(e.detail.value)
@@ -196,7 +196,7 @@ Page({
     // $wuxCalendar().open({
     //   value: that.data.beginDate,
     //   onChange: (values, displayValues) => {
-    //     // console.log('onChange', values, displayValues)
+    //     // // console.log('onChange', values, displayValues)
     //     that.setData({
     //       beginDate: displayValues,
     //     })
@@ -219,7 +219,7 @@ Page({
     // $wuxCalendar().open({
     //   value: that.data.endDate,
     //   onChange: (values, displayValues) => {
-    //     console.log('onChange', values, displayValues)
+    //     // console.log('onChange', values, displayValues)
     //     that.setData({
     //       endDate: displayValues,
     //     })
@@ -229,10 +229,10 @@ Page({
   },
   //选择日期后日期数组
   changeDate() {
-    // console.log(this.data.beginDate[0])
-    // console.log(this.data.endDate[0])
+    // // console.log(this.data.beginDate[0])
+    // // console.log(this.data.endDate[0])
     if (this.data.beginDate.length == 0) {
-      // console.log('无效的日期')
+      // // console.log('无效的日期')
       this.setData({
         day: 0
       })
@@ -249,14 +249,14 @@ Page({
       } else {
         let arr1 = this.data.beginDate[0].split('-');
         let arr2 = this.data.endDate[0].split('-');
-        // console.log(arr1, arr2)
+        // // console.log(arr1, arr2)
         var date1 = new Date(arr1[0], arr1[1], arr1[2]).getTime();
         var date2 = new Date(arr2[0], arr2[1], arr2[2]).getTime();
-        // console.log(date1, date2)
+        // // console.log(date1, date2)
         if (date2 < date1) {
 
           //时间错误
-          // console.log('错误')
+          // // console.log('错误')
           this.setData({
             day: 0
           })
@@ -264,7 +264,7 @@ Page({
         } else {
 
           //生成
-          // console.log('ok')
+          // // console.log('ok')
           let day1 = new Date(date1).getTime();
           let day2 = new Date(date2).getTime();
           var c = day2 - day1;
@@ -280,7 +280,7 @@ Page({
     }
   },
   addDayArr(a, b) {
-    // console.log(a,b)
+    // // console.log(a,b)
     if (a == 0) {
       this.setData({
         dayArr: []
@@ -289,7 +289,7 @@ Page({
     }
     if (b == 0) {
       var d = this.data.beginDate[0]
-      console.log(d)
+      // console.log(d)
       let arr = [];
       arr.push(d);
       this.setData({
@@ -319,7 +319,7 @@ Page({
   },
   perfectArrChange(val1, val2) {
     var that = this;
-    // console.log(val1.list)
+    // // console.log(val1.list)
     //判断默认数组长度
     if (val1.length <= 0) {
       let copy = this.data.uploadObj;
@@ -424,7 +424,7 @@ Page({
     var eDate = this.data.endDate;
     var hImg = this.data.headerImgArr;
     var that = this;
-    console.log(title,where,sDate,eDate)
+    // console.log(title,where,sDate,eDate)
 
     if (title == '' || where == '' || sDate.length == 0 || eDate.length == 0 || hImg.length == 0) {
       // $wuxToast().show({
@@ -432,7 +432,7 @@ Page({
       //   duration: 1500,
       //   color: 'white',
       //   text: '请填写完整',
-      //   success: () => console.log('已完成')
+      //   success: () => // console.log('已完成')
       // });
       wx.showToast({
         image: '../../images/error.png',
@@ -454,7 +454,7 @@ Page({
       minute <= 9 ? minute = '0' + minute : minute;
       second <= 9 ? second = '0' + second : second;
       let fullTimes = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-      // console.log(year + '-' + month + '-' + day + ' ' + hour+':'+minute+':'+second)
+      // // console.log(year + '-' + month + '-' + day + ' ' + hour+':'+minute+':'+second)
 
       var copy = that.data.uploadObj;
       copy.title = title;
@@ -505,13 +505,13 @@ Page({
         title: '上传标题图片',
         mask: true
       })
-      console.log(filePath)
-      console.log(cloudPath)
+      // console.log(filePath)
+      // console.log(cloudPath)
       wx.cloud.uploadFile({
         cloudPath,
         filePath,
         success(res) {
-          console.log(res.fileID)
+          // console.log(res.fileID)
           // let copy3 = that.data.uploadObj;
           copy.headerImg = res.fileID;
           that.setData({
@@ -520,7 +520,7 @@ Page({
 
           let anum = that.data.cImgNum - 0 + 1;
           let title = '上传图片' + anum + '/' + fullImgNums;
-          // console.log(anum, title)
+          // // console.log(anum, title)
           wx.showLoading({
             title: title,
             mask: true
@@ -528,7 +528,7 @@ Page({
           that.uploadTravelImg()
         },
         fail(res) {
-          console.log(res)
+          // console.log(res)
           wx.hideLoading();
           wx.showToast({
             image: '../../images/error.png',
@@ -561,10 +561,10 @@ Page({
 
       //添加到数组
       let copy = that.data.uploadObj;
-      // console.log(uparr, copy.list)
+      // // console.log(uparr, copy.list)
       for (var j = 0; j < copy.list.length; j++) {
         let s = uparr.splice(0, numarr[j]);
-        // console.log(s);
+        // // console.log(s);
         for (var i = 0; i < s.length; i++) {
           copy.list[j].imgs.push(s[i])
         }
@@ -579,11 +579,11 @@ Page({
           data: that.data.uploadObj
         },
         success(res) {
-          // console.log(res);
+          // // console.log(res);
           that.addSql(res._id);
         },
         fail(res) {
-          // console.log(res)
+          // // console.log(res)
         },
         complete(res) {
           // that.addSql(res._id)
@@ -592,11 +592,11 @@ Page({
 
     }
     else {
-    // console.log(num,numarr,numlist)
+    // // console.log(num,numarr,numlist)
     if(this.data.cImgNum < num) {
 
       let filePath = numlist[this.data.cImgNum];
-      // console.log(filePath)
+      // // console.log(filePath)
       let pattern = /\.{1}[a-z]{1,}$/;
       let aa = filePath.slice(0, pattern.exec(filePath).index);
       aa = aa.slice(11);
@@ -611,7 +611,7 @@ Page({
         cloudPath,
         filePath,
         success(res) {
-          console.log(res.fileID)
+          // console.log(res.fileID)
           uparr.push(res.fileID);
           that.setData({
             uparr: uparr
@@ -621,10 +621,10 @@ Page({
           that.setData({
             cImgNum: l
           });
-          console.log(l)
+          // console.log(l)
           let anum = that.data.cImgNum - 0 + 1;
           let title = '上传图片' + anum + '/' + that.data.fullImgNums;
-          console.log(anum, title)
+          // console.log(anum, title)
           wx.showLoading({
             title: title,
             mask: true
@@ -632,10 +632,10 @@ Page({
           that.uploadTravelImg();
         },
         fail(res) {
-          console.log(res)
+          // console.log(res)
         },
         complete(res) {
-          console.log(res)
+          // console.log(res)
         }
       })
 
@@ -651,15 +651,15 @@ Page({
 
       //添加到数组
       let copy = that.data.uploadObj;
-      console.log(uparr,copy.list)
+      // console.log(uparr,copy.list)
       for(var j=0; j<copy.list.length; j++) {
 
         let s = uparr.splice(0, numarr[j]); 
-        console.log(s);
+        // console.log(s);
         for(var i=0; i<s.length; i++) {
           copy.list[j].imgs.push(s[i])
         }
-        // console.log(copy.list[j])
+        // // console.log(copy.list[j])
       
       }
       that.setData({
@@ -672,14 +672,14 @@ Page({
           data: that.data.uploadObj
         },
         success(res) {
-          console.log(res);
+          // console.log(res);
           that.addSql(res._id)
         },
         fail(res) {
-          console.log(res)
+          // console.log(res)
         },
         complete(res) {
-          console.log(res)  
+          // console.log(res)  
           // that.addSql(res._id)
         }
       })
@@ -706,7 +706,7 @@ Page({
           travelArr: copyarr
         },
         success(res) {
-          console.log(res)
+          // console.log(res)
           wx.hideLoading();
             wx.showToast({
               title: '上传成功',
@@ -721,7 +721,7 @@ Page({
           },1500)
         },
         fail(res) {
-          console.log(res)
+          // console.log(res)
         }
       })
     })  

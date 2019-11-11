@@ -23,7 +23,7 @@ Page({
     showAdd: 'none'
   },
   touserDetail() {
-    console.log(this.data.userData._id)
+    // console.log(this.data.userData._id)
     wx.navigateTo({
       url: '../userDetail/userDetail?id='+this.data.travelObj._openid,
     })
@@ -103,7 +103,7 @@ Page({
             val: val
           },
           success(res) {
-            console.log(res)
+            // console.log(res)
             wx.hideLoading();
             wx.showToast({
               title: '评论成功'
@@ -113,10 +113,10 @@ Page({
             })
           },
           fail(res) {
-            console.log(res)
+            // console.log(res)
           },
           complete(res) {
-            console.log(res);
+            // console.log(res);
             that.initData(that.data.travelId);
             that.initUser();
           }
@@ -139,7 +139,7 @@ Page({
             val: val
           },
           success(res) {
-            console.log(res)
+            // console.log(res)
             wx.hideLoading();
             wx.showToast({
               title: '评论成功'
@@ -149,10 +149,10 @@ Page({
             })
           },
           fail(res) {
-            console.log(res)
+            // console.log(res)
           },
           complete(res) {
-            console.log(res);
+            // console.log(res);
             that.initData(that.data.travelId);
             that.initUser();
           }
@@ -193,7 +193,7 @@ Page({
       urls: [copy.data.headerImg],
       current: copy.data.headerImg,
       success: function(res) {
-        console.log(res)
+        // console.log(res)
       }
     })
   },
@@ -207,7 +207,7 @@ Page({
       // current: copy.data.list[index].imgs[e.currentTarget.dataset.smIndex],
       current: e.currentTarget.dataset.url,
       success: function(res) {
-        console.log(res)
+        // console.log(res)
       }
     })
   },
@@ -217,7 +217,7 @@ Page({
     let copy1 = this.data.travelObj;
     let arr = this.data.likeArr;
     let bol = false;
-    // console.log(copy)
+    // // console.log(copy)
     if (copy.length == 0) {
       // for (var i = 0; i < copy1.length; i++) {
       arr[0] = 0;
@@ -235,7 +235,7 @@ Page({
       })
       // }
     }
-    // console.log(arr);
+    // // console.log(arr);
 
     this.setData({
       likeArr: arr
@@ -266,7 +266,7 @@ Page({
     } else {
       res = copy.some(function(item, index) {
         if (item == copy1['_id']) {
-          console.log(index)
+          // console.log(index)
           haveIndex = index;
           return true;
         } else {
@@ -299,7 +299,7 @@ Page({
       this.sqlChange(index, copy, 'like', 'min')
     };
 
-    // console.log(copy)
+    // // console.log(copy)
 
     let copyAll = this.data.userData;
     copyAll.likeArr = copy;
@@ -312,10 +312,10 @@ Page({
 
   }, 3000),
   sqlChange(val, arr, types, what) {
-    console.log(val, arr, types, what)
+    // console.log(val, arr, types, what)
     let id = this.data.travelObj['_id'];
     let openid = wx.getStorageSync('openid');
-    // console.log(id)
+    // // console.log(id)
 
     let db = wx.cloud.database();
     let _ = db.command;
@@ -339,7 +339,7 @@ Page({
             id: id
           },
           success(res) {
-            console.log(res)
+            // console.log(res)
             $wuxToptips().success({
               hidden: true,
               text: '点赞成功',
@@ -357,7 +357,7 @@ Page({
             id: id
           },
           success(res) {
-            console.log(res)
+            // console.log(res)
             $wuxToptips().warn({
               hidden: true,
               text: '取消点赞',
@@ -386,7 +386,7 @@ Page({
             id: id
           },
           success(res) {
-            console.log(res)
+            // console.log(res)
           }
         })
       } else {
@@ -398,7 +398,7 @@ Page({
             id: id
           },
           success(res) {
-            console.log(res)
+            // console.log(res)
           }
         })
       }
@@ -427,7 +427,7 @@ Page({
         // id: 'W8nS5Z25dhqgTLLt'
       },
       success(res) {
-        console.log(res)
+        // console.log(res)
         that.setData({
           chatBol: false
         })
@@ -439,13 +439,25 @@ Page({
       }
     })
 
-    let db = wx.cloud.database();
-    db.collection('control').doc('W87jRg6qgQy38jbV').get().then(res => {
-      console.log(res.data.showAdd.showAdd)
-        this.setData({
-          showAdd: res.data.showAdd.showAdd,
-        })
-    })
+    // let db = wx.cloud.database();
+    // db.collection('control').doc('W87jRg6qgQy38jbV').get().then(res => {
+    //   // console.log(res.data.showAdd.showAdd)
+    //     this.setData({
+    //       showAdd: res.data.showAdd.showAdd,
+    //     })
+    // })
+
+    if (wx.getStorageSync('show')) {
+      this.setData({
+        showAdd: wx.getStorageSync('show'),
+      })
+    }
+    else {
+      this.setData({
+        showAdd: 'none',
+      })
+    }
+
   },
   initData(myid) {
     let that = this;
@@ -459,7 +471,7 @@ Page({
 
     var a = Promise.resolve(travelData).then(function(res) {
       mydata = res.data[0]
-      console.log(mydata);
+      // console.log(mydata);
       that.setData({
         travelObj: mydata
       })
@@ -482,7 +494,7 @@ Page({
     var mydata;
     Promise.resolve(userData1).then(function(res) {
       mydata = res.data[0]
-      // console.log(res.data[0]);
+      // // console.log(res.data[0]);
       that.setData({
         userData: mydata
       });

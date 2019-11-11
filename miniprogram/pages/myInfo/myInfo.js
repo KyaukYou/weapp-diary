@@ -20,14 +20,14 @@ Page({
   },
   // 我的邮箱
   emailChange(e) {
-    // console.log(e.detail.value);
+    // // console.log(e.detail.value);
     this.setData({
       email: e.detail.value
     })
   },
   // 省市区三级联动
   bindRegionChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+    // console.log('picker发送选择改变，携带值为', e.detail.value)
     var detail = e.detail.value[0] + '-' + e.detail.value[1] + '-' + e.detail.value[2]
     this.setData({
       region: e.detail.value
@@ -37,15 +37,15 @@ Page({
   },
   // 出生日期
   bindBirthChange: function (e) {
-    // console.log('picker发送选择改变，携带值为', e.detail.value)
-    console.log(e)
+    // // console.log('picker发送选择改变，携带值为', e.detail.value)
+    // console.log(e)
     this.setData({
       birth: e.detail.value
     })
 
     var date = new Date();
     var year = date.getFullYear();
-    // console.log(year - Number(this.data.birth.slice(0,4)));
+    // // console.log(year - Number(this.data.birth.slice(0,4)));
     var cha = year - Number(this.data.birth.slice(0, 4));
 
 
@@ -65,7 +65,7 @@ Page({
 
     var date = new Date();
     var year = date.getFullYear();
-    // console.log(year - Number(this.data.birth.slice(0,4)));
+    // // console.log(year - Number(this.data.birth.slice(0,4)));
     var cha = year - Number(this.data.birth.slice(0, 4));
 
 
@@ -85,7 +85,7 @@ Page({
   },
   //擅长描述
   bindTextareaChange: function (e) {
-    // console.log(e.detail.value)
+    // // console.log(e.detail.value)
     this.setData({
       goodat: e.detail.value
     })
@@ -127,10 +127,10 @@ Page({
               })
               clearTimeout(timer111);
             },1500)
-            // console.log(res)
+            // // console.log(res)
           },
           fail(res) {
-            // console.log(res)
+            // // console.log(res)
             wx.hideLoading();
             wx.showToast({
               title: '未知错误',
@@ -255,7 +255,7 @@ Page({
         for (var s in result.where) {
           newRegion.push(result.where[s])
         }
-        console.log(newAge)
+        // console.log(newAge)
         that.setData({
           birth: result.birth,
           // agePer: newAge[0]+'岁,属'+newAge[1],
@@ -281,7 +281,7 @@ Page({
         wx.showToast({
           title: '未知错误',
         })
-        // console.log(res[0])
+        // // console.log(res[0])
       }
     })
   },

@@ -25,7 +25,7 @@ Page({
     return fullTimes;
   },
   changeValue(e) {
-    console.log(e)
+    // console.log(e)
     this.setData({
       textarea: e.detail.value
     })
@@ -53,7 +53,7 @@ Page({
           text: this.data.textarea
         },
         success(res) {
-          console.log(res);
+          // console.log(res);
           wx.hideLoading();
           wx.showToast({
             title: '提交成功',
@@ -71,7 +71,7 @@ Page({
           },1000)
         },
         fail(res) {
-          console.log(res);
+          // console.log(res);
         },
         complete(res) {
 
