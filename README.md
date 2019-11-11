@@ -36,16 +36,16 @@
    + 在**微信开发者工具中**找到根目录下的**miniprogram**文件夹，找到**app.js**文件，第十行 **env**: 改成你之前创建的环境ID
    + 微信开发者工具 > 清缓存 > 全部清除 ，编译
    + 小程序中点击 > 我的 > 点击登录 > 注册成功
-   + 回到云开发，找到**users**集合，会多出一条记录，找到这条记录中 _openid 的值并复制 
+   + 回到云开发，找到**users**集合，会多出一条记录，找到这条记录中 **_openid** 的值并复制 
    + 替换 **control** 中 **_openid** 的值
 
 ---   
 
 ### 6.修改项目代码
    + 复制云开发**control**集合记录的 **_id** 值
-   + miniprogram > pages > index > index.js 中搜索 W87jRg6qgQy38jbV **替换** 刚才复制的 **_id**
-   + miniprogram > pages > my > my.js 中搜索 W87jRg6qgQy38jbV **替换** 刚才复制的 **_id**
-   + miniprogram > pages > travelDetail > travelDetail.js 中搜索 W87jRg6qgQy38jbV **替换** 刚才复制的 **_id**
+   + miniprogram > pages > index > index.js 中搜索 **W87jRg6qgQy38jbV** 替换 刚才复制的 **_id**
+   + miniprogram > pages > my > my.js 中搜索 **W87jRg6qgQy38jbV** 替换 刚才复制的 **_id**
+   + miniprogram > pages > travelDetail > travelDetail.js 中搜索 **W87jRg6qgQy38jbV** 替换 刚才复制的 **_id**
 
 ---
 
