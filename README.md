@@ -24,7 +24,7 @@
    - 左上角 > 数据库 > 点击+号 > 集合名称: **control**
    - 添加记录 > 添加字段 
       - 字段1: **_openid**: xxxxxxxxx (暂时先随便填写)
-      - 字段2：**showAdd** {"showAdd":"block"}
+      - 字段2：**showAdd**: {"showAdd":"block"}   注意是object格式的
 
 + 创建集合 **bug**、**travel**、**users**
 
