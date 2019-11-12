@@ -9,7 +9,7 @@
         </view>
     </view>
     <view slot="footer" class="wux-popup__buttons {{ verticalButtons ? 'wux-popup__buttons--vertical' : 'wux-popup__buttons--horizontal' }}">
-        <block wx:for="{{ buttons }}" wx:for-item="button" wx:key="">
+        <block wx:for="{{ buttons }}" wx:for-item="button" wx:key="index">
             <view
                 class="wux-popup__button {{ 'wux-popup__button--' + (button.type || 'default') }} {{ button.bold ? 'wux-popup__button--bold' : '' }}"
                 hover-class="wux-popup__button--hover"

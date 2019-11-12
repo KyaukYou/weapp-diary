@@ -120,7 +120,7 @@ page {
   /* box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.3); */
   position: relative;
   /* box-shadow: 0 0px 8px 0px rgba(199, 199, 199, 0.3); */
-  box-shadow: 0rpx 2rpx 10rpx 4rpx rgba(190, 190, 190, 0.4);
+  box-shadow: 0rpx 2rpx 10rpx 4rpx rgba(190, 190, 190, 0.3);
 }
 
 .index .index-wrap {
@@ -233,6 +233,8 @@ page {
   /* justify-content: center; */
   align-items: center;
   /* box-sizing: border-box; *//* padding-left: 2%; */
+  position: relative;
+  left: 2rpx;
 }
 
 .index .index-footer-left image {

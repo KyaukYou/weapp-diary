@@ -1,8 +1,4 @@
 <view class='page' wx:if='{{show}}'>
-  <!-- <view class='headerimg' bindtap='headerimg'>
-    <view wx:if="{{headerImgArr.length > 0 ? false : true}}">上传封面图</view>
-    <image wx:if="{{headerImgArr.length > 0 ? true : false}}" src='{{headerImgArr[0]}}'></image>
-  </view> -->
 
   <!-- 日历组件 -->
   <wux-calendar id="wux-calendar" />
@@ -11,13 +7,11 @@
     <van-cell-group>
       <van-field  maxlength='20' value="{{ title }}" type="text" clearable label="日记标题" placeholder="请输入日记标题(20字以内)"  border="false" bind:input='addTitle' />
       <view hover-class='addT-hover' class='add-one-add' bindtap='headerimg'>日记封面
-        <!-- <image wx:if="{{headerImgArr.length > 0 ? false : true}}" src='../../images/moren.jpg'>
-        </image> -->
         <image mode='aspectFill' wx:if="{{headerImgArr.length > 0 ? true : false}}" src='{{headerImgArr[0]}}'></image>
       </view>
-      <!-- <van-field maxlength='20' value="{{ title }}" type="text" clearable label="日记封面" placeholder="请输入日记标题(20字以内)"  border="false" bind:input='addTitle' >
-        <image slot="button" size="small" type="calm" bind:click='chooseWhere'>选择位置</image>
-      </van-field> -->
+      
+
+
 
       <van-field value="{{ where }}" type='text' center clearable label="日记位置" placeholder="请选择" border="false"  use-button-slot bind:input='addWhere'>
         <!-- <picker slot='button' return:false> -->
@@ -58,13 +52,8 @@
 
   </view>
 
-  <!-- <swiper indicator-dots="{{indicatorDots}}"
-  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-    <block class='add-list' wx:for='{{uploadObj.list}}' wx:for-index='main_index' wx:if='{{dayArr == 0 ? false : true}}' wx:key>
-      <swiper-item> -->
 
-
-  <view class='add-list' wx:for='{{uploadObj.list}}' wx:for-index='main_index' wx:if='{{dayArr == 0 ? false : true}}' wx:key>
+  <view class='add-list' wx:for='{{uploadObj.list}}' wx:for-index='main_index' wx:if='{{dayArr == 0 ? false : true}}' wx:key='index'>
     <view class='add-list-one'>
       <view class='add-footer'>
         <view>
@@ -84,7 +73,7 @@
 
       <view class='add-image'>
         <!-- wx:for='{{}}' -->
-        <view class='add-full' data-url='{{item}}' catchtap='showbgimg' wx:for='{{uploadObj.list[main_index].trueImgs}}' wx:for-index='img_index' wx:key data-index='{{main_index}}'>
+        <view class='add-full' data-url='{{item}}' catchtap='showbgimg' wx:for='{{uploadObj.list[main_index].trueImgs}}' wx:for-index='img_index' wx:key='index' data-index='{{main_index}}'>
           <wux-icon class='add-delete' type='md-close-circle-outline' size='20' data-main='{{main_index}}' data-index='{{img_index}}' catchtap='delImg' />
           <image mode='aspectFill' src='{{item}}'></image>
         </view>

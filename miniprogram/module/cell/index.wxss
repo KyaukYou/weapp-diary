@@ -61,7 +61,7 @@
 }
 
 .van-cell::after {
-  left: 15px;
+  left: 0;
   right: 0;
   -webkit-transform: scaleY(0.5);
   transform: scaleY(0.5);

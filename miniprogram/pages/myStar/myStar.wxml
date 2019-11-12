@@ -2,7 +2,7 @@
   <!-- <view class='container-scroll'> -->
   <wux-toptips id="wux-toptips" />
 
-  <view class='index' data-openid='{{item._openid}}' data-id='{{item._id}}' wx:for='{{travelList}}' wx:key wx:if='{{item.data.show}}' bindtap='todetail' data-lock='{{item.data.lock}}' style='left: 0;'>
+  <view class='index' data-openid='{{item._openid}}' data-id='{{item._id}}' wx:for='{{travelList}}' wx:key='index' wx:if='{{item.data.show}}' bindtap='todetail' data-lock='{{item.data.lock}}' style='left: 0;'>
     <!-- 单数 -->
     <view wx:if='{{index % 2 == 0}}' class='delTravel' catchtap='delTravel' data-lock='{{item.data.lock}}' data-index='{{index}}' data-id='{{item._id}}' data-openid='{{item._openid}}'>
       <wux-icon type='{{item.data.lock == true ? "md-lock" : "md-unlock" }}' size='18' style='position: relative; left: -4rpx; top: -6rpx;' />
@@ -68,7 +68,7 @@
           </view>
 
         </view>
-        <view class='index-footer-left' style='justify-content:flex-end; padding-right: 10rpx;'>
+        <view class='index-footer-left' style='justify-content:flex-end; padding-right: 12rpx;'>
           <image src='{{item.data.userInfo.avatarUrl}}'></image>
           <view>by {{item.data.userInfo.nickName}}</view>
         </view>

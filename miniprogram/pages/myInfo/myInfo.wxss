@@ -25,7 +25,7 @@
   float: left;
   margin-right: 14rpx;
   position: relative;
-  top: 4rpx;
+  top: 2rpx;
 }
 
 .myInfo-detail {

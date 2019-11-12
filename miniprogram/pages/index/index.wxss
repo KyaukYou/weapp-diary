@@ -102,7 +102,7 @@ page {
 .container {
   width: 100%;
   height: auto;
-  margin-top: 196rpx;
+  margin-top: 190rpx;
   padding-bottom: 8rpx;
 }
 
@@ -124,7 +124,8 @@ page {
   overflow: hidden;
   margin: 54rpx auto 54rpx auto;
   /* margin: 20rpx auto; */
-  box-shadow: 0rpx 2rpx 10rpx 4rpx rgba(190, 190, 190, 0.4);
+  box-shadow: 0rpx 2rpx 10rpx 4rpx rgba(190, 190, 190, 0.3);
+  /* box-shadow:0px 15px 10px -15px rgba(190, 190, 190, 1); */
   position: relative;
 }
 
@@ -241,6 +242,8 @@ page {
   /* justify-content: center; */
   align-items: center;
   /* box-sizing: border-box; *//* padding-left: 2%; */
+  position: relative;
+  left: 2rpx;
 }
 
 .index .index-footer-left image {
@@ -283,6 +286,8 @@ page {
   /* margin-top: 4rpx; */
   overflow: hidden;
   /* box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.3); */
+  position: relative;
+  top: 2rpx;
 }
 
 .index .index-footer-one view {
@@ -292,7 +297,7 @@ page {
   line-height: 70rpx;
   color: rgb(53, 193, 248);
   /* color: #35c1f8; */
-  font-size: 22rpx;
+  font-size: 24rpx;
   text-align: left;
   font-weight: bold;
   margin-left: -2rpx;

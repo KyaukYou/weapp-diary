@@ -695,9 +695,17 @@ Page({
   onShow: function () {
     this.getTravelNum();
     this.getStarNum();
-    this.setData({
-      version: app.globalData.version
+    // this.setData({
+    //   version: app.globalData.version
+    // })
+
+    let db = wx.cloud.database();
+    db.collection('control').doc(app.globalData.controlId).get().then(res => {
+      this.setData({
+        version: res.data.ver
+      })
     })
+
   },
 
   /**

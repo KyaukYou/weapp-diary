@@ -2,24 +2,29 @@
   padding: 0;
   margin: 0;
   border-radius: 0;
-  /* color: inherit; */
-  color: black;
-  background: 0 0;
-  /* font-size: inherit; */
-  font-size: 30rpx;
+  color: inherit !important;
+  background: 0 0 !important;
+  font-size: inherit;
+  font-weight: 400;
   line-height: inherit;
   text-align: inherit;
-  padding: 22rpx 22rpx 24rpx 22rpx;
+  text-decoration: none;
+  overflow: visible;
+  min-height: 0 !important;
+  width: auto !important;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  padding: 26rpx 30rpx;
   position: relative;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
   align-items: center;
   background: #fff;
-  margin-bottom: 12rpx;
 }
 
 .wux-cell:after {
+  display: block;
   position: static;
   top: auto;
   left: auto;
@@ -38,11 +43,11 @@
   bottom: 0;
   right: 0;
   height: 2rpx;
-  /* border-bottom: 2rpx solid #d9d9d9; */
-  color: #d9d9d9;
+  border-bottom: 2rpx solid #e7e7e7;
+  color: #e7e7e7;
   transform-origin: 0 100%;
   transform: scaleY(0.5);
-  left: 30rpx;
+  left: 0rpx;
 }
 
 .wux-cell--last:after {
@@ -50,7 +55,7 @@
 }
 
 .wux-cell--hover {
-  background-color: #ececec;
+  background-color: #ececec !important;
 }
 
 .wux-cell--disabled {
@@ -61,15 +66,13 @@
   display: block;
   width: 40rpx;
   height: 40rpx;
-  margin-right: 16rpx;
-  position: relative;
-  /* top: -2px; */
+  margin-right: 10rpx;
 }
 
 .wux-cell__bd {
   -ms-flex: 1;
   flex: 1;
-  padding-left: 50rpx;
+  padding-left: 10rpx;
 }
 
 .wux-cell__text {
@@ -104,8 +107,8 @@
   transform: matrix(0.71, 0.71, -.71, 0.71, 0, 0);
   position: relative;
   top: -4rpx;
-  /* position: absolute;
-  top: 20rpx;
-  margin-top: -4rpx; */
-  right: -20rpx;
+  position: absolute;
+  top: 50%;
+  margin-top: -8rpx;
+  right: 4rpx;
 }

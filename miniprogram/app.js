@@ -219,6 +219,6 @@ App({
     userInfo: {},
     login: false,
     controlId: 'W87jRg6qgQy38jbV',
-    version: 'V1.9.0809'
+    version: 'V1.10.1112'
   }
 })

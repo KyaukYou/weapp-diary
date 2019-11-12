@@ -22,7 +22,7 @@
   </view>
 
   <view class='detail-container'>
-    <view class='detail-list' wx:if='{{item.show}}' wx:for='{{travelObj.data.list}}' wx:for-index='allIndex' wx:key>
+    <view class='detail-list' wx:if='{{item.show}}' wx:for='{{travelObj.data.list}}' wx:for-index='allIndex' wx:key='index'>
       <view class='contact-border'>
         <wux-icon size='21' type='md-funnel' class='contact-border-footer' wx:if='{{travelObj.data.list.length-1 == allIndex ? true : false}}' />
       </view>
@@ -35,7 +35,7 @@
       </view>
       <view class='detail-info'>
         <view class='detail-list-img'>
-          <image lazy-load mode='aspectFill' data-index='{{allIndex}}' data-url='{{imgItem}}' lazy-load='true' class='{{item.imgs.length > 1 ? "detail-img-more" : "detail-img-one" }}' wx:for='{{item.imgs}}' wx:for-index='smIndex' data-smIndex='{{smIndex}}' wx:key
+          <image lazy-load mode='aspectFill' data-index='{{allIndex}}' data-url='{{imgItem}}' lazy-load='true' class='{{item.imgs.length > 1 ? "detail-img-more" : "detail-img-one" }}' wx:for='{{item.imgs}}' wx:for-index='smIndex' data-smIndex='{{smIndex}}' wx:key='index'
             wx:for-item='imgItem' src='{{imgItem}}' bindtap='showImg'></image>
         </view>
         <view class='detail-list-text'>
@@ -58,7 +58,7 @@
     </view>
     <view class='chat-container'>
       <view class='chat-wrap' wx:if='{{travelObj.data.chat.length == 0 ? false : true}}'>
-        <view class='chat-wrap-lists' wx:for='{{travelObj.data.chat}}' wx:key>
+        <view class='chat-wrap-lists' wx:for='{{travelObj.data.chat}}' wx:key='index'>
           <view class='chat-wrap-list'>
             <view class='chat-wrap-avatar' data-openid='{{item.openid}}' bindtap='toUsers'>
               <image src='{{item.avatar}}'></image>
@@ -71,7 +71,7 @@
             </view>
 
             <!-- 楼中楼 -->
-            <view class='chat-wrap-child' wx:if='{{sItem.index == index ? true : false}}' wx:for='{{travelObj.data.chats}}' wx:for-index='sIndex' wx:for-item='sItem' wx:key>
+            <view class='chat-wrap-child' wx:if='{{sItem.index == index ? true : false}}' wx:for='{{travelObj.data.chats}}' wx:for-index='sIndex' wx:for-item='sItem' wx:key='index'>
               <view class='chat-wrap-avatar chat-wrap-avatar1' data-openid='{{sItem.openid}}' bindtap='toUsers'>
                 <image src='{{sItem.avatar}}'></image>
               </view>

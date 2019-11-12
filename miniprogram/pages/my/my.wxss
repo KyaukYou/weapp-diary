@@ -185,13 +185,13 @@ button::after {
 }
 
 .my-info-child .my-info-two {
-  line-height: 38rpx;
+  line-height: 42rpx;
 }
 
 .my-info .my-info-border {
   width: 2rpx;
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.2);
   left: 25%;
   top: 20%;
   bottom: 20%;

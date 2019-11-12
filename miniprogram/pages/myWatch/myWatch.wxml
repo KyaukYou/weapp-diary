@@ -1,6 +1,6 @@
 <view class='page'>
  <!-- hover-class='fansWatch' -->
-  <view class='list' wx:for='{{myData}}' wx:key data-openid='{{item.openid}}' bindtap='toUsers'>
+  <view class='list' wx:for='{{myData}}' wx:key='index' data-openid='{{item.openid}}' bindtap='toUsers'>
     <view class='list-img'>
       <image src='{{item.avatarUrl}}'></image>
     </view>

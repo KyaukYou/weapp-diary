@@ -255,7 +255,8 @@ page {
 
 .picker button {
   /* font-size: 22rpx; */
-  padding-left: 2rpx;
+  /* padding-left: 2rpx; */
+  padding: 4rpx 6rpx 2rpx 2rpx;
 }
 
 .headerimg {
@@ -292,26 +293,27 @@ page {
 }
 
 .add-one-add {
-  padding: 20rpx 30rpx;
+  /* padding: 18rpx 30rpx 18rpx 17px; */
+  padding: 10px 5px 10px 17px;
   box-sizing:border-box;
-  line-height: 33px;
-  height: 56px;
+  line-height: 46rpx;
+  height: 80rpx;
   position:relative;
   background-color:#fff;
   color:#333;
-  font-size: 14px;
-  border: 1rpx solid rgb(248, 248, 248);
+  font-size: 26rpx;
+  border-bottom: 1rpx solid rgb(248, 248, 248);
   transition: all .2s ease;
 }
 
 .add-one-add image {
   position: absolute;
-  right: 13px;
-  top: 3px;
-  bottom: 6px;
-  width: 82px;
-  height: 48px;
-  border-radius: 4px;
+  right: 10rpx;
+  top: 6rpx;
+  bottom: 6rpx;
+  width: 110rpx;
+  height: auto;
+  border-radius: 6rpx;
 }
 
 .add-one-add view {
