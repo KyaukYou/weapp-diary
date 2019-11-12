@@ -3,7 +3,7 @@
   <wux-toptips id="wux-toptips" />
   <view class='detail-bigImg'>
   <!-- mode='widthFix' -->
-    <image lazy-load  src='{{travelObj.data.headerImg}}' bindtap='showBgImg'></image>
+    <image mode="aspectFill" lazy-load  src='{{travelObj.data.headerImg}}' bindtap='showBgImg'></image>
   </view>
 
   <view class='detail-header'>
@@ -13,6 +13,7 @@
     <view class='detail-title'>
       <view class='detail-heart'>
         <wux-icon type='{{likeArr[0] == 1 ? "md-heart" : "md-heart-empty" }}' catchtap='addLike' size='26' />
+        <wux-icon catchtap="changePaixu" class="paixu" type='{{paixu == "shun" ? "ios-arrow-dropdown" : "ios-arrow-dropup" }}' size="26" />
       </view>
       <view class='detail-title-top'>{{travelObj.data.title}}</view>
       <view class='detail-title-bottom'>

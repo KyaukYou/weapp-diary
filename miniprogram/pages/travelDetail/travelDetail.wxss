@@ -28,16 +28,16 @@ page {
 
 .detail-header {
   width: 90%;
-  margin: 12rpx auto;
+  margin: 14rpx auto 12rpx auto;
   /* margin-bottom: 100rpx; */
-
   height: 92rpx;
   position: relative;
+  left: -10rpx;
 }
 
 .detail-touxiang {
-  height: 70rpx;
-  width: 70rpx;
+  height: 76rpx;
+  width: 76rpx;
   margin-left: 8rpx;
   float: left;
   margin-top: 6rpx;
@@ -82,6 +82,7 @@ page {
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;
+  position: relative;
 }
 
 .detail-where {
@@ -298,11 +299,16 @@ page {
 
 .detail-heart {
   position: absolute;
-  width: 60rpx;
+  width: 100rpx;
   height: 60rpx;
-  right: -10rpx;
+  right: -34rpx;
   top: 20rpx;
-  text-align: center;
+  /* text-align: center; */
   color: #35c1f8;
 }
 
+.paixu {
+  position: absolute;
+  right: 4rpx;
+  /* top: 2rpx; */
+}

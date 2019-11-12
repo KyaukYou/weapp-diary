@@ -20,8 +20,38 @@ Page({
     chatsBol: false,
     chatsIndex: 0,
     chatsName: '',
-    showAdd: 'none'
+    showAdd: 'none',
+    paixu: 'shun'
   },
+
+  changePaixu() {
+    if(this.data.paixu == 'shun') {
+      this.setData({
+        paixu: 'fan'
+      });
+      let obj = this.data.travelObj;
+      let list = obj.data.list;
+      let list1 = list.reverse();
+      obj.data.list = list1;
+      this.setData({
+        travelObj: obj
+      })
+
+    }
+    else {
+      this.setData({
+        paixu: 'shun'
+      })
+      let obj = this.data.travelObj;
+      let list = obj.data.list;
+      let list1 = list.reverse();
+      obj.data.list = list1;
+      this.setData({
+        travelObj: obj
+      })
+    }
+  },
+
   touserDetail() {
     // console.log(this.data.userData._id)
     wx.navigateTo({
@@ -438,14 +468,6 @@ Page({
         that.initUser();
       }
     })
-
-    // let db = wx.cloud.database();
-    // db.collection('control').doc('W87jRg6qgQy38jbV').get().then(res => {
-    //   // console.log(res.data.showAdd.showAdd)
-    //     this.setData({
-    //       showAdd: res.data.showAdd.showAdd,
-    //     })
-    // })
 
     if (wx.getStorageSync('show')) {
       this.setData({
