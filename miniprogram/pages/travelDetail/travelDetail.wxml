@@ -30,7 +30,7 @@
 
       <view class='detail-time'>
         <wux-icon type='md-radio-button-on' size='20' />
-        <view class='detail-times'>{{item.date}} 第{{allIndex+1}}天</view>
+        <view class='detail-times'>{{item.date}} 第{{paixu=='shun'?allIndex+1:travelObj.data.list.length-allIndex}}天</view>
 
         <!-- <view class='detail-contact'></view> -->
       </view>

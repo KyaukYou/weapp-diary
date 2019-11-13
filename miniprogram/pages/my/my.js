@@ -19,6 +19,7 @@ Page({
     showStar: 'block',
     bgImg: '',
     animationSlow: 'animationSlow-pause',
+    animationSlow1: 'animationSlow-pause',
     timer: null
   },
   // 我的关注
@@ -490,12 +491,19 @@ Page({
     var mydata;
 
     var a = Promise.resolve(travelData).then(function (res) {
-      // // console.log(res)
+      // console.log(res)
       // mydata = res.data[0]
       // // console.log(res.data.length);
+      // let sLength = 0;
+      // for(let x=0; x<res.data.length; x++) {
+      //   if (res.data[x]._openid == that.data.userInfo._openid || res.data[x].data.show == true) {
+      //     sLength++;
+      //   }
+      // }
       that.setData({
         travelNum: res.data.length
-      })
+      });
+
     }) 
   },
   // 获得收藏数量
@@ -519,6 +527,8 @@ Page({
       wx.setStorageSync('userDetail', res.data[0].userDetail)
       // mydata = res.data[0]
       // // console.log(res.data.starArr);
+      
+
       that.setData({
         starNum: res.data[0].starArr.length,
         bgImg: res.data[0].backgroundImg.url,
@@ -528,7 +538,8 @@ Page({
       that.data.timer = setTimeout(function() {
         if (that.data.animationSlow == '') {
           that.setData({
-            animationSlow: 'animationSlow-pause'
+            animationSlow: 'animationSlow-pause',
+            animationSlow1: 'animationSlow-pause'
           })
           $wuxToptips().success({
             hidden: true,
@@ -676,7 +687,8 @@ Page({
   },
   shuaxin() {
     this.setData({
-      animationSlow: ''
+      animationSlow: '',
+      animationSlow1: ''
     })
     this.getTravelNum();
     this.getStarNum();

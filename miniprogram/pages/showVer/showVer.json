@@ -3,6 +3,7 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
       "van-cell": "../../module/cell/index",
-      "van-cell-group": "../../module/cell-group/index"
+      "van-cell-group": "../../module/cell-group/index",
+      "wux-icon": "../../dist/icon/index"
   }
 }

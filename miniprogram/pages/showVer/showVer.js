@@ -7,10 +7,20 @@ Page({
   data: {
     verData1: [
       {
+        "ver": "V1.11.1(2019-11-13)",
+        "text": [
+          "【优化】页面显示",
+          "【修复】修复日记日期picker选择器无法获取当前日期的BUG",
+          "【新增&测试】日记显示隐藏功能",
+          "【新增&测试】日记日期排序功能"
+        ]
+      },
+      {
         "ver": "V1.10.1112(2019-11-12)",
         "text": [
           "【优化】图标更新",
           "【优化】减少某些页面的网络请求次数",
+          "【修复】某些页面样式错误的BUG",
           "【修复】修复wx:key警告错误"
         ]
       },
@@ -134,13 +144,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.showLoading({
+      mask: true,
+      title: '正在加载',
+    })
     let db = wx.cloud.database();
     db.collection('control').doc(app.globalData.controlId).get().then(res => {
-      let data = JSON.parse(res.data.verData);
+      let data = res.data.verObj;
       this.setData({
         verData: data
       })
+      wx.hideLoading();
     })
 
   },
@@ -177,7 +191,18 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    wx.showLoading({
+      mask: true,
+      title: '正在加载',
+    })
+    let db = wx.cloud.database();
+    db.collection('control').doc(app.globalData.controlId).get().then(res => {
+      let data = res.data.verObj;
+      this.setData({
+        verData: data
+      })
+      wx.hideLoading();
+    })
   },
 
   /**

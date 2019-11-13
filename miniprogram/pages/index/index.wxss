@@ -116,15 +116,16 @@ page {
 
 .index {
   width: 94%;
-  height: 300rpx;
+  height: 330rpx;
   display: flex;
   flex-flow: column wrap;
   /* border: 2rpx solid gray; */
   /* border-radius: 8rpx; */
   overflow: hidden;
-  margin: 54rpx auto 54rpx auto;
+  margin: 50rpx auto 50rpx auto;
   /* margin: 20rpx auto; */
-  box-shadow: 0rpx 2rpx 10rpx 4rpx rgba(190, 190, 190, 0.3);
+  /* box-shadow: 0rpx 2rpx 10rpx 4rpx rgba(190, 190, 190, 0.3); */
+  box-shadow:0 0 10px rgba(190,190,190,0.5);
   /* box-shadow:0px 15px 10px -15px rgba(190, 190, 190, 1); */
   position: relative;
 }

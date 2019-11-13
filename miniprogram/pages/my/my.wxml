@@ -45,6 +45,9 @@
     <view bindtap='shuaxin' class='shuaxin-img animationSlow {{animationSlow}}'>
       <image style="width: 62%; height: 62%;"  src='../../images/shuaxin.png'></image>
     </view>
+    <view bindtap='shuaxin' class='shuaxin-img animationSlow1 {{animationSlow1}}'>
+      <image style="width: 62%; height: 62%;"  src='../../images/shuaxin.png'></image>
+    </view>
     <image class='edit-img' src='../../images/skin.png' bindtap='changeImg'></image>
     <view class='my-image' wx:if='{{hasUserInfo}}'>
     

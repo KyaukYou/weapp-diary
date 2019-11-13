@@ -31,6 +31,7 @@ Page({
       sDate: '',
       eDate: '',
       show: true,
+      sort: true,
       lock: false,
       createTime: '',
       headerImgArr: [],
@@ -47,8 +48,8 @@ Page({
   },
   changeLock(e) {
     // console.log(e)
-    var copy = this.data.uploadObj;
-    var copyBol = copy.lock;
+    let copy = this.data.uploadObj;
+    let copyBol = copy.lock;
     copyBol = !copyBol;
     copy.lock = copyBol;
 
@@ -56,6 +57,46 @@ Page({
       uploadObj: copy
     })
   },
+
+  changeShow() {
+    let copy = this.data.uploadObj;
+    let copyBol = copy.show;
+    copyBol = !copyBol;
+    copy.show = copyBol;
+
+    this.setData({
+      uploadObj: copy
+    })
+  },
+
+  changeSort() {
+    let copy = this.data.uploadObj;
+    let copyBol = copy.sort;
+    copyBol = !copyBol;
+    copy.sort = copyBol;
+    let list = copy.list;
+    let list1 = list.reverse();
+    copy.list = list1;
+
+    this.setData({
+      uploadObj: copy
+    })
+  },
+
+  autoSort() {
+    console.log(1)
+    var sort = this.data.uploadObj.sort;
+    if (!sort) {
+      let copy = this.data.uploadObj;
+      let list = copy.list;
+      let list1 = list.reverse();
+      copy.list = list1;
+      this.setData({
+        uploadObj: copy
+      })
+    }
+  },
+
   headerimg() {
     var that = this;
     wx.chooseImage({
@@ -413,6 +454,8 @@ Page({
       getSame(val1);
       putArr();
     }
+
+    this.autoSort();
 
   },
   //上传全部！！！

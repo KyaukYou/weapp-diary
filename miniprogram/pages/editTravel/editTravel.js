@@ -33,6 +33,7 @@ Page({
       sDate: '',
       eDate: '',
       show: true,
+      sort: true,
       createTime: '',
       headerImgArr: [],
       headerImg: [],
@@ -220,8 +221,8 @@ Page({
   },
   changeLock(e) {
      // console.log(e)
-    var copy = this.data.uploadObj;
-    var copyBol = copy.lock;
+    let copy = this.data.uploadObj;
+    let copyBol = copy.lock;
     copyBol = !copyBol;
     copy.lock = copyBol;
 
@@ -229,6 +230,46 @@ Page({
       uploadObj: copy
     })
   },
+
+  changeShow() {
+    let copy = this.data.uploadObj;
+    let copyBol = copy.show;
+    copyBol = !copyBol;
+    copy.show = copyBol;
+
+    this.setData({
+      uploadObj: copy
+    })
+  },
+
+  changeSort() {
+    let copy = this.data.uploadObj;
+    let copyBol = copy.sort;
+    copyBol = !copyBol;
+    copy.sort = copyBol;
+    let list = copy.list;
+    let list1 = list.reverse();
+    copy.list = list1;
+
+    this.setData({
+      uploadObj: copy
+    })
+  },
+
+  autoSort() {
+    // console.log(1)
+    var sort = this.data.uploadObj.sort;
+    if(!sort) {
+      let copy = this.data.uploadObj;
+      let list = copy.list;
+      let list1 = list.reverse();
+      copy.list = list1;
+      this.setData({
+        uploadObj: copy
+      })
+    }
+  },
+
   headerimg() {
     var that = this;
     wx.chooseImage({
@@ -565,6 +606,8 @@ Page({
       putArr();
     }
 
+    this.autoSort();
+
   },
   //上传全部！！！
   uploadAll() {
@@ -609,6 +652,7 @@ Page({
       //  // console.log(year + '-' + month + '-' + day + ' ' + hour+':'+minute+':'+second)
 
       var copy = that.data.uploadObj;
+      // console.log(copy)
       copy.title = title;
       copy.where = where;
       copy.sDate = sDate;
@@ -734,6 +778,7 @@ Page({
       that.setData({
         uploadObj: copy
       })
+      // console.log(copy)
       let db = wx.cloud.database();
       db.collection('travel').doc(that.data.travelId).update({
         data: {
@@ -748,6 +793,8 @@ Page({
             day: that.data.uploadObj.day,
             lock: that.data.uploadObj.lock,
             list: that.data.uploadObj.list,
+            show: that.data.uploadObj.show,
+            sort: that.data.uploadObj.sort
           }
         },
         success(res) {
@@ -938,6 +985,8 @@ Page({
             day: that.data.uploadObj.day,
             lock: that.data.uploadObj.lock,
             list: that.data.uploadObj.list,
+            show: that.data.uploadObj.show,
+            sort: that.data.uploadObj.sort
           }
         },
         success(res) {
@@ -1063,7 +1112,10 @@ Page({
       }
       //  // console.log(copy)
       mydata['data'].list = copy;
-      //  // console.log(mydata['data'])
+      //  console.log(mydata['data'])
+      if (mydata['data'].sort != true && mydata['data'].sort != false) {
+        mydata['data'].sort = true
+      }
       that.setData({
         travelId: id,
         title: mydata.data.title,
@@ -1078,6 +1130,7 @@ Page({
       wx.setNavigationBarTitle({
         title: '编辑' + that.data.uploadObj.title
       })
+      // that.autoSort();
     })
   },
 

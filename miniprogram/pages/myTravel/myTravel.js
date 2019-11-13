@@ -412,42 +412,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // var that = this;
-    // wx.showLoading({
-    //   mask: true,
-    //   title: '正在加载',
-    // })
-    // let db = wx.cloud.database();
-    // let openid = wx.getStorageSync('openid');
-
-    // let userData1 = db.collection('travel').where({
-    //   _openid: openid
-    // }).get();
-
-    // var mydata;
-    // Promise.resolve(userData1).then(function (res) {
-    //   mydata = res.data
-    //   // console.log(res.data[0]);
-
-    //   var aa = [];
-    //   for(var i=0 ;i<mydata.length; i++) {
-    //     aa.unshift(mydata[i])
-    //   }
-
-    //   that.setData({
-    //     travelList: aa
-    //   });
-    //   wx.hideLoading();
-    //   wx.stopPullDownRefresh();
-    //   var timer1 = null;
-    //   clearInterval(timer1);
-    //   timer1 = setInterval(function () {
-    //     if (app.globalData.login) {
-    //       that.initUser();
-    //       clearInterval(timer1);
-    //     }
-    //   }, 200)
-    // })
   },
   initUser() {
     let that = this;

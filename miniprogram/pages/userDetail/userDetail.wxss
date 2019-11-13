@@ -125,7 +125,7 @@ button::after {
   width: 34rpx;
   height: 34rpx;
   position: relative;
-  top: 6rpx;
+  top: 4rpx;
 }
 
 .my-info {
@@ -250,4 +250,11 @@ button::after {
   text-align: left;
   padding-left: 10rpx;
   box-sizing: border-box;
+}
+
+.wux-textarea__label {
+  width: 166rpx!important;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
 }

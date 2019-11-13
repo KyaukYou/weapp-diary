@@ -71,6 +71,8 @@ page {
   white-space: nowrap;
   line-height: 50rpx;
   /* margin-top: 6rpx; */
+  position: relative;
+  z-index: 99;
 }
 
 .detail-title-bottom {
@@ -83,6 +85,7 @@ page {
   text-overflow:ellipsis;
   white-space: nowrap;
   position: relative;
+  z-index: 99;
 }
 
 .detail-where {
@@ -176,11 +179,11 @@ page {
 }
 
 .detail-list-text {
-  min-height: 100rpx;
+  min-height: 90rpx;
   box-sizing: border-box;
   padding: 10rpx;
   position: relative;
-  background-color: rgba(240,240,240,0.7);
+  background-color: rgba(240, 240, 240, 0.6);
   /* border-top: 6rpx solid white; */
 }
 
@@ -305,6 +308,7 @@ page {
   top: 20rpx;
   /* text-align: center; */
   color: #35c1f8;
+  z-index: 100;
 }
 
 .paixu {

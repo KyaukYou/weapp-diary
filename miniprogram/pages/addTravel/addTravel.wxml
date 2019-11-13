@@ -42,10 +42,15 @@
       </van-field>
 
       <van-field type='text' center disabled label="是否锁定" border="false"  use-button-slot >
-        <!-- <picker slot='button' return:false> -->
         <van-switch slot='button' type='warning' id='lock-switch' class='lock-switch' checked="{{uploadObj.lock}}" size='28px' bind:change="changeLock" />
-        <!-- </picker> -->
+      </van-field>
 
+      <van-field type='text' center disabled label="是否显示" border="false" use-button-slot>
+        <van-switch slot='button' type='warning' id='lock-switch' class='lock-switch' checked="{{uploadObj.show}}" size='28px' bind:change="changeShow" />
+      </van-field>
+
+      <van-field type='text' center disabled label="排序方式" border="false" use-button-slot>
+        <van-switch slot='button' type='warning' id='lock-switch' class='lock-switch' checked="{{uploadObj.sort}}" size='28px' bind:change="changeSort" />
       </van-field>
 
     </van-cell-group>

@@ -16,7 +16,7 @@ App({
   getOpenId() {
     var that = this;
     wx.showLoading({
-      title: '正在加载...',
+      title: '正在加载',
     })
 
     wx.cloud.callFunction({

@@ -113,14 +113,15 @@ button::after {
 
 .my-image .editImage {
   position: absolute;
-  width: 36rpx;
-  height: 40rpx;
+  width: 30rpx;
+  height: 30rpx;
   overflow: auto;
-  bottom: 78rpx;
+  bottom: 84rpx;
   left: 50%;
   margin-left: 44rpx;
   box-shadow: none;
   opacity: 0.9;
+  border-radius: 0;
 }
 
 .my-image .my-info-detail {
@@ -208,8 +209,8 @@ button::after {
 .edit-img {
   position: absolute;
   width: 42rpx;
-  height: 34rpx;
-  top: 16rpx;
+  height: 42rpx;
+  top: 14rpx;
   right: 16rpx;
   /* color: white; */
   text-align: center;
@@ -253,6 +254,21 @@ button::after {
   -webkit-animation-iteration-count: infinite;
 }
 
+.animationSlow1 {
+  animation-name: myfirst; /*动画的名称 */
+  animation-duration: 1600ms; /*动画从开始到结束的时间*/
+  animation-timing-function: ease-in-out; /*动画执行快慢的参数*/
+  animation-iteration-count: infinite; /*动画执行多少次的参数*//*以下是兼容ios所需，参数意义与上相同*/
+  -webkit-animation-name: myfirst1;
+  -webkit-animation-duration: 1600ms;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+}
+
+.animationSlow1 image {
+  transform: rotateY(180deg) rotateX(180deg);
+}
+
 .animationSlow-pause {
   animation-play-state: paused;
 }
@@ -273,5 +289,24 @@ button::after {
       }
       100% {
           transform: rotate(360deg);
+      }
+}
+
+@keyframes myfirst1 {
+  /*开始转的角度*/
+  0% {
+          transform: rotate(0deg);
+      }
+      100% {
+          transform: rotate(-360deg);
+      }
+}
+/*兼容ios*/
+@-webkit-keyframes myfirst1 {
+  0% {
+          transform: rotate(0deg);
+      }
+      100% {
+          transform: rotate(-360deg);
       }
 }
