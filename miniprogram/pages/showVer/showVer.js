@@ -201,6 +201,7 @@ Page({
       this.setData({
         verData: data
       })
+      wx.stopPullDownRefresh();
       wx.hideLoading();
     })
   },

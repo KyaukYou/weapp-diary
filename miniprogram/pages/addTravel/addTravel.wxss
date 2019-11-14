@@ -333,3 +333,6 @@ page {
   height: 20px;
 }
 
+.van-cell__title {
+  max-width: 100px!important;
+}

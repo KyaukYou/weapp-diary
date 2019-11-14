@@ -343,3 +343,7 @@ page {
   font-size: 26rpx;
   background-color: white;
 }
+
+.van-cell__title {
+  max-width: 100px!important;
+}

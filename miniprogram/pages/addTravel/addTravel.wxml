@@ -21,20 +21,20 @@
       </van-field>
 
 
-      <van-field value="{{ beginDate }}" type='text' disabled='false' center clearable label="日记开始日期" placeholder="请选择" border="false"  use-button-slot>
+      <van-field value="{{ beginDate[0] }}" type='text' disabled='false' center clearable label="日记开始日期" placeholder="请选择" border="false"  use-button-slot>
         <!-- <wux-button slot="button" size="small" type="calm" bind:click='chooseStart'>
           <picker mode = date>选择日期</picker>
         </wux-button> -->
-        <picker hover-class='chooseBtn-hover' class='picker' slot='button' mode='date' bindchange='chooseStart'>
+        <picker value="{{ beginDate[0] }}" hover-class='chooseBtn-hover' class='picker' slot='button' mode='date' bindchange='chooseStart'>
           <wux-button size="small" type="calm">
             选择日期
           </wux-button>
         </picker>
       </van-field>
 
-      <van-field value="{{ endDate }}" type='text' disabled='false' center clearable label="日记结束日期" placeholder="请选择" border="false"  use-button-slot>
+      <van-field value="{{ endDate[0] }}" type='text' disabled='false' center clearable label="日记结束日期" placeholder="请选择" border="false"  use-button-slot>
         <!-- <wux-button slot="button" size="small" type="calm" bind:click='chooseEnd'>选择日期</wux-button> -->
-        <picker hover-class='chooseBtn-hover' class='picker' slot='button' mode='date' bindchange='chooseEnd'>
+        <picker value="{{ endDate[0] }}" hover-class='chooseBtn-hover' class='picker' slot='button' mode='date' bindchange='chooseEnd'>
           <wux-button size="small" type="calm">
             选择日期
           </wux-button>
@@ -49,7 +49,7 @@
         <van-switch slot='button' type='warning' id='lock-switch' class='lock-switch' checked="{{uploadObj.show}}" size='28px' bind:change="changeShow" />
       </van-field>
 
-      <van-field type='text' center disabled label="排序方式" border="false" use-button-slot>
+      <van-field type='text' center disabled label="{{uploadObj.sort == true ? '排序方式(顺序)' : '排序方式(倒序)' }}" border="false" use-button-slot>
         <van-switch slot='button' type='warning' id='lock-switch' class='lock-switch' checked="{{uploadObj.sort}}" size='28px' bind:change="changeSort" />
       </van-field>
 

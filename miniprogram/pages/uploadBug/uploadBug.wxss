@@ -34,7 +34,7 @@ button {
   left: 2%;
   width: 96%;
   right: 2%;
-  background-color: #35c1f8;
+  background-color: #f2709c;
   color: white;
 }
 

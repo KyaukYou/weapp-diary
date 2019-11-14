@@ -85,13 +85,13 @@ page {
 }
 
 .index-choose-listed {
-  color: #35c1f8;
+  color: #ffc3a0;
 }
 
 .getInfo {
   width: 94%;
   height: 70rpx;
-  background: #35c1f8;
+  background: #ffc3a0;
   line-height: 70rpx;
   font-size: 30rpx;
   color: white;
@@ -212,7 +212,7 @@ page {
   top: 14%;
   bottom: 9%;
   left: 26rpx;
-  background-color: #35c1f8;
+  background-color: #ffc3a0;
 }
 
 .index .index-smtitle text {
@@ -273,7 +273,7 @@ page {
   justify-content: flex-end;
   box-sizing: border-box;
   padding-right: 10rpx;
-  color: #35c1f8;
+  color: #ffc3a0;
 }
 
 .index .index-footer-one {
@@ -296,8 +296,8 @@ page {
   /* min-width: 30rpx; */
   height: 100%;
   line-height: 70rpx;
-  color: rgb(53, 193, 248);
-  /* color: #35c1f8; */
+  color: #f47695;
+  /* color: #ffc3a0; */
   font-size: 24rpx;
   text-align: left;
   font-weight: bold;
@@ -323,7 +323,7 @@ page {
   width: 82rpx;
   height: 82rpx;
   border-radius: 50%;
-  background-color: #35c1f8;
+  background-color: #ffc3a0;
   z-index: 100;
   bottom: 16rpx;
   right: 16rpx;

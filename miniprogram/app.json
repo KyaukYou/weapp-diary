@@ -21,13 +21,13 @@
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#35c1f8",
-    "navigationBarTitleText": "旅行小柴",
+    "navigationBarBackgroundColor": "#f47695",
+    "navigationBarTitleText": "小柴日记簿",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#dddddd",
-    "selectedColor": "#35c1f8",
+    "selectedColor": "#f47695",
     "borderStyle": "black",
     "backgroundColor": "#fff",
     "list": [

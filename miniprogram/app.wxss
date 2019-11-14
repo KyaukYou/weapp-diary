@@ -6,22 +6,22 @@ page {
 }
 
 .wx-switch-input {
-  background-color: #35c1f8;
-  color: #35c1f8;
+  background-color: #f47695;
+  color: #f47695;
 }
 
 /*白色样式（false的样式）*/
 
 .wx-switch-input::before {
-  background-color: #35c1f8;
-  color: #35c1f8;
+  background-color: #f47695;
+  color: #f47695;
 }
 
 /*绿色样式（true的样式）*/
 
 .wx-switch-input::after {
-  background-color: #35c1f8;
-  color: #35c1f8;
+  background-color: #f47695;
+  color: #f47695;
 }
 
 
@@ -39,7 +39,7 @@ page {
 
 /* 黄色按钮样式 */
 .chooseBtn-hover {
-  background-color: #29b2e1!important;
+  background-color: #f2709c!important;
 }
 
 /* 添加旅行输入框点击样式 */
@@ -49,12 +49,12 @@ page {
 
 /* 回复样式 */
 .huifuHover {
-  color: #0e9dd6!important;
+  color: #f2709c!important;
 }
 
 /* 粉丝关注背景颜色 */
 .fansWatch {
-  background-color: rgb(126, 194, 233)!important;
+  background-color: #f2709c!important;
   color: white!important;
 }
 
@@ -80,7 +80,7 @@ page {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  color: #35c1f8;
+  color: #f47695;
 }
 
 .chat-header-text {
@@ -125,7 +125,7 @@ page {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  color: #35c1f8;
+  color: #f47695;
   position: relative;
 }
 
@@ -250,7 +250,7 @@ page {
 
 .chat-wrap-top text {
   font-size: 26rpx;
-  color: #35c1f8;
+  color: #f47695;
   margin-right: 4rpx;
 }
 
@@ -298,7 +298,7 @@ page {
 
 .chat-wrap-huifu {
   font-size: 24rpx;
-  color: #35c1f8;
+  color: #f47695;
   margin-left: 10rpx;
 }
 
