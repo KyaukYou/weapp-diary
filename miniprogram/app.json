@@ -33,14 +33,14 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/qiu.png",
-        "selectedIconPath": "images/qiu_a.png",
+        "iconPath": "images/book.png",
+        "selectedIconPath": "images/book.png",
         "text": "主页"
       },
       {
         "pagePath": "pages/my/my",
-        "iconPath": "images/light.png",
-        "selectedIconPath": "images/light_a.png",
+        "iconPath": "images/my.png",
+        "selectedIconPath": "images/my.png",
         "text": "我的"
       }
     ]

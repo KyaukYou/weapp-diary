@@ -84,12 +84,6 @@ Page({
       })
     }
     else {
-      // $wuxToptips().warn({
-      //   hidden: true,
-      //   text: '无法取消关注',
-      //   duration: 2500,
-      //   success() { },
-      // })
       let db = wx.cloud.database();
       let that = this;
 

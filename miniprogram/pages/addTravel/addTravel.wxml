@@ -15,7 +15,7 @@
 
       <van-field value="{{ where }}" type='text' center clearable label="日记位置" placeholder="请选择" border="false"  use-button-slot bind:input='addWhere'>
         <!-- <picker slot='button' return:false> -->
-        <wux-button slot="button" size="small" type="calm" bind:click='chooseWhere'>选择位置</wux-button>
+        <wux-button slot="button" hover-class='chooseBtn-hover' size="small" type="calm" bind:click='chooseWhere'>选择位置</wux-button>
         <!-- </picker> -->
 
       </van-field>
@@ -26,7 +26,7 @@
           <picker mode = date>选择日期</picker>
         </wux-button> -->
         <picker value="{{ beginDate[0] }}" hover-class='chooseBtn-hover' class='picker' slot='button' mode='date' bindchange='chooseStart'>
-          <wux-button size="small" type="calm">
+          <wux-button hover-class='chooseBtn-hover' size="small" type="calm">
             选择日期
           </wux-button>
         </picker>
@@ -35,7 +35,7 @@
       <van-field value="{{ endDate[0] }}" type='text' disabled='false' center clearable label="日记结束日期" placeholder="请选择" border="false"  use-button-slot>
         <!-- <wux-button slot="button" size="small" type="calm" bind:click='chooseEnd'>选择日期</wux-button> -->
         <picker value="{{ endDate[0] }}" hover-class='chooseBtn-hover' class='picker' slot='button' mode='date' bindchange='chooseEnd'>
-          <wux-button size="small" type="calm">
+          <wux-button hover-class='chooseBtn-hover' size="small" type="calm">
             选择日期
           </wux-button>
         </picker>

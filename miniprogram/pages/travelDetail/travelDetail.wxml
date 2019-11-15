@@ -3,6 +3,7 @@
   <wux-toptips id="wux-toptips" />
   <view class='detail-bigImg'>
   <!-- mode='widthFix' -->
+    <image src='../../images/bg_load2.svg' lazy-load mode='aspectFill'></image>
     <image mode="aspectFill" lazy-load  src='{{travelObj.data.headerImg}}' bindtap='showBgImg'></image>
   </view>
 
@@ -25,7 +26,7 @@
   <view class='detail-container'>
     <view class='detail-list' wx:if='{{item.show}}' wx:for='{{travelObj.data.list}}' wx:for-index='allIndex' wx:key='index'>
       <view class='contact-border'>
-        <wux-icon size='21' type='md-funnel' class='contact-border-footer' wx:if='{{travelObj.data.list.length-1 == allIndex ? true : false}}' />
+        <!-- <wux-icon size='21' type='md-funnel' class='contact-border-footer' wx:if='{{travelObj.data.list.length-1 == allIndex ? true : false}}' /> -->
       </view>
 
       <view class='detail-time'>
@@ -36,18 +37,20 @@
       </view>
       <view class='detail-info'>
         <view class='detail-list-img'>
-          <image lazy-load mode='aspectFill' data-index='{{allIndex}}' data-url='{{imgItem}}' lazy-load='true' class='{{item.imgs.length > 1 ? "detail-img-more" : "detail-img-one" }}' wx:for='{{item.imgs}}' wx:for-index='smIndex' data-smIndex='{{smIndex}}' wx:key='index'
-            wx:for-item='imgItem' src='{{imgItem}}' bindtap='showImg'></image>
+        <view data-index='{{allIndex}}' data-url='{{imgItem}}' class='{{item.imgs.length > 1 ? "detail-img-load detail-img-more" : "detail-img-load detail-img-one" }}' wx:for='{{item.imgs}}' wx:for-index='smIndex' data-smIndex='{{smIndex}}' wx:key='index' wx:for-item='imgItem' src='{{imgItem}}' bindtap='showImg'>
+            <image src='../../images/bg_load2.svg' lazy-load mode='aspectFill'></image>
+            <image src='{{imgItem}}' lazy-load mode='aspectFill'></image>
+          <!-- <image lazy-load mode='aspectFill' data-index='{{allIndex}}' data-url='{{imgItem}}' lazy-load='true' class='{{item.imgs.length > 1 ? "detail-img-more" : "detail-img-one" }}' wx:for='{{item.imgs}}' wx:for-index='smIndex' data-smIndex='{{smIndex}}' wx:key='index'
+            wx:for-item='imgItem' src='{{imgItem}}' bindtap='showImg'></image> -->
+        </view>
+
         </view>
         <view class='detail-list-text'>
           <text decode='true' class='detail-list-top'>{{item.text == '' ? '木有内容啦~~~' : item.text}}</text>
-          <!-- <view class='detail-list-bottom'>
-            <wux-icon type='md-heart-empty'  size='26'/>
-            <view class='detail-likenum'>{{item.like}}</view>
-          </view> -->
         </view>
       </view>
     </view>
+    <wux-icon size='21' type='md-funnel' class='contact-border-footer' />
   </view>
 
 
@@ -104,7 +107,7 @@
             <view class='chat-write-num'>{{chatData.length}}/100</view>
             <wux-button block size='small' class='chat-write-header-btn' type="light" bindtap='cancelChats'>取消</wux-button>
             <view class='chat-write-btn'>
-              <wux-button block size='small'  type="calm" bindtap='uploadChat'>提交</wux-button>
+              <wux-button block size='small' hover-class='chooseBtn-hover' type="calm" bindtap='uploadChat'>提交</wux-button>
             </view>
           </view>
         </textarea>

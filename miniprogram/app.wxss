@@ -59,7 +59,7 @@ page {
 }
 
 .fansWatch1 {
-  background-color:rgba(255, 255, 255, 0.4)!important;
+  background-color:#f2709c!important;
 }
 
 /* 评论 */

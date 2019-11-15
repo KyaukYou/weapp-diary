@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "主页",
+  "navigationBarTitleText": "小柴日记簿",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "wux-floating-button": "../../dist/floating-button/index",

@@ -10,7 +10,8 @@ Page({
     textArr: [],
     id: '',
     bol: false,
-    upArr: []
+    upArr: [],
+    syncBol: false
   },
   toUsers(e) {
     wx.navigateTo({
@@ -84,6 +85,16 @@ Page({
       },
       success(res) {
         // console.log(res);
+        wx.hideLoading();
+        that.setData({
+          syncBol: true
+        })
+      },
+      fail(res) {
+        wx.hideLoading();
+        wx.showToast({
+          title: '同步失败',
+        })
       }
     })
   },
@@ -97,7 +108,7 @@ Page({
         openid: id
       },
       success(res) {
-        wx.hideLoading();
+        // wx.hideLoading();
         // wx.showToast({
         //   title: '加载成功',
         // })
@@ -152,167 +163,173 @@ Page({
       })
       return;
     }
-
-    if (this.data.textArr[e.currentTarget.dataset.index] == '关注') {
-      let that = this;
-      let userAll = wx.getStorageSync('userInfo');
-      let myOpenid = wx.getStorageSync('openid');
-      let heOpenid = e.currentTarget.dataset.openid;
-      let user1 = {
-        avatarUrl: userAll.avatarUrl,
-        gender: userAll.gender,
-        nickName: userAll.nickName,
-        openid: myOpenid
-      }
-      let user2 = {
-        avatarUrl: that.data.myData[e.currentTarget.dataset.index].avatarUrl,
-        gender: that.data.myData[e.currentTarget.dataset.index].gender,
-        nickName: that.data.myData[e.currentTarget.dataset.index].nickName,
-        openid: heOpenid
-      }
-
-      // // console.log(user1, user2)
-      wx.cloud.callFunction({
-        name: 'uploadFans',
-        data: {
-          openid: heOpenid,
-          val: user1
-        },
-        success(res) {
-          // console.log(res)
-          wx.cloud.callFunction({
-            name: 'uploadWatch',
-            data: {
-              openid: myOpenid,
-              val: user2
-            },
-            success(res) {
-              // console.log(res)
-              $wuxToptips().success({
-                hidden: true,
-                text: '关注成功',
-                duration: 2500,
-                success() { },
-              })
-              that.setData({
-                addText: '已关注'
-              })
-              that.getData(that.data.id)
-            }
-          })
-
-        }
+    if(this.data.syncBol == false) {
+      $wuxToptips().warn({
+        hidden: true,
+        text: '请等待同步完成',
+        duration: 2500,
+        success() { },
       })
     }
     else {
-      // $wuxToptips().warn({
-      //   hidden: true,
-      //   text: '无法取消关注',
-      //   duration: 2500,
-      //   success() { },
-      // })
+      if (this.data.textArr[e.currentTarget.dataset.index] == '关注') {
+        let that = this;
+        let userAll = wx.getStorageSync('userInfo');
+        let myOpenid = wx.getStorageSync('openid');
+        let heOpenid = e.currentTarget.dataset.openid;
+        let user1 = {
+          avatarUrl: userAll.avatarUrl,
+          gender: userAll.gender,
+          nickName: userAll.nickName,
+          openid: myOpenid
+        }
+        let user2 = {
+          avatarUrl: that.data.myData[e.currentTarget.dataset.index].avatarUrl,
+          gender: that.data.myData[e.currentTarget.dataset.index].gender,
+          nickName: that.data.myData[e.currentTarget.dataset.index].nickName,
+          openid: heOpenid
+        }
 
-      let that = this;
-      let db = wx.cloud.database();
-      let userAll = wx.getStorageSync('userInfo');
-      let myOpenid = wx.getStorageSync('openid');
-      let thisOpenid = e.currentTarget.dataset.openid;
-      wx.showModal({
-        title: '是否取消',
-        content: '是否取消关注',
-        success(res) {
-          if (res.confirm) {
-
-            // 取消关注  
-            let myData = db.collection('users').where({
-              _openid: myOpenid
-            }).get()
-
-            Promise.resolve(myData).then(function (res) {
-              // console.log(res);
-              let data1 = res.data[0];
-              for (var i = 0; i < data1.watch.length; i++) {
-                if (data1.watch[i].openid == thisOpenid) {
-                  data1.watch.splice(i, 1);
-                }
+        // // console.log(user1, user2)
+        wx.cloud.callFunction({
+          name: 'uploadFans',
+          data: {
+            openid: heOpenid,
+            val: user1
+          },
+          success(res) {
+            // console.log(res)
+            wx.cloud.callFunction({
+              name: 'uploadWatch',
+              data: {
+                openid: myOpenid,
+                val: user2
+              },
+              success(res) {
+                // console.log(res)
+                $wuxToptips().success({
+                  hidden: true,
+                  text: '关注成功',
+                  duration: 2500,
+                  success() { },
+                })
+                that.setData({
+                  addText: '已关注'
+                })
+                that.getData(that.data.id)
               }
-              // console.log(data1)
-              db.collection('users').doc(data1._id).update({
-                data: {
-                  watch: data1.watch
-                },
-                success(res) {
-                  // console.log(res);
-
-                  //取消粉丝
-                  wx.cloud.callFunction({
-                    name: 'cancelFans',
-                    data: {
-                      thisOpenid: that.data.thisOpenid,
-                      myOpenid: that.data.myOpenid
-                    },
-                    success(res) {
-                      // console.log(res)
-
-                      let data2 = res.result.data[0];
-                      // console.log(data2)
-                      for (var b = 0; b < data2.fans.length; b++) {
-                        if (data2.fans[b].openid == myOpenid) {
-                          data2.fans.splice(b, 1);
-                        }
-                      }
-
-                      wx.cloud.callFunction({
-                        name: 'cancelFans1',
-                        data: {
-                          thisOpenid: thisOpenid,
-                          myOpenid: myOpenid,
-                          dataId: data2._id,
-                          dataFans: data2.fans
-                        },
-                        success(res) {
-                          // console.log(res)
-                          if (res.result.stats.updated == 1) {
-                            $wuxToptips().warn({
-                              hidden: true,
-                              text: '取消成功',
-                              duration: 2500,
-                              success() { },
-                            })
-                            that.setData({
-                              addText: '关注'
-                            })
-                            that.getData(that.data.id)
-                          }
-
-
-                        },
-                        fail(res) {
-                          // console.log(res);
-                        }
-                      })
-
-                    },
-                    fail(res) {
-                      // console.log(res);
-                    }
-                  })
-
-                },
-                fail(res) {
-                  // console.log(res);
-                }
-              })
-
             })
 
           }
-          else {
+        })
+      }
+      else {
+        let that = this;
+        let db = wx.cloud.database();
+        let userAll = wx.getStorageSync('userInfo');
+        let myOpenid = wx.getStorageSync('openid');
+        let thisOpenid = e.currentTarget.dataset.openid;
+        wx.showModal({
+          title: '是否取消',
+          content: '是否取消关注',
+          success(res) {
+            if (res.confirm) {
 
+              // 取消关注  
+              let myData = db.collection('users').where({
+                _openid: myOpenid
+              }).get()
+
+              Promise.resolve(myData).then(function (res) {
+                // console.log(res);
+                let data1 = res.data[0];
+                for (var i = 0; i < data1.watch.length; i++) {
+                  if (data1.watch[i].openid == thisOpenid) {
+                    data1.watch.splice(i, 1);
+                  }
+                }
+                // console.log(data1)
+                db.collection('users').doc(data1._id).update({
+                  data: {
+                    watch: data1.watch
+                  },
+                  success(res) {
+                    // console.log(res);
+
+                    //取消关注
+                    wx.cloud.callFunction({
+                      name: 'cancelFans',
+                      data: {
+                        thisOpenid: thisOpenid,
+                        myOpenid: that.data.myOpenid
+                      },
+                      success(res) {
+                        console.log(res)
+
+                        let data2 = res.result.data[0];
+                        // console.log(data2)
+                        for (var b = 0; b < data2.fans.length; b++) {
+                          if (data2.fans[b].openid == myOpenid) {
+                            data2.fans.splice(b, 1);
+                          }
+                        }
+
+                        console.log(thisOpenid,data2)
+
+
+                        // 取消粉丝
+                        wx.cloud.callFunction({
+                          name: 'cancelFans1',
+                          data: {
+                            thisOpenid: thisOpenid,
+                            myOpenid: myOpenid,
+                            dataId: data2._id,
+                            dataFans: data2.fans
+                          },
+                          success(res) {
+                            // console.log(res)
+                            if (res.result.stats.updated == 1) {
+                              $wuxToptips().warn({
+                                hidden: true,
+                                text: '取消成功',
+                                duration: 2500,
+                                success() { },
+                              })
+                              that.setData({
+                                addText: '关注'
+                              })
+                              that.getData(that.data.id)
+                            }
+
+
+                          },
+                          fail(res) {
+                            // console.log(res);
+                          }
+                        })
+
+                      },
+                      fail(res) {
+                        // console.log(res);
+                      }
+                    })
+
+                  },
+                  fail(res) {
+                    // console.log(res);
+                  }
+                })
+
+              })
+
+            }
+            else {
+
+            }
           }
-        }
-      })
+        })
 
+      }
     }
   },
 

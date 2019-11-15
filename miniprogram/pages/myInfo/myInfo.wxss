@@ -147,7 +147,7 @@
 }
 
 .update {
-  background-color: #f2709c;
+  background-color: #f47695;
   color: white;
   box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.1);
   position: fixed;

@@ -43,17 +43,17 @@
     <image src='{{bgImg}}' class='show-img' mode='aspectFill'></image>
     <!-- <wux-icon size='22' type='md-planet' class='edit-img' bindtap='changeImg' /> -->
     <view bindtap='shuaxin' class='shuaxin-img animationSlow {{animationSlow}}'>
-      <image style="width: 62%; height: 62%;"  src='../../images/shuaxin.png'></image>
+      <image style="width: 70%; height: 70%;"  src='../../images/sx.png'></image>
     </view>
-    <view bindtap='shuaxin' class='shuaxin-img animationSlow1 {{animationSlow1}}'>
+    <!-- <view bindtap='shuaxin' class='shuaxin-img animationSlow1 {{animationSlow1}}'>
       <image style="width: 62%; height: 62%;"  src='../../images/shuaxin.png'></image>
-    </view>
+    </view> -->
     <image class='edit-img' src='../../images/skin.png' bindtap='changeImg'></image>
     <view class='my-image' wx:if='{{hasUserInfo}}'>
     
       <image src="{{userInfo.avatarUrl}}" bindtap="showBGTX">
       </image>
-      <image src='../../images/photo3.png' class="editImage" bindtap="uploadTX"></image>
+      <image src='../../images/photo.png' class="editImage" bindtap="uploadTX"></image>
       <view class='my-info-detail'>
         <view>{{userInfo.nickName}}
         </view>

@@ -248,7 +248,7 @@ Page({
                   wx.cloud.callFunction({
                     name: 'cancelFans',
                     data: {
-                      thisOpenid: that.data.thisOpenid,
+                      thisOpenid: thisOpenid,
                       myOpenid: that.data.myOpenid
                     },
                     success(res) {

@@ -45,7 +45,7 @@ page {
   height: 250rpx;
   text-align: center;
   box-sizing: border-box;
-  padding-top: 24rpx;
+  padding-top: 58rpx;
   z-index: 100;
   position: relative;
 }
@@ -113,14 +113,14 @@ button::after {
 
 .my-image .editImage {
   position: absolute;
-  width: 30rpx;
-  height: 30rpx;
+  width: 34rpx;
+  height: 34rpx;
   overflow: auto;
-  bottom: 84rpx;
+  bottom: 54rpx;
   left: 50%;
   margin-left: 44rpx;
   box-shadow: none;
-  opacity: 0.9;
+  opacity: 1;
   border-radius: 0;
 }
 
@@ -209,7 +209,7 @@ button::after {
 .edit-img {
   position: absolute;
   width: 42rpx;
-  height: 42rpx;
+  height: 38rpx;
   top: 14rpx;
   right: 16rpx;
   /* color: white; */

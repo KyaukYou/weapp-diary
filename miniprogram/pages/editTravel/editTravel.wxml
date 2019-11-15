@@ -21,7 +21,7 @@
 
       <van-field value="{{ where }}" type='text' center clearable label="日记位置" placeholder="请选择" border="false" use-button-slot bind:input='addWhere'>
         <!-- <picker slot='button' return:false> -->
-        <wux-button slot="button" size="small" type="calm" bind:click='chooseWhere'>选择位置</wux-button>
+        <wux-button slot="button" hover-class='chooseBtn-hover' size="small" type="calm" bind:click='chooseWhere'>选择位置</wux-button>
         <!-- </picker> -->
 
       </van-field>
@@ -32,7 +32,7 @@
           <picker mode = date>选择日期</picker>
         </wux-button> -->
         <picker value="{{ beginDate[0] }}" hover-class='chooseBtn-hover' class='picker' slot='button' mode='date' bindchange='chooseStart'>
-          <wux-button size="small" type="calm">
+          <wux-button hover-class='chooseBtn-hover' size="small" type="calm">
             选择日期
           </wux-button>
         </picker>
@@ -41,7 +41,7 @@
       <van-field value="{{ endDate[0] }}" type='text' disabled='false' center clearable label="日记结束日期" placeholder="请选择" border="false" use-button-slot>
         <!-- <wux-button slot="button" size="small" type="calm" bind:click='chooseEnd'>选择日期</wux-button> -->
         <picker value="{{ endDate[0] }}" hover-class='chooseBtn-hover' class='picker' slot='button' mode='date' bindchange='chooseEnd'>
-          <wux-button size="small" type="calm">
+          <wux-button hover-class='chooseBtn-hover' size="small" type="calm">
             选择日期
           </wux-button>
         </picker>
@@ -91,7 +91,8 @@
         <!-- wx:for='{{}}' -->
         <view class='add-full' data-url='{{item}}' catchtap='showbgimg' wx:for='{{uploadObj.list[main_index].trueImgs}}' wx:for-index='img_index' wx:key='index' data-index='{{main_index}}'>
           <wux-icon class='add-delete' type='md-close-circle-outline' size='20' data-main='{{main_index}}' data-index='{{img_index}}' catchtap='delImg' />
-          <image mode='aspectFill' src='{{item}}'></image>
+          <image src='../../images/bg_load2.svg' lazy-load mode='aspectFill'></image>
+          <image mode='aspectFill' src='{{item}}' lazy-load ></image>
         </view>
 
         <view data-index='{{main_index}}' class='add-full add-list-update' hover-class='addImg-hover' bindtap='chooseImg' wx:if='{{uploadObj.list[main_index].imgNum == 0 ? false : true}}'>
@@ -171,7 +172,7 @@
             <view class='chat-write-num'>{{chatData.length}}/100</view>
             <wux-button block size='small' class='chat-write-header-btn' style='background-color: rgb(255,255,255)' type="stable" bindtap='cancelChats'>取消</wux-button>
             <view class='chat-write-btn'>
-              <wux-button block size='small' type="calm" bindtap='uploadChat'>提交</wux-button>
+              <wux-button block size='small' hover-class='chooseBtn-hover' type="calm" bindtap='uploadChat'>提交</wux-button>
             </view>
           </view>
         </textarea>

@@ -209,11 +209,12 @@ button::after {
 
 .add-fans {
   position: absolute;
-  width: 80rpx;
-  height: 44rpx;
-  line-height: 44rpx;
+  width: 84rpx;
+  height: 48rpx;
+  line-height: 48rpx;
   z-index: 9999;
-  background-color: rgba(255, 255, 255, 0.3);
+  /* background-color: rgba(255, 255, 255, 0.3); */
+  background-color: #f47695;
   font-size: 22rpx;
   text-align: center;
   /* border: 2rpx solid rgba(255, 255, 255, 0.3); */

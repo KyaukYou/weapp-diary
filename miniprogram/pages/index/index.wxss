@@ -32,9 +32,8 @@ page {
   background-color: rgb(246,246,246);
   /* background-color: rgba(204,138,201,0.2); */
   z-index: 999;
-  /* margin-bottom: 160rpx; */
-  /* margin-bottom: 320rpx; */
   box-shadow: 0 2rpx 6rpx rgba(199, 199, 199, 0.3);
+  padding-top: 4rpx;
 }
 
 .index-search {
@@ -102,7 +101,7 @@ page {
 .container {
   width: 100%;
   height: auto;
-  margin-top: 190rpx;
+  margin-top: 184rpx;
   padding-bottom: 8rpx;
 }
 
@@ -120,13 +119,10 @@ page {
   display: flex;
   flex-flow: column wrap;
   /* border: 2rpx solid gray; */
-  /* border-radius: 8rpx; */
+  border-radius: 10rpx;
   overflow: hidden;
-  margin: 50rpx auto 50rpx auto;
-  /* margin: 20rpx auto; */
-  /* box-shadow: 0rpx 2rpx 10rpx 4rpx rgba(190, 190, 190, 0.3); */
+  margin: 42rpx auto 30rpx auto;
   box-shadow:0 0 10px rgba(190,190,190,0.5);
-  /* box-shadow:0px 15px 10px -15px rgba(190, 190, 190, 1); */
   position: relative;
 }
 
@@ -142,14 +138,18 @@ page {
   overflow: hidden;
 }
 
-.index .index-wrap>image {
+.index .index-wrap .index-wrap-loadImg {
   width: 57%;
   height: 99%;
-  /* position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0; */
+  border-radius: 10rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.index .index-wrap .index-wrap-loadImg image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 .index-wrap-text {

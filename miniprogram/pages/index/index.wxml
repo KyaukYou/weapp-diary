@@ -42,7 +42,10 @@
       <wux-icon type='{{item.data.lock == true ? "md-lock" : "md-unlock" }}' size='18' style='position: relative; left: -4rpx; top: -6rpx;' />
     </view>
     <view wx:if='{{index % 2 == 0}}' class='index-wrap'>
-      <image lazy-load='{{lazyloadBol}}' mode='aspectFill' src='{{item.data.headerImg}}'></image>
+      <view class="index-wrap-loadImg">
+        <image src='../../images/bg_load2.svg' lazy-load='{{lazyloadBol}}' mode='aspectFill'></image>
+        <image lazy-load='{{lazyloadBol}}' mode='aspectFill' src='{{item.data.headerImg}}'></image>
+      </view>
       <view class='index-wrap-text index-wrap-text-right' style='border-left: 0;'>
         <view class='index-title'>{{item.data.title}}</view>
         <view class='index-smtitle'>
@@ -86,7 +89,11 @@
           <text>{{item.data.where}}</text>
         </view>
       </view>
-      <image lazy-load='{{lazyloadBol}}' mode='aspectFill' src='{{item.data.headerImg}}'></image>
+      <!-- <image lazy-load='{{lazyloadBol}}' mode='aspectFill' src='{{item.data.headerImg}}'></image> -->
+      <view class="index-wrap-loadImg">
+        <image src='../../images/bg_load2.svg' lazy-load='{{lazyloadBol}}' mode='aspectFill'></image>
+        <image lazy-load='{{lazyloadBol}}' mode='aspectFill' src='{{item.data.headerImg}}'></image>
+      </view>
 
       <view class='index-footer'>
         <view class='index-footer-right' style='justify-content:flex-start; padding-right: 0; padding-left: 10rpx;'>
