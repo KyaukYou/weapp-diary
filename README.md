@@ -54,3 +54,7 @@
 
 ### 扫码体验
 ![小柴日记簿](https://www.littlechai.cn/images/littlechai.png)   
+
+### License
+
+[MIT](LICENSE)
