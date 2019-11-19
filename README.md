@@ -46,9 +46,11 @@
    + miniprogram > app.js 中  **controlId** 的值改成刚才复制的 **_id**
 
 ---
+### 7.权限管理
+   + 每个集合的权限一定要设置成 **所有用户可读，仅创建者可读写**
 
-### 7.完成
+### 完成
    + 编译小程序，即可新建日记   
 
-### 8.扫码体验
+### 扫码体验
 ![小柴日记簿](https://www.littlechai.cn/images/littlechai.png)   
