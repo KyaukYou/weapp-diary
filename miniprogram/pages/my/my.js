@@ -84,7 +84,7 @@ Page({
         let cloudPath = 'user/' + openid + '/avatar/' + cc + filePath.match(/\.[^.]+?$/)[0];
         // console.log(filePath, cloudPath)
         wx.showLoading({
-          title: '正在上传...',
+          title: '正在上传',
           mask: true
         })
         
@@ -193,7 +193,7 @@ Page({
         let cloudPath = 'user/' + openid + '/backgroundImg/' + cc + filePath.match(/\.[^.]+?$/)[0];
         // console.log(filePath,cloudPath)
         wx.showLoading({
-          title: '正在上传...',
+          title: '正在上传',
           mask: true
         })
         wx.cloud.uploadFile({

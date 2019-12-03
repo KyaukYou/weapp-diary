@@ -34,7 +34,7 @@ page {
 
 .add-list-one {
   width: 100%;
-  min-height: 440rpx;
+  /* min-height: 440rpx; */
   height: auto;
   padding-top: 8rpx;
   position: relative;
@@ -69,6 +69,7 @@ page {
   text-align: center;
   line-height: 36rpx;
   color: rgba(225,225,225,1);
+  z-index: 999;
 }
 
 .add-full .add-delete image {
@@ -122,7 +123,7 @@ page {
 .add-footer {
   width: 98%;
   margin: 2rpx auto;
-  min-height: 130rpx;
+  /* min-height: 130rpx; */
   height: auto;
   /* border-bottom: 2rpx solid rgb(221,221,221); */
 }

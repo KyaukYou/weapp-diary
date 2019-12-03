@@ -1,6 +1,6 @@
 <view class="container">
-  <!-- <view class='container-scroll'> -->
   <wux-toptips id="wux-toptips" />
+  <view class="container-index-wrap">   
   <!-- wx:if='{{userData._openid == item._openid || item.data.show}}' -->
   <view class='index' data-openid='{{item._openid}}' data-id='{{item._id}}' wx:for='{{travelList}}' wx:key='index'  bindtap='todetail'  data-lock='{{item.data.lock}}' style='left: 0;'>
     <!-- 单数 -->
@@ -93,6 +93,5 @@
       </view>
     </view>
   </view>
-
-  <!-- </view> -->
+  </view>
 </view>

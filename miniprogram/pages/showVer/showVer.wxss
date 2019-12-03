@@ -56,7 +56,7 @@
   background: linear-gradient(to right, #f2709c, #ff9472);
   left: -6.8%;
   top: 0;
-  height: 48rpx;
+  height: 46rpx;
   /* bottom: -46rpx; */
 }
 

@@ -71,12 +71,12 @@
             <van-switch data-index='{{main_index}}' type='warning' class='add-ss' checked="{{ item.show }}" size='28' bind:change="onchange1" />
           </view>
         </view>
-        <textarea value='{{item.text}}' data-index='{{main_index}}' maxlength='500' bindinput='getTextarea' placeholder='写下你的日记吧(500字以内)'>
+        <textarea wx:if="{{item.show}}" value='{{item.text}}' data-index='{{main_index}}' maxlength='500' bindinput='getTextarea' placeholder='写下你的日记吧(500字以内)'>
           <view>{{item.text.length}}/500</view>
         </textarea>
       </view>
 
-      <view class='add-image'>
+      <view class='add-image' wx:if="{{item.show}}">
         <!-- wx:for='{{}}' -->
         <view class='add-full' data-url='{{item}}' catchtap='showbgimg' wx:for='{{uploadObj.list[main_index].trueImgs}}' wx:for-index='img_index' wx:key='index' data-index='{{main_index}}'>
           <wux-icon class='add-delete' type='md-close-circle-outline' size='20' data-main='{{main_index}}' data-index='{{img_index}}' catchtap='delImg' />

@@ -326,3 +326,12 @@ page {
   color: rgb(177, 177, 177);
   margin-top: 2rpx;
 }
+
+.container-index-wrap {
+  width: 100%;
+  height: auto;
+}
+
+.index .index-footer-left view {
+  text-shadow: 0 0 6rpx rgba(0, 0, 0, 0.4);
+}

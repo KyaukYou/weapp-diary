@@ -352,7 +352,7 @@ Page({
   },
   //编辑文字
   getTextarea(e) {
-     // console.log(e.currentTarget.dataset)
+    //  console.log(e.currentTarget.dataset)
     let copy = this.data.uploadObj;
     copy.list[e.currentTarget.dataset.index].text = e.detail.value
     this.setData({

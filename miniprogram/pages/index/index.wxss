@@ -100,9 +100,14 @@ page {
 
 .container {
   width: 100%;
-  height: auto;
-  margin-top: 184rpx;
-  padding-bottom: 8rpx;
+  position: absolute;
+  top: 150rpx;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* height: auto; */
+  /* margin-top: 184rpx; */
+  /* padding-bottom: 8rpx; */
 }
 
 .container scroll-view {
@@ -121,7 +126,7 @@ page {
   /* border: 2rpx solid gray; */
   border-radius: 10rpx;
   overflow: hidden;
-  margin: 42rpx auto 30rpx auto;
+  margin: 42rpx auto 42rpx auto;
   box-shadow:0 0 10px rgba(190,190,190,0.5);
   position: relative;
 }

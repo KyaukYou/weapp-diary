@@ -35,7 +35,7 @@
 
 <view class="container">
   <wux-toptips id="wux-toptips" />
-      
+  <view class="container-index-wrap">   
   <view class='index' data-openid='{{item._openid}}' data-id='{{item._id}}' wx:for='{{travelList}}' wx:key="index" wx:if='{{item.data.show}}' bindtap='todetail' data-lock='{{item.data.lock}}' style='left: 0;'>
     <!-- 单数 -->
     <view wx:if='{{index % 2 == 0}}' class='delTravel' catchtap='delTravel' data-lock='{{item.data.lock}}' data-index='{{index}}' data-id='{{item._id}}' data-openid='{{item._openid}}'>
@@ -116,8 +116,7 @@
       </view>
     </view>
   </view>
-  <!-- </view> -->
 
   <wux-floating-button actionRotate='{{rotateBol}}' position="bottomRight" theme="calm" bind:change="addTravel" bind:click="addTravel" style='display: {{showAdd}}' />
-  <!-- </scroll-view> -->
+  </view> 
 </view>
