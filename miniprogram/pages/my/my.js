@@ -641,6 +641,24 @@ Page({
       }
     }
   },
+  toList() {
+    if (wx.getStorageSync('openid')) {
+      wx.navigateTo({
+        url: '../myList/myList',
+      })
+    } else {
+      if (!wx.getStorageSync('openid')) {
+        $wuxToptips().error({
+          hidden: true,
+          text: '请先登录',
+          duration: 2500,
+          success() { },
+        })
+        return;
+      }
+    }
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
