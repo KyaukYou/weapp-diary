@@ -658,6 +658,23 @@ Page({
       }
     }
   },
+  toAnswer() {
+    if (wx.getStorageSync('openid')) {
+      wx.navigateTo({
+        url: '../answerList/answerList',
+      })
+    } else {
+      if (!wx.getStorageSync('openid')) {
+        $wuxToptips().error({
+          hidden: true,
+          text: '请先登录',
+          duration: 2500,
+          success() { },
+        })
+        return;
+      }
+    }
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -710,6 +727,27 @@ Page({
     })
     this.getTravelNum();
     this.getStarNum();
+
+    if (wx.getStorageSync('show')) {
+      if (wx.getStorageSync('show') == 'none') {
+        this.setData({
+          showAdd: 'none',
+          showStar: 'block'
+        })
+      }
+      else {
+        this.setData({
+          showAdd: 'flex',
+          showStar: 'none'
+        })
+      }
+    }
+    else {
+      this.setData({
+        showAdd: 'none',
+        showStar: 'block'
+      })
+    }
   },
 
   /**

@@ -1,12 +1,34 @@
-const app = getApp();
+// pages/myListDetail/myListDetail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    verBol: false,
-    verData: []
+
+  },
+
+  getMyBug(val) {
+    let db = wx.cloud.database();
+    let that = this;
+    db.collection('bug').where({
+      _id: val,
+    })
+      .get({
+        success: function (res) {
+          console.log(res.data);
+          that.setData({
+            listArr: res.data[0]
+          })
+          var timer = null;
+          timer = setTimeout(function() {
+            wx.stopPullDownRefresh();
+            wx.hideLoading();
+            clearTimeout(timer);
+          },500)
+
+        }
+      })
   },
 
   /**
@@ -14,56 +36,36 @@ Page({
    */
   onLoad: function (options) {
     wx.showLoading({
-      mask: true,
       title: '正在加载',
     })
-    let db = wx.cloud.database();
-    db.collection('control').doc(app.globalData.controlId).get().then(res => {
-      let data = res.data.verObj;
-
-      // 排序
-      var reData = JSON.parse(JSON.stringify(data)).reverse();
-
-      this.setData({
-        verData: reData,
-        verBol: true
-      })
-      var timer = null;
-      timer = setTimeout(function () {
-        wx.stopPullDownRefresh();
-        wx.hideLoading();
-        clearTimeout(timer);
-      }, 400)
-    })
-
+    this.getMyBug(options.id);
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    
+
   },
 
   /**
@@ -71,31 +73,22 @@ Page({
    */
   onPullDownRefresh: function () {
     wx.showLoading({
-      mask: true,
       title: '正在加载',
     })
-    let db = wx.cloud.database();
-    db.collection('control').doc(app.globalData.controlId).get().then(res => {
-      let data = res.data.verObj;
-      this.setData({
-        verData: data
-      })
-      wx.stopPullDownRefresh();
-      wx.hideLoading();
-    })
+    this.getMyBug(options.id);
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+
   }
 })

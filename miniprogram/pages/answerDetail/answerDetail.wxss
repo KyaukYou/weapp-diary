@@ -1,0 +1,150 @@
+/* pages/answerDetail/answerDetail.wxss */
+.myList {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.myList-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: scroll;
+}
+
+.myList-list {
+  width: 100%;
+  height: auto;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+
+.myList-child {
+  width: 94%;
+  height: 60rpx;
+  position: relative;
+  /* background-color: rgb(242, 242, 242); */
+  margin: 10rpx auto 10rpx auto;
+  border-radius: 8rpx;
+}
+
+.myList-left {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  left: 0;
+  width: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.myList-left .myList-left-yes {
+  font-size: 18rpx;
+  display: inline-block;
+  background-color: rgb(83, 216, 83);
+  color: white;
+  padding: 6rpx 0;
+  border-radius: 8rpx;
+  width: 78rpx;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 2rpx;
+}
+
+.myList-left .myList-left-no {
+  font-size: 18rpx;
+  display: inline-block;
+  background-color: rgb(250, 69, 69);
+  color: white;
+  padding: 6rpx 0;
+  border-radius: 8rpx;
+  width: 78rpx;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 2rpx;
+}
+
+.myList-top {
+  position: absolute;
+  left: 100rpx;
+  top: 0;
+  right: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  box-sizing: border-box;
+  padding: 0 16rpx 0 4rpx;
+  color: rgb(122, 122, 122);
+}
+
+.myList-top text {
+  /* overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap; */
+  position: relative;
+  top: 6rpx;
+}
+
+.myList-bottom {
+  position: absolute;
+  left: 100rpx;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: rgb(122, 122, 122);
+}
+
+.myList-wrap {
+  width: 94%;
+  height: auto;
+  padding: 0 12rpx 0 12rpx;
+  box-sizing: border-box;
+  margin: 0 auto 50rpx auto;
+  font-size: 28rpx;
+}
+
+.myList-child-text {
+  width: 92%;
+  height: auto;
+  margin: 60rpx auto 0 auto;
+  border: 4rpx solid rgb(244, 118, 149);
+  box-sizing: border-box;
+  border-radius: 6rpx;
+}
+
+.myList-child-text textarea {
+  width: 100%;
+  height: 300rpx;
+  box-sizing: border-box;
+  padding: 20rpx 20rpx;
+  font-size: 28rpx;
+}
+
+.update {
+  background-color: #f47695;
+  color: white;
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  bottom: 30rpx;
+  left: 4%;
+  right: 4%;
+}
+
+.update::after {
+  border: none;
+}

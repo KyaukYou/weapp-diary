@@ -1,5 +1,4 @@
-<!--pages/myList/myList.wxml-->
-<wux-toptips id="wux-toptips" />
+<!--pages/answerList/answerList.wxml-->
 <view class="myList">
   <view class="myList-container">
     <view class="myList-list">
@@ -7,6 +6,11 @@
         <view class="myList-left">
           <view class="myList-left-yes" wx:if='{{item.answer == true }}'>已回复</view>
           <view class="myList-left-no" wx:if='{{item.answer == false }}'>未回复</view>
+        </view>
+        <view class="myList-top-top">
+          <image wx:if='{{!item.avatar}}' src='../../images/list_avatar.png'></image>
+          <image wx:if='{{item.avatar}}' src='{{item.avatar}}'></image>
+          <text>{{item.name}}</text>
         </view>
         <view class="myList-top">
           <text>{{item.text}}</text>
@@ -18,3 +22,4 @@
     </view>
   </view>
 </view>
+

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "我的提交",
+  "navigationBarTitleText": "提交详情",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "wux-floating-button": "../../dist/floating-button/index",

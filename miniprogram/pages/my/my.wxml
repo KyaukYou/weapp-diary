@@ -76,6 +76,7 @@
   <wux-cell thumb='../../images/info_list.png' title="我的信息" is-link bindtap='toMyDetail' extra=" "></wux-cell>
   <wux-cell thumb='../../images/bug_list.png' title="BUG提交" is-link bindtap='tobug' extra=" "></wux-cell>
   <wux-cell thumb='../../images/bug_result.png' title="我的提交" is-link bindtap='toList' extra=" "></wux-cell>
+  <wux-cell wx:if='{{userInfo.admin}}' thumb='../../images/answer.png' title="管理回复" is-link bindtap='toAnswer' extra=" "></wux-cell>
   <!-- <wux-cell title="版本号" is-link extra="{{version}}"></wux-cell> -->
   <wux-cell thumb='../../images/ver_list.png' title="版本号" bindtap='showVersion' is-link extra="{{version}}"></wux-cell>
 

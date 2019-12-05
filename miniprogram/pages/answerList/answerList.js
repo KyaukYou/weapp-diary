@@ -1,7 +1,5 @@
-// pages/myList/myList.js
+// pages/answerList/answerList.js
 const app = getApp()
-const util = require('../../utils/util.js');
-import { $wuxToptips } from '../../dist/index'
 
 Page({
 
@@ -13,41 +11,38 @@ Page({
   },
 
   toDetail(e) {
+    // console.log(e)
     let id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: `../myListDetail/myListDetail?id=${id}`,
+      url: `../answerDetail/answerDetail?id=${id}`,
     })
   },
 
   getMyBug() {
     let db = wx.cloud.database();
     let that = this;
-    db.collection('bug').where({
-      _openid: wx.getStorageSync('openid'),
-    })
-    .get({
-      success: function (res) {
-        let arr = res.data.reverse();
-        that.setData({
-          listArr: arr
-        })
-        var timer = null;
-        timer = setTimeout(function () {
-          wx.stopPullDownRefresh();
-          wx.hideLoading();
-          clearTimeout(timer);
-        }, 500)
-      }
-    })
+    db.collection('bug')
+      .get({
+        success: function (res) {
+          // console.log(res.data);
+          let arr = res.data.reverse();
+          that.setData({
+            listArr: arr
+          })
+          var timer = null;
+          timer = setTimeout(function () {
+            wx.stopPullDownRefresh();
+            wx.hideLoading();
+            clearTimeout(timer);
+          }, 500)
+        }
+      })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading({
-      title: '正在加载',
-    })
   },
 
   /**
@@ -61,6 +56,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showLoading({
+      title: '正在加载',
+    })
     this.getMyBug();
   },
 

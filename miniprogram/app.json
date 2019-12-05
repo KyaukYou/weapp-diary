@@ -1,9 +1,12 @@
 {
   "cloud": true,
-  "pages": [
+  "pages": [    
+    "pages/index/index",
     "pages/my/my",
     "pages/myList/myList",
-    "pages/index/index",
+    "pages/answerList/answerList",
+    "pages/answerDetail/answerDetail",
+    "pages/myListDetail/myListDetail",
     
     "pages/myTravel/myTravel",
     "pages/showVer/showVer",

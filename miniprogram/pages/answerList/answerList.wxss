@@ -1,4 +1,4 @@
-/* pages/myList/myList.wxss */
+/* pages/answerList/answerList.wxss */
 .myList {
   position: fixed;
   top: 0;
@@ -25,7 +25,7 @@
 
 .myList-child {
   width: 94%;
-  height: 110rpx;
+  height: 160rpx;
   position: relative;
   background-color: rgb(242, 242, 242);
   margin: 10rpx auto 20rpx auto;
@@ -61,17 +61,38 @@
   border-radius: 8rpx;
 }
 
-.myList-top {
-  position: absolute;
-  left: 120rpx;
-  top: 0;
+.myList-top-top {
+  position: relative;
+  /* left: 120rpx; */
+  top: 6rpx;
   right: 0;
-  height: 50%;
+  height: 33.33333%;
   display: flex;
   align-items: center;
   font-size: 28rpx;
   box-sizing: border-box;
-  padding: 0 16rpx 0 4rpx;
+  padding: 0 16rpx 0 124rpx;    
+  flex-flow: row nowrap;
+}
+
+.myList-top-top image {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  margin-right: 8rpx;
+}
+
+.myList-top {
+  position: relative;
+  /* left: 120rpx; */
+  top: 0;
+  right: 0;
+  height: 33.33333%;
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  padding: 0 16rpx 0 124rpx;
 }
 
 .myList-top text {
@@ -79,6 +100,7 @@
   text-overflow:ellipsis;
   white-space: nowrap;
   position: relative;
+
   top: 6rpx;
 }
 
@@ -87,7 +109,7 @@
   left: 120rpx;
   bottom: 0;
   right: 0;
-  height: 50%;
+  height: 33.33333%;
   display: flex;
   align-items: center;
   font-size: 24rpx;

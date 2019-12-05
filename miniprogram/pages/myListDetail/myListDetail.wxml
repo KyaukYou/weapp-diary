@@ -1,0 +1,33 @@
+<!--pages/myListDetail/myListDetail.wxml-->
+<wux-toptips id="wux-toptips" />
+<view class="myList">
+  <view class="myList-container">
+    <view class="myList-list">
+      <view class="myList-child">
+        <view class="myList-left">
+          <view class="myList-left-yes" wx:if='{{listArr.answer == true }}'>已回复</view>
+          <view class="myList-left-no" wx:if='{{listArr.answer == false }}'>未回复</view>
+        </view>
+        <view class="myList-top">{{listArr.time}}</view>
+      </view>
+      <view class="myList-wrap">
+        {{listArr.text}}
+      </view>
+
+      <view class="myList-child" wx:if='{{listArr.answerObj}}'>
+        <view class="myList-left">
+          <view class="myList-left-yes">回复详情</view>
+        </view>
+        <view class="myList-top">{{listArr.answerObj.time}}</view>
+      </view>
+      <view class="myList-wrap myList-wrap-nomargin">
+        <image src='{{listArr.answerObj.avatarUrl}}'></image>
+        {{listArr.answerObj.name}}
+      </view>
+      <view class="myList-wrap">
+        {{listArr.answerObj.answer}}
+      </view>
+      
+    </view>
+  </view>
+</view>

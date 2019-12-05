@@ -1,4 +1,4 @@
-/* pages/myList/myList.wxss */
+/* pages/myListDetail/myListDetail.wxss */
 .myList {
   position: fixed;
   top: 0;
@@ -25,10 +25,10 @@
 
 .myList-child {
   width: 94%;
-  height: 110rpx;
+  height: 60rpx;
   position: relative;
-  background-color: rgb(242, 242, 242);
-  margin: 10rpx auto 20rpx auto;
+  /* background-color: rgb(242, 242, 242); */
+  margin: 10rpx auto 10rpx auto;
   border-radius: 8rpx;
 }
 
@@ -37,59 +37,97 @@
   top: 0;
   height: 100%;
   left: 0;
-  width: 120rpx;
+  width: 100rpx;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .myList-left .myList-left-yes {
-  font-size: 20rpx;
+  font-size: 18rpx;
   display: inline-block;
   background-color: rgb(83, 216, 83);
   color: white;
-  padding: 6rpx 6rpx;
+  padding: 6rpx 0;
   border-radius: 8rpx;
+  width: 78rpx;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 2rpx;
 }
 
 .myList-left .myList-left-no {
-  font-size: 20rpx;
+  font-size: 18rpx;
   display: inline-block;
   background-color: rgb(250, 69, 69);
   color: white;
-  padding: 6rpx 6rpx;
+  padding: 6rpx 0;
   border-radius: 8rpx;
+  width: 78rpx;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 2rpx;
 }
 
 .myList-top {
   position: absolute;
-  left: 120rpx;
+  left: 100rpx;
   top: 0;
   right: 0;
-  height: 50%;
+  height: 100%;
   display: flex;
   align-items: center;
-  font-size: 28rpx;
+  font-size: 26rpx;
   box-sizing: border-box;
   padding: 0 16rpx 0 4rpx;
+  color: rgb(122, 122, 122);
 }
 
 .myList-top text {
-  overflow: hidden;
+  /* overflow: hidden;
   text-overflow:ellipsis;
-  white-space: nowrap;
+  white-space: nowrap; */
   position: relative;
   top: 6rpx;
 }
 
 .myList-bottom {
   position: absolute;
-  left: 120rpx;
+  left: 100rpx;
   bottom: 0;
   right: 0;
-  height: 50%;
+  height: 100%;
   display: flex;
   align-items: center;
   font-size: 24rpx;
-  color: rgb(88, 88, 88);
+  color: rgb(122, 122, 122);
+}
+
+.myList-wrap {
+  width: 94%;
+  height: auto;
+  padding: 0 12rpx 0 12rpx;
+  box-sizing: border-box;
+  margin: 0 auto 50rpx auto;
+  font-size: 28rpx;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.myList-wrap image {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  margin-right: 8rpx;
+}
+
+.myList-wrap-nomargin {
+  margin-bottom: 8rpx;
 }

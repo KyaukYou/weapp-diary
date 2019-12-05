@@ -759,16 +759,13 @@ Page({
   onLoad: function (options) {
     var that = this;
     that.getInit();
-
     let db = wx.cloud.database();
     db.collection('control').doc(app.globalData.controlId).get().then(res => {
-      // console.log(res.data.showAdd.showAdd)
       this.setData({
         showAdd: res.data.showAdd.showAdd
       })
       wx.setStorageSync('show', res.data.showAdd.showAdd)
     })
-
     that.changeData1(this.data.listIndex);
   },
 
@@ -784,6 +781,7 @@ Page({
    */
   onShow: function () {
     let that = this;
+
     // that.changeData1(this.data.listIndex);
     wx.getSetting({
       success(res) {
@@ -1136,6 +1134,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    let db = wx.cloud.database();
+    db.collection('control').doc(app.globalData.controlId).get().then(res => {
+      this.setData({
+        showAdd: res.data.showAdd.showAdd
+      })
+      wx.setStorageSync('show', res.data.showAdd.showAdd)
+    })
+
     var that = this;
     this.setData({
       searchBol: false,
