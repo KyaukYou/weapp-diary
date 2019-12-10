@@ -1,4 +1,6 @@
 const app = getApp();
+import { $wuxDialog } from '../../dist/index'
+import { $wuxToptips } from '../../dist/index'
 Page({
 
   /**

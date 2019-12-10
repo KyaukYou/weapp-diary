@@ -20,7 +20,85 @@ Page({
     bgImg: '',
     animationSlow: 'animationSlow-pause',
     animationSlow1: 'animationSlow-pause',
-    timer: null
+    timer: null,
+    switchs: false,
+    sBol: true
+  },
+
+  getControl() {
+    let db = wx.cloud.database();
+    let that = this;
+    db.collection('control').where({
+      _openid: wx.getStorageSync('openid'),
+    })
+      .get({
+        success: function (res) {
+          // console.log(res.data);
+          if(res.data[0].showAdd.showAdd == 'block') {
+            that.setData({
+              switchs: true
+            })
+          }
+          else {
+            that.setData({
+              switchs: false
+            })
+          }
+        }
+      })
+  },
+
+  control(e) {
+    // console.log(e)
+    let that = this;
+    if(this.data.sBol == true) {
+
+      this.setData({
+        sBol: false
+      })
+
+      let x = '';
+      if(this.data.switchs == false) {
+        x = 'block'
+      }
+      else {
+        x = 'none';
+      }
+
+      wx.cloud.callFunction({
+        name: 'control',
+        data: {
+          openid: wx.getStorageSync('openid'),
+          showAdd: {
+            showAdd: x
+          }
+        },
+        success(res) {
+          // console.log(res)
+          that.setData({
+            sBol: true
+          })
+          if (res.result != false) {
+
+            that.setData({
+              switchs: !that.data.switchs
+            })
+
+          } else {
+
+          }
+        },
+        fail(res) {
+          that.setData({
+            sBol: true
+          })
+        }
+      })
+
+    }
+    else {
+
+    }
   },
   // 我的关注
   toWatch(e) {
@@ -509,10 +587,14 @@ Page({
   // 获得收藏数量
   getStarNum() {
     let that = this;
-    // // console.log(options.id)
+
+    if(!wx.getStorageSync('openid')) {
+      return false;
+    }
+
+    this.getControl();
 
     let openid = wx.getStorageSync('openid');
-    // let openid = 'W725rd2AWotkbRXB';
 
     let db = wx.cloud.database();
     // let _ = db.command;
@@ -523,12 +605,9 @@ Page({
     var mydata;
 
     var a = Promise.resolve(travelData).then(function (res) {
-      // console.log(res)
-      wx.setStorageSync('userDetail', res.data[0].userDetail)
-      // mydata = res.data[0]
-      // // console.log(res.data.starArr);
       
-
+      wx.setStorageSync('userDetail', res.data[0].userDetail)
+  
       that.setData({
         starNum: res.data[0].starArr.length,
         bgImg: res.data[0].backgroundImg.url,
@@ -763,9 +842,6 @@ Page({
   onShow: function () {
     this.getTravelNum();
     this.getStarNum();
-    // this.setData({
-    //   version: app.globalData.version
-    // })
 
     let db = wx.cloud.database();
     db.collection('control').doc(app.globalData.controlId).get().then(res => {

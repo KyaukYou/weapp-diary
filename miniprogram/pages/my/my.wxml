@@ -70,17 +70,15 @@
   </view>
 <wux-toptips id="wux-toptips" />
 
-  <!-- <wux-cell-group style=''> -->
-  <!-- <wux-cell thumb='../../images/star_list.png' title="我的收藏" is-link bindtap='toMyStar' style='display: {{showStar}}'></wux-cell> -->
-  <!-- </wux-cell-group> -->
   <wux-cell thumb='../../images/info_list.png' title="我的信息" is-link bindtap='toMyDetail' extra=" "></wux-cell>
   <wux-cell thumb='../../images/bug_list.png' title="BUG提交" is-link bindtap='tobug' extra=" "></wux-cell>
   <wux-cell thumb='../../images/bug_result.png' title="我的提交" is-link bindtap='toList' extra=" "></wux-cell>
   <wux-cell wx:if='{{userInfo.admin}}' thumb='../../images/answer.png' title="管理回复" is-link bindtap='toAnswer' extra=" "></wux-cell>
-  <!-- <wux-cell title="版本号" is-link extra="{{version}}"></wux-cell> -->
+  <wux-cell hover-class='none' wx:if='{{userInfo.admin}}' thumb='../../images/switch.png' title="管理控制">
+    <wux-switch name="switch" slot="footer" value="{{switchs}}" bind:change="control" />
+  </wux-cell>
   <wux-cell thumb='../../images/ver_list.png' title="版本号" bindtap='showVersion' is-link extra="{{version}}"></wux-cell>
 
   <wux-dialog id="wux-dialog" />
   <wux-dialog id="wux-dialog--alert" />
-  <!-- <view bindtap='changeImg'>点击</view> -->
 </view>

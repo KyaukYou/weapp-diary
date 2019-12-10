@@ -9,17 +9,16 @@ exports.main = async (event, context) => {
       return false;
     }
 
-    return await db.collection('bug').where({
-      _id: event.id
+    return await db.collection('control').where({
+      _openid: event.openid
     })
       .update({
         data: {
-          answer: true,
-          answerObj: event.answer
+          showAdd: event.showAdd
         },
       })
   } catch (e) {
     console.error(e)
   }
-  // return event;
+
 }

@@ -54,27 +54,35 @@ Page({
       wx.cloud.callFunction({
         name: 'answer',
         data: {
+          openid: wx.getStorageSync('openid'),
           id: that.data.id,
           answer: obj
         },
         success(res) {
+          console.log(res)
           wx.hideLoading();
-          if (res.errMsg == "cloud.callFunction:ok") {
+          if (res.result != false) {
             wx.showToast({
               title: '提交成功',
             })
-            wx.navigateBack({
-              delta: 1
-            })
+            var timer1 = null;
+            timer1 = setTimeout(function() {
+              wx.navigateBack({
+                delta: 1
+              })
+              clearTimeout(timer1)
+            },300);
           }else {
             wx.showToast({
               title: '提交失败',
+              image: '../../images/error.png'
             })
           }
         },
         fail(res) {
           wx.showToast({
             title: '提交失败',
+            image: '../../images/error.png'
           })
         }
       })

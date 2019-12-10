@@ -310,3 +310,19 @@ button::after {
           transform: rotate(-360deg);
       }
 }
+
+
+.wux-switch__input::after {
+  width: 48rpx!important;
+  height: 48rpx!important;
+}
+
+.wux-switch__input::before {
+  height: 48rpx!important;
+  width: 90rpx!important;
+}
+
+.wux-switch__input {
+  height: 52rpx!important;
+  width: 92rpx!important;
+}
