@@ -44,6 +44,8 @@
 ### 6.修改项目代码
    + 复制云开发**control**集合记录的 **_id** 值
    + miniprogram > app.js 中  **controlId** 的值改成刚才复制的 **_id**
+   + 修改 **cloundfunctions** 中 **answer** 的 openid 为自己的openid
+   + 修改 **cloundfunctions** 中 **control** 的 openid 为自己的openid
 
 ---
 ### 7.权限管理
