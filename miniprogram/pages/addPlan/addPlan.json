@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "添加计划",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "wux-toptips": "../../dist/toptips/index"
+  }
+}

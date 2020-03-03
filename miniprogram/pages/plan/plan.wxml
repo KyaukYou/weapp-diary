@@ -1,0 +1,33 @@
+<view class="plan">
+
+  <view class="plan-header">
+    <button hover-class='planBtn-hover' class='planBtn'>状态排序</button>
+    <button hover-class='planBtn-hover' class='planBtn'>时间排序</button>
+    <button hover-class='planBtn-hover' class='planBtn'>等级排序</button>
+  </view>
+
+  <view class="plan-center">
+    <view class="plan-center-container">
+      <view class="plan-list" wx:for='{{planArr}}' wx:key='index'>
+        <view class="plan-list-left">
+          <image src='../../images/planOk.png'></image>
+        </view>
+        <view class="plan-list-center">
+          <view class="plan-list-center1">测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容测试内容</view>
+          <view class="plan-list-center2">
+            <view class="plan-list-center-child1">时间：2020-02-17 14:29:32</view>
+            <view class="plan-list-center-child2">重要等级：5</view>
+          </view>
+        </view>
+        <view class="plan-list-right">
+          <image src="../../images/delPlan.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="plan-footer">
+    <button hover-class='chooseBtn-hover' class='update' bindtap="addPlan">添加计划</button>
+  </view>
+
+</view>

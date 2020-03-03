@@ -567,6 +567,9 @@ Page({
 
   // 初始化点赞图标
   initLikeArr() {
+    if (!app.globalData.login) {
+      return false;
+    }
     let copy = this.data.userData.likeArr;
     let copy1 = this.data.travelList;
     let arr = this.data.likeArr;
@@ -605,6 +608,9 @@ Page({
   },
   // 初始化收藏图标
   initStarArr() {
+    if (!app.globalData.login) {
+      return false;
+    }
     let copy = this.data.userData.starArr;
     let copy1 = this.data.travelList;
     let arr = this.data.starArr;
@@ -1095,6 +1101,7 @@ Page({
     }
   },
   initUser() {
+    
     let that = this;
     let openid = wx.getStorageSync('openid')
     let db = wx.cloud.database();

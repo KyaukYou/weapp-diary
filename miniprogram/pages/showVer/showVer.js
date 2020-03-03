@@ -78,7 +78,7 @@ Page({
     })
     let db = wx.cloud.database();
     db.collection('control').doc(app.globalData.controlId).get().then(res => {
-      let data = res.data.verObj;
+      let data = res.data.verObj.reverse();
       this.setData({
         verData: data
       })

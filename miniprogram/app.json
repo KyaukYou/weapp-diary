@@ -1,7 +1,11 @@
 {
   "cloud": true,
   "pages": [    
+    
     "pages/index/index",
+    "pages/plan/plan",
+    "pages/addPlan/addPlan",
+    
     "pages/my/my",
     "pages/myList/myList",
     "pages/answerList/answerList",
@@ -41,6 +45,12 @@
         "iconPath": "images/index1.png",
         "selectedIconPath": "images/index2.png",
         "text": "主页"
+      },
+      {
+        "pagePath": "pages/plan/plan",
+        "iconPath": "images/plan1.png",
+        "selectedIconPath": "images/plan.png",
+        "text": "计划"
       },
       {
         "pagePath": "pages/my/my",
