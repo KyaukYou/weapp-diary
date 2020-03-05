@@ -1,4 +1,6 @@
 // pages/addPlan/addPlan.js
+const toLunar = require('../../utils/lunar.js')
+
 Page({
 
   /**
@@ -15,7 +17,8 @@ Page({
     fourArr: [],
     fiveArr: [],
     sixArr: [],
-    ifAdd: true
+    ifAdd: true,
+    chooseInfo: {}
   },
 
   // 初始化年份
@@ -166,10 +169,10 @@ Page({
     // ...
 
     if (year == thisYear && month + 1 == thisMonth) {
-      this.getDaysArr('first', index, prevDays, days, nextDays, thisDay,'yes');
+      this.getDaysArr('first', index, prevDays, days, nextDays, beginDay, thisDay, 'yes', year, month);
     }
     else {
-      this.getDaysArr('first', index, prevDays, days, nextDays, thisDay,'no');
+      this.getDaysArr('first', index, prevDays, days, nextDays, beginDay, thisDay, 'no', year, month);
     }
     
 
@@ -221,20 +224,20 @@ Page({
       for (let a = 1; a <= weekLength; a++) {
         // console.log(a);
         if(year == thisYear && month+1 == thisMonth) {
-          this.getDaysArr('normal', a, prevDays, days, nextDays, beginDay, thisDay, 'yes');
+          this.getDaysArr('normal', a, prevDays, days, nextDays, beginDay, thisDay, 'yes',year,month);
         }
         else {
-          this.getDaysArr('normal', a, prevDays, days, nextDays, beginDay, thisDay, 'no');
+          this.getDaysArr('normal', a, prevDays, days, nextDays, beginDay, thisDay, 'no', year, month);
         }
         
       }
       if (year == thisYear && month + 1 == thisMonth) {
-        this.getDaysArr('special', index, prevDays, days, nextDays, weekMoreDays, thisDay,'yes');
-        this.getDaysArr('next', index, prevDays, days, nextDays, weekMoreDays, thisDay,'yes');
+        this.getDaysArr('special', index, prevDays, days, nextDays, weekMoreDays, thisDay, 'yes', year, month);
+        this.getDaysArr('next', index, prevDays, days, nextDays, weekMoreDays, thisDay, 'yes', year, month);
       }
       else {
-        this.getDaysArr('special', index, prevDays, days, nextDays, weekMoreDays, thisDay,'no');
-        this.getDaysArr('next', index, prevDays, days, nextDays, weekMoreDays, thisDay,'no');
+        this.getDaysArr('special', index, prevDays, days, nextDays, weekMoreDays, thisDay, 'no', year, month);
+        this.getDaysArr('next', index, prevDays, days, nextDays, weekMoreDays, thisDay, 'no', year, month);
       }
       
     }
@@ -243,18 +246,18 @@ Page({
       for (let a = 1; a <= weekLength; a++) {
         // console.log(a);
         if (year == thisYear && month + 1 == thisMonth) {
-          this.getDaysArr('normal', a, prevDays, days, nextDays, beginDay, thisDay,'yes');
+          this.getDaysArr('normal', a, prevDays, days, nextDays, beginDay, thisDay, 'yes', year, month);
         }
         else {
-          this.getDaysArr('normal', a, prevDays, days, nextDays, beginDay, thisDay,'no');
+          this.getDaysArr('normal', a, prevDays, days, nextDays, beginDay, thisDay, 'no', year, month);
         }
         
       }
       if (year == thisYear && month + 1 == thisMonth) {
-        this.getDaysArr('last', index, prevDays, days, nextDays, weekMoreDays, thisDay,'yes');
+        this.getDaysArr('last', index, prevDays, days, nextDays, weekMoreDays, thisDay, 'yes', year, month);
       }
       else {
-        this.getDaysArr('last', index, prevDays, days, nextDays, weekMoreDays, thisDay,'no');
+        this.getDaysArr('last', index, prevDays, days, nextDays, weekMoreDays, thisDay, 'no', year, month);
       }
       
     }
@@ -264,56 +267,63 @@ Page({
 
   getDays(year,month) {
     let days = 0;
+    let m = month;
+    // 表示本月是1月份
+    if(m == 0) {
+      m = 12;
+    }
     if (year % 4 == 0) {
       // 是
-      if (month == 2) {
+      if (m == 2) {
         days = 29;
       }
     }
     else {
       //不是
-      if (month == 2) {
+      if (m == 2) {
         days = 28;
       }
     }
 
-    if (month == 1) {
+    if (m == 1) {
       days = 31;
     }
-    else if (month == 3) {
+    else if (m == 3) {
       days = 31;
     }
-    else if (month == 4) {
+    else if (m == 4) {
       days = 30;
     }
-    else if (month == 5) {
+    else if (m == 5) {
       days = 31;
     }
-    else if (month == 6) {
+    else if (m == 6) {
       days = 30;
     }
-    else if (month == 7) {
+    else if (m == 7) {
       days = 31;
     }
-    else if (month == 8) {
+    else if (m == 8) {
       days = 31;
     }
-    else if (month == 9) {
+    else if (m == 9) {
       days = 30;
     }
-    else if (month == 10) {
+    else if (m == 10) {
       days = 31;
     }
-    else if (month == 11) {
+    else if (m == 11) {
       days = 30;
     }
-    else if (month == 12) {
+    else if (m == 12) {
       days = 31;
     }
+    console.log(year,month,days);
     return days;
   },
 
-  getDaysArr(type,index,prevDays,days,nextDays,beginDay,d,b) {
+  getDaysArr(type, index, prevDays, days, nextDays, beginDay, d, b, year, month) {
+    console.log(year,month+1)
     let oneArr = [];
     let twoArr = [];
     let threeArr = [];
@@ -325,14 +335,35 @@ Page({
     if(type == 'first') {
       // 上个月末尾天数添加
       for (let i = 0; i < index; i++) {
-        // console.log(i);
-        let obj = {
-          day: prevDays - i,
-          show: 'hide',
-          choose: false,
-          planArr: []
+        // 当为一月份的时候，那上个月就是去年了;
+        if(month+1 == 1) {
+          // console.log('去年:' + year - 1, 12+'月');
+
+          let obj = {
+            day: prevDays - i,
+            show: 'hide',
+            choose: false,
+            lunar: toLunar.toLunar(year-1, 12, prevDays - i),
+            planArr: []
+          }
+          oneArr.unshift(obj)
+
         }
-        oneArr.unshift(obj)
+        // 否则就是今年，上个月
+        else {
+          // console.log('今年:' + year, month + '月');
+
+          let obj = {
+            day: prevDays - i,
+            show: 'hide',
+            choose: false,
+            lunar: toLunar.toLunar(year, month, prevDays - i),
+            planArr: []
+          }
+          oneArr.unshift(obj)
+        }
+
+        
       }
       //本月月初天数添加
       for(let j=7; j>index; j--) {
@@ -342,15 +373,20 @@ Page({
               day: 7 - j + 1,
               show: 'block',
               choose: true,
+              lunar: toLunar.toLunar(year, month+1, 7 - j + 1),
               planArr: []
             }
-            oneArr.push(obj)
+            oneArr.push(obj);
+            this.setData({
+              chooseInfo: obj.lunar
+            })
           }
           else {
             let obj = {
               day: 7 - j + 1,
               show: 'block',
               choose: false,
+              lunar: toLunar.toLunar(year, month+1, 7 - j + 1),
               planArr: []
             }
             oneArr.push(obj)
@@ -360,6 +396,7 @@ Page({
             day: 7 - j + 1,
             show: 'block',
             choose: false,
+            lunar: toLunar.toLunar(year, month + 1, 7 - j + 1),
             planArr: []
           }
           oneArr.push(obj)
@@ -379,23 +416,34 @@ Page({
               day: i,
               show: 'block',
               choose: true,
+              lunar: toLunar.toLunar(year, month + 1, i),
+              // lunar: 'a',
               planArr: []
             }
+            this.setData({
+              chooseInfo: obj.lunar
+            })
           }
           else {
+            console.log('测试：', year, month + 1, i)
             obj = {
               day: i,
               show: 'block',
               choose: false,
+              lunar: toLunar.toLunar(year, month + 1, i),
+              // lunar: 'a',
               planArr: []
             }
           }
         }
         else {
+          console.log('测试：', year, month + 1, i)
           obj = {
             day: i,
             show: 'block',
             choose: false,
+            lunar: toLunar.toLunar(year, month + 1, i),
+            // lunar: 'a',
             planArr: []
           }
         }
@@ -436,15 +484,20 @@ Page({
               day: i + 1,
               show: 'block',
               choose: true,
+              lunar: toLunar.toLunar(year, month + 1, i+1),
               planArr: []
             }
             sixArr.push(obj)
+            this.setData({
+              chooseInfo: obj.lunar
+            })
           }
           else {
             let obj = {
               day: i + 1,
               show: 'block',
               choose: false,
+              lunar: toLunar.toLunar(year, month + 1, i+1),
               planArr: []
             }
             sixArr.push(obj)
@@ -455,6 +508,7 @@ Page({
             day: i + 1,
             show: 'block',
             choose: false,
+            lunar: toLunar.toLunar(year, month + 1, i+1),
             planArr: []
           }
           sixArr.push(obj)
@@ -463,13 +517,35 @@ Page({
       }
       //下月月初天数添加
       for (let j = 1; j <= 7-beginDay; j++) {
-        let obj = {
-          day: j,
-          show: 'hide',
-          choose: false,
-          planArr: []
+
+        // 判断下个月是否是明年 month + 1 == 12?
+        // 是：year: year+1, month：1月
+        if(month + 1 == 12) {
+          console.log('明年:' + year+1, '1月');
+          let obj = {
+            day: j,
+            show: 'hide',
+            choose: false,
+            lunar: toLunar.toLunar(year+1, 1, j),
+            planArr: []
+          }
+          sixArr.push(obj)
         }
-        sixArr.push(obj)
+
+        // 不是： year: year, month: month + 2
+        else {
+          console.log('今年:' + year, month+2 + '月');
+          let obj = {
+            day: j,
+            show: 'hide',
+            choose: false,
+            lunar: toLunar.toLunar(year, month+2, j),
+            planArr: []
+          }
+          sixArr.push(obj)
+        }
+
+        
       }
       this.setData({
         sixArr: sixArr
@@ -485,15 +561,20 @@ Page({
               day: i + 1,
               show: 'block',
               choose: true,
+              lunar: toLunar.toLunar(year, month+1, i+1),
               planArr: []
             }
             fiveArr.push(obj)
+            this.setData({
+              chooseInfo: obj.lunar
+            })
           }
           else {
             let obj = {
               day: i + 1,
               show: 'block',
               choose: false,
+              lunar: toLunar.toLunar(year, month + 1, i + 1),
               planArr: []
             }
             fiveArr.push(obj)
@@ -504,6 +585,7 @@ Page({
             day: i + 1,
             show: 'block',
             choose: false,
+            lunar: toLunar.toLunar(year, month + 1, i + 1),
             planArr: []
           }
           fiveArr.push(obj)
@@ -512,13 +594,31 @@ Page({
       }
       //下月月初天数添加
       for (let j = 1; j <= 7 - beginDay; j++) {
-        let obj = {
-          day: j,
-          show: 'hide',
-          choose: false,
-          planArr: []
+
+        // lunar: toLunar.toLunar(year, month + 2, j),
+
+        if (month + 1 == 12) {
+          let obj = {
+            day: j,
+            show: 'hide',
+            choose: false,
+            lunar: toLunar.toLunar(year+1, 1, j),
+            planArr: []
+          }
+          fiveArr.push(obj)
         }
-        fiveArr.push(obj)
+        else {
+          let obj = {
+            day: j,
+            show: 'hide',
+            choose: false,
+            lunar: toLunar.toLunar(year, month + 2, j),
+            planArr: []
+          }
+          fiveArr.push(obj)
+        }
+
+        
       }
       this.setData({
         fiveArr: fiveArr
@@ -527,14 +627,29 @@ Page({
     else if (type == 'next') {
       // 下月一周天数添加
       for (let i = 7 - beginDay; i < 7 - beginDay + 7; i++) {
-        console.log(i);
-        let obj = {
-          day: i + 1,
-          show: 'none',
-          choose: false,
-          planArr: []
+        
+        if(month + 1 == 12) {
+          let obj = {
+            day: i + 1,
+            show: 'none',
+            choose: false,
+            lunar: toLunar.toLunar(year+1, 1, i+1),
+            planArr: []
+          }
+          sixArr.push(obj)
         }
-        sixArr.push(obj)
+        else {
+          let obj = {
+            day: i + 1,
+            show: 'none',
+            choose: false,
+            lunar: toLunar.toLunar(year, month + 2, i+1),
+            planArr: []
+          }
+          sixArr.push(obj)
+        }
+
+        
       }
       this.setData({
         sixArr: sixArr
@@ -566,26 +681,44 @@ Page({
 
     if(arr == 'oneArr') {
       one[index].choose = true; 
+      this.setData({
+        chooseInfo: one[index].lunar
+      })
     }
 
     else if(arr == 'twoArr') {
       two[index].choose = true; 
+      this.setData({
+        chooseInfo: two[index].lunar
+      })
     }
 
     else if (arr == 'threeArr') {
       three[index].choose = true; 
+      this.setData({
+        chooseInfo: three[index].lunar
+      })
     }
 
     else if (arr == 'fourArr') {
       four[index].choose = true; 
+      this.setData({
+        chooseInfo: four[index].lunar
+      })
     }
 
     else if (arr == 'fiveArr') {
       five[index].choose = true; 
+      this.setData({
+        chooseInfo: five[index].lunar
+      })
     }
 
     else if (arr == 'sixArr') {
       six[index].choose = true; 
+      this.setData({
+        chooseInfo: six[index].lunar
+      })
     }
 
     this.setData({

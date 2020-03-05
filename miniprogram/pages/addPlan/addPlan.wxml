@@ -1,79 +1,108 @@
 <!--pages/addPlan/addPlan.wxml-->
 <view class="addPlan">
+  <view class="addPlan-container">
+    <!-- 年份月份 -->
+    <view class="plan-header">
+      <view class="plan-header-year">
+        <picker bindchange="changeYear" value="{{yearArrIndex}}" range="{{yearArr}}">
+          <view class="picker">
+            {{yearArr[yearArrIndex]}}
+          </view>
+        </picker>
+      </view>
+      <view class="plan-header-month">
+        <picker bindchange="changeMonth" value="{{monthArrIndex}}" range="{{monthArr}}">
+          <view class="picker">
+            {{monthArr[monthArrIndex]}}
+          </view>
+        </picker>
+      </view>
+    </view>
 
-  <!-- 年份月份 -->
-  <view class="plan-header">
-    <view class="plan-header-year">
-      <picker bindchange="changeYear" value="{{yearArrIndex}}" range="{{yearArr}}">
-        <view class="picker">
-          {{yearArr[yearArrIndex]}}
+    <!-- 日历主体 -->
+    <view class="plan-wrap">
+
+      <!-- 显示周 -->
+      <view class="plan-wrap-week">
+        <view class="plan-wrap-weeks">一</view>
+        <view class="plan-wrap-weeks">二</view>
+        <view class="plan-wrap-weeks">三</view>
+        <view class="plan-wrap-weeks">四</view>
+        <view class="plan-wrap-weeks">五</view>
+        <view class="plan-wrap-weeks">六</view>
+        <view class="plan-wrap-weeks">日</view>
+      </view>
+
+      <!-- 显示主要日期 -->
+      <!-- 第一周 -->
+      <view class="plan-wrap-day" >
+        <view class="{{item.show == 'block' ? 'plan-wrap-days' : 'plan-wrap-days plan-wrap-days-gray'}}" wx:for='{{oneArr}}' wx:key='index'>
+          <view data-index='{{index}}' data-arr='oneArr' bindtap="changeChoose" class="{{item.choose == true ? 'plan-wrap-choose' : '' }}">
+            <text class="plan-text-day">{{item.day}}</text>
+            <text class="plan-text-lunar">{{item.lunar.lunarDay}}</text>
+          </view>
         </view>
-      </picker>
-    </view>
-    <view class="plan-header-month">
-      <picker bindchange="changeMonth" value="{{monthArrIndex}}" range="{{monthArr}}">
-        <view class="picker">
-          {{monthArr[monthArrIndex]}}
+      </view>
+
+      <!-- 第二周 -->
+      <view class="plan-wrap-day">
+        <view class="{{item.show == 'block' ? 'plan-wrap-days' : 'plan-wrap-days plan-wrap-days-gray'}}" wx:for='{{twoArr}}' wx:key='index'>
+          <view data-index='{{index}}' data-arr='twoArr' bindtap="changeChoose" class="{{item.choose == true ? 'plan-wrap-choose' : '' }}">
+            <text class="plan-text-day">{{item.day}}</text>
+            <text class="plan-text-lunar">{{item.lunar.lunarDay}}</text>
+          </view>
         </view>
-      </picker>
-    </view>
-  </view>
-
-  <!-- 日历主体 -->
-  <view class="plan-wrap">
-
-    <!-- 显示周 -->
-    <view class="plan-wrap-week">
-      <view class="plan-wrap-weeks">一</view>
-      <view class="plan-wrap-weeks">二</view>
-      <view class="plan-wrap-weeks">三</view>
-      <view class="plan-wrap-weeks">四</view>
-      <view class="plan-wrap-weeks">五</view>
-      <view class="plan-wrap-weeks">六</view>
-      <view class="plan-wrap-weeks">日</view>
-    </view>
-
-    <!-- 显示主要日期 -->
-    <!-- 第一周 -->
-    <view class="plan-wrap-day" >
-      <view class="{{item.show == 'block' ? 'plan-wrap-days' : 'plan-wrap-days plan-wrap-days-gray'}}" wx:for='{{oneArr}}' wx:key='index'>
-        <view data-index='{{index}}' data-arr='oneArr' bindtap="changeChoose" class="{{item.choose == true ? 'plan-wrap-choose' : '' }}">{{item.day}}</view>
       </view>
+
+      <!-- 第三周 -->
+      <view class="plan-wrap-day">
+        <view class="{{item.show == 'block' ? 'plan-wrap-days' : 'plan-wrap-days plan-wrap-days-gray'}}" wx:for='{{threeArr}}' wx:key='index'>
+          <view data-index='{{index}}' data-arr='threeArr' bindtap="changeChoose" class="{{item.choose == true ? 'plan-wrap-choose' : '' }}">
+            <text class="plan-text-day">{{item.day}}</text>
+            <text class="plan-text-lunar">{{item.lunar.lunarDay}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 第四周 -->
+      <view class="plan-wrap-day">
+        <view class="{{item.show == 'block' ? 'plan-wrap-days' : 'plan-wrap-days plan-wrap-days-gray'}}" wx:for='{{fourArr}}' wx:key='index'>
+          <view data-index='{{index}}' data-arr='fourArr' bindtap="changeChoose" class="{{item.choose == true ? 'plan-wrap-choose' : '' }}">
+            <text class="plan-text-day">{{item.day}}</text>
+            <text class="plan-text-lunar">{{item.lunar.lunarDay}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 第五周 -->
+      <view class="plan-wrap-day">
+        <view class="{{item.show == 'block' ? 'plan-wrap-days' : 'plan-wrap-days plan-wrap-days-gray'}}" wx:for='{{fiveArr}}' wx:key='index'>
+          <view data-index='{{index}}' data-arr='fiveArr' bindtap="changeChoose" class="{{item.choose == true ? 'plan-wrap-choose' : '' }}">
+            <text class="plan-text-day">{{item.day}}</text>
+            <text class="plan-text-lunar">{{item.lunar.lunarDay}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 第六周 -->
+      <view class="plan-wrap-day">
+        <view class="{{item.show == 'block' ? 'plan-wrap-days' : 'plan-wrap-days plan-wrap-days-gray'}}" wx:for='{{sixArr}}' wx:key='index'>
+          <view data-index='{{index}}' data-arr='sixArr' bindtap="changeChoose" class="{{item.choose == true ? 'plan-wrap-choose' : '' }}">
+            <text class="plan-text-day">{{item.day}}</text>
+            <text class="plan-text-lunar">{{item.lunar.lunarDay}}</text>
+          </view>
+        </view>
+      </view>
+
     </view>
 
-    <!-- 第二周 -->
-    <view class="plan-wrap-day">
-      <view class="{{item.show == 'block' ? 'plan-wrap-days' : 'plan-wrap-days plan-wrap-days-gray'}}" wx:for='{{twoArr}}' wx:key='index'>
-        <view data-index='{{index}}' data-arr='twoArr' bindtap="changeChoose" class="{{item.choose == true ? 'plan-wrap-choose' : '' }}">{{item.day}}</view>
-      </view>
+    <!-- 日历内容 -->
+    <view class="plan-info">
+      {{chooseInfo.lunarYear}}年{{chooseInfo.lunarMonth}}月{{chooseInfo.lunarDay}}
     </view>
 
-    <!-- 第三周 -->
-    <view class="plan-wrap-day">
-      <view class="{{item.show == 'block' ? 'plan-wrap-days' : 'plan-wrap-days plan-wrap-days-gray'}}" wx:for='{{threeArr}}' wx:key='index'>
-        <view data-index='{{index}}' data-arr='threeArr' bindtap="changeChoose" class="{{item.choose == true ? 'plan-wrap-choose' : '' }}">{{item.day}}</view>
-      </view>
-    </view>
-
-    <!-- 第四周 -->
-    <view class="plan-wrap-day">
-      <view class="{{item.show == 'block' ? 'plan-wrap-days' : 'plan-wrap-days plan-wrap-days-gray'}}" wx:for='{{fourArr}}' wx:key='index'>
-        <view data-index='{{index}}' data-arr='fourArr' bindtap="changeChoose" class="{{item.choose == true ? 'plan-wrap-choose' : '' }}">{{item.day}}</view>
-      </view>
-    </view>
-
-    <!-- 第五周 -->
-    <view class="plan-wrap-day">
-      <view class="{{item.show == 'block' ? 'plan-wrap-days' : 'plan-wrap-days plan-wrap-days-gray'}}" wx:for='{{fiveArr}}' wx:key='index'>
-        <view data-index='{{index}}' data-arr='fiveArr' bindtap="changeChoose" class="{{item.choose == true ? 'plan-wrap-choose' : '' }}">{{item.day}}</view>
-      </view>
-    </view>
-
-    <!-- 第六周 -->
-    <view class="plan-wrap-day">
-      <view class="{{item.show == 'block' ? 'plan-wrap-days' : 'plan-wrap-days plan-wrap-days-gray'}}" wx:for='{{sixArr}}' wx:key='index'>
-        <view data-index='{{index}}' data-arr='sixArr' bindtap="changeChoose" class="{{item.choose == true ? 'plan-wrap-choose' : '' }}">{{item.day}}</view>
-      </view>
+    <view class="plan-footer">
+      <button hover-class='chooseBtn-hover' class='update' bindtap="addPlan">添加</button>
     </view>
 
   </view>

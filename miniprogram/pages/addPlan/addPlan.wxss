@@ -2,6 +2,13 @@
 .addPlan {
   width: 100%;
   height: 100%;
+  overflow-y: auto;
+}
+
+.addPlan-container {
+  width: 100%;
+  height: auto;
+  padding-bottom: 30rpx;
 }
 
 .plan-header {
@@ -50,9 +57,10 @@
 }
 
 .plan-wrap-week .plan-wrap-weeks {
-  width: 14.285714%;
+  width: 13%;
+  margin-right: 1.5%;
   text-align: center;
-  font-size: 22rpx;
+  font-size: 20rpx;
   color: rgb(158, 158, 158)
 }
 
@@ -66,7 +74,8 @@
 }
 
 .plan-wrap-day .plan-wrap-days {
-  width: 14.285714%;
+  width: 13%;
+  margin-right: 1.5%;
   text-align: center;
   height: 100%;
   line-height: 90rpx;
@@ -74,11 +83,62 @@
 }
 
 .plan-wrap-day .plan-wrap-days-gray {
-  color: rgba(140, 140, 140, 1)
+  color: rgba(161, 161, 161, 0.8)
 } 
 
 .plan-wrap-day .plan-wrap-choose {
   background-color: #f47695;
   color: white;
   border-radius: 12rpx;
+}
+
+.plan-wrap-day .plan-wrap-days view {
+   display: flex;
+   /* flex-flow: column wrap; 
+   align-items: center; */
+   width: 100%;
+   height: 100%;
+   position: relative;
+}
+
+.plan-wrap-day .plan-wrap-days .plan-text-day {
+  width: 100%;
+  height: 50%;
+  display: inline-block;
+  line-height: 55rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.plan-wrap-day .plan-wrap-days .plan-text-lunar {
+  width: 100%;
+  height: 50%;
+  display: inline-block;
+  line-height: 30rpx;
+  font-size: 18rpx;
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+.plan-info {
+  width: 94%;
+  position: relative;
+  left: 3%;
+  padding-top: 10rpx;
+  height: 680rpx;
+}
+
+
+.update {
+  background-color: #f47695;
+  color: white;
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.1);
+  width: 92%;
+  transition: all .3s ease;
+}
+
+.update::after {
+  border: none;
 }
