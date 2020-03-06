@@ -138,8 +138,8 @@
   position: absolute;
   width: auto;
   height: 60rpx;
-  right: -10rpx;
-  bottom: -30rpx;
+  right: 0rpx;
+  bottom: -10rpx;
   text-align: center;
   line-height: 60rpx;
   color: rgb(182, 182, 182);

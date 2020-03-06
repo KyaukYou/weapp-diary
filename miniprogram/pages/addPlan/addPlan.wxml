@@ -98,7 +98,76 @@
 
     <!-- 日历内容 -->
     <view class="plan-info">
-      {{chooseInfo.lunarYear}}年{{chooseInfo.lunarMonth}}月{{chooseInfo.lunarDay}}
+      <!-- {{chooseInfo.lunarYear}}年{{chooseInfo.lunarMonth}}月{{chooseInfo.lunarDay}} -->
+
+      <!-- 状态 -->
+      <view class="plan-list">
+        <view>当前状态:</view>
+        <view>
+        <picker bindchange="bindPickerChange" value="{{status}}" range="{{statusArr}}">
+          <view class="picker">
+            {{statusArr[status]}}
+          </view>
+        </picker>  
+        </view>
+      </view>
+
+      <!-- 是否提醒 -->
+      <view class="plan-list">
+        <view>是否提醒:</view>
+        <view>
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <view class="picker">
+            {{array[index]}}
+          </view>
+        </picker>  
+        </view>
+      </view>
+
+      <!-- 重要等级 -->
+      <view class="plan-list">
+        <view>重要等级:</view>
+        <view>
+        <picker bindchange="bindPickerChange" value="{{level}}" range="{{levelArr}}">
+          <view class="picker">
+            {{levelArr[level]}}
+          </view>
+        </picker>  
+        </view>
+      </view>
+
+      <!-- 开始时间 -->
+      <view class="plan-list">
+        <view>开始时间:</view>
+        <view>
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <view class="picker">
+            {{array[index]}}
+          </view>
+        </picker>  
+        </view>
+      </view>
+
+      <!-- 结束时间 -->
+      <view class="plan-list">
+        <view>结束时间:</view>
+        <view>
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <view class="picker">
+            {{array[index]}}
+          </view>
+        </picker>  
+        </view>
+      </view>
+
+
+      <!-- 内容 -->
+      <view class="plan-textarea">
+      
+      </view>
+
+
+
     </view>
 
     <view class="plan-footer">

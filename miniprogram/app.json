@@ -2,8 +2,11 @@
   "cloud": true,
   "pages": [    
     "pages/addPlan/addPlan",
-    "pages/index/index",
     "pages/plan/plan",
+    
+    "pages/index/index",
+    
+    
     
     
     "pages/my/my",

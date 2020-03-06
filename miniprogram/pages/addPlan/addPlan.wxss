@@ -123,7 +123,7 @@
 }
 
 .plan-info {
-  width: 94%;
+  width: 92%;
   position: relative;
   left: 3%;
   padding-top: 10rpx;

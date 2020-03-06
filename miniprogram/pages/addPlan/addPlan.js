@@ -18,7 +18,15 @@ Page({
     fiveArr: [],
     sixArr: [],
     ifAdd: true,
-    chooseInfo: {}
+    chooseInfo: {},
+    status: 1,
+    notice: true,
+    level: 1,
+    startTime: '2020-03-06 16:16',
+    endTime: '2020-03-07 16:16',
+    statusArr: ['未开始','进行中','已结束'],
+    levelArr: ['普通','一般','重要','很重要','非常重要']  
+    
   },
 
   // 初始化年份
@@ -340,6 +348,8 @@ Page({
           // console.log('去年:' + year - 1, 12+'月');
 
           let obj = {
+            year: year-1,
+            month: 12,
             day: prevDays - i,
             show: 'hide',
             choose: false,
@@ -354,6 +364,8 @@ Page({
           // console.log('今年:' + year, month + '月');
 
           let obj = {
+            year: year,
+            month: month,
             day: prevDays - i,
             show: 'hide',
             choose: false,
@@ -370,6 +382,8 @@ Page({
         if(b == 'yes') {
           if (7 - j + 1 == d) {
             let obj = {
+              year: year,
+              month: month + 1,
               day: 7 - j + 1,
               show: 'block',
               choose: true,
@@ -383,6 +397,8 @@ Page({
           }
           else {
             let obj = {
+              year: year,
+              month: month + 1,
               day: 7 - j + 1,
               show: 'block',
               choose: false,
@@ -393,6 +409,8 @@ Page({
           }
         }else {
           let obj = {
+            year: year,
+            month: month + 1,
             day: 7 - j + 1,
             show: 'block',
             choose: false,
@@ -413,6 +431,8 @@ Page({
         if(b == 'yes') {
           if(i == d) {
             obj = {
+              year: year,
+              month: month + 1,
               day: i,
               show: 'block',
               choose: true,
@@ -425,8 +445,10 @@ Page({
             })
           }
           else {
-            console.log('测试：', year, month + 1, i)
+            // console.log('测试：', year, month + 1, i)
             obj = {
+              year: year,
+              month: month + 1,
               day: i,
               show: 'block',
               choose: false,
@@ -437,8 +459,10 @@ Page({
           }
         }
         else {
-          console.log('测试：', year, month + 1, i)
+          // console.log('测试：', year, month + 1, i)
           obj = {
+            year: year,
+            month: month + 1,
             day: i,
             show: 'block',
             choose: false,
@@ -481,6 +505,8 @@ Page({
         if(b == 'yes') {
           if(d == i+1) {
             let obj = {
+              year: year,
+              month: month + 1,
               day: i + 1,
               show: 'block',
               choose: true,
@@ -494,6 +520,8 @@ Page({
           }
           else {
             let obj = {
+              year: year,
+              month: month + 1,
               day: i + 1,
               show: 'block',
               choose: false,
@@ -505,6 +533,8 @@ Page({
         }
         else {
           let obj = {
+            year: year,
+            month: month + 1,
             day: i + 1,
             show: 'block',
             choose: false,
@@ -521,8 +551,10 @@ Page({
         // 判断下个月是否是明年 month + 1 == 12?
         // 是：year: year+1, month：1月
         if(month + 1 == 12) {
-          console.log('明年:' + year+1, '1月');
+          // console.log('明年:' + year+1, '1月');
           let obj = {
+            year: year + 1,
+            month: 1,
             day: j,
             show: 'hide',
             choose: false,
@@ -534,8 +566,10 @@ Page({
 
         // 不是： year: year, month: month + 2
         else {
-          console.log('今年:' + year, month+2 + '月');
+          // console.log('今年:' + year, month+2 + '月');
           let obj = {
+            year: year,
+            month: month + 2,
             day: j,
             show: 'hide',
             choose: false,
@@ -558,6 +592,8 @@ Page({
         if(b == 'yes') {
           if(d == i+1) {
             let obj = {
+              year: year,
+              month: month + 1,
               day: i + 1,
               show: 'block',
               choose: true,
@@ -571,6 +607,8 @@ Page({
           }
           else {
             let obj = {
+              year: year,
+              month: month + 1,
               day: i + 1,
               show: 'block',
               choose: false,
@@ -582,6 +620,8 @@ Page({
         }
         else {
           let obj = {
+            year: year,
+            month: month + 1,
             day: i + 1,
             show: 'block',
             choose: false,
@@ -599,6 +639,8 @@ Page({
 
         if (month + 1 == 12) {
           let obj = {
+            year: year+1,
+            month: 1,
             day: j,
             show: 'hide',
             choose: false,
@@ -609,6 +651,8 @@ Page({
         }
         else {
           let obj = {
+            year: year,
+            month: month + 2,
             day: j,
             show: 'hide',
             choose: false,
@@ -630,6 +674,8 @@ Page({
         
         if(month + 1 == 12) {
           let obj = {
+            year: year + 1,
+            month: 1,
             day: i + 1,
             show: 'none',
             choose: false,
@@ -640,6 +686,8 @@ Page({
         }
         else {
           let obj = {
+            year: year,
+            month: month + 2,
             day: i + 1,
             show: 'none',
             choose: false,
@@ -684,6 +732,8 @@ Page({
       this.setData({
         chooseInfo: one[index].lunar
       })
+      this.getUserPlan(one[index])
+      this.getDayInfo(one[index])
     }
 
     else if(arr == 'twoArr') {
@@ -691,6 +741,8 @@ Page({
       this.setData({
         chooseInfo: two[index].lunar
       })
+      this.getUserPlan(two[index])
+      this.getDayInfo(two[index])
     }
 
     else if (arr == 'threeArr') {
@@ -698,6 +750,8 @@ Page({
       this.setData({
         chooseInfo: three[index].lunar
       })
+      this.getUserPlan(three[index])
+      this.getDayInfo(three[index])
     }
 
     else if (arr == 'fourArr') {
@@ -705,6 +759,8 @@ Page({
       this.setData({
         chooseInfo: four[index].lunar
       })
+      this.getUserPlan(four[index])
+      this.getDayInfo(four[index])
     }
 
     else if (arr == 'fiveArr') {
@@ -712,6 +768,8 @@ Page({
       this.setData({
         chooseInfo: five[index].lunar
       })
+      this.getUserPlan(five[index])
+      this.getDayInfo(five[index])
     }
 
     else if (arr == 'sixArr') {
@@ -719,6 +777,8 @@ Page({
       this.setData({
         chooseInfo: six[index].lunar
       })
+      this.getUserPlan(six[index])
+      this.getDayInfo(six[index])
     }
 
     this.setData({
@@ -729,6 +789,16 @@ Page({
       fiveArr: five,
       sixArr: six,
     })
+
+    
+
+  },
+
+  getUserPlan(val) {
+
+  },
+
+  getDayInfo(val) {
 
   },
 
