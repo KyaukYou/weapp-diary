@@ -2,6 +2,11 @@
   "navigationBarTitleText": "添加计划",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "wux-toptips": "../../dist/toptips/index"
+    "wux-toptips": "../../dist/toptips/index",
+    "van-field": "../../module/field/index",
+    "van-cell": "../../module/cell/index",
+    "van-cell-group": "../../module/cell-group/index",
+    "van-button": "../../module/button/index",
+    "van-switch": "../../module/switch/index"
   }
 }

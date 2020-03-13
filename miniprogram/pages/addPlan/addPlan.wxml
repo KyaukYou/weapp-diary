@@ -20,7 +20,7 @@
     </view>
 
     <!-- 日历主体 -->
-    <view class="plan-wrap">
+    <view class="plan-wrap calBG">
 
       <!-- 显示周 -->
       <view class="plan-wrap-week">
@@ -101,69 +101,87 @@
       <!-- {{chooseInfo.lunarYear}}年{{chooseInfo.lunarMonth}}月{{chooseInfo.lunarDay}} -->
 
       <!-- 状态 -->
-      <view class="plan-list">
-        <view>当前状态:</view>
-        <view>
-        <picker bindchange="bindPickerChange" value="{{status}}" range="{{statusArr}}">
-          <view class="picker">
-            {{statusArr[status]}}
-          </view>
-        </picker>  
-        </view>
-      </view>
-
-      <!-- 是否提醒 -->
-      <view class="plan-list">
-        <view>是否提醒:</view>
-        <view>
-        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-          <view class="picker">
-            {{array[index]}}
-          </view>
-        </picker>  
+      <view class="plan-list bg1">
+        <view class="plan-list-view1">当前状态</view>
+        <view class="plan-list-view2">
+          <picker bindchange="bindPickerChange1" value="{{status}}" range="{{statusArr}}">
+            <view class="picker">
+              {{statusArr[status]}} <text>▼</text> 
+            </view>
+          </picker>  
         </view>
       </view>
 
       <!-- 重要等级 -->
-      <view class="plan-list">
-        <view>重要等级:</view>
-        <view>
-        <picker bindchange="bindPickerChange" value="{{level}}" range="{{levelArr}}">
-          <view class="picker">
-            {{levelArr[level]}}
-          </view>
-        </picker>  
+      <view class="plan-list bg2">
+        <view class="plan-list-view1">重要等级</view>
+        <view class="plan-list-view2">
+          <picker bindchange="bindPickerChange2" value="{{level}}" range="{{levelArr}}">
+            <view class="picker">
+              {{levelArr[level]}}<text>▼</text> 
+            </view>
+          </picker>  
+        </view>
+      </view>
+
+      <!-- 是否提醒 -->
+      <view class="plan-list bg3">
+        <view class="plan-list-view1">是否提醒</view>
+        <view class="plan-list-view2">
+          <van-switch slot='button' type='warning' class='notice-switch' checked="{{noticeBol}}" size='24px' bind:change="changeNotice" />
         </view>
       </view>
 
       <!-- 开始时间 -->
-      <view class="plan-list">
-        <view>开始时间:</view>
-        <view>
-        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-          <view class="picker">
-            {{array[index]}}
+      <view class="plan-list plan-list-time bg4">
+        <view class="plan-list-view1">开始时间</view>
+        <view class="plan-list-view2">
+          <view class="plan-list-view3">
+            <picker mode='date' bindchange="bindPickerChange3" value="{{startDate}}">
+              <view class="picker">
+                {{startDate}}
+              </view>
+            </picker>  
           </view>
-        </picker>  
+
+          <view class="plan-list-view4">
+            <picker mode='time' bindchange="bindPickerChange4" value="{{startTime}}">
+              <view class="picker">
+                {{startTime}}
+              </view>
+            </picker>  
+          </view>
         </view>
       </view>
 
       <!-- 结束时间 -->
-      <view class="plan-list">
-        <view>结束时间:</view>
-        <view>
-        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-          <view class="picker">
-            {{array[index]}}
+      <view class="plan-list plan-list-time plan-list-time1 bg5">
+        <view class="plan-list-view1">结束时间</view>
+        <view class="plan-list-view2">
+          <view class="plan-list-view3">
+            <picker mode='date' bindchange="bindPickerChange5" value="{{endDate}}">
+              <view class="picker">
+                {{endDate}}
+              </view>
+            </picker>  
           </view>
-        </picker>  
+
+          <view class="plan-list-view4">
+            <picker mode='time' bindchange="bindPickerChange6" value="{{endTime}}">
+              <view class="picker">
+                {{endTime}}
+              </view>
+            </picker>  
+          </view>
         </view>
       </view>
 
 
       <!-- 内容 -->
-      <view class="plan-textarea">
-      
+      <view class="plan-textarea bg6">
+        <textarea placeholder-class='textarea-p' placeholder="请输入您的计划安排...">
+        
+        </textarea>
       </view>
 
 

@@ -19,14 +19,67 @@ Page({
     sixArr: [],
     ifAdd: true,
     chooseInfo: {},
-    status: 1,
-    notice: true,
-    level: 1,
-    startTime: '2020-03-06 16:16',
-    endTime: '2020-03-07 16:16',
+    status: 0,
+    noticeBol: true,
+    level: 0,
+    startTime: '16:16',
+    startDate: '2020-03-07',
+    endTime: '16:16',
+    endDate: '2020-03-07',
     statusArr: ['未开始','进行中','已结束'],
     levelArr: ['普通','一般','重要','很重要','非常重要']  
     
+  },
+
+  // 修改当前状态
+  bindPickerChange1(e) {
+    // console.log(e);
+    this.setData({
+      status: e.detail.value
+    })
+  },
+
+  // 修改提醒状态
+  changeNotice(e) {
+    console.log(e);
+    this.setData({
+      noticeBol: e.detail
+    })
+  },
+
+
+  // 修改重要等级
+  bindPickerChange2(e) {
+    // console.log(e);
+    this.setData({
+      level: e.detail.value
+    })
+  },
+
+  // 修改开始日期
+  bindPickerChange3(e) {
+    this.setData({
+      startDate: e.detail.value
+    })
+  },
+  // 修改开始时间
+  bindPickerChange4(e) {
+    this.setData({
+      startTime: e.detail.value
+    })
+  },
+
+  // 修改结束日期
+  bindPickerChange5(e) {
+    this.setData({
+      endDate: e.detail.value
+    })
+  },
+  // 修改结束时间
+  bindPickerChange6(e) {
+    this.setData({
+      endTime: e.detail.value
+    })
   },
 
   // 初始化年份
