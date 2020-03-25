@@ -48,6 +48,7 @@
   margin-bottom: 20rpx;
   border-radius: 8rpx;
   padding-bottom: 6rpx;
+  /* box-shadow: 0 0 4rpx rgba(66, 66, 66, 0.8); */
 }
 
 .plan-wrap-week {
@@ -181,7 +182,7 @@
   height: 50rpx;
   line-height: 50rpx;
   text-align: center;
-  color: white;
+  /* color: white; */
   opacity: 0.8;
 }
 
@@ -190,10 +191,10 @@
   height: 110rpx;
   line-height: 110rpx;
   text-align: right;
-  /* color: #f47695; */
+  color: #f47695;
   text-align: center;
   box-sizing: border-box;
-  color: white;
+  /* color: white; */
   /* box-shadow: 0 0rpx 4rpx rgba(118, 118, 118, 0.3); */
 }
 
@@ -202,10 +203,10 @@
   height: 110rpx;
   line-height: 110rpx;
   text-align: right;
-  /* color: #f47695; */
+  color: #f47695;
   text-align: center;
   box-sizing: border-box;
-  color: white;
+  /* color: white; */
   display: inline-block;
   text-align: right;
   padding-right: 8rpx;
@@ -216,10 +217,10 @@
   height: 110rpx;
   line-height: 110rpx;
   text-align: right;
-  /* color: #f47695; */
+  color: #f47695;
   text-align: center;
   box-sizing: border-box;
-  color: white;
+  /* color: white; */
   display: inline-block;
   text-align: left;
 }
@@ -262,13 +263,41 @@
   height: 100%;
   box-sizing: border-box;
   padding: 12rpx 14rpx;
-  color: white;
+  color: #f47695;
   word-spacing: 2rpx;
   letter-spacing: 2rpx;
 }
 
 .textarea-p {
-  color: rgba(255, 255, 255, 0.671);
+  color: #f47696b4;
+}
+
+/* 加载动画 */
+.plan-wrap-loading {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255,255,255,0.8);
+  z-index: 999;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plan-wrap-loading image {
+  width: 90rpx;
+  height: 90rpx;
+
+}
+
+
+.bgAll {
+  color: black;
+  /* background-color: rgb(116, 209, 248); */
+  /* box-shadow: 0 0 4rpx rgb(116, 209, 248); */
 }
 
 .bg1 {

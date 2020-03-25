@@ -20,7 +20,11 @@
     </view>
 
     <!-- 日历主体 -->
-    <view class="plan-wrap calBG">
+    <view class="plan-wrap bgAll">
+
+      <view class="plan-wrap-loading" wx:if='{{loadBol}}'>
+        <image src="../../images/load.gif"></image>
+      </view> 
 
       <!-- 显示周 -->
       <view class="plan-wrap-week">
@@ -101,7 +105,7 @@
       <!-- {{chooseInfo.lunarYear}}年{{chooseInfo.lunarMonth}}月{{chooseInfo.lunarDay}} -->
 
       <!-- 状态 -->
-      <view class="plan-list bg1">
+      <view class="plan-list bgAll">
         <view class="plan-list-view1">当前状态</view>
         <view class="plan-list-view2">
           <picker bindchange="bindPickerChange1" value="{{status}}" range="{{statusArr}}">
@@ -113,7 +117,7 @@
       </view>
 
       <!-- 重要等级 -->
-      <view class="plan-list bg2">
+      <view class="plan-list bgAll">
         <view class="plan-list-view1">重要等级</view>
         <view class="plan-list-view2">
           <picker bindchange="bindPickerChange2" value="{{level}}" range="{{levelArr}}">
@@ -125,7 +129,7 @@
       </view>
 
       <!-- 是否提醒 -->
-      <view class="plan-list bg3">
+      <view class="plan-list bgAll">
         <view class="plan-list-view1">是否提醒</view>
         <view class="plan-list-view2">
           <van-switch slot='button' type='warning' class='notice-switch' checked="{{noticeBol}}" size='24px' bind:change="changeNotice" />
@@ -133,7 +137,7 @@
       </view>
 
       <!-- 开始时间 -->
-      <view class="plan-list plan-list-time bg4">
+      <view class="plan-list plan-list-time bgAll">
         <view class="plan-list-view1">开始时间</view>
         <view class="plan-list-view2">
           <view class="plan-list-view3">
@@ -155,7 +159,7 @@
       </view>
 
       <!-- 结束时间 -->
-      <view class="plan-list plan-list-time plan-list-time1 bg5">
+      <view class="plan-list plan-list-time plan-list-time1 bgAll">
         <view class="plan-list-view1">结束时间</view>
         <view class="plan-list-view2">
           <view class="plan-list-view3">
@@ -178,8 +182,8 @@
 
 
       <!-- 内容 -->
-      <view class="plan-textarea bg6">
-        <textarea placeholder-class='textarea-p' placeholder="请输入您的计划安排...">
+      <view class="plan-textarea bgAll">
+        <textarea bindinput="changeTextArea" placeholder-class='textarea-p' placeholder="请输入您的计划安排...">
         
         </textarea>
       </view>
@@ -189,7 +193,7 @@
     </view>
 
     <view class="plan-footer">
-      <button hover-class='chooseBtn-hover' class='update' bindtap="addPlan">添加</button>
+      <button hover-class='chooseBtn-hover' class='update' bindtap="uploadPlan">添加</button>
     </view>
 
   </view>

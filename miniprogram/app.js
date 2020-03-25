@@ -169,6 +169,7 @@ App({
                       starArr: [],
                       fans: [],
                       watch: [],
+                      plan: [],
                       backgroundImg: {
                         url: ''
                       },

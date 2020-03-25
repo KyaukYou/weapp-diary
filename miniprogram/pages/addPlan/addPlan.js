@@ -27,8 +27,9 @@ Page({
     endTime: '16:16',
     endDate: '2020-03-07',
     statusArr: ['未开始','进行中','已结束'],
-    levelArr: ['普通','一般','重要','很重要','非常重要']  
-    
+    levelArr: ['普通','一般','重要','很重要','非常重要'],  
+    textArea: "",
+    loadBol: true  
   },
 
   // 修改当前状态
@@ -79,6 +80,14 @@ Page({
   bindPickerChange6(e) {
     this.setData({
       endTime: e.detail.value
+    })
+  },
+
+  // 获得textarea
+  changeTextArea(e) {
+    console.log(e)
+    this.setData({
+      textArea: e.detail.value
     })
   },
 
@@ -137,13 +146,15 @@ Page({
 
   changeYear(e) {
     this.setData({
-      yearArrIndex: e.detail.value
+      yearArrIndex: e.detail.value,
+      loadBol: true
     })
     this.getMonthDetail()
   },
   changeMonth(e) {
     this.setData({
-      monthArrIndex: e.detail.value
+      monthArrIndex: e.detail.value,
+      loadBol: true
     })
     this.getMonthDetail()
   },
@@ -757,6 +768,15 @@ Page({
       })
     }
 
+    let timer = null;
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      this.setData({
+        loadBol: false
+      });
+      clearTimeout(timer);
+    },500)
+
     // console.log(oneArr, twoArr, threeArr, fourArr, fiveArr, sixArr);
 
   },
@@ -860,6 +880,28 @@ Page({
       arr[i].choose = false;
     }
     return arr;
+  },
+
+  uploadPlan() {
+    let openid = wx.getStorageSync('openid');
+
+    wx.colud.callFunction({
+      name: 'uploadPlan',
+      data: {
+        openid: openid,
+        val: {
+          a: 'a',
+          b: 'b'
+        }
+      },
+      success(res) {
+
+      },
+      fail(res) {
+
+      }
+    })
+    
   },
 
   /**
