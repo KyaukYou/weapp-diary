@@ -19,6 +19,7 @@ Page({
     sixArr: [],
     ifAdd: true,
     chooseInfo: {},
+    chooseInfoTrue: "",
     status: 0,
     noticeBol: true,
     level: 0,
@@ -456,7 +457,8 @@ Page({
             }
             oneArr.push(obj);
             this.setData({
-              chooseInfo: obj.lunar
+              chooseInfo: obj.lunar,
+              chooseInfoTrue: `${year},${month+1},${7 - j + 1}`
             })
           }
           else {
@@ -505,7 +507,8 @@ Page({
               planArr: []
             }
             this.setData({
-              chooseInfo: obj.lunar
+              chooseInfo: obj.lunar,
+              chooseInfoTrue: `${year},${month + 1},${i}`
             })
           }
           else {
@@ -579,7 +582,8 @@ Page({
             }
             sixArr.push(obj)
             this.setData({
-              chooseInfo: obj.lunar
+              chooseInfo: obj.lunar,
+              chooseInfoTrue: `${year},${month + 1},${i+1}`
             })
           }
           else {
@@ -666,7 +670,8 @@ Page({
             }
             fiveArr.push(obj)
             this.setData({
-              chooseInfo: obj.lunar
+              chooseInfo: obj.lunar,
+              chooseInfoTrue: `${year},${month+1},${i+1}`
             })
           }
           else {
@@ -803,7 +808,8 @@ Page({
     if(arr == 'oneArr') {
       one[index].choose = true; 
       this.setData({
-        chooseInfo: one[index].lunar
+        chooseInfo: one[index].lunar,
+        chooseInfoTrue: one[index].year + ',' + one[index].month + ',' + one[index].day
       })
       this.getUserPlan(one[index])
       this.getDayInfo(one[index])
@@ -812,7 +818,8 @@ Page({
     else if(arr == 'twoArr') {
       two[index].choose = true; 
       this.setData({
-        chooseInfo: two[index].lunar
+        chooseInfo: two[index].lunar,
+        chooseInfoTrue: two[index].year + ',' + two[index].month + ',' + two[index].day
       })
       this.getUserPlan(two[index])
       this.getDayInfo(two[index])
@@ -821,7 +828,8 @@ Page({
     else if (arr == 'threeArr') {
       three[index].choose = true; 
       this.setData({
-        chooseInfo: three[index].lunar
+        chooseInfo: three[index].lunar,
+        chooseInfoTrue: three[index].year + ',' + three[index].month + ',' + three[index].day
       })
       this.getUserPlan(three[index])
       this.getDayInfo(three[index])
@@ -830,7 +838,8 @@ Page({
     else if (arr == 'fourArr') {
       four[index].choose = true; 
       this.setData({
-        chooseInfo: four[index].lunar
+        chooseInfo: four[index].lunar,
+        chooseInfoTrue: four[index].year + ',' + four[index].month + ',' + four[index].day
       })
       this.getUserPlan(four[index])
       this.getDayInfo(four[index])
@@ -839,7 +848,8 @@ Page({
     else if (arr == 'fiveArr') {
       five[index].choose = true; 
       this.setData({
-        chooseInfo: five[index].lunar
+        chooseInfo: five[index].lunar,
+        chooseInfoTrue: five[index].year + ',' + five[index].month + ',' + five[index].day
       })
       this.getUserPlan(five[index])
       this.getDayInfo(five[index])
@@ -848,7 +858,8 @@ Page({
     else if (arr == 'sixArr') {
       six[index].choose = true; 
       this.setData({
-        chooseInfo: six[index].lunar
+        chooseInfo: six[index].lunar,
+        chooseInfoTrue: six[index].year + ',' + six[index].month + ',' + six[index].day
       })
       this.getUserPlan(six[index])
       this.getDayInfo(six[index])
@@ -883,24 +894,58 @@ Page({
   },
 
   uploadPlan() {
+    // 判断是否有openid
+    // 暂时不做
     let openid = wx.getStorageSync('openid');
 
-    wx.colud.callFunction({
-      name: 'uploadPlan',
-      data: {
-        openid: openid,
-        val: {
-          a: 'a',
-          b: 'b'
-        }
-      },
-      success(res) {
-
-      },
-      fail(res) {
-
+    // 判断是否填写完整
+    if(this.data.textArea == '') {
+      wx.showToast({
+        image: '../../images/error.png',
+        title: '请填写完整',
+      })
+    }
+    else {
+      console.log(1)
+      let obj = {
+        date1: this.data.chooseInfoTrue,
+        date2: this.data.chooseInfo,
+        status: this.data.status,
+        level: this.data.level,
+        notice: this.data.notice,
+        startTime: this.data.startTime,
+        endTime: this.data.endTime,
+        textArea: this.data.textArea,
+        time: new Date().getTime()
       }
-    })
+
+      wx.cloud.callFunction({
+        name: 'uploadPlan',
+        data: {
+          openid: openid,
+          val: obj
+        },
+        success(res) {
+          console.log(res)
+          let timer = null;
+          wx.showToast({
+            title: '添加成功',
+          })
+          timer = setTimeout(() => {
+            wx.navigateBack({
+              delta: 1
+            })
+          },1000)
+        },
+        fail(res) {
+          console.log(res)
+        }
+      })
+
+    }
+
+
+
     
   },
 

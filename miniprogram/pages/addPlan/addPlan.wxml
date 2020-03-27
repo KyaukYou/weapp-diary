@@ -140,13 +140,13 @@
       <view class="plan-list plan-list-time bgAll">
         <view class="plan-list-view1">开始时间</view>
         <view class="plan-list-view2">
-          <view class="plan-list-view3">
+          <!-- <view class="plan-list-view3">
             <picker mode='date' bindchange="bindPickerChange3" value="{{startDate}}">
               <view class="picker">
                 {{startDate}}
               </view>
             </picker>  
-          </view>
+          </view> -->
 
           <view class="plan-list-view4">
             <picker mode='time' bindchange="bindPickerChange4" value="{{startTime}}">
@@ -162,13 +162,13 @@
       <view class="plan-list plan-list-time plan-list-time1 bgAll">
         <view class="plan-list-view1">结束时间</view>
         <view class="plan-list-view2">
-          <view class="plan-list-view3">
+          <!-- <view class="plan-list-view3">
             <picker mode='date' bindchange="bindPickerChange5" value="{{endDate}}">
               <view class="picker">
                 {{endDate}}
               </view>
             </picker>  
-          </view>
+          </view> -->
 
           <view class="plan-list-view4">
             <picker mode='time' bindchange="bindPickerChange6" value="{{endTime}}">
