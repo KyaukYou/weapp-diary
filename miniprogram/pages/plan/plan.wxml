@@ -1,16 +1,16 @@
 <view class="plan">
 
-  <view class="plan-header">
+  <!-- <view class="plan-header">
     <button hover-class='planBtn-hover' class='planBtn'>状态排序</button>
     <button hover-class='planBtn-hover' class='planBtn'>时间排序</button>
     <button hover-class='planBtn-hover' class='planBtn'>等级排序</button>
-  </view>
+  </view> -->
 
   <view class="plan-center">
     <view class="plan-center-container">
-      <view class="plan-list" wx:for='{{planArr}}' wx:key='index'>
-        <view class="plan-list-left">
-          <image src='../../images/planOk.png'></image>
+      <view data-id="{{item.id}}" bindtap="editPlan" class="plan-list {{'plan-list-level'+item.level}} " wx:for='{{planArr}}' wx:key='index'>
+        <view class="plan-list-left" bindtap="changeStstus" data-id="{{item.id}}">
+          <image src='{{item.status == 0 ? "../../images/star_no.png" : "../../images/star_yes.png"}}'></image>
         </view>
         <view class="plan-list-center">
           <view class="plan-list-center1">{{item.textArea}}</view>
@@ -19,7 +19,7 @@
             <view class="plan-list-center-child2">重要等级：{{levelArr[item.level]}}</view>
           </view>
         </view>
-        <view class="plan-list-right">
+        <view class="plan-list-right" bindtap="delPlan" data-id="{{item.id}}">
           <image src="../../images/delPlan.png"></image>
         </view>
       </view>

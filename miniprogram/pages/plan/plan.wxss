@@ -20,7 +20,7 @@
 
 .plan-center {
   position: absolute;
-  top: 100rpx;
+  top: 18rpx;
   bottom: 150rpx;
   width: 100%;
   left: 0;
@@ -66,13 +66,34 @@
 }
 
 .plan-list {
-  width: 92%;
-  height: 150rpx;
+  width: 94%;
+  height: 120rpx;
   overflow: hidden;
-  background-color: rgba(250, 250, 250, 1);
+  background-color: rgb(241, 241, 241);
   margin: 0 auto 20rpx auto;
   position: relative;
 }
+
+/* .plan-list-level0 {
+  border: 2rpx solid #f4769688;
+}
+
+.plan-list-level1 {
+  border: 2rpx solid #f47696ad;
+}
+
+.plan-list-level2 {
+  border: 2rpx solid #f47696d5;
+} 
+
+.plan-list-level3 {
+  border: 2rpx solid #f47696ea;    
+}
+
+.plan-list-level4 {
+  border: 2rpx solid #f47696;
+} */
+
 
 .plan-center-wrap {
   width: 100%;
@@ -88,7 +109,7 @@
   top: 0;
   bottom: 0;
   left: 0;
-  width: 70rpx;
+  width: 64rpx;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,15 +124,17 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 80rpx;
-  right: 88rpx;
+  left: 70rpx;
+  right: 0;
+  z-index: 98;
 }
 
 .plan-list-center1 {
-  width: 99%;
-  height: 90rpx;
+  width: 92%;
+  height: 60rpx;
+  line-height: 60rpx;
   position: relative;
-  top: 12rpx;
+  top: 8rpx;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
@@ -129,7 +152,7 @@
   justify-content: space-around; */
   position: relative;
   color: #797878;
-  top: 14rpx;
+  top: 18rpx;
 } 
 
 
@@ -149,22 +172,25 @@
   right: 0;
   top: 0;
   bottom: 0;
+  text-align: left;
+  width: 218rpx;
 }
 
 .plan-list-right {
   position: absolute;
   top: 0;
-  bottom: 0;
   right: 0;
-  width: 86rpx;
+  height: 35rpx;
+  width: 35rpx;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 99;
 }
 
 .plan-list-right image {
-  width: 50rpx;
-  height: 50rpx;
+  width: 35rpx;
+  height: 35rpx;
 }
 
 /* 黄色按钮样式 */

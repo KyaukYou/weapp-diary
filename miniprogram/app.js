@@ -220,6 +220,6 @@ App({
     userInfo: {},
     login: false,
     controlId: 'W87jRg6qgQy38jbV',
-    version: 'V1.18.01'
+    version: 'V1.19.01'
   }
 })

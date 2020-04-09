@@ -183,7 +183,7 @@
 
       <!-- 内容 -->
       <view class="plan-textarea bgAll">
-        <textarea bindinput="changeTextArea" placeholder-class='textarea-p' placeholder="请输入您的计划安排...">
+        <textarea value="{{textArea}}" bindinput="changeTextArea" placeholder-class='textarea-p' placeholder="请输入您的计划安排...">
         
         </textarea>
       </view>
@@ -193,7 +193,7 @@
     </view>
 
     <view class="plan-footer">
-      <button hover-class='chooseBtn-hover' class='update' bindtap="uploadPlan">添加</button>
+      <button hover-class='chooseBtn-hover' class='update' bindtap="uploadPlan">{{type == 'edit' ? '更新' : '添加'}}</button>
     </view>
 
   </view>
