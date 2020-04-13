@@ -8,11 +8,11 @@
 
   <view class="plan-center">
     <view class="plan-center-container">
-      <view data-id="{{item.id}}" bindtap="editPlan" class="plan-list {{'plan-list-level'+item.level}} " wx:for='{{planArr}}' wx:key='index'>
+      <view data-id="{{item.id}}" class="plan-list {{'plan-list-level'+item.level}} " wx:for='{{planArr}}' wx:key='index'>
         <view class="plan-list-left" bindtap="changeStstus" data-id="{{item.id}}">
           <image src='{{item.status == 0 ? "../../images/star_no.png" : "../../images/star_yes.png"}}'></image>
         </view>
-        <view class="plan-list-center">
+        <view class="plan-list-center" bindtap="editPlan" data-id="{{item.id}}">
           <view class="plan-list-center1">{{item.textArea}}</view>
           <view class="plan-list-center2">
             <view class="plan-list-center-child1">时间：{{item.date1}} {{item.startTime}}~{{item.endTime}}</view>

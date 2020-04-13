@@ -26,9 +26,9 @@ Page({
     status: 0,
     noticeBol: true,
     level: 0,
-    startTime: '16:16',
+    startTime: '00:00',
     startDate: '2020-03-07',
-    endTime: '16:16',
+    endTime: '00:00',
     endDate: '2020-03-07',
     statusArr: ['进行中', '已结束'],
     levelArr: ['普通', '一般', '重要', '很重要', '非常重要'],
@@ -1004,38 +1004,98 @@ Page({
         id: new Date().getTime() + num
       }
 
-      wx.cloud.callFunction({
-        name: 'uploadPlan',
-        data: {
-          openid: openid,
-          val: obj
-        },
-        success(res) {
-          console.log(res)
-          let timer = null;
-          wx.hideLoading({
-            complete: (res) => {},
+
+      if(this.data.type == 'edit') {
+
+        let id = this.data.id;
+        let db = wx.cloud.database();
+        let openid = wx.getStorageSync('openid');
+    
+        db.collection('users').where({
+          _openid: openid
+        })
+        .get().then(res => {
+          console.log(res);
+    
+          // 获取plan
+          let arr = JSON.parse(JSON.stringify(res.data[0].plan));
+          // 更改status
+          for(var i=0; i<arr.length; i++) {
+            if(arr[i].id == id) {
+              arr[i] = obj
+            }
+          }
+    
+          // 替换plan
+          console.log(arr)
+          db.collection('users').where({
+            _openid: openid
           })
-          wx.showToast({
-            title: '添加成功',
+          .update({
+            data: {
+              plan: arr
+            }
           })
-          timer = setTimeout(() => {
-            wx.navigateBack({
-              delta: 1
+          .then(res => {
+            console.log(res)
+            if(res.errMsg == 'collection.update:ok') {
+              let timer = null;
+              wx.hideLoading({
+                complete: (res) => {},
+              })
+              wx.showToast({
+                title: '更新成功',
+              })
+              timer = setTimeout(() => {
+                wx.navigateBack({
+                  delta: 1
+                })
+              }, 1000)
+            }
+            else {
+              wx.showToast({
+                title: '更新失败',
+              })
+            }
+          })
+    
+        })
+
+      }
+      else {
+        wx.cloud.callFunction({
+          name: 'uploadPlan',
+          data: {
+            openid: openid,
+            val: obj
+          },
+          success(res) {
+            console.log(res)
+            let timer = null;
+            wx.hideLoading({
+              complete: (res) => {},
             })
-          }, 1000)
-        },
-        fail(res) {
-          console.log(res)
-          wx.hideLoading({
-            complete: (res) => {},
-          })
-          wx.showToast({
-            title: '添加失败',
-            icon: 'none'
-          })
-        }
-      })
+            wx.showToast({
+              title: '添加成功',
+            })
+            timer = setTimeout(() => {
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1000)
+          },
+          fail(res) {
+            console.log(res)
+            wx.hideLoading({
+              complete: (res) => {},
+            })
+            wx.showToast({
+              title: '添加失败',
+              icon: 'none'
+            })
+          }
+        })
+      }
 
     }
 
