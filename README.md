@@ -55,7 +55,7 @@
    + 编译小程序，即可新建日记   
 
 ### 扫码体验
-![小柴日记簿](https://www.littlechai.cn/images/littlechai.png)   
+![小柴日记簿](http://www.littlechai.cn/chai.png)   
 
 ### License
 
