@@ -1,4 +1,4 @@
-### 2.0版本已经上线，具体代码&文档将会在后续开源
+### 2.0版本已经上线，[点击这里查看](https://github.com/LittleChai/littlechai_diary2.0)
 
 ## 小柴日记簿配置文档
 
